@@ -72,7 +72,12 @@ local function GlowCheapestGrey()
 			itemLink = GetContainerItemLink(bagNumNow, slotNumNow)
 			print("Cheapest:", itemLink, GetCoinTextureString(minPriceNow))
 			PickupContainerItem(bagNumNow,slotNumNow)
-			SendChatMessage(format("I can give you %s if you have some bag space left.", itemLink))
+			if currentNumberFuture == 1 then
+				msg = format("I can give you %s if you have some bag space left.", itemLink)
+			else
+				msg = format("I can give you %s*%s if you have some bag space left.", itemLink, currentNumberFuture)
+			end
+			SendChatMessage(msg)
 			CloseAllBags()
 		else
 			print("Cheapest now:", GetContainerItemLink(bagNumNow, slotNumNow), GetCoinTextureString(minPriceNow))
