@@ -122,6 +122,7 @@ local function SetItemRefToolTipPrice(tt)
 	end
 end
 
+print("GreyHandling: Launch by hitting ctrl while holding shift.")
 GameTooltip:HookScript("OnTooltipSetItem", SetGameToolTipPrice)
 ItemRefTooltip:HookScript("OnTooltipSetItem", SetItemRefToolTipPrice)
 f:RegisterEvent("MODIFIER_STATE_CHANGED")
