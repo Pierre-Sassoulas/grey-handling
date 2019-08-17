@@ -83,7 +83,7 @@ local function GlowCheapestGrey()
 			print("Cheapest now:", GetContainerItemLink(bagNumNow, slotNumNow), GetCoinTextureString(minPriceNow))
 			print("Cheapest later:", currentNumberFuture, "*", GetContainerItemLink(bagNumFuture, slotNumFuture), GetCoinTextureString(currentPriceFuture),
 			"(max ", GetCoinTextureString(minPriceFuture), ")")
-			SetBagItemGlow(bagNumFuture, slotNumFuture, "bags-glow-white")
+			SetBagItemGlow(bagNumFuture, slotNumFuture, "bags-glow-orange")
 		end
 	else
 		print("GreyHandling : No grey to throw, maybe you don't need this hearthstone after all ;) ?")
