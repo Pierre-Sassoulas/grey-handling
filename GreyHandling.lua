@@ -1,6 +1,17 @@
 local SELL_PRICE_TEXT = format("%s:", SELL_PRICE)
 local f = CreateFrame("Frame")
-isClassic = true
+local isClassic = true
+local addOnName = "GreyHandling"
+
+local ThisAddon_Defaults = {
+  ["Options"] = {
+    ["MasterOnOff"] = "On",
+    ["version"] = "1.0",
+    ["debug"] = false,
+    ["More Random Variables"] = Value,
+  },
+};
+
 
 local function SetBagItemGlow(bagID, slotID, color)
 	local item = nil
@@ -70,19 +81,25 @@ local function GlowCheapestGrey()
 		SetBagItemGlow(bagNumNow, slotNumNow, "bags-glow-orange")
 		if bagNumNow==bagNumFuture and slotNumNow==slotNumFuture then
 			itemLink = GetContainerItemLink(bagNumNow, slotNumNow)
-			print("Cheapest:", itemLink, GetCoinTextureString(minPriceNow))
-			PickupContainerItem(bagNumNow,slotNumNow)
-			if currentNumberFuture == 1 then
-				msg = format("I can give you %s if you have some bag space left.", itemLink)
-			else
-				msg = format("I can give you %s*%s if you have some bag space left.", itemLink, currentNumberFuture)
+			if VERBOSE then
+				print("Cheapest:", itemLink, GetCoinTextureString(minPriceNow))
 			end
-			SendChatMessage(msg)
+			PickupContainerItem(bagNumNow,slotNumNow)
+			if TALKATIVE then
+				if currentNumberFuture == 1 then
+					msg = format("I can give you %s if you have some bag space left.", itemLink)
+				else
+					msg = format("I can give you %s*%s if you have some bag space left.", itemLink, currentNumberFuture)
+				end
+				SendChatMessage(msg)
+			end
 			CloseAllBags()
 		else
-			print("Cheapest now:", GetContainerItemLink(bagNumNow, slotNumNow), GetCoinTextureString(minPriceNow))
-			print("Cheapest later:", currentNumberFuture, "*", GetContainerItemLink(bagNumFuture, slotNumFuture), GetCoinTextureString(currentPriceFuture),
-			"(max ", GetCoinTextureString(minPriceFuture), ")")
+			if VERBOSE then
+				print("Cheapest now:", GetContainerItemLink(bagNumNow, slotNumNow), GetCoinTextureString(minPriceNow))
+				print("Cheapest later:", currentNumberFuture, "*", GetContainerItemLink(bagNumFuture, slotNumFuture), GetCoinTextureString(currentPriceFuture),
+				"(max ", GetCoinTextureString(minPriceFuture), ")")
+			end
 			SetBagItemGlow(bagNumFuture, slotNumFuture, "bags-glow-orange")
 		end
 	else
@@ -98,9 +115,9 @@ function f:OnEvent(event, key, state)
 end
 
 local function SetGameToolTipPrice(tt)
-	if not MerchantFrame:IsShown() then
+	if not MerchantFrame:IsShown() and SHOW_PRICE then
 		local itemLink = select(2, tt:GetItem())
-		if itemLink and isClassic then
+		if itemLink then
 			local itemSellPrice = select(11, GetItemInfo(itemLink))
 			if itemSellPrice and itemSellPrice > 0 then
 				local container = GetMouseFocus()
@@ -127,6 +144,56 @@ local function SetItemRefToolTipPrice(tt)
 			SetTooltipMoney(tt, itemSellPrice, nil, SELL_PRICE_TEXT)
 		end
 	end
+end
+
+GreyHandling = {};
+GreyHandling.panel = CreateFrame("Frame", "GreyHandlingPanel", UIParent);
+GreyHandling.panel.name = "GreyHandling";
+InterfaceOptions_AddCategory(GreyHandling.panel);
+local title = GreyHandling.panel:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
+title:SetPoint("TOPLEFT", 16, -16)
+title:SetText("GreyHandling options")
+local sometext = GreyHandling.panel:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
+sometext:SetPoint("TOPLEFT", title, "BOTTOMLEFT", 0, -8)
+sometext:SetText("Let GreyHandling offer your grey around!")
+
+local frame = CreateFrame("FRAME"); -- Need a frame to respond to events
+frame:RegisterEvent("ADDON_LOADED"); -- Fired when saved variables are loaded
+frame:RegisterEvent("PLAYER_LOGOUT"); -- Fired when about to log out
+
+function frame:OnEvent(event, arg1)
+	if event == "ADDON_LOADED" and arg1 == addOnName then
+		if TALKATIVE == nil then
+			TALKATIVE = true
+		end
+		if VERBOSE == nil then
+			VERBOSE = true
+		end
+		if SHOW_PRICE == nil then
+			SHOW_PRICE = true
+		end
+	end
+end
+
+frame:SetScript("OnEvent", frame.OnEvent);
+SLASH_HAVEWEMET1 = "/gho";
+function SlashCmdList.HAVEWEMET(msg)
+	if TALKATIVE then
+		talkative = "talk"
+	else
+		talkative = "do not talk"
+	end
+	if VERBOSE then
+		verbose = "talk to you,"
+	else
+		verbose = "keep to himself around you,"
+	end
+	if SHOW_PRICE then
+		price = "show"
+	else
+		price "do not show"
+	end
+	print("GreyHandling", talkative, "to your friends,", verbose, "and", price, "item's prices.");
 end
 
 print("GreyHandling: Launch by hitting ctrl while holding shift.")
