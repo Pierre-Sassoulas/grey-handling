@@ -161,6 +161,12 @@ local frame = CreateFrame("FRAME"); -- Need a frame to respond to events
 frame:RegisterEvent("ADDON_LOADED"); -- Fired when saved variables are loaded
 frame:RegisterEvent("PLAYER_LOGOUT"); -- Fired when about to log out
 
+function GreyHandling.panel.default()
+	TALKATIVE = true
+	VERBOSE = true
+	SHOW_PRICE = true
+end
+
 function frame:OnEvent(event, arg1)
 	if event == "ADDON_LOADED" and arg1 == addOnName then
 		if TALKATIVE == nil then
