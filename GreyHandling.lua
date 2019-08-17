@@ -69,9 +69,11 @@ local function GlowCheapestGrey()
 	if bagNumNow and slotNumNow then
 		SetBagItemGlow(bagNumNow, slotNumNow, "bags-glow-orange")
 		if bagNumNow==bagNumFuture and slotNumNow==slotNumFuture then
-			print("Cheapest:", GetContainerItemLink(bagNumNow, slotNumNow), GetCoinTextureString(minPriceNow))
-			PickupContainerItem(bagNumNow,slotNumNow);
-			print("Use left click to throw or exchange")
+			itemLink = GetContainerItemLink(bagNumNow, slotNumNow)
+			print("Cheapest:", itemLink, GetCoinTextureString(minPriceNow))
+			PickupContainerItem(bagNumNow,slotNumNow)
+			SendChatMessage(format("I can give you %s if you have some bag space left.", itemLink))
+			CloseAllBags()
 		else
 			print("Cheapest now:", GetContainerItemLink(bagNumNow, slotNumNow), GetCoinTextureString(minPriceNow))
 			print("Cheapest later:", currentNumberFuture, "*", GetContainerItemLink(bagNumFuture, slotNumFuture), GetCoinTextureString(currentPriceFuture),
