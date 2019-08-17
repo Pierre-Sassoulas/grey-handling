@@ -96,7 +96,7 @@ local function GlowCheapestGrey()
 			CloseAllBags()
 		else
 			if VERBOSE then
-				print("Cheapest now:", GetContainerItemLink(bagNumNow, slotNumNow), GetCoinTextureString(minPriceNow))
+				print("Cheapest now:", GetContainerItemLink(bagNumNow, slotNumNow), GetCoinTextureString(minPriceNow)) --, "(max ", GetCoinTextureString(minPriceFuture), ")")
 				print("Cheapest later:", currentNumberFuture, "*", GetContainerItemLink(bagNumFuture, slotNumFuture), GetCoinTextureString(currentPriceFuture),
 				"(max ", GetCoinTextureString(minPriceFuture), ")")
 			end
@@ -181,9 +181,7 @@ function frame:OnEvent(event, arg1)
 	end
 end
 
-frame:SetScript("OnEvent", frame.OnEvent);
-SLASH_HAVEWEMET1 = "/gho";
-function SlashCmdList.HAVEWEMET(msg)
+function greyHandlingOption()
 	if TALKATIVE then
 		talkative = "talk"
 	else
@@ -202,7 +200,15 @@ function SlashCmdList.HAVEWEMET(msg)
 	print("GreyHandling", talkative, "to your friends,", verbose, "and", price, "item's prices.");
 end
 
-print("GreyHandling: Launch by hitting ctrl while holding shift.")
+
+frame:SetScript("OnEvent", frame.OnEvent);
+SLASH_GREYHANDLINGOPTION1 = "/gho";
+function SlashCmdList.GREYHANDLINGOPTION(msg)
+	greyHandlingOption()
+end
+
+
+print("GreyHandling: Launch by hitting ctrl while holding shift. (/gho)")
 GameTooltip:HookScript("OnTooltipSetItem", SetGameToolTipPrice)
 ItemRefTooltip:HookScript("OnTooltipSetItem", SetItemRefToolTipPrice)
 f:RegisterEvent("MODIFIER_STATE_CHANGED")
