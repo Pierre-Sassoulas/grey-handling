@@ -2,7 +2,7 @@ local SELL_PRICE_TEXT = format("%s:", SELL_PRICE)
 local f = CreateFrame("Frame")
 local isClassic = true
 local addOnName = "GreyHandling"
-
+local A, GreyHandling = ...
 local ThisAddon_Defaults = {
   ["Options"] = {
     ["MasterOnOff"] = "On",
@@ -11,22 +11,6 @@ local ThisAddon_Defaults = {
     ["More Random Variables"] = Value,
   },
 };
-
-
-local function SetBagItemGlow(bagID, slotID, color)
-	for i = 1, NUM_CONTAINER_FRAMES, 1 do
-		local frame = _G["ContainerFrame"..i]
-		if frame:GetID() == bagID and frame:IsShown() then
-			item = _G["ContainerFrame"..i.."Item"..(GetContainerNumSlots(bagID) + 1 - slotID)]
-		end
-	end
-	if item then
-		item.NewItemTexture:SetAtlas(color)
-		item.NewItemTexture:Show()
-		item.flashAnim:Play()
-		item.newitemglowAnim:Play()
-	end
-end
 
 local function GlowCheapestGrey()
 	local minPriceNow = nil
@@ -77,7 +61,7 @@ local function GlowCheapestGrey()
 		end
 	end
 	if bagNumNow and slotNumNow then
-		SetBagItemGlow(bagNumNow, slotNumNow, "bags-glow-orange")
+		GreyHandling.functions.SetBagItemGlow(bagNumNow, slotNumNow, "bags-glow-orange")
 		if bagNumNow==bagNumFuture and slotNumNow==slotNumFuture then
 			itemLink = GetContainerItemLink(bagNumNow, slotNumNow)
 			if VERBOSE then
@@ -99,7 +83,7 @@ local function GlowCheapestGrey()
 				print("Cheapest later:", currentNumberFuture, "*", GetContainerItemLink(bagNumFuture, slotNumFuture), GetCoinTextureString(currentPriceFuture),
 				"(max ", GetCoinTextureString(minPriceFuture), ")")
 			end
-			SetBagItemGlow(bagNumFuture, slotNumFuture, "bags-glow-orange")
+			GreyHandling.functions.SetBagItemGlow(bagNumFuture, slotNumFuture, "bags-glow-orange")
 		end
 	else
 		print("GreyHandling : No grey to throw, maybe you don't need this hearthstone after all ;) ?")
@@ -145,14 +129,14 @@ local function SetItemRefToolTipPrice(tt)
 	end
 end
 
-GreyHandling = {};
-GreyHandling.panel = CreateFrame("Frame", "GreyHandlingPanel", UIParent);
-GreyHandling.panel.name = "Grey Handling"
-InterfaceOptions_AddCategory(GreyHandling.panel);
-local title = GreyHandling.panel:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
+GreyHandling.options = {};
+GreyHandling.options.panel = CreateFrame("Frame", "GreyHandlingPanel", UIParent);
+GreyHandling.options.panel.name = "Grey Handling"
+InterfaceOptions_AddCategory(GreyHandling.options.panel);
+local title = GreyHandling.options.panel:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
 title:SetPoint("TOPLEFT", 16, -16)
 title:SetText("GreyHandling options")
-local greyHandlingDescription = GreyHandling.panel:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
+local greyHandlingDescription = GreyHandling.options.panel:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
 greyHandlingDescription:SetPoint("TOPLEFT", title, "BOTTOMLEFT", 0, -8)
 greyHandlingDescription:SetText([[This addon display the price of object in bag for Wow Classic.
 
@@ -179,7 +163,7 @@ local frame = CreateFrame("FRAME"); -- Need a frame to respond to events
 frame:RegisterEvent("ADDON_LOADED"); -- Fired when saved variables are loaded
 frame:RegisterEvent("PLAYER_LOGOUT"); -- Fired when about to log out
 
-function GreyHandling.panel.default()
+function GreyHandling.options.panel.default()
 	TALKATIVE = true
 	VERBOSE = true
 	SHOW_PRICE = true

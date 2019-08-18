@@ -8,4 +8,6 @@
 ##SavedVariables: VERBOSE
 ##SavedVariables: SHOW_PRICE
 
+init.lua
+functions\SetBagItemGlow.lua
 GreyHandling.lua
