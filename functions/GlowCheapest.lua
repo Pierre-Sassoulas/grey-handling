@@ -50,7 +50,9 @@ local function GlowCheapestGrey()
 						now.bag = bagID
 						now.slot = bagSlot
 					end
-					if later.potentialPrice == nil or later.potentialPrice > potentialVendorPrice then
+					if later.potentialPrice == nil or
+							later.potentialPrice > potentialVendorPrice or
+							(later.potentialPrice==potentialVendorPrice and later.currentPrice > currentVendorPrice) then
 						later.currentPrice = currentVendorPrice
 						later.potentialPrice = potentialVendorPrice
 						later.itemCount = itemCount
