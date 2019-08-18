@@ -14,7 +14,6 @@ local ThisAddon_Defaults = {
 
 
 local function SetBagItemGlow(bagID, slotID, color)
-	local item = nil
 	for i = 1, NUM_CONTAINER_FRAMES, 1 do
 		local frame = _G["ContainerFrame"..i]
 		if frame:GetID() == bagID and frame:IsShown() then
@@ -148,7 +147,7 @@ end
 
 GreyHandling = {};
 GreyHandling.panel = CreateFrame("Frame", "GreyHandlingPanel", UIParent);
-GreyHandling.panel.name = "GreyHandling";
+GreyHandling.panel.name = "Grey Handling"
 InterfaceOptions_AddCategory(GreyHandling.panel);
 local title = GreyHandling.panel:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
 title:SetPoint("TOPLEFT", 16, -16)
