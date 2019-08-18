@@ -1,14 +1,10 @@
 local A, GreyHandling = ...
 
 local function GlowCheapestGrey()
-	local minPriceNow = nil
-	local bagNumNow = nil
-	local slotNumNow = nil
-	local minPriceFuture = nil
-	local currentPriceFuture = nil
-	local currentNumberFuture = nil
-	local bagNumFuture = nil
-	local slotNumFuture = nil
+	local now = {}
+	now.min = nil
+	local later = {}
+	later.min = nil
 	for bagID = 0, NUM_BAG_SLOTS do
 		for bagSlot = 1, GetContainerNumSlots(bagID) do
 			local itemid = GetContainerItemID(bagID, bagSlot)
@@ -22,56 +18,48 @@ local function GlowCheapestGrey()
 					local _, itemCount = GetContainerItemInfo(bagID, bagSlot)
 					local currentVendorPrice = vendorPrice * itemCount
 					local potentialVendorPrice = vendorPrice * itemStackCount
-					if minPriceNow == nil then
-						minPriceNow = currentVendorPrice
-						bagNumNow = bagID
-						slotNumNow = bagSlot
-					elseif minPriceNow > currentVendorPrice then
-						minPriceNow = currentVendorPrice
-						bagNumNow = bagID
-						slotNumNow = bagSlot
+					if now.min == nil or now.min > currentVendorPrice then
+						now.min = currentVendorPrice
+						now.currentPrice = vendorPrice * itemCount
+						now.currentNumber = itemCount
+						now.bag = bagID
+						now.slot = bagSlot
 					end
-					if minPriceFuture == nil then
-						minPriceFuture = potentialVendorPrice
-						currentPriceFuture = vendorPrice * itemCount
-						currentNumberFuture = itemCount
-						bagNumFuture = bagID
-						slotNumFuture = bagSlot
-					elseif minPriceFuture > potentialVendorPrice then
-						minPriceFuture = potentialVendorPrice
-						currentPriceFuture = vendorPrice * itemCount
-						currentNumberFuture = itemCount
-						bagNumFuture = bagID
-						slotNumFuture = bagSlot
+					if later.min == nil or later.min > potentialVendorPrice then
+						later.min = potentialVendorPrice
+						later.currentPrice = vendorPrice * itemCount
+						later.currentNumber = itemCount
+						later.bag = bagID
+						later.slot = bagSlot
 					end
 				end
 			end
 		end
 	end
-	if bagNumNow and slotNumNow then
-		GreyHandling.functions.SetBagItemGlow(bagNumNow, slotNumNow, "bags-glow-orange")
-		if bagNumNow==bagNumFuture and slotNumNow==slotNumFuture then
-			itemLink = GetContainerItemLink(bagNumNow, slotNumNow)
+	if now.bag and now.slot then
+		GreyHandling.functions.SetBagItemGlow(now.bag, now.slot, "bags-glow-orange")
+		if now.bag==later.bag and now.slot==later.slot then
+			itemLink = GetContainerItemLink(now.bag, now.slot)
 			if VERBOSE then
-				print("Cheapest:", itemLink, GetCoinTextureString(minPriceNow))
+				print("Cheapest:", itemLink, GetCoinTextureString(now.min))
 			end
-			PickupContainerItem(bagNumNow,slotNumNow)
+			PickupContainerItem(now.bag, now.slot)
 			if TALKATIVE then
 				if currentNumberFuture == 1 then
 					msg = format("I can give you %s if you have some bag space left.", itemLink)
 				else
-					msg = format("I can give you %s*%s if you have some bag space left.", itemLink, currentNumberFuture)
+					msg = format("I can give you %s*%s if you have some bag space left.", itemLink, later.currentNumber)
 				end
 				SendChatMessage(msg)
 			end
 			CloseAllBags()
 		else
 			if VERBOSE then
-				print("Cheapest now:", GetContainerItemLink(bagNumNow, slotNumNow), GetCoinTextureString(minPriceNow)) --, "(max ", GetCoinTextureString(minPriceFuture), ")")
-				print("Cheapest later:", currentNumberFuture, "*", GetContainerItemLink(bagNumFuture, slotNumFuture), GetCoinTextureString(currentPriceFuture),
-				"(max ", GetCoinTextureString(minPriceFuture), ")")
+				print("Cheapest now:", GetContainerItemLink(now.bag, now.slot), GetCoinTextureString(now.min)) --, "(max ", GetCoinTextureString(later.min), ")")
+				print("Cheapest later:", currentNumberFuture, "*", GetContainerItemLink(later.bag, later.slot), GetCoinTextureString(later.currentPrice),
+				"(max ", GetCoinTextureString(later.min), ")")
 			end
-			GreyHandling.functions.SetBagItemGlow(bagNumFuture, slotNumFuture, "bags-glow-orange")
+			GreyHandling.functions.SetBagItemGlow(later.bag, later.slot, "bags-glow-orange")
 		end
 	else
 		print("GreyHandling : No grey to throw, maybe you don't need this hearthstone after all ;) ?")
