@@ -1,8 +1,5 @@
 local A, GreyHandling = ...
 
-GreyHandling.options.display = displayOptions
-
-
 GreyHandling.options.panel = CreateFrame("Frame", "GreyHandlingPanel", UIParent);
 GreyHandling.options.panel.name = GreyHandling.addOnDisplayName
 local title = GreyHandling.options.panel:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
@@ -32,6 +29,8 @@ local function displayOptions()
 	end
 	print("GreyHandling", talkative, "to your friends,", verbose, "and", price, "item's prices.");
 end
+
+GreyHandling.options.display = displayOptions
 
 function GreyHandling.options.panel.default()
 	TALKATIVE = true
