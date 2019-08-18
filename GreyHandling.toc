@@ -8,7 +8,7 @@
 ##SavedVariables: VERBOSE
 ##SavedVariables: SHOW_PRICE
 
-init.lua
+constants.lua
 functions\SetBagItemGlow.lua
 functions\GlowCheapest.lua
 functions\SetGameTooltipPrice.lua

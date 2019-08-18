@@ -1,3 +1,5 @@
+-- This also define the namespace and should be the first file loaded
+
 local A, GreyHandling = ...
 GreyHandling.frame = CreateFrame("Frame")
 GreyHandling.functions = {}
