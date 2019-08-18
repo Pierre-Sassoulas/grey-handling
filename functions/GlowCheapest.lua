@@ -62,7 +62,7 @@ local function GlowCheapestGrey()
 		end
 	end
 	if now.bag and now.slot then
-		if now.bag==later.bag and now.slot==later.slot then
+		if now.bag==later.bag and now.slot==later.slot or now.potentialPrice == later.potentialPrice then
 			-- Only one object is the clear cheapest
 			if VERBOSE then
 				GreyHandling.functions.DisplayCheapest("Cheapest:", now)
