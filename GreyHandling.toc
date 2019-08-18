@@ -12,4 +12,6 @@ init.lua
 functions\SetBagItemGlow.lua
 functions\GlowCheapest.lua
 functions\SetGameTooltipPrice.lua
+GreyHandlingOptions.lua
 GreyHandling.lua
+
