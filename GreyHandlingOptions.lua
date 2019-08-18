@@ -1,10 +1,10 @@
 local A, GreyHandling = ...
 
-GreyHandling.options.panel = CreateFrame("Frame", "GreyHandlingPanel", UIParent);
+GreyHandling.options.panel = CreateFrame("Frame", nil, InterfaceOptionsFramePanelContainer);
 GreyHandling.options.panel.name = GreyHandling.DISPLAY_NAME
 local title = GreyHandling.options.panel:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
 title:SetPoint("TOPLEFT", 16, -16)
-title:SetText(format("%s options", GreyHandling.DISPLAY_NAME))
+title:SetText(GreyHandling.DISPLAY_NAME)
 local description = GreyHandling.options.panel:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
 description:SetPoint("TOPLEFT", title, "BOTTOMLEFT", 0, -8)
 description:SetText(GreyHandling.DESCRIPTION)
