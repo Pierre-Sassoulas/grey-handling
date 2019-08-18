@@ -1,11 +1,14 @@
 local A, GreyHandling = ...
 
-local panel = CreateFrame("Frame", "GreyHandlingPanel", UIParent);
-panel.name = GreyHandling.addOnDisplayName
-local title = panel:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
+GreyHandling.options.display = displayOptions
+
+
+GreyHandling.options.panel = CreateFrame("Frame", "GreyHandlingPanel", UIParent);
+GreyHandling.options.panel.name = GreyHandling.addOnDisplayName
+local title = GreyHandling.options.panel:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
 title:SetPoint("TOPLEFT", 16, -16)
 title:SetText(format("%s options", GreyHandling.addOnDisplayName))
-local description = panel:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
+local description = GreyHandling.options.panel:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
 description:SetPoint("TOPLEFT", title, "BOTTOMLEFT", 0, -8)
 description:SetText(GreyHandling.description)
 description:SetJustifyH("LEFT")
@@ -30,6 +33,33 @@ local function displayOptions()
 	print("GreyHandling", talkative, "to your friends,", verbose, "and", price, "item's prices.");
 end
 
+function GreyHandling.options.panel.default()
+	TALKATIVE = true
+	VERBOSE = true
+	SHOW_PRICE = true
+end
 
-GreyHandling.options.panel = panel
-GreyHandling.options.display = displayOptions
+GreyHandling.options.frame:RegisterEvent("ADDON_LOADED")
+GreyHandling.options.frame:RegisterEvent("PLAYER_LOGOUT")
+
+function GreyHandling.options.frame:OnEvent(event, arg1)
+	if event == "ADDON_LOADED" and arg1 == addOnName then
+		if TALKATIVE == nil then
+			TALKATIVE = true
+		end
+		if VERBOSE == nil then
+			VERBOSE = true
+		end
+		if SHOW_PRICE == nil then
+			SHOW_PRICE = true
+		end
+		GreyHandling.options.display()
+	end
+
+end
+
+GreyHandling.options.frame:SetScript("OnEvent", GreyHandling.options.frame.OnEvent);
+SLASH_GREYHANDLINGOPTION1 = "/gho";
+function SlashCmdList.GREYHANDLINGOPTION(msg)
+	GreyHandling.options.display()
+end

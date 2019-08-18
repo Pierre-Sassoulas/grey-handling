@@ -20,8 +20,10 @@ profitable grey objects glows orange in your bags:
  - Explain ambiguous choice for the cheapest object in your chat
  - Not display object price because you're playing retail and this is already
   done by the Wow client]]
+GreyHandling.frame = CreateFrame("Frame")
 GreyHandling.isClassic = true
 GreyHandling.functions = {}
 GreyHandling.constants = {}
 GreyHandling.constants.SELL_PRICE_TEXT = format("%s:", SELL_PRICE)
 GreyHandling.options = {}
+GreyHandling.options.frame = CreateFrame("FRAME")
