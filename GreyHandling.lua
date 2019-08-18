@@ -1,24 +1,12 @@
 local A, GreyHandling = ...
 
 local f = CreateFrame("Frame")
-
-local ThisAddon_Defaults = {
-  ["Options"] = {
-    ["MasterOnOff"] = "On",
-    ["version"] = "1.0",
-    ["debug"] = false,
-    ["More Random Variables"] = Value,
-  },
-};
-
 function f:OnEvent(event, key, state)
 	if key == "LCTRL" and state == 1 and IsShiftKeyDown() then
 		OpenAllBags()
 		GreyHandling.functions.GlowCheapestGrey()
 	end
 end
-
-InterfaceOptions_AddCategory(GreyHandling.options.panel);
 
 function GreyHandling.options.panel.default()
 	TALKATIVE = true
@@ -44,33 +32,14 @@ function frame:OnEvent(event, arg1)
 	end
 end
 
-function greyHandlingOption()
-	if TALKATIVE then
-		talkative = "talk"
-	else
-		talkative = "do not talk"
-	end
-	if VERBOSE then
-		verbose = "talk to you,"
-	else
-		verbose = "keep to himself around you,"
-	end
-	if SHOW_PRICE then
-		price = "show"
-	else
-		price "do not show"
-	end
-	print("GreyHandling", talkative, "to your friends,", verbose, "and", price, "item's prices.");
-end
-
-
 frame:SetScript("OnEvent", frame.OnEvent);
 SLASH_GREYHANDLINGOPTION1 = "/gho";
 function SlashCmdList.GREYHANDLINGOPTION(msg)
-	greyHandlingOption()
+	GreyHandling.options.display()
 end
 
 print("GreyHandling: Launch by hitting ctrl while holding shift. (/gho)")
+InterfaceOptions_AddCategory(GreyHandling.options.panel);
 GameTooltip:HookScript("OnTooltipSetItem", SetGameToolTipPrice)
 ItemRefTooltip:HookScript("OnTooltipSetItem", SetItemRefToolTipPrice)
 f:RegisterEvent("MODIFIER_STATE_CHANGED")

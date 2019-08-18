@@ -11,4 +11,25 @@ description:SetText(GreyHandling.description)
 description:SetJustifyH("LEFT")
 description:SetJustifyV("TOP")
 
+local function displayOptions()
+	if TALKATIVE then
+		talkative = "talk"
+	else
+		talkative = "do not talk"
+	end
+	if VERBOSE then
+		verbose = "talk to you,"
+	else
+		verbose = "keep to himself around you,"
+	end
+	if SHOW_PRICE then
+		price = "show"
+	else
+		price "do not show"
+	end
+	print("GreyHandling", talkative, "to your friends,", verbose, "and", price, "item's prices.");
+end
+
+
 GreyHandling.options.panel = panel
+GreyHandling.options.display = displayOptions
