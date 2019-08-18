@@ -1,6 +1,6 @@
 local A, GreyHandling = ...
 
-function SetGameToolTipPrice(tt)
+local function SetGameToolTipPrice(tt)
 	if not MerchantFrame:IsShown() and SHOW_PRICE then
 		local itemLink = select(2, tt:GetItem())
 		if itemLink then
@@ -22,7 +22,7 @@ function SetGameToolTipPrice(tt)
 	end
 end
 
-function SetItemRefToolTipPrice(tt)
+local function SetItemRefToolTipPrice(tt)
 	local itemLink = select(2, tt:GetItem())
 	if itemLink then
 		local itemSellPrice = select(11, GetItemInfo(itemLink))

@@ -10,6 +10,6 @@ end
 print("GreyHandling: Launch by hitting ctrl while holding shift. (/gho)")
 InterfaceOptions_AddCategory(GreyHandling.options.panel);
 GameTooltip:HookScript("OnTooltipSetItem", GreyHandling.functions.SetGameToolTipPrice)
-ItemRefTooltip:HookScript("OnTooltipSetItem", SetItemRefToolTipPrice)
+ItemRefTooltip:HookScript("OnTooltipSetItem", GreyHandling.functions.SetItemRefToolTipPrice)
 GreyHandling.frame:RegisterEvent("MODIFIER_STATE_CHANGED")
 GreyHandling.frame:SetScript("OnEvent", GreyHandling.frame.OnEvent)

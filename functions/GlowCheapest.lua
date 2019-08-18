@@ -1,6 +1,6 @@
 local A, GreyHandling = ...
 
-function GlowCheapestGrey()
+local function GlowCheapestGrey()
 	local minPriceNow = nil
 	local bagNumNow = nil
 	local slotNumNow = nil
