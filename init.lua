@@ -23,4 +23,5 @@ profitable grey objects glows orange in your bags:
 GreyHandling.isClassic = true
 GreyHandling.functions = {}
 GreyHandling.constants = {}
+GreyHandling.constants.SELL_PRICE_TEXT = format("%s:", SELL_PRICE)
 GreyHandling.options = {}

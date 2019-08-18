@@ -1,7 +1,5 @@
 local A, GreyHandling = ...
 
-local SELL_PRICE_TEXT = format("%s:", SELL_PRICE)
-
 function SetGameToolTipPrice(tt)
 	if not MerchantFrame:IsShown() and SHOW_PRICE then
 		local itemLink = select(2, tt:GetItem())
@@ -18,7 +16,7 @@ function SetGameToolTipPrice(tt)
 					count = container.count or tonumber(container.Count:GetText())
 				end
 				local cost = (type(count) == "number" and count or 1) * itemSellPrice
-				SetTooltipMoney(tt, cost, nil, SELL_PRICE_TEXT)
+				SetTooltipMoney(tt, cost, nil, GreyHandling.constants.SELL_PRICE_TEXT)
 			end
 		end
 	end
@@ -29,7 +27,7 @@ function SetItemRefToolTipPrice(tt)
 	if itemLink then
 		local itemSellPrice = select(11, GetItemInfo(itemLink))
 		if itemSellPrice and itemSellPrice > 0 then
-			SetTooltipMoney(tt, itemSellPrice, nil, SELL_PRICE_TEXT)
+			SetTooltipMoney(tt, itemSellPrice, nil, GreyHandling.constants.SELL_PRICE_TEXT)
 		end
 	end
 end

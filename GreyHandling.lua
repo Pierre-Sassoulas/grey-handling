@@ -1,6 +1,5 @@
 local A, GreyHandling = ...
 
-local SELL_PRICE_TEXT = format("%s:", SELL_PRICE)
 local f = CreateFrame("Frame")
 
 local ThisAddon_Defaults = {
