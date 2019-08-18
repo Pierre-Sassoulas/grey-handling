@@ -1,24 +1,25 @@
 local A, GreyHandling = ...
 
-local function DisplayCheapest(text, item) -- bag, slot, vendorPrice, itemCount, currentPrice, potentialPrice)
-	if item.itemCount == 1 then
-		print(
-			text, GetContainerItemLink(item.bag, item.slot), "worth", GetCoinTextureString(item.vendorPrice),
-			"(max ", GetCoinTextureString(item.potentialPrice), ")"
-		)
-	elseif item.potentialPrice == item.currentPrice then
-		print(
-			text, "A full stack of", GetContainerItemLink(item.bag, item.slot), "worth",
-			GetCoinTextureString(item.potentialPrice)
-		)
-	else
-		print(
-			text, GetContainerItemLink(item.bag, item.slot), item.itemCount, "*",
-			GetCoinTextureString(item.vendorPrice),	"=", GetCoinTextureString(item.currentPrice),
-			"(max ", GetCoinTextureString(item.potentialPrice), ")"
-		)
+local function DisplayCheapest(text, item)
+	if VERBOSE then
+		if item.itemCount == 1 then
+			print(
+				text, GetContainerItemLink(item.bag, item.slot), "worth", GetCoinTextureString(item.vendorPrice),
+				"(max ", GetCoinTextureString(item.potentialPrice), ")"
+			)
+		elseif item.potentialPrice == item.currentPrice then
+			print(
+				text, "A full stack of", GetContainerItemLink(item.bag, item.slot), "worth",
+				GetCoinTextureString(item.potentialPrice)
+			)
+		else
+			print(
+				text, GetContainerItemLink(item.bag, item.slot), item.itemCount, "*",
+				GetCoinTextureString(item.vendorPrice),	"=", GetCoinTextureString(item.currentPrice),
+				"(max ", GetCoinTextureString(item.potentialPrice), ")"
+			)
+		end
 	end
-
 end
 
 GreyHandling.functions.DisplayCheapest =  DisplayCheapest
@@ -64,9 +65,7 @@ local function GlowCheapestGrey()
 	if now.bag and now.slot then
 		if now.bag==later.bag and now.slot==later.slot or now.potentialPrice == later.potentialPrice then
 			-- Only one object is the clear cheapest
-			if VERBOSE then
-				GreyHandling.functions.DisplayCheapest("Cheapest:", now)
-			end
+			GreyHandling.functions.DisplayCheapest("Cheapest:", now)
 			PickupContainerItem(now.bag, now.slot)
 			if TALKATIVE then
 				local itemLink = GetContainerItemLink(now.bag, now.slot)
@@ -80,10 +79,8 @@ local function GlowCheapestGrey()
 			CloseAllBags()
 		else
 			-- Two objects can be considered cheapest
-			if VERBOSE then
-				GreyHandling.functions.DisplayCheapest("Cheapest now:", now)
-				GreyHandling.functions.DisplayCheapest("Cheapest later:", later)
-			end
+			GreyHandling.functions.DisplayCheapest("Cheapest now:", now)
+			GreyHandling.functions.DisplayCheapest("Cheapest later:", later)
 			GreyHandling.functions.SetBagItemGlow(now.bag, now.slot, "bags-glow-orange")
 			GreyHandling.functions.SetBagItemGlow(later.bag, later.slot, "bags-glow-orange")
 		end
