@@ -29,3 +29,6 @@ profitable grey objects glows orange in your bags:
 GreyHandling.options = {}
 GreyHandling.OPTION_COMMAND = "/gho"
 GreyHandling.options.frame = CreateFrame("FRAME")
+GreyHandling.options.TALKATIVE = true
+GreyHandling.options.VERBOSE = true
+GreyHandling.options.SHOW_PRICE = true

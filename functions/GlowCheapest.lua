@@ -1,7 +1,7 @@
 local A, GreyHandling = ...
 
 local function DisplayCheapest(text, item)
-	if VERBOSE then
+	if GreyHandling.options.VERBOSE then
 		if item.itemCount == 1 then
 			print(
 				text, GetContainerItemLink(item.bag, item.slot), "worth", GetCoinTextureString(item.vendorPrice),
@@ -67,7 +67,7 @@ local function GlowCheapestGrey()
 			-- Only one object is the clear cheapest
 			GreyHandling.functions.DisplayCheapest("Cheapest:", now)
 			PickupContainerItem(now.bag, now.slot)
-			if TALKATIVE then
+			if GreyHandling.options.TALKATIVE then
 				local itemLink = GetContainerItemLink(now.bag, now.slot)
 				if now.itemCount == 1 then
 					msg = format("I can give you %s if you have some bag space left.", itemLink)

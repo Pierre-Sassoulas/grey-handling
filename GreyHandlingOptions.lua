@@ -12,30 +12,30 @@ description:SetJustifyH("LEFT")
 description:SetJustifyV("TOP")
 
 local function displayOptions()
-	if TALKATIVE then
+	if GreyHandling.options.TALKATIVE then
 		talkative = "talk"
 	else
 		talkative = "do not talk"
 	end
-	if VERBOSE then
+	if GreyHandling.options.VERBOSE then
 		verbose = "talk to you,"
 	else
 		verbose = "keep to himself around you,"
 	end
-	if SHOW_PRICE then
+	if GreyHandling.options.SHOW_PRICE then
 		price = "show"
 	else
 		price "do not show"
 	end
-	print("GreyHandling", talkative, "to your friends,", verbose, "and", price, "item's prices.");
+	print("GreyHandling: I", talkative, "to your friends,", verbose, "and", price, "item's prices.");
 end
 
 GreyHandling.options.display = displayOptions
 
 function GreyHandling.options.panel.default()
-	TALKATIVE = true
-	VERBOSE = true
-	SHOW_PRICE = true
+	GreyHandling.options.TALKATIVE = true
+	GreyHandling.options.VERBOSE = true
+	GreyHandling.options.SHOW_PRICE = true
 end
 
 GreyHandling.options.frame:RegisterEvent("ADDON_LOADED")
@@ -43,14 +43,14 @@ GreyHandling.options.frame:RegisterEvent("PLAYER_LOGOUT")
 
 function GreyHandling.options.frame:OnEvent(event, arg1)
 	if event == "ADDON_LOADED" and arg1 == addOnName then
-		if TALKATIVE == nil then
-			TALKATIVE = true
+		if GreyHandling.options.TALKATIVE == nil then
+			GreyHandling.options.TALKATIVE = true
 		end
-		if VERBOSE == nil then
-			VERBOSE = true
+		if GreyHandling.options.VERBOSE == nil then
+			GreyHandling.options.VERBOSE = true
 		end
-		if SHOW_PRICE == nil then
-			SHOW_PRICE = true
+		if GreyHandling.options.SHOW_PRICE == nil then
+			GreyHandling.options.SHOW_PRICE = true
 		end
 		GreyHandling.options.display()
 	end
