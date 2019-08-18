@@ -3,6 +3,7 @@
 ## Title: Grey Handling
 ## Notes: Permit to help with your grey objects when your bags are full, and you have no vendor around
 ## Author: pierre-sassoulas
+
 ##SavedVariables: TALKATIVE
 ##SavedVariables: VERBOSE
 ##SavedVariables: SHOW_PRICE
