@@ -1,5 +1,5 @@
 ## Interface: TODO
-## Version: 0.0.1
+## Version: 0.0.2
 ## Title: Grey Handling
 ## Notes: Permit to help with your grey objects when your bags are full, and you have no vendor around
 ## Author: pierre-sassoulas

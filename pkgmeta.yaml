@@ -1,0 +1,11 @@
+package-as: GreyHandling
+license-output: LICENSE
+
+ignore: # Files and directories beginning with a dot (such as .git) are automatically ignored, as is the pgkmeta file itself.
+    - art/GreyHandlingIconAlpha.tga
+    - art/GreyHandlingIconRaw.tga
+    - art/GreyHandlingTwitchAlpha.png
+    - art/GreyHandlingTwitchButton.png
+    - art/GreyHandlingTwitchRaw.png
+    - README.md
+
