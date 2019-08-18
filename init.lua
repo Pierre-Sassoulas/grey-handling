@@ -1,7 +1,11 @@
 local A, GreyHandling = ...
-GreyHandling.addOnName = "GreyHandling"
-GreyHandling.addOnDisplayName = "Grey Handling"
-GreyHandling.description = [[This addon display the price of object in bag for Wow Classic.
+GreyHandling.frame = CreateFrame("Frame")
+GreyHandling.functions = {}
+GreyHandling.SELL_PRICE_TEXT = format("%s:", SELL_PRICE)
+GreyHandling.IS_CLASSIC = true
+GreyHandling.NAME = "GreyHandling"
+GreyHandling.DISPLAY_NAME = "Grey Handling"
+GreyHandling.DESCRIPTION = [[This addon display the price of object in bag for Wow Classic.
 
 It can also be activated with the ctrl key while holding shift in order to:
 - Select the cheapest grey object, so you can exchange it or throw it away
@@ -20,10 +24,6 @@ profitable grey objects glows orange in your bags:
  - Explain ambiguous choice for the cheapest object in your chat
  - Not display object price because you're playing retail and this is already
   done by the Wow client]]
-GreyHandling.frame = CreateFrame("Frame")
-GreyHandling.isClassic = true
-GreyHandling.functions = {}
-GreyHandling.constants = {}
-GreyHandling.constants.SELL_PRICE_TEXT = format("%s:", SELL_PRICE)
 GreyHandling.options = {}
+GreyHandling.OPTION_COMMAND = "/gho"
 GreyHandling.options.frame = CreateFrame("FRAME")

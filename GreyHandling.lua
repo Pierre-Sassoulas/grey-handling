@@ -7,7 +7,7 @@ function GreyHandling.frame:OnEvent(event, key, state)
 	end
 end
 
-print("GreyHandling: Launch by hitting ctrl while holding shift. (/gho)")
+print(format("%s: Launch by hitting left CTRL while holding SHIFT. (%s)", GreyHandling.NAME, GreyHandling.OPTION_COMMAND))
 InterfaceOptions_AddCategory(GreyHandling.options.panel);
 GameTooltip:HookScript("OnTooltipSetItem", GreyHandling.functions.SetGameToolTipPrice)
 ItemRefTooltip:HookScript("OnTooltipSetItem", GreyHandling.functions.SetItemRefToolTipPrice)

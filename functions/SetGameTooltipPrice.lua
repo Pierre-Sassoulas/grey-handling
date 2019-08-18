@@ -16,7 +16,7 @@ local function SetGameToolTipPrice(tt)
 					count = container.count or tonumber(container.Count:GetText())
 				end
 				local cost = (type(count) == "number" and count or 1) * itemSellPrice
-				SetTooltipMoney(tt, cost, nil, GreyHandling.constants.SELL_PRICE_TEXT)
+				SetTooltipMoney(tt, cost, nil, GreyHandling.SELL_PRICE_TEXT)
 			end
 		end
 	end
@@ -27,7 +27,7 @@ local function SetItemRefToolTipPrice(tt)
 	if itemLink then
 		local itemSellPrice = select(11, GetItemInfo(itemLink))
 		if itemSellPrice and itemSellPrice > 0 then
-			SetTooltipMoney(tt, itemSellPrice, nil, GreyHandling.constants.SELL_PRICE_TEXT)
+			SetTooltipMoney(tt, itemSellPrice, nil, GreyHandling.SELL_PRICE_TEXT)
 		end
 	end
 end
