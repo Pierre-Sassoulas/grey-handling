@@ -1,10 +1,33 @@
 local A, GreyHandling = ...
 
+local function DisplayCheapest(text, item) -- bag, slot, vendorPrice, itemCount, currentPrice, potentialPrice)
+	if item.itemCount == 1 then
+		print(
+			text, GetContainerItemLink(item.bag, item.slot), "worth", GetCoinTextureString(item.vendorPrice),
+			"(max ", GetCoinTextureString(item.potentialPrice), ")"
+		)
+	elseif item.potentialPrice == item.currentPrice then
+		print(
+			text, "A full stack of", GetContainerItemLink(item.bag, item.slot), "worth",
+			GetCoinTextureString(item.potentialPrice)
+		)
+	else
+		print(
+			text, GetContainerItemLink(item.bag, item.slot), item.itemCount, "*",
+			GetCoinTextureString(item.vendorPrice),	"=", GetCoinTextureString(item.currentPrice),
+			"(max ", GetCoinTextureString(item.potentialPrice), ")"
+		)
+	end
+
+end
+
+GreyHandling.functions.DisplayCheapest =  DisplayCheapest
+
 local function GlowCheapestGrey()
 	local now = {}
-	now.min = nil
+	now.currentPrice = nil
 	local later = {}
-	later.min = nil
+	later.potentialPrice = nil
 	for bagID = 0, NUM_BAG_SLOTS do
 		for bagSlot = 1, GetContainerNumSlots(bagID) do
 			local itemid = GetContainerItemID(bagID, bagSlot)
@@ -18,17 +41,19 @@ local function GlowCheapestGrey()
 					local _, itemCount = GetContainerItemInfo(bagID, bagSlot)
 					local currentVendorPrice = vendorPrice * itemCount
 					local potentialVendorPrice = vendorPrice * itemStackCount
-					if now.min == nil or now.min > currentVendorPrice then
-						now.min = currentVendorPrice
-						now.currentPrice = vendorPrice * itemCount
-						now.currentNumber = itemCount
+					if now.currentPrice == nil or now.currentPrice > currentVendorPrice then
+						now.currentPrice = currentVendorPrice
+						now.potentialPrice = potentialVendorPrice
+						now.itemCount = itemCount
+						now.vendorPrice = vendorPrice
 						now.bag = bagID
 						now.slot = bagSlot
 					end
-					if later.min == nil or later.min > potentialVendorPrice then
-						later.min = potentialVendorPrice
-						later.currentPrice = vendorPrice * itemCount
-						later.currentNumber = itemCount
+					if later.potentialPrice == nil or later.potentialPrice > potentialVendorPrice then
+						later.currentPrice = currentVendorPrice
+						later.potentialPrice = potentialVendorPrice
+						later.itemCount = itemCount
+						later.vendorPrice = vendorPrice
 						later.bag = bagID
 						later.slot = bagSlot
 					end
@@ -37,28 +62,29 @@ local function GlowCheapestGrey()
 		end
 	end
 	if now.bag and now.slot then
-		GreyHandling.functions.SetBagItemGlow(now.bag, now.slot, "bags-glow-orange")
 		if now.bag==later.bag and now.slot==later.slot then
-			itemLink = GetContainerItemLink(now.bag, now.slot)
+			-- Only one object is the clear cheapest
 			if VERBOSE then
-				print("Cheapest:", itemLink, GetCoinTextureString(now.min))
+				GreyHandling.functions.DisplayCheapest("Cheapest:", now)
 			end
 			PickupContainerItem(now.bag, now.slot)
 			if TALKATIVE then
-				if currentNumberFuture == 1 then
+				local itemLink = GetContainerItemLink(now.bag, now.slot)
+				if now.itemCount == 1 then
 					msg = format("I can give you %s if you have some bag space left.", itemLink)
 				else
-					msg = format("I can give you %s*%s if you have some bag space left.", itemLink, later.currentNumber)
+					msg = format("I can give you %s*%s if you have some bag space left.", itemLink, now.itemCount)
 				end
 				SendChatMessage(msg)
 			end
 			CloseAllBags()
 		else
+			-- Two objects can be considered cheapest
 			if VERBOSE then
-				print("Cheapest now:", GetContainerItemLink(now.bag, now.slot), GetCoinTextureString(now.min)) --, "(max ", GetCoinTextureString(later.min), ")")
-				print("Cheapest later:", currentNumberFuture, "*", GetContainerItemLink(later.bag, later.slot), GetCoinTextureString(later.currentPrice),
-				"(max ", GetCoinTextureString(later.min), ")")
+				GreyHandling.functions.DisplayCheapest("Cheapest now:", now)
+				GreyHandling.functions.DisplayCheapest("Cheapest later:", later)
 			end
+			GreyHandling.functions.SetBagItemGlow(now.bag, now.slot, "bags-glow-orange")
 			GreyHandling.functions.SetBagItemGlow(later.bag, later.slot, "bags-glow-orange")
 		end
 	else
