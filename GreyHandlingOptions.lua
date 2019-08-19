@@ -33,9 +33,9 @@ end
 GreyHandling.options.display = displayOptions
 
 function GreyHandling.options.panel.default()
-	GreyHandling.options.TALKATIVE = true
-	GreyHandling.options.VERBOSE = true
-	GreyHandling.options.SHOW_PRICE = true
+	GreyHandling.options.TALKATIVE = false
+	GreyHandling.options.VERBOSE = false
+	GreyHandling.options.SHOW_PRICE = false
 end
 
 GreyHandling.options.frame:RegisterEvent("ADDON_LOADED")
