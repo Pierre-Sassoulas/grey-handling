@@ -2,6 +2,8 @@ local A, GreyHandling = ...
 
 local function SetGameToolTipPrice(tt)
 	if not MerchantFrame:IsShown() and GreyHandling.options.SHOW_PRICE then
+		-- TODO Take into account the damage to stuff (price go down not linearly)
+		-- Ie stuff is worth 18 coppers at 60/60, but 6 copper at 45/60
 		local itemLink = select(2, tt:GetItem())
 		if itemLink then
 			local itemSellPrice = select(11, GetItemInfo(itemLink))
