@@ -13,19 +13,19 @@ description:SetJustifyV("TOP")
 
 local function displayOptions()
 	if GreyHandling.options.TALKATIVE then
-		talkative = "talk"
+		local talkative = "talk"
 	else
-		talkative = "do not talk"
+		local talkative = "do not talk"
 	end
 	if GreyHandling.options.VERBOSE then
-		verbose = "talk to you,"
+		local verbose = "talk to you,"
 	else
-		verbose = "keep to himself around you,"
+		local verbose = "keep to himself around you,"
 	end
 	if GreyHandling.options.SHOW_PRICE then
-		price = "show"
+		local price = "show"
 	else
-		price "do not show"
+		local price = "do not show"
 	end
 	print("GreyHandling: I", talkative, "to your friends,", verbose, "and", price, "item's prices.");
 end
