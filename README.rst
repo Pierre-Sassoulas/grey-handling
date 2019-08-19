@@ -26,3 +26,6 @@ boot only wearable by demonists, worth 25 coppers.
 Destroyed skins are the cheapest right now because they're 20 coppers when the boots
 are 25 coppers, but the boots are the cheapest later because they can't stack so they
 will still be 25 copper, and a full stack of 20 destroyed skins is worth 1 silver.
+
+.. image:: examples/emergency_problematic_looting_situation.jpg
+   :width: 600pt

@@ -7,5 +7,5 @@ ignore: # Files and directories beginning with a dot (such as .git) are automati
     - art/GreyHandlingTwitchAlpha.png
     - art/GreyHandlingTwitchButton.png
     - art/GreyHandlingTwitchRaw.png
-    - README.md
-
+    - README.rst
+    - examples/emergency_problematic_looting_situation.jpg
