@@ -38,7 +38,8 @@ local function GlowCheapestGrey()
 				local itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount,
 					itemEquipLoc, itemIcon, vendorPrice, itemClassID, itemSubClassID, bindType, expacID, itemSetID,
 					isCraftingReagent = GetItemInfo(itemid)
-				if itemRarity == 0 and vendorPrice > 0 then
+				if (itemRarity == 0 and vendorPrice > 0) or
+                    (itemRarity == 1 and (itemClassID == LE_ITEM_CLASS_WEAPON or itemClassID == LE_ITEM_CLASS_ARMOR))then
 					local _, itemCount = GetContainerItemInfo(bagID, bagSlot)
 					local currentVendorPrice = vendorPrice * itemCount
 					local potentialVendorPrice = vendorPrice * itemStackCount
