@@ -24,9 +24,17 @@ function GreyHandling.functions.ToolTipHook(t)
             if count <= 1 then
                 count = 1
             end
+            -- local to_add = 1 + string.len(format("%s%s", count, itemSellPrice))
             if count ~= itemStackCount then
-                SetTooltipMoney(t, count*itemSellPrice, nil, format("%s(%s*%s)", SELL_PRICE, count, GetCoinTextureString(itemSellPrice)))
+                SetTooltipMoney(t, count*itemSellPrice, nil, format("%s (%s*%s)", SELL_PRICE, count, GetCoinTextureString(itemSellPrice)))
             end
+            -- to_add = to_add - string.len(format("%s", itemStackCount))
+            -- local formatting_space = ""
+            -- print("Adding", to_add)
+            -- for i = 0,to_add,1
+            -- do
+            --     formatting_space = format("%s ", formatting_space)
+            -- end
             SetTooltipMoney(t, itemStackCount * itemSellPrice, nil, format("%s (%s)", SELL_PRICE, itemStackCount))
             -- SetTooltipMoney(t, curValue, nil, format("Max %s*%s (%s)", GetCoinTextureString(itemSellPrice), itemStackCount, GetCoinTextureString(maxValue)))
         else
