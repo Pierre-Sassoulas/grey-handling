@@ -1,6 +1,6 @@
 local A, GreyHandling = ...
 
-local function DisplayCheapest(text, item)
+function GreyHandling.functions.DisplayCheapest(text, item)
 	if GreyHandling.options.VERBOSE then
 		if item.itemCount == 1 then
 			print(
@@ -22,9 +22,7 @@ local function DisplayCheapest(text, item)
 	end
 end
 
-GreyHandling.functions.DisplayCheapest =  DisplayCheapest
-
-local function GlowCheapestGrey()
+function GreyHandling.functions.GlowCheapestGrey()
 	local now = {}
 	now.currentPrice = nil
 	local later = {}
@@ -96,5 +94,3 @@ local function GlowCheapestGrey()
 		print("GreyHandling : No grey to throw, maybe you don't need this hearthstone after all ;) ?")
 	end
 end
-
-GreyHandling.functions.GlowCheapestGrey =  GlowCheapestGrey
