@@ -24,19 +24,17 @@ function GreyHandling.functions.ToolTipHook(t)
             if count <= 1 then
                 count = 1
             end
-            -- local to_add = 1 + string.len(format("%s%s", count, itemSellPrice))
             if count ~= itemStackCount then
-                SetTooltipMoney(t, count*itemSellPrice, nil, format("%s (%s*%s)", SELL_PRICE, count, GetCoinTextureString(itemSellPrice)))
+                if GreyHandling.IS_CLASSIC then
+                    -- We don't have the real value in classic so we create everything on two lines
+                    SetTooltipMoney(t, count*itemSellPrice, nil, format("%s (%s*%s) :", SELL_PRICE, count, GetCoinTextureString(itemSellPrice)))
+                else
+                    -- Changing the wow tooltip directly is hard because we'd need to recover the real value
+                    -- So three lines it is
+                    SetTooltipMoney(t, itemSellPrice, nil, format("%s (1) :", SELL_PRICE))
+                end
             end
-            -- to_add = to_add - string.len(format("%s", itemStackCount))
-            -- local formatting_space = ""
-            -- print("Adding", to_add)
-            -- for i = 0,to_add,1
-            -- do
-            --     formatting_space = format("%s ", formatting_space)
-            -- end
-            SetTooltipMoney(t, itemStackCount * itemSellPrice, nil, format("%s (%s)", SELL_PRICE, itemStackCount))
-            -- SetTooltipMoney(t, curValue, nil, format("Max %s*%s (%s)", GetCoinTextureString(itemSellPrice), itemStackCount, GetCoinTextureString(maxValue)))
+            SetTooltipMoney(t, itemStackCount * itemSellPrice, nil, format("%s (%s) :", SELL_PRICE, itemStackCount))
         else
             if itemClassID == LE_ITEM_CLASS_WEAPON or itemClassID == LE_ITEM_CLASS_ARMOR then
                 -- TODO Take into account the damage to stuff (price go down not linearly)
