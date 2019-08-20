@@ -41,9 +41,9 @@ function GreyHandling.functions.ToolTipHook(t)
             if itemClassID == LE_ITEM_CLASS_WEAPON or itemClassID == LE_ITEM_CLASS_ARMOR then
                 -- TODO Take into account the damage to stuff (price go down not linearly)
                 -- Ie stuff is worth 18 coppers at 60/60, but 6 copper at 45/60
-                -- slot = From link ??
-                -- print(GetInventoryItemDurability(slot))
-                SetTooltipMoney(t, itemSellPrice, nil, format("%s %s", SELL_PRICE, "(Decreases fast if damaged)"))
+                -- bagID, bagSlot = from t ?
+                -- local currentDurability, maximumDurability = GetContainerItemDurability(bagID, bagSlot)
+                SetTooltipMoney(t, itemSellPrice, nil, format("%s %s", SELL_PRICE, "(100% durability)"))
             else
                 SetTooltipMoney(t, itemSellPrice, nil, format("%s", SELL_PRICE))
             end

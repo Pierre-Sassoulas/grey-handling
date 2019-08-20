@@ -4,7 +4,7 @@ local function DisplayCheapest(text, item)
 	if GreyHandling.options.VERBOSE then
 		if item.itemCount == 1 then
 			print(
-				text, GetContainerItemLink(item.bag, item.slot), "worth", GetCoinTextureString(item.vendorPrice),
+				text, GetContainerItemLink(item.bag, item.slot), "worth", GetCoinTextureString(item.currentPrice),
 				"(max ", GetCoinTextureString(item.potentialPrice), ")"
 			)
 		elseif item.potentialPrice == item.currentPrice then
@@ -41,7 +41,12 @@ local function GlowCheapestGrey()
 				if (itemRarity == 0 and vendorPrice > 0) or
                     (itemRarity == 1 and (itemClassID == LE_ITEM_CLASS_WEAPON or itemClassID == LE_ITEM_CLASS_ARMOR))then
 					local _, itemCount = GetContainerItemInfo(bagID, bagSlot)
-					local currentVendorPrice = vendorPrice * itemCount
+                    local currentDurability, maximumDurability = GetContainerItemDurability(bagID, bagSlot)
+                    local modifier = 1
+                    if currentDurability and maximumDurability then
+                        modifier= currentDurability / maximumDurability
+                    end
+					local currentVendorPrice = vendorPrice * itemCount * modifier
 					local potentialVendorPrice = vendorPrice * itemStackCount
 					if now.currentPrice == nil or now.currentPrice > currentVendorPrice then
 						now.currentPrice = currentVendorPrice
