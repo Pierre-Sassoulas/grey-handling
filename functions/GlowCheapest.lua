@@ -22,7 +22,7 @@ function GreyHandling.functions.DisplayCheapest(text, item)
 	end
 end
 
-function GreyHandling.functions.GlowCheapestGrey()
+function GreyHandling.functions.GetCheapestItem()
 	local now = {}
 	now.currentPrice = nil
 	local later = {}
@@ -68,6 +68,11 @@ function GreyHandling.functions.GlowCheapestGrey()
 			end
 		end
 	end
+    return now, later
+end
+
+function GreyHandling.functions.GlowCheapestGrey()
+    now, later = GreyHandling.functions.GetCheapestItem()
 	if now.bag and now.slot then
 		if now.bag==later.bag and now.slot==later.slot or now.potentialPrice == later.potentialPrice then
 			-- Only one object is the clear cheapest
