@@ -34,25 +34,43 @@ function GreyHandling.options.panel.default()
 	GreyHandling.options.TALKATIVE = false
 	GreyHandling.options.VERBOSE = false
 	GreyHandling.options.SHOW_PRICE = false
+	GH_TALKATIVE = GreyHandling.options.TALKATIVE
+	GH_VERBOSE = GreyHandling.options.VERBOSE
+	GH_SHOW_PRICE = GreyHandling.options.SHOW_PRICE
 end
 
 GreyHandling.options.frame:RegisterEvent("ADDON_LOADED")
 GreyHandling.options.frame:RegisterEvent("PLAYER_LOGOUT")
 
-function GreyHandling.options.frame:OnEvent(event, arg1)
-	if event == "ADDON_LOADED" and arg1 == addOnName then
-		if GreyHandling.options.TALKATIVE == nil then
-			GreyHandling.options.TALKATIVE = true
+function GreyHandling.options.frame:OnEvent(event, key)
+	if key ~= GreyHandling.NAME then
+      return -- not us, return
+    end
+	if event == "ADDON_LOADED" then
+		if GH_TALKATIVE == nil then
+			GreyHandling.options.TALKATIVE = GreyHandling.options.DEFAULT_TALKATIVE
+			GH_TALKATIVE = GreyHandling.options.DEFAULT_TALKATIVE
+		else
+			GreyHandling.options.TALKATIVE = GH_TALKATIVE
 		end
-		if GreyHandling.options.VERBOSE == nil then
-			GreyHandling.options.VERBOSE = true
+		if  GH_VERBOSE == nil then
+			GreyHandling.options.VERBOSE = GreyHandling.options.DEFAULT_VERBOSE
+			GH_VERBOSE = GreyHandling.options.DEFAULT_VERBOSE
+		else
+			GreyHandling.options.VERBOSE = GH_VERBOSE
 		end
-		if GreyHandling.options.SHOW_PRICE == nil then
-			GreyHandling.options.SHOW_PRICE = true
+		if GH_SHOW_PRICE == nil then
+			GreyHandling.options.SHOW_PRICE = GreyHandling.options.DEFAULT_SHOW_PRICE
+			GH_SHOW_PRICE = GreyHandling.options.DEFAULT_SHOW_PRICE
+		else
+			GreyHandling.options.SHOW_PRICE = GH_SHOW_PRICE
 		end
-		GreyHandling.options.display()
 	end
-
+	if event == "PLAYER_LOGOUT" then
+		GH_TALKATIVE = GreyHandling.options.TALKATIVE
+		GH_VERBOSE = GreyHandling.options.VERBOSE
+		GH_SHOW_PRICE = GreyHandling.options.SHOW_PRICE
+	end
 end
 
 GreyHandling.options.frame:SetScript("OnEvent", GreyHandling.options.frame.OnEvent);

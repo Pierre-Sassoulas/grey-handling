@@ -9,12 +9,11 @@ GreyHandling.NAME = "GreyHandling"
 GreyHandling.DISPLAY_NAME = "Grey Handling"
 GreyHandling.DESCRIPTION = "Permit to help with your grey objects when your bags are full, and you have no vendor around"
 GreyHandling.options = {}
-GreyHandling.OPTION_COMMAND = "/gho"
 GreyHandling.options.frame = CreateFrame("FRAME")
-GreyHandling.options.TALKATIVE = true
-GreyHandling.options.VERBOSE = true
-GreyHandling.options.SHOW_PRICE = true
-
+GreyHandling.OPTION_COMMAND = "/gho"
+GreyHandling.options.DEFAULT_TALKATIVE = true
+GreyHandling.options.DEFAULT_VERBOSE = true
+GreyHandling.options.DEFAULT_SHOW_PRICE = true
 
 --- localization helpers
 

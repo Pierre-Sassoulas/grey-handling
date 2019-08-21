@@ -4,9 +4,9 @@
 ## Notes: Permit to help with your grey objects when your bags are full, and you have no vendor around
 ## Author: pierre-sassoulas
 
-## SavedVariables: GreyHandling.options.TALKATIVE
-## SavedVariables: GreyHandling.options.VERBOSE
-## SavedVariables: GreyHandling.options.SHOW_PRICE
+## SavedVariables: GH_TALKATIVE
+## SavedVariables: GH_VERBOSE
+## SavedVariables: GH_SHOW_PRICE
 
 constants.lua
 functions\SetBagItemGlow.lua
