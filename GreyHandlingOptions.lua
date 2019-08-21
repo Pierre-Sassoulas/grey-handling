@@ -11,6 +11,62 @@ description:SetText(GreyHandling.DESCRIPTION)
 description:SetJustifyH("LEFT")
 description:SetJustifyV("TOP")
 
+-- Variable for easy positioning
+lastcheckbox = description
+local function CreateCheckbox(text, tooltip, script)
+    -- Thank you BattlePetBreedId author (Simca@Malfurion and Hugh@Burning Blade)
+    local checkbox = CreateFrame("CheckButton", nil, GreyHandling.options.panel, "UICheckButtonTemplate")
+    checkbox:SetPoint("TOPLEFT", lastcheckbox, "BOTTOMLEFT", 0, 0)
+    checkbox:SetSize(32, 32)
+    checkbox.text:SetFontObject("GameFontNormal")
+    checkbox.tooltip = tooltip
+    checkbox:SetScript("OnClick", script);
+    checkbox.text:SetText(" " .. text)
+    lastcheckbox = checkbox
+    return checkbox
+end
+
+local function change_value_verbose()
+    if GreyHandling.options.VERBOSE then
+        GreyHandling.options.VERBOSE = false
+    else
+        GreyHandling.options.VERBOSE = true
+    end
+end
+
+local function change_value_talkative()
+    if GreyHandling.options.TALKATIVE then
+        GreyHandling.options.TALKATIVE = false
+    else
+        GreyHandling.options.TALKATIVE = true
+    end
+end
+
+local function change_value_show_price()
+    if GreyHandling.options.SHOW_PRICE then
+        GreyHandling.options.SHOW_PRICE = false
+    else
+        GreyHandling.options.SHOW_PRICE = true
+    end
+end
+
+-- definition order matter here lastcheckbox is global !
+local CheckboxTalkative = CreateCheckbox(
+    "Text visible by everyone (/s), offering the grey.",
+    "",
+    change_value_talkative
+)
+local CheckboxVerbose = CreateCheckbox(
+    "Text only visible to you, explaining the addon reasoning",
+    "",
+    change_value_verbose
+)
+local CheckboxShowPrice = CreateCheckbox(
+    "Show item price in tooltip",
+    "Permit to see price in interface (Not very RP ;))",
+    change_value_show_price
+)
+
 function GreyHandling.options.display()
 	if GreyHandling.options.TALKATIVE then
 		talkative = "talk"
