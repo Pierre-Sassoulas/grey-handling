@@ -87,9 +87,9 @@ function GreyHandling.options.display()
 end
 
 function GreyHandling.options.panel.default()
-	GreyHandling.options.TALKATIVE = false
-	GreyHandling.options.VERBOSE = false
-	GreyHandling.options.SHOW_PRICE = false
+	GreyHandling.options.TALKATIVE = GreyHandling.options.DEFAULT_TALKATIVE
+	GreyHandling.options.VERBOSE = GreyHandling.options.DEFAULT_VERBOSE
+	GreyHandling.options.SHOW_PRICE = GreyHandling.options.DEFAULT_SHOW_PRICE
 	GH_TALKATIVE = GreyHandling.options.TALKATIVE
 	GH_VERBOSE = GreyHandling.options.VERBOSE
 	GH_SHOW_PRICE = GreyHandling.options.SHOW_PRICE
