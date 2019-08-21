@@ -92,8 +92,18 @@ function GreyHandling.functions.GlowCheapestGrey()
 			-- Two objects can be considered cheapest
 			GreyHandling.functions.DisplayCheapest("Cheapest now:", now)
 			GreyHandling.functions.DisplayCheapest("Cheapest later:", later)
-			GreyHandling.functions.SetBagItemGlow(now.bag, now.slot, "bags-glow-orange")
-			GreyHandling.functions.SetBagItemGlow(later.bag, later.slot, "bags-glow-orange")
+			if IsAddOnLoaded("Inventorian") then
+				if GreyHandling.options.VERBOSE then
+					print("GreyHandling: Sorry, you use inventorian, I can't make those two items glow.")
+				end
+			elseif IsAddOnLoaded("ArkInventory") then
+				if GreyHandling.options.VERBOSE then
+					print("GreyHandling: Sorry, you use ArkInventory, I can't make those two items glow.")
+				end
+			else
+				GreyHandling.functions.SetBagItemGlow(now.bag, now.slot, "bags-glow-orange")
+				GreyHandling.functions.SetBagItemGlow(later.bag, later.slot, "bags-glow-orange")
+			end
 		end
 	else
 		print("GreyHandling : No grey to throw, maybe you don't need this hearthstone after all ;) ?")
