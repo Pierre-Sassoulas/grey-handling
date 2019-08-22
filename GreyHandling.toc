@@ -1,5 +1,5 @@
 ## Interface: 80200
-## Version: 0.3.0
+## Version: 0.3.1
 ## Title: Grey Handling
 ## Notes: Permit to help with your grey objects when your bags are full, and you have no vendor around
 ## Author: pierre-sassoulas
