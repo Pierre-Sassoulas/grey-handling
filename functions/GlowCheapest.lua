@@ -29,6 +29,11 @@ function GreyHandling.functions.GetCheapestItem()
 	later.potentialPrice = nil
 	for bagID = 0, NUM_BAG_SLOTS do
 		for bagSlot = 1, GetContainerNumSlots(bagID) do
+			if IsAddOnLoaded("ArkInventory") then
+				local loc_id, bag_id = ArkInventory.BlizzardBagIdToInternalId(bagID)
+				local _, item = ArkInventory.API.ItemFrameGet( loc_id, bag_id, bagSlot)
+				ActionButton_HideOverlayGlow(item)
+			end
 			local itemid = GetContainerItemID(bagID, bagSlot)
 			local itemLink = GetContainerItemLink(bagID, bagSlot)
 			local _, itemCount = GetContainerItemInfo(bagID, bagSlot)
@@ -87,6 +92,7 @@ function GreyHandling.functions.GlowCheapestGrey()
 				end
 				SendChatMessage(msg)
 			end
+			GreyHandling.functions.SetBagItemGlow(now.bag, now.slot, "bags-glow-orange")
 			CloseAllBags()
 		else
 			-- Two objects can be considered cheapest
@@ -95,10 +101,6 @@ function GreyHandling.functions.GlowCheapestGrey()
 			if IsAddOnLoaded("Inventorian") then
 				if GreyHandling.options.VERBOSE then
 					print("GreyHandling: Sorry, you use inventorian, I can't make those two items glow.")
-				end
-			elseif IsAddOnLoaded("ArkInventory") then
-				if GreyHandling.options.VERBOSE then
-					print("GreyHandling: Sorry, you use ArkInventory, I can't make those two items glow.")
 				end
 			else
 				GreyHandling.functions.SetBagItemGlow(now.bag, now.slot, "bags-glow-orange")

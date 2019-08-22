@@ -1,10 +1,14 @@
 local A, GreyHandling = ...
 
 
-local function SetBagItemGlow(bagID, slotID, color)
+function GreyHandling.functions.SetBagItemGlow(bagID, slotID, color)
 	local item = nil
 	if IsAddOnLoaded("OneBag3") then
 		item = _G["OneBagFrameBag"..bagID.."Item"..slotID]
+    elseif IsAddOnLoaded("ArkInventory") then
+        local loc_id, bag_id = ArkInventory.BlizzardBagIdToInternalId(bagID)
+        local framename, item = ArkInventory.API.ItemFrameGet( loc_id, bag_id, slotID)
+        ActionButton_ShowOverlayGlow(item)
 	else
 		for i = 1, NUM_CONTAINER_FRAMES, 1 do
 			local frame = _G["ContainerFrame"..i]
@@ -20,5 +24,3 @@ local function SetBagItemGlow(bagID, slotID, color)
 		item.newitemglowAnim:Play()
 	end
 end
-
-GreyHandling.functions.SetBagItemGlow = SetBagItemGlow
