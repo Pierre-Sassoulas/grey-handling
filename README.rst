@@ -27,5 +27,16 @@ Destroyed skins are the cheapest right now because they're 20 coppers when the b
 are 25 coppers, but the boots are the cheapest later because they can't stack so they
 will still be 25 copper, and a full stack of 20 destroyed skins is worth 1 silver.
 
+Compatibility with other bags addons
+------------------------------------
+
+* Everything works the same with OneBag3
+* The orange glow in ArkInventory is replaced by a bright yellow glow that is not removed by mouseover. (Launch again until there is no more grey to remove)
+* The orange glow does not work with Inventorian (for now, I could makes it works if it's important for you)
+
+If your bag addon break the orange glow, you can always activate the
+text explanation in options and search for the item yourself visually
+or with its name if your addon permit that.
+
 .. image:: examples/emergency_problematic_looting_situation.jpg
    :width: 600pt
