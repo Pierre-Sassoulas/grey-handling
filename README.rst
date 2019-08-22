@@ -21,13 +21,14 @@ What does it do?
 - If the choice isn't clear, display your two worst items (the cheapest at the moment and the cheapest once fully stacked) so you can choose for yourself
 
 For example, if you have:
+
   * 4 leather skins worth 20 coppers
   * 1 cloth robe worth 25 coppers
   * 1 cape (muddy, and only for demonists), worth 8 coppers
 
 The skins are worth 20, the cloth robe is worth 25, so everything is worth
 more than the muddy cape. If you activate the addon, it pick the cape up and
-**you just have to left click to get rid of the cape**.
+**you just have to left click to get rid of the cape** (or right click to cancel the pick up).
 
 Then if you throw away the cape :
 
