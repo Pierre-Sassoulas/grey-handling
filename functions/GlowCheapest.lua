@@ -81,27 +81,27 @@ function GreyHandling.functions.GlowCheapestGrey()
     now, later = GreyHandling.functions.GetCheapestItem()
 	if now.bag and now.slot then
 		if now.bag==later.bag and now.slot==later.slot or now.potentialPrice == later.potentialPrice then
-			-- Only one object is the clear cheapest
+			-- Only one item is the cheapest
 			GreyHandling.functions.DisplayCheapest("Cheapest:", now)
 			PickupContainerItem(now.bag, now.slot)
 			if GreyHandling.options.TALKATIVE then
 				local itemLink = GetContainerItemLink(now.bag, now.slot)
 				if now.itemCount == 1 then
-					msg = format("I can give you %s if you have some bag space left.", itemLink)
+					msg = format("I can give you %s if you have enough bag places.", itemLink)
 				else
-					msg = format("I can give you %s*%s if you have some bag space left.", itemLink, now.itemCount)
+					msg = format("I can give you %s*%s if you have enough bag places.", itemLink, now.itemCount)
 				end
 				SendChatMessage(msg)
 			end
 			GreyHandling.functions.SetBagItemGlow(now.bag, now.slot, "bags-glow-orange")
 			CloseAllBags()
 		else
-			-- Two objects can be considered cheapest
+			-- Two items can be considered cheapest
 			GreyHandling.functions.DisplayCheapest("Cheapest now:", now)
 			GreyHandling.functions.DisplayCheapest("Cheapest later:", later)
 			if IsAddOnLoaded("Inventorian") then
 				if GreyHandling.options.VERBOSE then
-					print("GreyHandling: Sorry, you use inventorian, I can't make those two items glow.")
+					print("GreyHandling: It seems you're using Inventorian. Please note that the feature for glowing two items is not yet fully supported.")
 				end
 			else
 				GreyHandling.functions.SetBagItemGlow(now.bag, now.slot, "bags-glow-orange")
@@ -109,6 +109,6 @@ function GreyHandling.functions.GlowCheapestGrey()
 			end
 		end
 	else
-		print("GreyHandling : No grey to throw, maybe you don't need this hearthstone after all ;) ?")
+		print("GreyHandling: There are no grey items to throw away. Maybe you don't need this Hearthstone after all? ;)")
 	end
 end

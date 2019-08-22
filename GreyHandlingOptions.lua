@@ -14,7 +14,7 @@ description:SetJustifyV("TOP")
 -- Variable for easy positioning
 lastcheckbox = description
 local function CreateCheckbox(text, tooltip, script)
-    -- Thank you BattlePetBreedId author (Simca@Malfurion and Hugh@Burning Blade)
+    -- Thanks to BattlePetBreedId author (Simca@Malfurion and Hugh@Burning Blade)
     local checkbox = CreateFrame("CheckButton", nil, GreyHandling.options.panel, "UICheckButtonTemplate")
     checkbox:SetPoint("TOPLEFT", lastcheckbox, "BOTTOMLEFT", 0, 0)
     checkbox:SetSize(32, 32)
@@ -50,20 +50,20 @@ local function change_value_show_price()
     end
 end
 
--- definition order matter here lastcheckbox is global !
+-- definition order matter here lastcheckbox is global!
 local CheckboxTalkative = CreateCheckbox(
-    "Text visible by everyone (/s), offering the grey.",
+    "The text will be displayed to everyone (offering to trade the grey item).",
     "",
     change_value_talkative
 )
 local CheckboxVerbose = CreateCheckbox(
-    "Text only visible to you, explaining the addon reasoning",
+    "The text will be displayed to you only (explaining the logic behind the addon)",
     "",
     change_value_verbose
 )
 local CheckboxShowPrice = CreateCheckbox(
-    "Show item price in tooltip",
-    "Permit to see price in interface (Not very RP ;))",
+    "Display vendor sell prices in item tooltips",
+    "Allows you to display in tooltip the price of an item",
     change_value_show_price
 )
 

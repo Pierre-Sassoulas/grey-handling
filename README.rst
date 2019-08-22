@@ -1,42 +1,28 @@
 grey-handling
 =============
 
-Say you're in a dungeon or far from a vendor, with full bags, you're underwater and
-about to drown or be ninja looted if you don't loot this corpse pretty fast!  Or
-maybe you have some teammates that have bag space around, and you want to give them
-the shittiest, the least useful, and the least expensive object you have, to be a
-good team player and increase your server reputation?
+Let's say you have full bags and you're in the middle of a dungeon, far from a vendor, or maybe underwater and about to drown or be ninja looted if you don't loot this corpse pretty fast! Even better, let's say you're playing with some teammates that have free bag spaces, and you want to give them the junkest, the least useful, valuable and expensive item of your inventory to be recognized as a good person, improving your reputation on your server.
 
-Well, this addon **aims to make decisions about your objects easier when you must
-choose to part way with your greys**.
+Well, that's great because **this addon helps you to make these decisions more easily by displaying the price of your grey items on tooltip and making the less valuable grey items glow in your bags**! In addition, **it allows you to give to the players around you the opportunity to trade your most unprofitable grey items without wasting time writing**.
 
-What it does
-------------
+What it does?
+-------------
 
-- Displays the price of objects in your bags for Wow Classic.
-- Selects your cheapest grey object, so you can exchange it or throw it away in one click.
+- Displays in tooltip the price of items in your bags (especially useful on World of Warcraft Classic).
+- Displays your cheapest grey items by making them glow to make it easier for you to know which item to throw away or trade to another player.
 
-If the choice is hard makes the two least profitable grey objects glow orange :
+If the choice is too hard, the addon displays the two least valuable grey items glow in orange (the cheapest at the moment and the cheapest considering that its stack is full).
 
-- One is the cheapest right now
-- One is the cheapest if you go on exploring and stack everything to the max
-
-Ie: Right now you have 4 destroyed skins worth 20 coppers, and some pierced cloth
-boot only wearable by demonists, worth 25 coppers.
-Destroyed skins are the cheapest right now because they're 20 coppers when the boots
-are 25 coppers, but the boots are the cheapest later because they can't stack so they
-will still be 25 copper, and a full stack of 20 destroyed skins is worth 1 silver.
+For example, you got in your bags 4 leather skin worth 20 pieces of coppers and 1 cloth robe worth 25 pieces of coppers. Individual leather skin is cheaper than the robe, but stacked leather skins are more valuable than the cloth robe that can't be stacked. Both items will glow in orange, giving you the final choice.
 
 Compatibility with other bags addons
 ------------------------------------
 
-* Everything works the same with OneBag3
-* The orange glow in ArkInventory is replaced by a bright yellow glow that is not removed by mouseover. (Launch again until there is no more grey to remove)
-* The orange glow does not work with Inventorian (for now, I could makes it works if it's important for you)
+- Everything works the same with **OneBag3**.
+- The orange glow in **ArkInventory** is replaced with a bright yellow glow that is not removed by mouseover (close and open your bags until there is no more grey items to remove).
+- The orange glow does not currently work work with **Inventorian**.
 
-If your bag addon break the orange glow, you can always activate the
-text explanation in options and search for the item yourself visually
-or with its name if your addon permit that.
+If your bag addon disables the orange glow, you can always activate the text explanation in options and looking for the item yourself (visually or with its name if the addon you are using has a search bar).
 
 .. image:: examples/emergency_problematic_looting_situation.jpg
    :width: 600pt
