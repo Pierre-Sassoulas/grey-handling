@@ -52,18 +52,18 @@ end
 
 -- definition order matter here lastcheckbox is global!
 local CheckboxTalkative = CreateCheckbox(
-    "The text will be displayed to everyone (offering to trade the grey item).",
+    "Automatically offer to trade the grey item in chat (displayed to everyone)",
     "",
     change_value_talkative
 )
 local CheckboxVerbose = CreateCheckbox(
-    "The text will be displayed to you only (explaining the logic behind the addon)",
+    "Explain the logic behind the two chepeast items (displayed to you only)",
     "",
     change_value_verbose
 )
 local CheckboxShowPrice = CreateCheckbox(
-    "Display vendor sell prices in item tooltips",
-    "Allows you to display in tooltip the price of an item",
+    "Display vendor sell prices in item tooltips (might be redondant with another addon)",
+    "",
     change_value_show_price
 )
 
