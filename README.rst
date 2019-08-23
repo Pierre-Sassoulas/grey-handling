@@ -30,11 +30,14 @@ The skins are worth 20, the cloth robe is worth 25, so everything is worth
 more than the muddy cape. If you activate the addon, it pick the cape up and
 **you just have to left click to get rid of the cape** (or right click to cancel the pick up).
 
-Then if you throw away the cape :
+Then if you throw away the cape:
 
-The 4 leather skins are cheaper than the robe, but stacked leather skins
-are more valuable than the cloth robe that can't be stacked. **Both items
-will glow in orange inside your bags**, giving you the final choice.
+The 4 leather skins are cheaper than the robe, but the addon know you can stack 20 of them
+together, so 20 stacked leather skins are worth 100 and are more valuable
+than the cloth robe that can't be stacked. **Both items will glow in orange inside
+your bags**, giving you the final choice. Because you're the only one who knows
+how close or not you are from a vendor or if you're going to be killing 50 more
+boars with leather skins.
 
 Compatibility with other bags addons
 ------------------------------------
