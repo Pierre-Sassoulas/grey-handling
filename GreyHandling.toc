@@ -1,7 +1,15 @@
 ## Interface: 80200
 ## Version: 0.3.2
 ## Title: Grey Handling
-## Notes: Helps you to deal with your grey items when your bags are full, and you have no vendor around
+## Notes: Helps you get rid of the right grey objects when your bags are full
+## Notes-deDE: Hilft Ihnen, die richtigen grauen Gegenstände loszuwerden, wenn Ihre Taschen voll sind
+## Notes-ruRU: Помогает вам избавиться от правильных серых объектов, когда ваши сумки заполнены
+## Notes-zhTW: 當你的行李滿了時，幫助你擺脫正確的灰色物體
+## Notes-arAE: يساعدك على التخلص من الأشياء الرمادية الصحيحة عندما تكون حقائبك ممتلئة
+## Notes-frFR: Vous aide à vous débarrasser des bons objets gris lorsque vos sacs sont pleins
+## Notes-esES: Te ayuda a deshacerte de los objetos grises correctos cuando tus maletas están llenas
+## Notes-ptBR: Ajuda você a se livrar dos objetos cinzentos certos quando suas malas estão cheias
+## Notes-itIT:  Ti aiuta a sbarazzarti degli oggetti grigi giusti quando le tue borse sono piene
 ## Author: pierre-sassoulas
 
 ## SavedVariables: GH_TALKATIVE
