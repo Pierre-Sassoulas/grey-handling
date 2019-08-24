@@ -12,15 +12,17 @@ function GreyHandling.functions.handleChatMessageLoot(chat_message, player_name,
 	if GreyHandling.data.items[player_id][itemLink] == nil then
 		GreyHandling.data.items[player_id][itemLink] = {}
 		GreyHandling.data.items[player_id][itemLink]["itemStackCount"] = itemStackCount
-		local our = GetItemCount(itemLink)
-		if our == nil then
-			GreyHandling.data.items[player_id][itemLink]["number"] = 0
-		else
-			-- We can initialize properly only if its us as long as we have no communication between players
-			GreyHandling.data.items[player_id][itemLink]["number"] = our
-		end
+		-- We can initialize properly only if its us as long as we have no communication between players
+		GreyHandling.data.items[player_id][itemLink]["number"] = 0
 	end
-	print(format("The player %s (%s) had %s*%s (max %s)", player_name, player_id, itemLink, GreyHandling.data.items[player_id][itemLink]["number"], GreyHandling.data.items[player_id][itemLink]["itemStackCount"] ))
+	print(
+		format("The player %s (%s) had %s*%s (max %s)",
+			player_name,
+			player_id,
+			itemLink,
+			GreyHandling.data.items[player_id][itemLink]["number"],
+			GreyHandling.data.items[player_id][itemLink]["itemStackCount"])
+	)
 	if itemStackCount == 1 then
 		return -- We can't optimize stacking for items that do not stack
 	end
