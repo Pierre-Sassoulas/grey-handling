@@ -24,6 +24,8 @@ constants.lua
 functions\SetBagItemGlow.lua
 functions\GlowCheapest.lua
 functions\SetGameTooltipPrice.lua
+functions\handleChatMessageLoot.lua
+functions\NumberLootedFromChatMessage.lua
 GreyHandlingOptions.lua
 GreyHandling.lua
 
