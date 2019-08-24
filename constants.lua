@@ -14,6 +14,9 @@ GreyHandling.OPTION_COMMAND = "/gho"
 GreyHandling.options.DEFAULT_TALKATIVE = true
 GreyHandling.options.DEFAULT_VERBOSE = true
 GreyHandling.options.DEFAULT_SHOW_PRICE = true
+GreyHandling.data = {}
+GreyHandling.data.names = {}
+GreyHandling.data.items = {}
 
 --- localization helpers
 
