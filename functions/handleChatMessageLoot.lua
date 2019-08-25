@@ -18,6 +18,9 @@ function GreyHandling.functions.initPlayerItem(player_id, itemLink, itemStackCou
 end
 
 function GreyHandling.functions.handleChatMessageLoot(chat_message, player_name, line_number, player_id, k, l, m, n, o)
+	if GreyHandling.data.ourName == player_name then
+		return -- We can get the player items reliably with GetItemCount()
+	end
 	GreyHandling.functions.updatePlayersList(player_id, player_name)
 	-- chat_message contain an item link, and work like one as of patch 8.2.0
 	local _, itemLink, _, _, _, _, _, itemStackCount, _, _, vendorPrice = GetItemInfo(chat_message)
