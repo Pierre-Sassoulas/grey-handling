@@ -3,18 +3,18 @@ grey-handling
 
 This addon aims to **make decisions about your objects easier when you have to
 throw them or give them away**. It helps you know what are your cheapest objects
-faster.
+faster and what trade your teammates would likely accept.
 
 What does it do?
 ----------------
 
 - Displays the **price, maximum stack of items, and number possessed by teammates in tooltip**
-- If your bag are full **pick the worst item** (left click to throw or give)
+- If your bags are full **pick the worst item** (left click to throw or give)
 - If there isn't a worst item **make your two worst items glow in bag**
-- If one ore more mutually beneficial traded exists suggest the fairest one.
+- If one ore more mutually beneficial trades exist, suggest the fairest one.
 
-The two worst item are the cheapest at the moment and the cheapest once fully
-stacked. A mutually beneficial trade is an exchange that permit to free a bag
+The two worst items are the cheapest at the moment and the cheapest once fully
+stacked. A mutually beneficial trade is an exchange that permits to free one bag
 space for everyone without throwing anything by keeping one kind of stackable
 grey instead of two.
 
@@ -66,6 +66,6 @@ Now, before throwing that, if you saw your teammate Alice loot:
 You can give 4 leather skins worth 20 copper for 3 rocks worth 30 coppers.
 You do not throw anything and you can compensate Alice for her 3 rocks.
 The addon will suggest 10 coppers, but you could give more because you would
-have to throw at least 20 coppers if Alice refuse your offer. The addon does
+have to throw at least 20 coppers if Alice refuses your offer. The addon does
 not suggest that Alice give you her skin the trade would not be very fair for
 her but you could compensate more.
