@@ -8,12 +8,16 @@ faster.
 What does it do?
 ----------------
 
-- Displays the **price and maximum stack of items in tooltip**
+- Displays the **price, maximum stack of items, and number possessed by teammates in tooltip**
 - If your bag are full **pick the worst item** (left click to throw or give)
 - If there isn't a worst item **make your two worst items glow in bag**
+- If one ore more mutually beneficial traded exists suggest the fairest one.
 
 The two worst item are the cheapest at the moment and the cheapest once fully
-stacked
+stacked. A mutually beneficial trade is an exchange that permit to free a bag
+space for everyone without throwing anything by keeping one kind of stackable
+grey instead of two.
+
 
 Compatibility with other bags addons
 ------------------------------------
@@ -39,6 +43,8 @@ For example, if you have:
 * 4 leather skins worth 4*5 coppers = 20 coppers
 * 1 cloth robe worth 25 coppers
 * 1 cape (muddy, and only for demonists), worth 8 coppers
+* 5 rocks worth 5*10 coppers = 50 coppers
+
 
 The muddy cape can't stack and is your cheapest item. If you activate the addon,
 it pick the cape up and **you just have to left click to get rid of the cape**
@@ -50,3 +56,16 @@ skins are worth 100c and are more valuable than the cloth robe that can't be sta
 **Both items will glow in orange inside your bags**, giving you the final choice.
 Because you're the only one who knows how close or not you are from a vendor or
 if you're going to be killing 50 more boars with leather skins.
+
+Now, before throwing that, if you saw your teammate Alice loot:
+
+* 3 rocks worth 3*10 coppers = 30 coppers
+* 16 leather skins worth 16*5 coppers = 80 coppers
+
+**The addon will suggest a mutually beneficial trade**.
+You can give 4 leather skins worth 20 copper for 3 rocks worth 30 coppers.
+You do not throw anything and you can compensate Alice for her 3 rocks.
+The addon will suggest 10 coppers, but you could give more because you would
+have to throw at least 20 coppers if Alice refuse your offer. The addon does
+not suggest that Alice give you her skin the trade would not be very fair for
+her but you could compensate more.
