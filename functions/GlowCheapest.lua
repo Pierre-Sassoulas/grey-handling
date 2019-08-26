@@ -219,7 +219,12 @@ function GreyHandling.functions.GlowCheapestGrey()
 		else
 			exchange_value = format("%sloose %s", exchange_value, GetCoinTextureString(-fair.ourGain))
 		end
-		msg = format("You could give %s your '%s' in exchange of their '%s'. %s.", fair.playerId, fair.itemGiven, fair.itemTaken, exchange_value)
+		local bag, slot = GreyHandling.functions.GetBagAndSlot(fair.itemGiven)
+		if bad and slot then
+			GreyHandling.functions.SetBagItemGlow(bag, slot, "bags-glow-orange")
+		end
+		msg = format("You could give %s your '%s' in exchange of their '%s'. %s.", GreyHandling.data.names[fair.playerId],
+			fair.itemGiven, fair.itemTaken, exchange_value)
 		print(msg)
 		-- SendChatMessage(msg)
 		--else
