@@ -234,7 +234,7 @@ function GreyHandling.functions.GlowCheapestGrey()
 		if bad and slot then
 			GreyHandling.functions.SetBagItemGlow(bag, slot, "bags-glow-orange")
 		end
-		msg = format("You could give %s your '%s' in exchange of their '%s'. %s.", GreyHandling.data.names[fair.playerId],
+		msg = format("You could give %s your %s in exchange of their %s. %s.", GreyHandling.data.names[fair.playerId],
 			fair.itemGiven, fair.itemTaken, exchange_value)
 		print(msg)
 		-- SendChatMessage(msg)
