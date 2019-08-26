@@ -116,7 +116,7 @@ end
 
 function GreyHandling.functions.displayTrade(message, trade)
 	local exchange_value = ""
-	print(trade.theirGain)
+	-- print(trade.theirGain)
 	if trade.theirGain < 0 then
 		if trade.ourGain > 0 then
 			exchange_value = format("You should give them %s as compensation", GetCoinTextureString(trade.ourGain))
