@@ -22,6 +22,17 @@ function GreyHandling.functions.DisplayCheapest(text, item)
 	end
 end
 
+function GreyHandling.functions.GetBagAndSlot(itemLink)
+	for bagID = 0, NUM_BAG_SLOTS do
+		for bagSlot = 1, GetContainerNumSlots(bagID) do
+			local testedItemLink = GetContainerItemLink(bagID, bagSlot)
+			if testedItemLink == itemLink then
+				return bagID, bagSlot
+			end
+		end
+	end
+end
+
 function GreyHandling.functions.GetCheapestItem()
 	local now = {}
 	now.currentPrice = nil
@@ -35,7 +46,7 @@ function GreyHandling.functions.GetCheapestItem()
 				ActionButton_HideOverlayGlow(item)
 			end
 			local itemid = GetContainerItemID(bagID, bagSlot)
-			local itemLink = GetContainerItemLink(bagID, bagSlot)
+
 			local _, itemCount = GetContainerItemInfo(bagID, bagSlot)
 			if itemid then
 				local itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount,
