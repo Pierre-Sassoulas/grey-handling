@@ -89,29 +89,18 @@ function GreyHandling.functions.GetCheapestItem()
 end
 
 function GreyHandling.functions.CreateExchange(itemLink, ourCount, theirCount, vendorPrice, itemStackCount)
-	local exchange = {}
-	-- If we need to throw some
-	exchange.item = itemLink
-	exchange["realLoss"] = (itemStackCount - ourCount - theirCount) * vendorPrice
-	if exchange["realLoss"] > 0 then
-		exchange["realLoss"] = 0
+	-- When we have no bag space we'll have to throw some
+	local lossCount = itemStackCount - ourCount - theirCount
+	if lossCount > 0 then
+		lossCount = 0
 	end
-	-- What we give
-	exchange["giveOurLoss"] = ourCount * vendorPrice
-	exchange["takeTheirLoss"] = theirCount * vendorPrice
-	-- What we get
-	exchange["takeOurGain"] =  theirCount * vendorPrice
-	local giveTheirGainIfFull = (itemStackCount - theirCount) * vendorPrice
-	if giveTheirGainIfFull > ourCount * vendorPrice then
-		exchange["giveTheirGain"] = ourCount * vendorPrice
-	else
-		exchange["giveTheirGain"] = giveTheirGainIfFull
-	end
-	--print(format("If we give %s, we loose %s they win %s", itemLink,
---			GetCoinTextureString(exchange["giveOurLoss"]), GetCoinTextureString(exchange["giveTheirGain"])))
-	--print(format("If they give %s, they loose %s, we win %s", itemLink,
---		GetCoinTextureString(exchange["takeTheirLoss"]), GetCoinTextureString(exchange["takeOurGain"])))
-	return exchange
+	return {
+		item = itemLink,
+		vendorPrice = vendorPrice,
+		ourCount = ourCount,
+		theirCount = theirCount,
+		lossCount = lossCount,
+	}
 end
 
 function GreyHandling.functions.displayTrade(message, trade)
@@ -138,6 +127,9 @@ function GreyHandling.functions.GetBestExchange()
 	for player_id, items in pairs(GreyHandling.data.items) do
 		for itemLink, itemInformation  in pairs(items) do
 			local ourCount = GetItemCount(itemLink)
+			local itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount,
+				itemEquipLoc, itemIcon, vendorPrice, itemClassID, itemSubClassID, bindType, expacID, itemSetID,
+				isCraftingReagent = GetItemInfo(itemLink)
 			if ourCount ~= 0 then
 				if exchanges[player_id] == nil then
 					exchanges[player_id] = {}
@@ -155,8 +147,11 @@ function GreyHandling.functions.GetBestExchange()
 		for itemGiven, givenValues in pairs(item_link_values) do
 			for itemTaken, takenValues in pairs(item_link_values) do
 				if itemGiven ~= itemTaken then
-					local ourGain = takenValues["takeOurGain"] - givenValues["giveOurLoss"]
-					local theirGain = givenValues["giveTheirGain"] - takenValues["takeTheirLoss"]
+					-- print(itemGiven.item, givenValues.ourCount, GetCoinTextureString(givenValues.vendorPrice), itemTaken.item, takenValues.theirCount, GetCoinTextureString(takenValues.vendorPrice))
+					local given =  givenValues.ourCount * givenValues.vendorPrice
+					local taken = takenValues.theirCount * takenValues.vendorPrice
+					local ourGain = taken - given - givenValues.lossCount * givenValues.vendorPrice
+					local theirGain = given - taken - takenValues.lossCount * takenValues.vendorPrice
 					local totalGain = theirGain + ourGain
 					local fairness = (theirGain - ourGain) * (theirGain - ourGain)
 	--				if ourGain > egoist.ourGain then
@@ -168,9 +163,16 @@ function GreyHandling.functions.GetBestExchange()
 	--						totalGain=totalGain, fairness=fairness, playerId=player_id}
 	--				end
 					if fair.fairness==nil or fairness < fair.fairness then
-						fair = {itemGiven=itemGiven, itemTaken=itemTaken, ourGain=ourGain, theirGain=theirGain,
+						fair = {itemGiven=itemGiven, itemTaken=itemTaken, ourGain=ourGain, theirGain=theirGain,ourCount=givenValues.ourCount,
+								theirCount=takenValues.theirCount,
 							totalGain=totalGain, fairness=fairness, playerId=player_id}
 					end
+					--print(GreyHandling.functions.userPrintableExchange(
+--							{itemGiven=itemGiven, itemTaken=itemTaken, ourGain=ourGain, theirGain=theirGain, ourCount=givenValues.ourCount,
+--								theirCount=takenValues.theirCount,
+							--totalGain=totalGain, fairness=fairness, playerId=player_id }
+						--)
+					--)
 				end
 			end
 
@@ -198,8 +200,8 @@ function GreyHandling.functions.userPrintableExchange(exchange)
 		msg = format("%sYou could ask for %s", msg, GetCoinTextureString(-exchange.ourGain))
 	end
 	return format(
-		"Exchange your %s for %s's %s : %s", exchange.itemGiven, GreyHandling.data.names[exchange.playerId],
-		exchange.itemTaken, msg
+		"Exchange your %s*%s for %s's %s*%s : %s", exchange.itemGiven, exchange.ourCount, GreyHandling.data.names[exchange.playerId],
+		exchange.itemTaken, exchange.theirCount, msg
 	)
 end
 
