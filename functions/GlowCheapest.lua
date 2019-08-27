@@ -231,7 +231,7 @@ function GreyHandling.functions.GlowCheapestGrey()
 			exchange_value = format("%sloose %s", exchange_value, GetCoinTextureString(-fair.ourGain))
 		end
 		local bag, slot = GreyHandling.functions.GetBagAndSlot(fair.itemGiven)
-		if bad and slot then
+		if bag and slot then
 			GreyHandling.functions.SetBagItemGlow(bag, slot, "bags-glow-orange")
 		end
 		msg = format("You could give %s your %s in exchange of their %s. %s.", GreyHandling.data.names[fair.playerId],
