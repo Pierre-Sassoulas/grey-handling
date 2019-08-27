@@ -218,24 +218,22 @@ function GreyHandling.functions.GlowCheapestGrey()
 		end
 	end
 	if fair.itemGiven and fair.itemTaken then
-		local exchange_value = "They win one bag space "
+		local exchange_value = "For two bag spaces, "
 		if fair.theirGain > 0 then
-			exchange_value = format("%sand %s, ", exchange_value, GetCoinTextureString(fair.theirGain))
+			exchange_value = format("%sthey win %s, ", exchange_value, GetCoinTextureString(fair.theirGain))
 		else
-			exchange_value = format("%sand loose %s, ", exchange_value, GetCoinTextureString(-fair.theirGain))
+			exchange_value = format("%sthey loose %s, ", exchange_value, GetCoinTextureString(-fair.theirGain))
 		end
-		exchange_value = format("%syou win 1 bag space and ", exchange_value)
 		if fair.ourGain > 0 then
-			exchange_value = format("%s%s", exchange_value, GetCoinTextureString(fair.ourGain))
+			exchange_value = format("%syou win %s", exchange_value, GetCoinTextureString(fair.ourGain))
 		else
-			exchange_value = format("%sloose %s", exchange_value, GetCoinTextureString(-fair.ourGain))
+			exchange_value = format("%syou loose %s", exchange_value, GetCoinTextureString(-fair.ourGain))
 		end
 		local bag, slot = GreyHandling.functions.GetBagAndSlot(fair.itemGiven)
 		if bag and slot then
 			GreyHandling.functions.SetBagItemGlow(bag, slot, "bags-glow-orange")
 		end
-		msg = format("You could give %s your %s in exchange of their %s. %s.", GreyHandling.data.names[fair.playerId],
-			fair.itemGiven, fair.itemTaken, exchange_value)
+		msg = format("Exchange %s vs %s with %s : %s", fair.itemGiven, fair.itemTaken, GreyHandling.data.names[fair.playerId], exchange_value)
 		print(msg)
 		-- SendChatMessage(msg)
 		--else
