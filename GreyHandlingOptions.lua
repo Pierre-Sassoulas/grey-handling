@@ -27,26 +27,26 @@ local function CreateCheckbox(text, tooltip, script)
 end
 
 local function change_value_verbose()
-    if GreyHandling.options.VERBOSE then
-        GreyHandling.options.VERBOSE = false
+    if GreyHandlingIsVerbose then
+        GreyHandlingIsVerbose = false
     else
-        GreyHandling.options.VERBOSE = true
+        GreyHandlingIsVerbose = true
     end
 end
 
 local function change_value_talkative()
-    if GreyHandling.options.TALKATIVE then
-        GreyHandling.options.TALKATIVE = false
+    if GreyHandlingIsTalkative then
+        GreyHandlingIsTalkative = false
     else
-        GreyHandling.options.TALKATIVE = true
+        GreyHandlingIsTalkative = true
     end
 end
 
 local function change_value_show_price()
-    if GreyHandling.options.SHOW_PRICE then
-        GreyHandling.options.SHOW_PRICE = false
+    if GreyHandlingShowPrice then
+        GreyHandlingShowPrice = false
     else
-        GreyHandling.options.SHOW_PRICE = true
+        GreyHandlingShowPrice = true
     end
 end
 
@@ -68,17 +68,17 @@ local CheckboxShowPrice = CreateCheckbox(
 )
 
 function GreyHandling.options.display()
-	if GreyHandling.options.TALKATIVE then
+	if GreyHandlingIsTalkative then
 		talkative = "talk"
 	else
 		talkative = "do not talk"
 	end
-	if GreyHandling.options.VERBOSE then
+	if GreyHandlingIsVerbose then
 		verbose = "talk to you,"
 	else
 		verbose = "keep to myself around you,"
 	end
-	if GreyHandling.options.SHOW_PRICE then
+	if GreyHandlingShowPrice then
 		price = "show"
 	else
 		price = "do not show"
@@ -87,12 +87,9 @@ function GreyHandling.options.display()
 end
 
 function GreyHandling.options.panel.default()
-	GreyHandling.options.TALKATIVE = GreyHandling.options.DEFAULT_TALKATIVE
-	GreyHandling.options.VERBOSE = GreyHandling.options.DEFAULT_VERBOSE
-	GreyHandling.options.SHOW_PRICE = GreyHandling.options.DEFAULT_SHOW_PRICE
-	GH_TALKATIVE = GreyHandling.options.TALKATIVE
-	GH_VERBOSE = GreyHandling.options.VERBOSE
-	GH_SHOW_PRICE = GreyHandling.options.SHOW_PRICE
+	GreyHandlingIsTalkative = GreyHandling.options.DEFAULT_TALKATIVE
+	GreyHandlingIsVerbose = GreyHandling.options.DEFAULT_VERBOSE
+	GreyHandlingShowPrice = GreyHandling.options.DEFAULT_SHOW_PRICE
 end
 
 GreyHandling.options.frame:RegisterEvent("ADDON_LOADED")
@@ -103,29 +100,20 @@ function GreyHandling.options.frame:OnEvent(event, key)
       return -- not us, return
     end
 	if event == "ADDON_LOADED" then
-		if GH_TALKATIVE == nil then
-			GreyHandling.options.TALKATIVE = GreyHandling.options.DEFAULT_TALKATIVE
-			GH_TALKATIVE = GreyHandling.options.DEFAULT_TALKATIVE
-		else
-			GreyHandling.options.TALKATIVE = GH_TALKATIVE
+		if GreyHandlingIsTalkative == nil then
+			GreyHandlingIsTalkative = GreyHandling.options.DEFAULT_TALKATIVE
 		end
-		if  GH_VERBOSE == nil then
-			GreyHandling.options.VERBOSE = GreyHandling.options.DEFAULT_VERBOSE
-			GH_VERBOSE = GreyHandling.options.DEFAULT_VERBOSE
-		else
-			GreyHandling.options.VERBOSE = GH_VERBOSE
+		if  GreyHandlingIsVerbose == nil then
+			GreyHandlingIsVerbose = GreyHandling.options.DEFAULT_VERBOSE
 		end
-		if GH_SHOW_PRICE == nil then
-			GreyHandling.options.SHOW_PRICE = GreyHandling.options.DEFAULT_SHOW_PRICE
-			GH_SHOW_PRICE = GreyHandling.options.DEFAULT_SHOW_PRICE
-		else
-			GreyHandling.options.SHOW_PRICE = GH_SHOW_PRICE
+		if GreyHandlingShowPrice == nil then
+			GreyHandlingShowPrice = GreyHandling.options.DEFAULT_SHOW_PRICE
 		end
 	end
 	if event == "PLAYER_LOGOUT" then
-		GH_TALKATIVE = GreyHandling.options.TALKATIVE
-		GH_VERBOSE = GreyHandling.options.VERBOSE
-		GH_SHOW_PRICE = GreyHandling.options.SHOW_PRICE
+		GreyHandlingIsTalkative = GreyHandlingIsTalkative
+		GreyHandlingIsVerbose = GreyHandlingIsVerbose
+		GreyHandlingShowPrice = GreyHandlingShowPrice
 	end
 end
 

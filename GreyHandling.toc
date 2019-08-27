@@ -16,9 +16,9 @@
 
 ## X-Curse-Project-ID: 336164
 
-## SavedVariables: GH_TALKATIVE
-## SavedVariables: GH_VERBOSE
-## SavedVariables: GH_SHOW_PRICE
+## SavedVariables: GreyHandlingIsTalkative
+## SavedVariables: GreyHandlingIsVerbose
+## SavedVariables: GreyHandlingShowPrice
 
 constants.lua
 functions\SetBagItemGlow.lua

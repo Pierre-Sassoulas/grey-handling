@@ -1,7 +1,7 @@
 local A, GreyHandling = ...
 
 function GreyHandling.functions.DisplayCheapest(text, item)
-	if GreyHandling.options.VERBOSE then
+	if GreyHandlingIsVerbose then
 		if item.itemCount == 1 then
 			print(
 				text, GetContainerItemLink(item.bag, item.slot), "worth", GetCoinTextureString(item.currentPrice),
@@ -192,7 +192,7 @@ function GreyHandling.functions.GlowCheapestGrey()
 			-- Only one item is the cheapest
 			GreyHandling.functions.DisplayCheapest("Cheapest:", now)
 			PickupContainerItem(now.bag, now.slot)
-			if GreyHandling.options.TALKATIVE then
+			if GreyHandlingIsTalkative then
 				local itemLink = GetContainerItemLink(now.bag, now.slot)
 				if now.itemCount == 1 then
 					msg = format("I can give you %s if you have enough bag places.", itemLink)
@@ -208,7 +208,7 @@ function GreyHandling.functions.GlowCheapestGrey()
 			GreyHandling.functions.DisplayCheapest("Cheapest now:", now)
 			GreyHandling.functions.DisplayCheapest("Cheapest later:", later)
 			if IsAddOnLoaded("Inventorian") then
-				if GreyHandling.options.VERBOSE then
+				if GreyHandlingIsVerbose then
 					print("GreyHandling: It seems you're using Inventorian. Please note that the feature for glowing two items is not yet fully supported.")
 				end
 			else

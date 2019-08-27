@@ -3,7 +3,7 @@ local A, GreyHandling = ...
 local L = GreyHandling:GetLocalization()
 
 function GreyHandling.functions.ToolTipHook(t)
-    if GreyHandling.options.SHOW_PRICE then
+    if GreyHandlingShowPrice then
         local link = select(2, t:GetItem())
         if not link then
             return
