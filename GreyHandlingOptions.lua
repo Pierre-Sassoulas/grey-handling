@@ -27,27 +27,15 @@ local function CreateCheckbox(text, tooltip, script)
 end
 
 local function change_value_verbose()
-    if GreyHandlingIsVerbose then
-        GreyHandlingIsVerbose = false
-    else
-        GreyHandlingIsVerbose = true
-    end
+    GreyHandlingIsVerbose = not GreyHandlingIsVerbose
 end
 
 local function change_value_talkative()
-    if GreyHandlingIsTalkative then
-        GreyHandlingIsTalkative = false
-    else
-        GreyHandlingIsTalkative = true
-    end
+    GreyHandlingIsTalkative = not GreyHandlingIsTalkative
 end
 
 local function change_value_show_price()
-    if GreyHandlingShowPrice then
-        GreyHandlingShowPrice = false
-    else
-        GreyHandlingShowPrice = true
-    end
+    GreyHandlingShowPrice = not GreyHandlingShowPrice
 end
 
 -- definition order matter here lastcheckbox is global!
