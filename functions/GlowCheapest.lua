@@ -183,6 +183,26 @@ function GreyHandling.functions.GetBestExchange()
 	return fair
 end
 
+function GreyHandling.functions.userPrintableExchange(exchange)
+	local msg = ""
+	if exchange.theirGain ~= -exchange.ourGain then
+		if exchange.theirGain > 0 then
+			msg = format("They win %s. ", GetCoinTextureString(exchange.theirGain))
+		else
+			msg = format("They loose %s. ", GetCoinTextureString(-exchange.theirGain))
+		end
+	end
+	if exchange.ourGain > 0 then
+		msg = format("%sYou should give them %s", msg, GetCoinTextureString(exchange.ourGain))
+	else
+		msg = format("%sYou could ask for %s", msg, GetCoinTextureString(-exchange.ourGain))
+	end
+	return format(
+		"Exchange your %s for %s's %s : %s", exchange.itemGiven, GreyHandling.data.names[exchange.playerId],
+		exchange.itemTaken, msg
+	)
+end
+
 function GreyHandling.functions.GlowCheapestGrey()
     local now, later = GreyHandling.functions.GetCheapestItem()
 	--local egoist, altruist, fair = GreyHandling.functions.GetBestExchange()
@@ -218,23 +238,11 @@ function GreyHandling.functions.GlowCheapestGrey()
 		end
 	end
 	if fair.itemGiven and fair.itemTaken then
-		local exchange_value = "For two bag spaces, "
-		if fair.theirGain > 0 then
-			exchange_value = format("%sthey win %s, ", exchange_value, GetCoinTextureString(fair.theirGain))
-		else
-			exchange_value = format("%sthey loose %s, ", exchange_value, GetCoinTextureString(-fair.theirGain))
-		end
-		if fair.ourGain > 0 then
-			exchange_value = format("%syou win %s", exchange_value, GetCoinTextureString(fair.ourGain))
-		else
-			exchange_value = format("%syou loose %s", exchange_value, GetCoinTextureString(-fair.ourGain))
-		end
 		local bag, slot = GreyHandling.functions.GetBagAndSlot(fair.itemGiven)
 		if bag and slot then
 			GreyHandling.functions.SetBagItemGlow(bag, slot, "bags-glow-orange")
 		end
-		msg = format("Exchange %s vs %s with %s : %s", fair.itemGiven, fair.itemTaken, GreyHandling.data.names[fair.playerId], exchange_value)
-		print(msg)
+		print(GreyHandling.functions.userPrintableExchange(fair))
 		-- SendChatMessage(msg)
 		--else
 		--	print("GreyHandling: There are no grey items to throw away. Maybe you don't need this Hearthstone after all? ;)")
