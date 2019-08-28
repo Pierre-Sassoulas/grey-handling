@@ -23,7 +23,6 @@ GreyHandling.data.names = {}
 GreyHandling.data.items = {}
 
 -- Test data remove in production
---[[
 local test_object_1 = "Dent plate émoussée"
 local test_object_2 = "Incisive dentelée"
 local test_object_3 = "Fourrure miteuse"
@@ -31,17 +30,16 @@ GreyHandling.data.names["PlayerID1AEBCFE1123123"] = "TestName-TestServer"
 GreyHandling.data.items["PlayerID1AEBCFE1123123"] = {}
 GreyHandling.data.items["PlayerID1AEBCFE1123123"][test_object_1] = {}
 GreyHandling.data.items["PlayerID1AEBCFE1123123"][test_object_1]["itemStackCount"] = 100
-GreyHandling.data.items["PlayerID1AEBCFE1123123"][test_object_1]["vendorPrice"] = 30000
+GreyHandling.data.items["PlayerID1AEBCFE1123123"][test_object_1]["vendorPrice"] = 14699
 GreyHandling.data.items["PlayerID1AEBCFE1123123"][test_object_1]["number"] = 12
 GreyHandling.data.items["PlayerID1AEBCFE1123123"][test_object_2] = {}
 GreyHandling.data.items["PlayerID1AEBCFE1123123"][test_object_2]["itemStackCount"] = 20
-GreyHandling.data.items["PlayerID1AEBCFE1123123"][test_object_2]["vendorPrice"] = 20000
+GreyHandling.data.items["PlayerID1AEBCFE1123123"][test_object_2]["vendorPrice"] = 12685
 GreyHandling.data.items["PlayerID1AEBCFE1123123"][test_object_2]["number"] = 5
 GreyHandling.data.items["PlayerID1AEBCFE1123123"][test_object_3] = {}
 GreyHandling.data.items["PlayerID1AEBCFE1123123"][test_object_3]["itemStackCount"] = 20
 GreyHandling.data.items["PlayerID1AEBCFE1123123"][test_object_3]["vendorPrice"] = 2932
 GreyHandling.data.items["PlayerID1AEBCFE1123123"][test_object_3]["number"] = 1
-]]--
 -- End Test data
 
 
