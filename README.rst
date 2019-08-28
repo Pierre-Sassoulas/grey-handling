@@ -9,9 +9,12 @@ What does it do?
 ----------------
 
 - Displays the **price, maximum stack of items, and number possessed by teammates in tooltip**
+
+When you launch by hitting **left CTRL while holding SHIFT** :
+
 - If your bags are full **pick the worst item** (left click to throw or give)
 - If there isn't a worst item **make your two worst items glow in bag**
-- If one ore more mutually beneficial trades exist, suggest the fairest one.
+- If one ore more **mutually beneficial trades** exist, suggest the fairest one. You need to be grouped with a teammate to see what they're looting.
 
 The two worst items are the cheapest at the moment and the cheapest once fully
 stacked. A mutually beneficial trade is an exchange that permits to free one bag
