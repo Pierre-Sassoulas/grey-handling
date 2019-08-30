@@ -206,10 +206,12 @@ function GreyHandling.functions.userPrintableExchange(exchange)
 end
 
 function GreyHandling.functions.GlowCheapestGrey()
+	local foundSomething = nil
     local now, later = GreyHandling.functions.GetCheapestItem()
 	--local egoist, altruist, fair = GreyHandling.functions.GetBestExchange()
 	local fair = GreyHandling.functions.GetBestExchange()
 	if now.bag and now.slot then
+		foundSomething = true
 		if now.bag==later.bag and now.slot==later.slot or now.potentialPrice == later.potentialPrice then
 			-- Only one item is the cheapest
 			GreyHandling.functions.DisplayCheapest("Cheapest:", now)
@@ -238,8 +240,11 @@ function GreyHandling.functions.GlowCheapestGrey()
 				GreyHandling.functions.SetBagItemGlow(later.bag, later.slot, "bags-glow-orange")
 			end
 		end
+	else
+		print("No grey found in bag.")
 	end
 	if fair.itemGiven and fair.itemTaken then
+		foundSomething = true
 		local bag, slot = GreyHandling.functions.GetBagAndSlot(fair.itemGiven)
 		if bag and slot then
 			GreyHandling.functions.SetBagItemGlow(bag, slot, "bags-glow-orange")
@@ -248,5 +253,10 @@ function GreyHandling.functions.GlowCheapestGrey()
 		-- SendChatMessage(msg)
 		--else
 		--	print("GreyHandling: There are no grey items to throw away. Maybe you don't need this Hearthstone after all? ;)")
+	else
+		print("No mutually beneficial trade found.")
+	end
+	if not foundSomething then
+		CloseAllBags()
 	end
 end
