@@ -23,6 +23,7 @@ GreyHandling.data.names = {}
 GreyHandling.data.items = {}
 
 -- Test data remove in production
+--[[
 local test_object_1 = "Dent plate émoussée"
 local test_object_2 = "Incisive dentelée"
 local test_object_3 = "Fourrure miteuse"
@@ -40,6 +41,7 @@ GreyHandling.data.items["PlayerID1AEBCFE1123123"][test_object_3] = {}
 GreyHandling.data.items["PlayerID1AEBCFE1123123"][test_object_3]["itemStackCount"] = 20
 GreyHandling.data.items["PlayerID1AEBCFE1123123"][test_object_3]["vendorPrice"] = 2932
 GreyHandling.data.items["PlayerID1AEBCFE1123123"][test_object_3]["number"] = 1
+--]]
 -- End Test data
 
 
