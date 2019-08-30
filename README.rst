@@ -1,6 +1,11 @@
 grey-handling
 =============
 
+|Install|
+
+.. |Install| image:: http://img.shields.io/badge/install-twitch-blueviolet
+   :target: https://www.curseforge.com/wow/addons/greyhandling
+
 This addon aims to **make decisions about your objects easier when you have to
 throw them or give them away**. It helps you know what are your cheapest objects
 faster and what trade your teammates would likely accept.
