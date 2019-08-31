@@ -16,8 +16,6 @@ function GreyHandling.functions.numberLootedFromChatMessage(chat_message)
 	end
 	local number = tonumber(string.sub(chat_message, numberStartIndex))
 	if not number then
-		local error_msg = "Mutually beneficial trades will be less accurate. You can report this on Github."
-		print(format("%s: Failed to parser a number in '%s', assuming it's 1. %s", GreyHandling.NAME, chat_message, error_msg))
 		return 1
 	end
 	return number
