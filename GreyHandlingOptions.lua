@@ -30,22 +30,23 @@ local function change_value_show_price()
 end
 
 function GreyHandling.options.display()
+	local scrap = "I could use scrap to determine what is junk, if you had it."
+	if IsAddOnLoaded("Scrap") then
+		scrap = "I'm going to use Scrap to determine what is junk. "
+	end
+	local talkative = "I do not talk to your friends."
 	if GreyHandlingIsTalkative then
-		talkative = "talk"
-	else
-		talkative = "do not talk"
+		talkative = "I talk to your friends."
 	end
+	local verbose = "I keep to myself around you."
 	if GreyHandlingIsVerbose then
-		verbose = "talk to you,"
-	else
-		verbose = "keep to myself around you,"
+		verbose = "I talk to you."
 	end
+	local price = "I do not show item's prices."
 	if GreyHandlingShowPrice then
-		price = "show"
-	else
-		price = "do not show"
+		price = "I show item's prices."
 	end
-	print(GreyHandling.NAME, ": I", talkative, "to your friends,", verbose, "and", price, "item's prices.");
+	print(format("%s : %s %s %s And %s", GreyHandling.NAME, scrap, talkative, verbose, price))
 end
 
 function GreyHandling.options.panel.default()

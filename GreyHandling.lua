@@ -7,10 +7,6 @@ ItemRefTooltip:HookScript("OnTooltipSetItem", GreyHandling.functions.ToolTipHook
 
 function GreyHandling.frame:OnEvent(event, key, state)
 	if key == "LCTRL" and state == 1 and IsShiftKeyDown() then
-		if IsAddOnLoaded("Scrap") and not GreyHandling.alreadyAnnouncedScrap then
-			print(format("%s: We're going to use Scrap to determine what is junk.", GreyHandling.NAME))
-			GreyHandling.alreadyAnnouncedScrap = true
-		end
 		OpenAllBags()
 		local foundSomething = false
 		foundSomething = GreyHandling.functions.HandleCheapestJunk(foundSomething)
