@@ -10,6 +10,10 @@ function GreyHandling.frame:OnEvent(event, key, state)
 		OpenAllBags()
 		local foundSomething = false
 		foundSomething = GreyHandling.functions.HandleCheapestJunk(foundSomething)
+		if GreyHandling.HANDLE_MESSAGE_IS_BROKEN > 10 then
+			print(format("%s: Sorry there is a bug in the chat loot message analysis of your language (chinese?).", GreyHandling.NAME))
+			print(format("%s: The following mutual trade suggestion might be really bad until I fix the problem.", GreyHandling.NAME))
+		end
 		foundSomething = GreyHandling.functions.HandleMutuallyBeneficialTrades(foundSomething)
 		if not foundSomething then
 			CloseAllBags()

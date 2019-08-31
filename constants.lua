@@ -9,6 +9,7 @@ GreyHandling.IS_CLASSIC = nil
 GreyHandling.NAME = "GreyHandling"
 GreyHandling.DISPLAY_NAME = "Grey Handling"
 GreyHandling.DESCRIPTION = GetAddOnMetadata(GreyHandling.NAME, "NOTES")
+GreyHandling.HANDLE_MESSAGE_IS_BROKEN = 0
 GreyHandling.options = {}
 GreyHandling.options.frame = CreateFrame("FRAME")
 GreyHandling.OPTION_COMMAND = "/gho"

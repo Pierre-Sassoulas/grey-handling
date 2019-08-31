@@ -30,8 +30,9 @@ function GreyHandling.functions.handleChatMessageLoot(chat_message, player_name,
 		return
 	end
 	if not player_id then
-		print(format("%s: We did not manage to understand '%s'", GreyHandling.NAME, chat_message))
-		print(format("%s: If this seem important to track loot properly, please report it on github.", GreyHandling.NAME))
+		-- print(format("%s: We did not manage to understand '%s'", GreyHandling.NAME, chat_message))
+		-- print(format("%s: If this seem important to track loot properly, please report it on github.", GreyHandling.NAME))
+		GreyHandling.HANDLE_MESSAGE_IS_BROKEN = GreyHandling.HANDLE_MESSAGE_IS_BROKEN + 1
 		return
 	end
 	GreyHandling.functions.updatePlayersList(player_id, player_name)
