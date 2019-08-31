@@ -29,7 +29,8 @@ functions\GetCheapeastJunk.lua
 functions\SetGameTooltipPrice.lua
 functions\handleChatMessageLoot.lua
 functions\NumberLootedFromChatMessage.lua
-main.lua
+HandleCheapestJunk.lua
+HandleMutuallyBeneficialTrades.lua
 GreyHandlingOptions.lua
 GreyHandling.lua
 

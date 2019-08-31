@@ -13,8 +13,8 @@ function GreyHandling.frame:OnEvent(event, key, state)
 		end
 		OpenAllBags()
 		local foundSomething = false
-		foundSomething = GreyHandling.functions.displayCheapestJunk(foundSomething)
-		foundSomething = GreyHandling.functions.displayMutuallyBeneficialTrades(foundSomething)
+		foundSomething = GreyHandling.functions.HandleCheapestJunk(foundSomething)
+		foundSomething = GreyHandling.functions.HandleMutuallyBeneficialTrades(foundSomething)
 		if not foundSomething then
 			CloseAllBags()
 		end
