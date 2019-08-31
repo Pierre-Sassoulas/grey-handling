@@ -85,25 +85,6 @@ function GreyHandling.functions.CreateExchange(itemLink, ourCount, theirCount, v
 	}
 end
 
-function GreyHandling.functions.displayTrade(message, trade)
-	local exchange_value = ""
-	-- print(trade.theirGain)
-	if trade.theirGain < 0 then
-		if trade.ourGain > 0 then
-			exchange_value = format("You should give them %s as compensation", GetCoinTextureString(trade.ourGain))
-		else
-			exchange_value = format("We loose %s and they loose %s", GetCoinTextureString(-trade.ourGain), GetCoinTextureString(-trade.theirGain))
-		end
-	else
-		if trade.theirGain > 0 then
-			exchange_value = format("They should give you %s as compensation", GetCoinTextureString(trade.theirGain))
-		else
-			exchange_value = format("They loose %s", GetCoinTextureString(-trade.theirGain))
-		end
-	end
-	print(format("%s Give %s to %s and take %s (%s)", message, trade.itemGiven, trade.playerId, trade.itemTaken, exchange_value))
-end
-
 function GreyHandling.functions.GetBestExchange()
 	local exchanges = {}
 	for player_id, items in pairs(GreyHandling.data.items) do
@@ -149,7 +130,7 @@ function GreyHandling.functions.GetBestExchange()
 								theirCount=takenValues.theirCount,
 							totalGain=totalGain, fairness=fairness, playerId=player_id}
 					end
-					--print(GreyHandling.functions.userPrintableExchange(
+					--print(GreyHandling.functions.DisplayMutuallyBeneficialTradeInChat(
 --							{itemGiven=itemGiven, itemTaken=itemTaken, ourGain=ourGain, theirGain=theirGain, ourCount=givenValues.ourCount,
 --								theirCount=takenValues.theirCount,
 							--totalGain=totalGain, fairness=fairness, playerId=player_id }
@@ -160,32 +141,13 @@ function GreyHandling.functions.GetBestExchange()
 
 		end
 	end
-	--GreyHandling.functions.displayTrade("Egoist trade:", egoist)
-	--GreyHandling.functions.displayTrade("Altruist trade:", altruist)
-	-- GreyHandling.functions.displayTrade("Fairer trade:", fair)
+	--GreyHandling.functions.DisplayMutuallyBeneficialTradeInChat("Egoist trade:", egoist)
+	--GreyHandling.functions.DisplayMutuallyBeneficialTradeInChat("Altruist trade:", altruist)
+	--GreyHandling.functions.DisplayMutuallyBeneficialTradeInChat("Fairer trade:", fair)
 	--return egoist, altruist, fair
 	return fair
 end
 
-function GreyHandling.functions.userPrintableExchange(exchange)
-	local msg = ""
-	if exchange.theirGain ~= -exchange.ourGain then
-		if exchange.theirGain > 0 then
-			msg = format("They win %s. ", GetCoinTextureString(exchange.theirGain))
-		else
-			msg = format("They loose %s. ", GetCoinTextureString(-exchange.theirGain))
-		end
-	end
-	if exchange.ourGain > 0 then
-		msg = format("%sYou should give them %s", msg, GetCoinTextureString(exchange.ourGain))
-	else
-		msg = format("%sYou could ask for %s", msg, GetCoinTextureString(-exchange.ourGain))
-	end
-	return format(
-		"Exchange your %s*%s for %s's %s*%s : %s", exchange.itemGiven, exchange.ourCount, GreyHandling.data.names[exchange.playerId],
-		exchange.itemTaken, exchange.theirCount, msg
-	)
-end
 
 function GreyHandling.functions.GlowCheapestGrey()
 	local foundSomething = nil
@@ -231,7 +193,7 @@ function GreyHandling.functions.GlowCheapestGrey()
 		if bag and slot then
 			GreyHandling.functions.SetBagItemGlow(bag, slot, "bags-glow-orange")
 		end
-		print(GreyHandling.functions.userPrintableExchange(fair))
+		print(GreyHandling.functions.DisplayMutuallyBeneficialTradeInChat(fair))
 		-- SendChatMessage(msg)
 	else
 		print(format("%s: No mutually beneficial trade found.", GreyHandling.NAME))

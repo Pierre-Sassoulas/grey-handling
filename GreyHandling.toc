@@ -23,6 +23,7 @@
 constants.lua
 functions\SetBagItemGlow.lua
 functions\DisplayCheapestInChat.lua
+functions\DisplayMutuallyBeneficialTradeInChat.lua
 functions\GlowCheapest.lua
 functions\SetGameTooltipPrice.lua
 functions\handleChatMessageLoot.lua
