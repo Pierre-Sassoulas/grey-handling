@@ -16,7 +16,7 @@ function GreyHandling.functions.ToolTipHook(t)
         if itemStackCount > 1 then
             local c = GetMouseFocus()
             if not c then
-                error("nil GetMouseFocus()")
+                return -- error("nil GetMouseFocus()")
             end
             local bn = c:GetName() and (c:GetName() .. "Count")
             local count = c.count or (c.Count and c.Count:GetText()) or (c.Quantity and c.Quantity:GetText()) or (bn and _G[bn] and _G[bn]:GetText())

@@ -1,5 +1,5 @@
 ## Interface: 80200
-## Version: 0.6.1
+## Version: 0.6.2
 ## Title: Grey Handling
 
 ## Notes: Helps you get rid of the right grey objects when your bags are full
