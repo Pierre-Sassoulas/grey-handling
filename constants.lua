@@ -21,6 +21,7 @@ local realmName=GetRealmName()
 GreyHandling.data.ourName = format("%s-%s", ourName, string.gsub(realmName, "%s+", ""))
 GreyHandling.data.names = {}
 GreyHandling.data.items = {}
+GreyHandling.announcedScrap = nil
 
 -- Test data remove in production
 --[[

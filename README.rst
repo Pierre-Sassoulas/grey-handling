@@ -17,6 +17,7 @@ What does it do?
 
 When you launch by hitting **left CTRL while holding SHIFT** :
 
+- If you have **Scrap** installed, we search in your junk list, if not, only in your grey items.
 - If your bags are full **pick the worst item** (left click to throw or give)
 - If there isn't a worst item **make your two worst items glow in bag**
 - If one ore more **mutually beneficial trades** exist, suggest the fairest one. You need to be grouped with a teammate to see what they're looting.
@@ -30,6 +31,7 @@ grey instead of two.
 Compatibility with other bags addons
 ------------------------------------
 
+- **Scrap** If scrap is installed, we'll use your junk list
 - **OneBag3**
 - **ArkInventory** (But the orange glow is replaced with a bright yellow glow that is not removed by mouseover)
 
@@ -52,10 +54,11 @@ For example, if you have:
 * 1 cloth robe worth 25 coppers
 * 1 cape (muddy, and only for demonists), worth 8 coppers
 * 5 rocks worth 5*10 coppers = 50 coppers
+* 1 tough jerky worth 1 copper
 
 
-The muddy cape can't stack and is your cheapest item. If you activate the addon,
-it pick the cape up and **you just have to left click to get rid of the cape**
+The muddy cape can't stack and is your cheapest grey item. If you activate the
+addon, it pick the cape up and **you just have to left click to get rid of the cape**
 (or right click to cancel the pick up).
 
 Then if you throw away the cape, the 4 leather skins are cheaper than the robe,
@@ -64,6 +67,9 @@ skins are worth 100c and are more valuable than the cloth robe that can't be sta
 **Both items will glow in orange inside your bags**, giving you the final choice.
 Because you're the only one who knows how close or not you are from a vendor or
 if you're going to be killing 50 more boars with leather skins.
+
+If you have scrap installed and the low level consumable is in your list of junk
+then the cheapest item is the tough jerky.
 
 Now, before throwing that, if you saw your teammate Alice loot:
 
