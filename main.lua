@@ -11,15 +11,8 @@ function GreyHandling.functions.GetBagAndSlot(itemLink)
 	end
 end
 
-function GreyHandling.functions.main()
-	if IsAddOnLoaded("Scrap") and not GreyHandling.alreadyAnnouncedScrap then
-		print(format("%s: We're going to use Scrap to determine what is junk.", GreyHandling.NAME))
-		GreyHandling.alreadyAnnouncedScrap = true
-	end
-	OpenAllBags()
-    local now, later = GreyHandling.functions.GetCheapestJunk()
-	--local egoist, altruist, fair = GreyHandling.functions.GetBestExchange()
-	local fair = GreyHandling.functions.GetBestExchange()
+function GreyHandling.functions.displayCheapestJunk(foundSomething)
+	local now, later = GreyHandling.functions.GetCheapestJunk()
 	if now.bag and now.slot then
 		foundSomething = true
 		if now.bag==later.bag and now.slot==later.slot or now.potentialPrice == later.potentialPrice then
@@ -53,6 +46,12 @@ function GreyHandling.functions.main()
 	else
 		print(format("%s: No junk found in bag.", GreyHandling.NAME))
 	end
+	return foundSomething
+end
+
+function GreyHandling.functions.displayMutuallyBeneficialTrades(foundSomething)
+	--local egoist, altruist, fair = GreyHandling.functions.GetBestExchange()
+	local fair = GreyHandling.functions.GetBestExchange()
 	if fair.itemGiven and fair.itemTaken then
 		foundSomething = true
 		local bag, slot = GreyHandling.functions.GetBagAndSlot(fair.itemGiven)
@@ -64,6 +63,18 @@ function GreyHandling.functions.main()
 	else
 		print(format("%s: No mutually beneficial trade found.", GreyHandling.NAME))
 	end
+	return foundSomething
+end
+
+function GreyHandling.functions.main()
+	if IsAddOnLoaded("Scrap") and not GreyHandling.alreadyAnnouncedScrap then
+		print(format("%s: We're going to use Scrap to determine what is junk.", GreyHandling.NAME))
+		GreyHandling.alreadyAnnouncedScrap = true
+	end
+	OpenAllBags()
+	local foundSomething = false
+	foundSomething = GreyHandling.functions.displayCheapestJunk(foundSomething)
+	foundSomething = GreyHandling.functions.displayMutuallyBeneficialTrades(foundSomething)
 	if not foundSomething then
 		CloseAllBags()
 	end
