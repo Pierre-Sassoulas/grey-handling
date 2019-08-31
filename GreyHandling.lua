@@ -12,7 +12,7 @@ function GreyHandling.frame:OnEvent(event, key, state)
 			GreyHandling.alreadyAnnouncedScrap = true
 		end
 		OpenAllBags()
-		GreyHandling.functions.GlowCheapestGrey()
+		GreyHandling.functions.main()
 	end
 end
 GreyHandling.frame:RegisterEvent("MODIFIER_STATE_CHANGED")

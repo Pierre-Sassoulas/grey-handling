@@ -24,10 +24,12 @@ constants.lua
 functions\SetBagItemGlow.lua
 functions\DisplayCheapestInChat.lua
 functions\DisplayMutuallyBeneficialTradeInChat.lua
-functions\GlowCheapest.lua
+functions\GetBestExchange.lua
+functions\GetCheapeastJunk.lua
 functions\SetGameTooltipPrice.lua
 functions\handleChatMessageLoot.lua
 functions\NumberLootedFromChatMessage.lua
+main.lua
 GreyHandlingOptions.lua
 GreyHandling.lua
 
