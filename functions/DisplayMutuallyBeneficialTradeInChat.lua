@@ -15,7 +15,7 @@ function GreyHandling.functions.DisplayMutuallyBeneficialTradeInChat(exchange)
 		msg = format("%sYou could ask for %s", msg, GetCoinTextureString(-exchange.ourGain))
 	end
 	return format(
-		"Exchange your %s*%s for %s's %s*%s : %s", exchange.itemGiven, exchange.ourCount, GreyHandling.data.names[exchange.playerId],
-		exchange.itemTaken, exchange.theirCount, msg
+		"%s: Exchange your %s*%s for %s's %s*%s : %s", GreyHandling.NAME, exchange.itemGiven, exchange.ourCount,
+		GreyHandling.data.names[exchange.playerId], exchange.itemTaken, exchange.theirCount, msg
 	)
 end

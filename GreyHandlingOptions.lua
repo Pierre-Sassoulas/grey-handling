@@ -45,7 +45,7 @@ function GreyHandling.options.display()
 	else
 		price = "do not show"
 	end
-	print("GreyHandling: I", talkative, "to your friends,", verbose, "and", price, "item's prices.");
+	print(GreyHandling.NAME, ": I", talkative, "to your friends,", verbose, "and", price, "item's prices.");
 end
 
 function GreyHandling.options.panel.default()
