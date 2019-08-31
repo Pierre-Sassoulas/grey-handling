@@ -38,8 +38,10 @@ function GreyHandling.functions.GetCheapestJunk()
 						now.currentPrice = currentVendorPrice
 						now.potentialPrice = potentialVendorPrice
 						now.itemCount = itemCount
+						now.itemStackCount = itemStackCount
 						now.vendorPrice = vendorPrice
 						now.bag = bagID
+
 						now.slot = bagSlot
 					end
 					if later.potentialPrice == nil or
@@ -48,6 +50,7 @@ function GreyHandling.functions.GetCheapestJunk()
 						later.currentPrice = currentVendorPrice
 						later.potentialPrice = potentialVendorPrice
 						later.itemCount = itemCount
+						later.itemStackCount = itemStackCount
 						later.vendorPrice = vendorPrice
 						later.bag = bagID
 						later.slot = bagSlot

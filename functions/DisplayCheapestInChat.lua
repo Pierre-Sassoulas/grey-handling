@@ -4,24 +4,17 @@ function GreyHandling.functions.DisplayCheapestInChat(text, item)
 	if GreyHandlingIsVerbose then
 		local details = ""
 		if item.itemCount == 1 then
-			details = format("%s worth %s (max %s)",
-				GetContainerItemLink(item.bag, item.slot),
-				GetCoinTextureString(item.currentPrice),
-				GetCoinTextureString(item.potentialPrice)
-			)
+			details = GetContainerItemLink(item.bag, item.slot)
 		elseif item.potentialPrice == item.currentPrice then
-			details = format("A full stack of %s worth %s",
-				GetContainerItemLink(item.bag, item.slot),
-				GetCoinTextureString(item.potentialPrice)
-			)
+			details = format("A full stack of %s", GetContainerItemLink(item.bag, item.slot))
 		else
-			details = format("%s*%s=%s (max %s)",
+			details = format("%s*%s (max %s)",
 				GetContainerItemLink(item.bag, item.slot),
 				item.itemCount,
-				GetCoinTextureString(item.currentPrice),
-				GetCoinTextureString(item.potentialPrice)
+				item.itemStackCount
 			)
 		end
-		print(format("%s: %s%s", GreyHandling.NAME, text, details))
+		print(format("%s: %s %s", GreyHandling.NAME, text, details))
+		print(format("%s: Worth %s", GreyHandling.NAME, GetCoinTextureString(item.currentPrice)))
 	end
 end
