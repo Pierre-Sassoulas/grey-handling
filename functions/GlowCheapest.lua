@@ -1,27 +1,5 @@
 local A, GreyHandling = ...
 
-function GreyHandling.functions.DisplayCheapest(text, item)
-	if GreyHandlingIsVerbose then
-		if item.itemCount == 1 then
-			print(
-				text, GetContainerItemLink(item.bag, item.slot), "worth", GetCoinTextureString(item.currentPrice),
-				"(max ", GetCoinTextureString(item.potentialPrice), ")"
-			)
-		elseif item.potentialPrice == item.currentPrice then
-			print(
-				text, "A full stack of", GetContainerItemLink(item.bag, item.slot), "worth",
-				GetCoinTextureString(item.potentialPrice)
-			)
-		else
-			print(
-				text, GetContainerItemLink(item.bag, item.slot), item.itemCount, "*",
-				GetCoinTextureString(item.vendorPrice),	"=", GetCoinTextureString(item.currentPrice),
-				"(max ", GetCoinTextureString(item.potentialPrice), ")"
-			)
-		end
-	end
-end
-
 function GreyHandling.functions.GetBagAndSlot(itemLink)
 	for bagID = 0, NUM_BAG_SLOTS do
 		for bagSlot = 1, GetContainerNumSlots(bagID) do
@@ -218,7 +196,7 @@ function GreyHandling.functions.GlowCheapestGrey()
 		foundSomething = true
 		if now.bag==later.bag and now.slot==later.slot or now.potentialPrice == later.potentialPrice then
 			-- Only one item is the cheapest
-			GreyHandling.functions.DisplayCheapest("Cheapest:", now)
+			GreyHandling.functions.DisplayCheapestInChat("Cheapest:", now)
 			PickupContainerItem(now.bag, now.slot)
 			if GreyHandlingIsTalkative then
 				local itemLink = GetContainerItemLink(now.bag, now.slot)
@@ -233,8 +211,8 @@ function GreyHandling.functions.GlowCheapestGrey()
 			CloseAllBags()
 		else
 			-- Two items can be considered cheapest
-			GreyHandling.functions.DisplayCheapest("Cheapest now:", now)
-			GreyHandling.functions.DisplayCheapest("Cheapest later:", later)
+			GreyHandling.functions.DisplayCheapestInChat("Cheapest now:", now)
+			GreyHandling.functions.DisplayCheapestInChat("Cheapest later:", later)
 			if IsAddOnLoaded("Inventorian") then
 				if GreyHandlingIsVerbose then
 					print("GreyHandling: It seems you're using Inventorian. Please note that the feature for glowing two items is not yet fully supported.")
