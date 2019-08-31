@@ -5,6 +5,10 @@ function GreyHandling.testNumberLootedFromChatMessage()
     assert (20 == GreyHandling.functions.numberLootedFromChatMessage("Vous créez：[Petit pain de manne invoqué] x20"), "Can't parse conjuring bread in french")
     assert (2 == GreyHandling.functions.numberLootedFromChatMessage("Vous recevez le butin ：[Viande séchée coriace] x2."), "Can't parse multi object loot in french")
     assert (1 == GreyHandling.functions.numberLootedFromChatMessage("Vous recevez le butin ：[Oeil de tigre]."), "Can't parse single object loot in french")
+    assert (1 == GreyHandling.functions.numberLootedFromChatMessage("Ваша добыча: [Медная руда]."), "Can't parse single object loot in russian")
+    assert (1 == GreyHandling.functions.numberLootedFromChatMessage("Вы получаете предмет: [Мушкет капера]."), "Can't parse single quest object loot in russian")
+    assert (3 == GreyHandling.functions.numberLootedFromChatMessage("Фогги получает добычу: [Синячник]x3."), "Can't parse multi object loot in russian")
+    assert (1 == GreyHandling.functions.numberLootedFromChatMessage("Ваша добыча: [Маленькая блестящая жемчужина]."), "Can't parse object looted from roll in russian")
 end
 
 function GreyHandling.testMutuallyBeneficialExchange()
