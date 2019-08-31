@@ -7,11 +7,6 @@ ItemRefTooltip:HookScript("OnTooltipSetItem", GreyHandling.functions.ToolTipHook
 
 function GreyHandling.frame:OnEvent(event, key, state)
 	if key == "LCTRL" and state == 1 and IsShiftKeyDown() then
-		if IsAddOnLoaded("Scrap") and not GreyHandling.alreadyAnnouncedScrap then
-			print(format("%s: We're going to use Scrap to determine what is junk.", GreyHandling.NAME))
-			GreyHandling.alreadyAnnouncedScrap = true
-		end
-		OpenAllBags()
 		GreyHandling.functions.main()
 	end
 end
@@ -22,7 +17,6 @@ function GreyHandling.loot_frame:OnLoot(event, chat_message, player_name, a, b, 
 	GreyHandling.functions.handleChatMessageLoot(chat_message, player_name, line_number, player_id, k, l, m, n, o)
 end
 
--- ChatFrame_AddMessageEventFilter("CHAT_MSG_LOOT", GreyHandling.loot_frame.OnLoot) -- This happen before the wow message
 GreyHandling.loot_frame:RegisterEvent("CHAT_MSG_LOOT")
 GreyHandling.loot_frame:SetScript("OnEvent", GreyHandling.loot_frame.OnLoot)
 

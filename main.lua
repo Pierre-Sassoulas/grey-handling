@@ -12,6 +12,11 @@ function GreyHandling.functions.GetBagAndSlot(itemLink)
 end
 
 function GreyHandling.functions.main()
+	if IsAddOnLoaded("Scrap") and not GreyHandling.alreadyAnnouncedScrap then
+		print(format("%s: We're going to use Scrap to determine what is junk.", GreyHandling.NAME))
+		GreyHandling.alreadyAnnouncedScrap = true
+	end
+	OpenAllBags()
     local now, later = GreyHandling.functions.GetCheapestJunk()
 	--local egoist, altruist, fair = GreyHandling.functions.GetBestExchange()
 	local fair = GreyHandling.functions.GetBestExchange()
