@@ -215,7 +215,7 @@ function GreyHandling.functions.GlowCheapestGrey()
 			GreyHandling.functions.DisplayCheapestInChat("Cheapest later:", later)
 			if IsAddOnLoaded("Inventorian") then
 				if GreyHandlingIsVerbose then
-					print("GreyHandling: It seems you're using Inventorian. Please note that the feature for glowing two items is not yet fully supported.")
+					print(format("%s: For Inventorian glows in bag feature is not yet supported.", GreyHandling.NAME))
 				end
 			else
 				GreyHandling.functions.SetBagItemGlow(now.bag, now.slot, "bags-glow-orange")
@@ -223,7 +223,7 @@ function GreyHandling.functions.GlowCheapestGrey()
 			end
 		end
 	else
-		print("No grey found in bag.")
+		print(format("%s: No junk found in bag.", GreyHandling.NAME))
 	end
 	if fair.itemGiven and fair.itemTaken then
 		foundSomething = true
@@ -233,10 +233,8 @@ function GreyHandling.functions.GlowCheapestGrey()
 		end
 		print(GreyHandling.functions.userPrintableExchange(fair))
 		-- SendChatMessage(msg)
-		--else
-		--	print("GreyHandling: There are no grey items to throw away. Maybe you don't need this Hearthstone after all? ;)")
 	else
-		print("No mutually beneficial trade found.")
+		print(format("%s: No mutually beneficial trade found.", GreyHandling.NAME))
 	end
 	if not foundSomething then
 		CloseAllBags()
