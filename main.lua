@@ -12,7 +12,6 @@ function GreyHandling.functions.GetBagAndSlot(itemLink)
 end
 
 function GreyHandling.functions.main()
-	local foundSomething = nil
     local now, later = GreyHandling.functions.GetCheapestJunk()
 	--local egoist, altruist, fair = GreyHandling.functions.GetBestExchange()
 	local fair = GreyHandling.functions.GetBestExchange()

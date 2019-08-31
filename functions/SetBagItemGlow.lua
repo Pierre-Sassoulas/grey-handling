@@ -2,7 +2,6 @@ local A, GreyHandling = ...
 
 
 function GreyHandling.functions.SetBagItemGlow(bagID, slotID, color)
-	local item = nil
 	if IsAddOnLoaded("OneBag3") then
 		item = _G["OneBagFrameBag"..bagID.."Item"..slotID]
     elseif IsAddOnLoaded("ArkInventory") then
