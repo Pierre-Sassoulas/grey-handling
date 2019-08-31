@@ -22,7 +22,6 @@ GreyHandling.data = {}
 local ourName=UnitName("player")
 local realmName=GetRealmName()
 GreyHandling.data.ourName = format("%s-%s", ourName, string.gsub(realmName, "%s+", ""))
-GreyHandling.data.names = {}
 GreyHandling.data.items = {}
 
 --- localization helpers

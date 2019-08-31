@@ -16,6 +16,6 @@ function GreyHandling.functions.DisplayMutuallyBeneficialTradeInChat(exchange)
 	end
 	return format(
 		"%s: Exchange your %s*%s for %s's %s*%s : %s", GreyHandling.NAME, exchange.itemGiven, exchange.ourCount,
-		GreyHandling.data.names[exchange.playerId], exchange.itemTaken, exchange.theirCount, msg
+		exchange.playerId, exchange.itemTaken, exchange.theirCount, msg
 	)
 end

@@ -46,11 +46,11 @@ function GreyHandling.functions.ToolTipHook(t)
                 SetTooltipMoney(t, itemSellPrice, nil, format("%s", SELL_PRICE))
             end
         end
-        for player_id, items in pairs(GreyHandling.data.items) do
+        for playerName, items in pairs(GreyHandling.data.items) do
             for items_id, itemInformation  in pairs(items) do
                 if items_id == link then
                     GameTooltip:AddLine(
-                        format("%s: %s/%s", GreyHandling.data.names[player_id], itemInformation.number,
+                        format("%s: %s/%s", playerName, itemInformation.number,
                             itemInformation.itemStackCount)
                     )
                 end
