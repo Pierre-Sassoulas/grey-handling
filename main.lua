@@ -65,17 +65,3 @@ function GreyHandling.functions.displayMutuallyBeneficialTrades(foundSomething)
 	end
 	return foundSomething
 end
-
-function GreyHandling.functions.main()
-	if IsAddOnLoaded("Scrap") and not GreyHandling.alreadyAnnouncedScrap then
-		print(format("%s: We're going to use Scrap to determine what is junk.", GreyHandling.NAME))
-		GreyHandling.alreadyAnnouncedScrap = true
-	end
-	OpenAllBags()
-	local foundSomething = false
-	foundSomething = GreyHandling.functions.displayCheapestJunk(foundSomething)
-	foundSomething = GreyHandling.functions.displayMutuallyBeneficialTrades(foundSomething)
-	if not foundSomething then
-		CloseAllBags()
-	end
-end
