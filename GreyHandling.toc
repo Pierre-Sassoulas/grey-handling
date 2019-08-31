@@ -32,5 +32,6 @@ functions\NumberLootedFromChatMessage.lua
 HandleCheapestJunk.lua
 HandleMutuallyBeneficialTrades.lua
 GreyHandlingOptions.lua
+tests\Tests.lua
 GreyHandling.lua
 

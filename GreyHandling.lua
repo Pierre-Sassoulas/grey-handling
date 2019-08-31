@@ -7,6 +7,10 @@ ItemRefTooltip:HookScript("OnTooltipSetItem", GreyHandling.functions.ToolTipHook
 
 function GreyHandling.frame:OnEvent(event, key, state)
 	if key == "LCTRL" and state == 1 and IsShiftKeyDown() then
+        if GreyHandling.DEVELOPMENT_VERSION then
+            GreyHandling.allTests()
+            print("All tests passed successfully.")
+        end
 		OpenAllBags()
 		local foundSomething = false
 		foundSomething = GreyHandling.functions.HandleCheapestJunk(foundSomething)
