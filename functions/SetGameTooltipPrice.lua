@@ -57,6 +57,9 @@ function GreyHandling.functions.ToolTipHook(t)
             end
         end
         for playerName, items in pairs(GreyHandling.data.items) do
+            if not playerName then
+                break
+            end
             for items_id, itemInformation  in pairs(items) do
                 if items_id == link then
                     GameTooltip:AddLine(
