@@ -29,6 +29,14 @@ local function change_value_show_price()
     GreyHandlingShowPrice = not GreyHandlingShowPrice
 end
 
+local function change_value_show_api_fail()
+    GreyHandlingShowAPIFail = not GreyHandlingShowAPIFail
+end
+
+local function change_value_remind_about_scrap()
+    GreyHandlingUseScrapJunkList = not GreyHandlingUseScrapJunkList
+end
+
 function GreyHandling.options.display()
 	local scrap = "I could use scrap to determine what is junk, if you had it."
 	if IsAddOnLoaded("Scrap") then
@@ -53,6 +61,8 @@ function GreyHandling.options.panel.default()
 	GreyHandlingIsTalkative = GreyHandling.options.DEFAULT_TALKATIVE
 	GreyHandlingIsVerbose = GreyHandling.options.DEFAULT_VERBOSE
 	GreyHandlingShowPrice = GreyHandling.options.DEFAULT_SHOW_PRICE
+	GreyHandlingShowAPIFail = GreyHandling.options.DEFAULT_SHOW_API_FAIL
+	GreyHandlingUseScrapJunkList = GreyHandling.options.DEFAULT_USE_SCRAP_JUNK_LIST
 end
 
 GreyHandling.options.frame:RegisterEvent("ADDON_LOADED")
@@ -71,6 +81,12 @@ function GreyHandling.options.frame:OnEvent(event, key)
 		end
 		if GreyHandlingShowPrice == nil then
 			GreyHandlingShowPrice = GreyHandling.options.DEFAULT_SHOW_PRICE
+		end
+		if GreyHandlingShowAPIFail == nil then
+			GreyHandlingShowAPIFail = GreyHandling.options.DEFAULT_SHOW_API_FAIL
+		end
+		if GreyHandlingUseScrapJunkList == nil then
+			GreyHandlingUseScrapJunkList = GreyHandling.options.DEFAULT_USE_SCRAP_JUNK_LIST
 		end
 		local title = GreyHandling.options.panel:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
 		title:SetPoint("TOPLEFT", 16, -16)
@@ -95,11 +111,21 @@ function GreyHandling.options.frame:OnEvent(event, key)
 			"Display vendor sell prices in item tooltips (might be redondant with another addon)", "",
 			change_value_show_price, GreyHandlingShowPrice
 		)
+		local CheckboxShowAPIFail = CreateCheckbox(
+			"Display API fail (displayed to you only)", "",
+			change_value_show_api_fail,  GreyHandlingShowAPIFail
+		)
+		local CheckboxUseScrapJunkList = CreateCheckbox(
+			"Use scrap junk list, if scrap is installed (only grey are analyzed otherwise)", "",
+			change_value_remind_about_scrap,  GreyHandlingUseScrapJunkList
+		)
 	end
 	if event == "PLAYER_LOGOUT" then
 		GreyHandlingIsTalkative = GreyHandlingIsTalkative
 		GreyHandlingIsVerbose = GreyHandlingIsVerbose
 		GreyHandlingShowPrice = GreyHandlingShowPrice
+		GreyHandlingShowAPIFail = GreyHandlingShowAPIFail
+		GreyHandlingUseScrapJunkList = GreyHandlingUseScrapJunkList
 	end
 end
 

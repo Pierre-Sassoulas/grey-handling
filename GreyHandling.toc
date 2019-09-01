@@ -19,6 +19,8 @@
 ## SavedVariables: GreyHandlingIsTalkative
 ## SavedVariables: GreyHandlingIsVerbose
 ## SavedVariables: GreyHandlingShowPrice
+## SavedVariables: GreyHandlingShowAPIFail
+## SavedVariables: GreyHandlingUseScrapJunkList
 
 constants.lua
 functions\getItemIdFromItemLink.lua
