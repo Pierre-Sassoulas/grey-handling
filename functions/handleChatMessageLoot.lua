@@ -10,13 +10,13 @@ function GreyHandling.functions.isLootCouncilMessage(chatMessage)
 	return string.find(chatMessage, "%[") < 2
 end
 
-function GreyHandling.functions.handleChatMessageLoot(chatMessage, pLayerName, lineNumber, playerId, k, l, m, n, o)
-	-- print("Handling", chatMessage, "-",  pLayerName, "-",  lineNumber, "-",  playerId, "-",  GreyHandling.data.ourName)
-	if GreyHandling.data.ourName == pLayerName then
+function GreyHandling.functions.handleChatMessageLoot(chatMessage, playerName, lineNumber, playerId, k, l, m, n, o)
+	-- print("Handling", chatMessage, "-",  playerName, "-",  lineNumber, "-",  playerId, "-",  GreyHandling.data.ourName)
+	if GreyHandling.data.ourName == playerName then
 		-- print("This is the player, we don't need to add", chatMessage, " to our data store.")
 		return -- We can get the player items reliably with GetItemCount()
 	end
-	if not pLayerName then
+	if not playerName then
 		local version = ""
 		if GreyHandling.IS_CLASSIC then
 		  version = "WOW classic"
@@ -34,12 +34,12 @@ function GreyHandling.functions.handleChatMessageLoot(chatMessage, pLayerName, l
 	local itemId = GreyHandling.functions.getIDNumber(chatMessage)
 	local itemName = GreyHandling.functions.getItemNameFromChatMessage(chatMessage)
 	if not itemId then
-		print(format("Cannot treat '%s' looted by %s.", itemName, pLayerName))
+		print(format("Cannot treat '%s' looted by %s.", itemName, playerName))
 		return
 	end
 	local _, itemLink, _, _, _, _, _, itemStackCount, _, _, vendorPrice, _, _, bindType = GetItemInfo(itemId)
 	if not itemLink then
-		print(format("Did not manage to retrieve '%s' looted by %s with itemID %s.", itemName, pLayerName, itemId))
+		print(format("Did not manage to retrieve '%s' looted by %s with itemID %s.", itemName, playerName, itemId))
 		return
 	end
 	if itemStackCount == 1 or bindType == 1 or bindType == 4 then
@@ -48,19 +48,19 @@ function GreyHandling.functions.handleChatMessageLoot(chatMessage, pLayerName, l
 		-- No one want to trade quest item
 		return
 	end
-	if not GreyHandling.data.items[pLayerName] then
-		GreyHandling.data.items[pLayerName] = {}
+	if not GreyHandling.data.items[playerName] then
+		GreyHandling.data.items[playerName] = {}
 	end
 	-- print(itemLink)
-	if not GreyHandling.data.items[pLayerName][itemLink] then
-		GreyHandling.data.items[pLayerName][itemLink] = {}
-		GreyHandling.data.items[pLayerName][itemLink]["itemStackCount"] = itemStackCount
-		GreyHandling.data.items[pLayerName][itemLink]["vendorPrice"] = vendorPrice
-		GreyHandling.data.items[pLayerName][itemLink]["number"] = 0
+	if not GreyHandling.data.items[playerName][itemLink] then
+		GreyHandling.data.items[playerName][itemLink] = {}
+		GreyHandling.data.items[playerName][itemLink]["itemStackCount"] = itemStackCount
+		GreyHandling.data.items[playerName][itemLink]["vendorPrice"] = vendorPrice
+		GreyHandling.data.items[playerName][itemLink]["number"] = 0
 	end
 	-- print("Chat message : ", chatMessage)
 	local number= GreyHandling.functions.numberLootedFromChatMessage(chatMessage)
 	-- print("Number found", number, chatMessage)
-	GreyHandling.data.items[pLayerName][itemLink]["number"] = GreyHandling.data.items[pLayerName][itemLink]["number"] + number
-	-- print(format("GreyHandling: (estimation) %s's %s current stack : %s/%s", pLayerName, itemLink, number, itemStackCount))
+	GreyHandling.data.items[playerName][itemLink]["number"] = GreyHandling.data.items[playerName][itemLink]["number"] + number
+	-- print(format("GreyHandling: (estimation) %s's %s current stack : %s/%s", playerName, itemLink, number, itemStackCount))
 end
