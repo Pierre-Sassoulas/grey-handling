@@ -20,7 +20,11 @@ GreyHandling.options.DEFAULT_SHOW_PRICE = true
 GreyHandling.data = {}
 local ourName=UnitName("player")
 local realmName=GetRealmName()
-GreyHandling.data.ourName = format("%s-%s", ourName, string.gsub(realmName, "%s+", ""))
+if GreyHandling.IS_CLASSIC then
+  GreyHandling.data.ourName = ourName
+else
+  GreyHandling.data.ourName = format("%s-%s", ourName, string.gsub(realmName, "%s+", ""))
+end
 GreyHandling.data.items = {}
 
 --- localization helpers

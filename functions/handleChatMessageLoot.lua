@@ -6,8 +6,9 @@ function GreyHandling.functions.getItemNameFromChatMessage(chatMessage)
 end
 
 function GreyHandling.functions.handleChatMessageLoot(chatMessage, pLayerName, lineNumber, playerId, k, l, m, n, o)
-	-- print("Handling", chatMessage, pLayerName, lineNumber, playerId)
+	-- print("Handling", chatMessage, "-",  pLayerName, "-",  lineNumber, "-",  playerId, "-",  GreyHandling.data.ourName)
 	if GreyHandling.data.ourName == pLayerName then
+		-- print("This is the player, we don't need to add", chatMessage, " to our data store.")
 		return -- We can get the player items reliably with GetItemCount()
 	end
 	-- chatMessage contain an item link, and work like one as of patch 8.2.0

@@ -23,8 +23,13 @@ end
 GreyHandling.frame:RegisterEvent("MODIFIER_STATE_CHANGED")
 GreyHandling.frame:SetScript("OnEvent", GreyHandling.frame.OnEvent)
 
-function GreyHandling.loot_frame:OnLoot(event, chat_message, player_name, a, b, c, d, e, f, g, h, line_number, player_id, k, l, m, n, o)
-	GreyHandling.functions.handleChatMessageLoot(chat_message, player_name, line_number, player_id, k, l, m, n, o)
+function GreyHandling.loot_frame:OnLoot(event, chat_message, player_name_retail, a, b, player_name_classic, d, e, f, g, h, line_number, player_id, k, l, m, n, o)
+	-- print(event, "-", chat_message, "-", player_name_retail, "-", a,  "-", b, "-",  player_name_classic, "-",  d, "-",  e, "-", f, "-",  g, "-",  h, "-",  line_number,  "-", player_id, "-",  k, "-",  l, "-", m, "-",  n, "-",  o)
+	if GreyHandling.IS_CLASSIC then
+		GreyHandling.functions.handleChatMessageLoot(chat_message, player_name_classic, line_number, player_id, k, l, m, n, o)
+	else
+		GreyHandling.functions.handleChatMessageLoot(chat_message, player_name_retail, line_number, player_id, k, l, m, n, o)
+	end
 end
 
 GreyHandling.loot_frame:RegisterEvent("CHAT_MSG_LOOT")
