@@ -11,7 +11,6 @@ GreyHandling.DISPLAY_NAME = "Grey Handling"
 GreyHandling.MAX_CHAR_IN_CHAT_LOOT_MESSAGE = 255
 GreyHandling.DEVELOPMENT_VERSION = false
 GreyHandling.DESCRIPTION = GetAddOnMetadata(GreyHandling.NAME, "NOTES")
-GreyHandling.HANDLE_MESSAGE_IS_BROKEN = 0
 GreyHandling.options = {}
 GreyHandling.options.frame = CreateFrame("FRAME")
 GreyHandling.OPTION_COMMAND = "/gho"
