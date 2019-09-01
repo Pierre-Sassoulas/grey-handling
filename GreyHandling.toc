@@ -21,6 +21,7 @@
 ## SavedVariables: GreyHandlingShowPrice
 
 constants.lua
+functions\getItemIdFromItemLink.lua
 functions\SetBagItemGlow.lua
 functions\DisplayCheapestInChat.lua
 functions\DisplayMutuallyBeneficialTradeInChat.lua

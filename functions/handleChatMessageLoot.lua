@@ -31,10 +31,15 @@ function GreyHandling.functions.handleChatMessageLoot(chatMessage, pLayerName, l
 		return
 	end
 	-- chatMessage contain an item link, and work like one as of patch 8.2.0
+	local itemId = GreyHandling.functions.getIDNumber(chatMessage)
 	local itemName = GreyHandling.functions.getItemNameFromChatMessage(chatMessage)
-	local _, itemLink, _, _, _, _, _, itemStackCount, _, _, vendorPrice, _, _, bindType = GetItemInfo(itemName)
+	if not itemId then
+		print(format("Cannot treat '%s' looted by %s.", itemName, pLayerName))
+		return
+	end
+	local _, itemLink, _, _, _, _, _, itemStackCount, _, _, vendorPrice, _, _, bindType = GetItemInfo(itemId)
 	if not itemLink then
-		print(format("You never saw '%s' looted by %s before so we can't ask the WOW API about it.", itemName, pLayerName))
+		print(format("Did not manage to retrieve '%s' looted by %s with itemID %s.", itemName, pLayerName, itemId))
 		return
 	end
 	if itemStackCount == 1 or bindType == 1 or bindType == 4 then
