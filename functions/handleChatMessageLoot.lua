@@ -16,7 +16,7 @@ function GreyHandling.functions.handleChatMessageLoot(chatMessage, playerName, l
 		-- print("This is the player, we don't need to add", chatMessage, " to our data store.")
 		return -- We can get the player items reliably with GetItemCount()
 	end
-	if not playerName then
+	if not playerName or playerName == "" then
 		local version = ""
 		if GreyHandling.IS_CLASSIC then
 		  version = "WOW classic"
