@@ -5,6 +5,11 @@ function GreyHandling.functions.getItemNameFromChatMessage(chatMessage)
 	return string.sub(chatMessage, string.find(chatMessage, "%[") + 1 , string.find(chatMessage, "]") -1)
 end
 
+function GreyHandling.functions.isLootCouncilMessage(chatMessage)
+	-- https://stackoverflow.com/questions/6077423/how-to-string-find-the-square-bracket-character-in-lua
+	return string.find(chatMessage, "%[") < 2
+end
+
 function GreyHandling.functions.handleChatMessageLoot(chatMessage, pLayerName, lineNumber, playerId, k, l, m, n, o)
 	-- print("Handling", chatMessage, "-",  pLayerName, "-",  lineNumber, "-",  playerId, "-",  GreyHandling.data.ourName)
 	if GreyHandling.data.ourName == pLayerName then
@@ -19,6 +24,10 @@ function GreyHandling.functions.handleChatMessageLoot(chatMessage, pLayerName, l
 		  version = "WOW retail"
 		end
 		print(format("%s: Something went wrong, this addon is for '%s' please check your version of GreyHandling.", GreyHandling.NAME, version))
+		return
+	end
+	if GreyHandling.functions.isLootCouncilMessage(chatMessage) then
+		-- We don't analyse loot council message
 		return
 	end
 	-- chatMessage contain an item link, and work like one as of patch 8.2.0

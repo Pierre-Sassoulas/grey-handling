@@ -11,6 +11,13 @@ function GreyHandling.testNumberLootedFromChatMessage()
     assert (1 == GreyHandling.functions.numberLootedFromChatMessage("Ваша добыча: [Маленькая блестящая жемчужина]."), "Can't parse object looted from roll in russian")
 end
 
+function GreyHandling.testIsLootCouncilMessage()
+    assert (GreyHandling.functions.isLootCouncilMessage("[Butin] Vous avez choisi cupidité pour ：[Oeil de tigre]."), "Can't parse loot council in french")
+    assert (GreyHandling.functions.isLootCouncilMessage("[Butin] Vous avez choisi cupidité pour ：[Oeil de tigre]."), "Can't parse loot council in french")
+    assert (not GreyHandling.functions.isLootCouncilMessage("Vous créez：[Petit pain de manne invoqué] x20."), "Detect loot council for no reason in french")
+    assert (not GreyHandling.functions.isLootCouncilMessage("Vous recevez le butin ：[Oeil de tigre]."), "Detect loot council for no reason in french")
+end
+
 function GreyHandling.testMutuallyBeneficialExchange()
     local test_object_1 = "Dent plate émoussée"
     local test_object_2 = "Incisive dentelée"
@@ -35,6 +42,7 @@ function GreyHandling.testHandleChatLootMessageFrench()
     local _, oeilDeTigreLink = GetItemInfo("Oeil de tigre")
     GreyHandling.functions.handleChatMessageLoot("Vous recevez le butin : [Oeil de tigre].", "TestOtherName-TestOtherServer", 120, "PlayerID1AEBCFEE1123123")
     GreyHandling.functions.handleChatMessageLoot("TestName-TestServer reçoit le butin : [Oeil de tigre] x2.", "TestName-TestServer", 121, "PlayerID2AEBCFE1123124")
+    GreyHandling.functions.handleChatMessageLoot("[Butin] Vous avez choisi cupidité pour ：[Oeil de tigre].", "TestOtherName-TestOtherServer", 125, "PlayerID1AEBCFEE1123123")
     assert (1 == GreyHandling.data.items["TestOtherName-TestOtherServer"][oeilDeTigreLink].number)
     assert (2 == GreyHandling.data.items["TestName-TestServer"][oeilDeTigreLink]["number"])
 end
@@ -51,6 +59,8 @@ function GreyHandling.allTests()
     GreyHandling.data.items = {}
     print("Testing NumberLootedFromChatMessage...")
     GreyHandling.testNumberLootedFromChatMessage()
+    print("Testing IsLootCouncilMessage...")
+    GreyHandling.testIsLootCouncilMessage()
     print("Testing MutuallyBeneficialExchange...")
     GreyHandling.testMutuallyBeneficialExchange()
     print("Testing HandleChatLootMessage in French...")
