@@ -11,6 +11,16 @@ function GreyHandling.functions.handleChatMessageLoot(chatMessage, pLayerName, l
 		-- print("This is the player, we don't need to add", chatMessage, " to our data store.")
 		return -- We can get the player items reliably with GetItemCount()
 	end
+	if not pLayerName then
+		local version = ""
+		if GreyHandling.IS_CLASSIC then
+		  version = "WOW classic"
+		else
+		  version = "WOW retail"
+		end
+		print(format("%s: Something went wrong, this addon is for '%s' please check your version of GreyHandling.", GreyHandling.NAME, version))
+		return
+	end
 	-- chatMessage contain an item link, and work like one as of patch 8.2.0
 	local itemName = GreyHandling.functions.getItemNameFromChatMessage(chatMessage)
 	local _, itemLink, _, _, _, _, _, itemStackCount, _, _, vendorPrice, _, _, bindType = GetItemInfo(itemName)
