@@ -9,8 +9,18 @@ function GreyHandling.functions.ToolTipHook(t)
             return
         end
         local _, _, _, _, _, _, _, itemStackCount, _, _, itemSellPrice, itemClassID = GetItemInfo(link)
+        -- local itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount,
+        -- itemEquipLoc, itemIcon, vendorPrice, itemClassID, itemSubClassID, bindType, expacID, itemSetID, isCraftingReagent = GetItemInfo(link)
+        --print(
+        -- "- itemName", itemName, "- itemLink", itemLink, "- ItemRarity", itemRarity, "- ItemLevel", itemLevel,
+        -- "- itemMinLevel", itemMinLevel, "- itemType", itemType, "- ItemSubType", itemSubType, "- ItemStackCount",
+        --   itemStackCount, "- ItemEquipLoc", itemEquipLoc, "- ItemIcon", itemIcon,
+        --    "- VendorPrice", vendorPrice, "- ItemClassID", itemClassID, "- ItemSubClassId", itemSubClassID,
+        --    "- bindType", bindType, "- expacID",  expacID,"- ItemSetID",  itemSetID, "- isCraftingReagent", isCraftingReagent
+        --)
         if not itemSellPrice or itemSellPrice <= 0 then
-            -- Can be a quest item for example
+            -- Can be a quest item, mild spices, or hearthstone for example
+            GameTooltip:AddLine("Cannot be sold", "1", "0.5", "0.5")
             return
         end
         if itemStackCount > 1 then
