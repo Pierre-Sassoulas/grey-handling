@@ -25,7 +25,9 @@ function GreyHandling.functions.HandleCheapestJunk(foundSomething)
 			GreyHandling.functions.DisplayCheapestInChat("Cheapest later:", later)
 			if IsAddOnLoaded("Inventorian") then
 				if GreyHandlingIsVerbose then
-					print(format("%s: For Inventorian glows in bag feature is not yet supported.", GreyHandling.NAME))
+					if GreyHandlingShowAPIFail then
+						print(format("%s: For Inventorian glows in bag feature is not yet supported.", GreyHandling.NAME))
+					end
 				end
 			else
 				GreyHandling.functions.SetBagItemGlow(now.bag, now.slot, "bags-glow-orange")
