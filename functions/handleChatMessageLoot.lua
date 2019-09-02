@@ -16,6 +16,10 @@ function GreyHandling.functions.handleChatMessageLoot(chatMessage, playerName, l
 		-- print("This is the player, we don't need to add", chatMessage, " to our data store.")
 		return -- We can get the player items reliably with GetItemCount()
 	end
+	if GreyHandling.functions.isLootCouncilMessage(chatMessage) then
+		-- We don't analyse loot council message
+		return
+	end
 	if not playerName or playerName == "" then
 		local version = ""
 		if GreyHandling.IS_CLASSIC then
@@ -26,10 +30,6 @@ function GreyHandling.functions.handleChatMessageLoot(chatMessage, playerName, l
 		if GreyHandlingShowAPIFail then
 			print(format("%s: Something went wrong, this addon is for '%s' please check your version of GreyHandling.", GreyHandling.NAME, version))
 		end
-		return
-	end
-	if GreyHandling.functions.isLootCouncilMessage(chatMessage) then
-		-- We don't analyse loot council message
 		return
 	end
 	-- chatMessage contain an item link, and work like one as of patch 8.2.0
