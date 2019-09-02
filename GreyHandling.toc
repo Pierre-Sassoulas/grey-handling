@@ -1,6 +1,5 @@
-## Interface: 11303
-## X-Min-Interface: 11302
-## Version: 1.13.2_1.7.1
+## Interface: 80205
+## Version: 8.2.5_1.7.1
 ## Title:|cffa0a0a0GH|r|cffffffff:|r Grey Handling
 
 ## Notes: Helps you get rid of the right grey objects when your bags are full
