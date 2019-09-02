@@ -20,7 +20,7 @@ function GreyHandling.functions.GetCheapestJunk()
 					itemEquipLoc, itemIcon, vendorPrice, itemClassID, itemSubClassID, bindType, expacID, itemSetID,
 					isCraftingReagent = GetItemInfo(itemid)
 				local isJunk = nil
-				if IsAddOnLoaded("Scrap") then
+				if IsAddOnLoaded("Scrap") and GreyHandlingUseScrapJunkList then
 					isJunk = Scrap:IsJunk(itemid, bagID, bagSlot)
 				else
 					isJunk = (itemRarity == 0 and vendorPrice > 0)
