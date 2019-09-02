@@ -11,8 +11,8 @@ function GreyHandling.functions.isLootCouncilMessage(chatMessage)
 end
 
 function GreyHandling.functions.handleChatMessageLoot(chatMessage, playerName, lineNumber, playerId, k, l, m, n, o)
-	-- print("Handling", chatMessage, "-",  playerName, "-",  lineNumber, "-",  playerId, "-",  GreyHandling.data.ourName)
-	if GreyHandling.data.ourName == playerName then
+	-- print("Handling", chatMessage, "-",  playerName, "-",  lineNumber, "-",  playerId, "-",  GreyHandling.data.playerName)
+	if GreyHandling.data.playerName == playerName then
 		-- print("This is the player, we don't need to add", chatMessage, " to our data store.")
 		return -- We can get the player items reliably with GetItemCount()
 	end

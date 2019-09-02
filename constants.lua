@@ -23,9 +23,9 @@ GreyHandling.data = {}
 local ourName=UnitName("player")
 local realmName=GetRealmName()
 if GreyHandling.IS_CLASSIC then
-  GreyHandling.data.ourName = ourName
+  GreyHandling.data.playerName = ourName
 else
-  GreyHandling.data.ourName = format("%s-%s", ourName, string.gsub(realmName, "%s+", ""))
+  GreyHandling.data.playerName = format("%s-%s", ourName, string.gsub(realmName, "%s+", ""))
 end
 GreyHandling.data.items = {}
 
