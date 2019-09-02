@@ -9,7 +9,7 @@ GreyHandling.IS_CLASSIC = true
 GreyHandling.NAME = "GreyHandling"
 GreyHandling.DISPLAY_NAME = "Grey Handling"
 GreyHandling.MAX_CHAR_IN_CHAT_LOOT_MESSAGE = 255
-GreyHandling.DEVELOPMENT_VERSION = false
+GreyHandling.DEVELOPMENT_VERSION = true
 GreyHandling.DESCRIPTION = GetAddOnMetadata(GreyHandling.NAME, "NOTES")
 GreyHandling.options = {}
 GreyHandling.options.frame = CreateFrame("FRAME")
@@ -19,15 +19,6 @@ GreyHandling.options.DEFAULT_VERBOSE = true
 GreyHandling.options.DEFAULT_SHOW_PRICE = true
 GreyHandling.options.DEFAULT_SHOW_API_FAIL = false
 GreyHandling.options.DEFAULT_USE_SCRAP_JUNK_LIST = true
-GreyHandling.data = {}
-local ourName=UnitName("player")
-local realmName=GetRealmName()
-if GreyHandling.IS_CLASSIC then
-  GreyHandling.data.playerName = ourName
-else
-  GreyHandling.data.playerName = format("%s-%s", ourName, string.gsub(realmName, "%s+", ""))
-end
-GreyHandling.data.items = {}
 
 --- localization helpers
 

@@ -1,0 +1,3 @@
+local A, GreyHandling = ...
+
+GreyHandling.data = {}

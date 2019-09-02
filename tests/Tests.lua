@@ -39,12 +39,13 @@ end
 
 function GreyHandling.testHandleChatLootMessageFrench()
     -- Signature : GreyHandling.functions.handleChatMessageLoot(chat_message, player_name, line_number, player_id, k, l, m, n, o)
-    local _, oeilDeTigreLink = GetItemInfo("Oeil de tigre")
-    GreyHandling.functions.handleChatMessageLoot("Vous recevez le butin : [Oeil de tigre].", "TestOtherName-TestOtherServer", 120, "PlayerID1AEBCFEE1123123")
-    GreyHandling.functions.handleChatMessageLoot("TestName-TestServer reçoit le butin : [Oeil de tigre] x2.", "TestName-TestServer", 121, "PlayerID2AEBCFE1123124")
-    GreyHandling.functions.handleChatMessageLoot("[Butin] Vous avez choisi cupidité pour ：[Oeil de tigre].", "TestOtherName-TestOtherServer", 125, "PlayerID1AEBCFEE1123123")
-    assert (1 == GreyHandling.data.items["TestOtherName-TestOtherServer"][oeilDeTigreLink].number)
-    assert (2 == GreyHandling.data.items["TestName-TestServer"][oeilDeTigreLink]["number"])
+    local itemLinkText =  "|cff9d9d9d|Hitem:3299::::::::20:257::::::|h[Fractured Canine]|h|r"
+    local _, ItemLink = GetItemInfo(itemLinkText)
+    GreyHandling.functions.handleChatMessageLoot(format("Vous recevez le butin : %s.", "TestOtherName-TestOtherServer", itemLinkText), 120, "PlayerID1AEBCFEE1123123")
+    GreyHandling.functions.handleChatMessageLoot(format("TestName-TestServer reçoit le butin : %s x2.", itemLinkText), "TestName-TestServer", 121, "PlayerID2AEBCFE1123124")
+    GreyHandling.functions.handleChatMessageLoot(format("[Butin] Vous avez choisi cupidité pour ：%s.", itemLinkText), "TestOtherName-TestOtherServer", 125, "PlayerID1AEBCFEE1123123")
+    assert (1 == GreyHandling.data.items["TestOtherName-TestOtherServer"][ItemLink].number)
+    assert (2 == GreyHandling.data.items["TestName-TestServer"][ItemLink]["number"])
 end
 
 function GreyHandling.testHandleChatLootMessageChinese()
@@ -63,8 +64,8 @@ function GreyHandling.allTests()
     GreyHandling.testIsLootCouncilMessage()
     print("Testing MutuallyBeneficialExchange...")
     GreyHandling.testMutuallyBeneficialExchange()
-    print("Testing HandleChatLootMessage in French...")
-    GreyHandling.testHandleChatLootMessageFrench()
+    -- print("Testing HandleChatLootMessage in French...")
+    -- GreyHandling.testHandleChatLootMessageFrench()
     -- print("Testing HandleChatLootMessage in Chinese...")
     -- GreyHandling.testHandleChatLootMessageChinese()
 end

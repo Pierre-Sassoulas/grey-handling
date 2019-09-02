@@ -24,6 +24,9 @@
 ## SavedVariables: GreyHandlingUseScrapJunkList
 
 constants.lua
+db\initDatabase.lua
+db\playerName.lua
+db\itemStore.lua
 functions\getItemIdFromItemLink.lua
 functions\SetBagItemGlow.lua
 functions\DisplayCheapestInChat.lua
