@@ -36,14 +36,14 @@ function GreyHandling.functions.handleChatMessageLoot(chatMessage, playerName, l
 	local itemId = GreyHandling.functions.getIDNumber(chatMessage)
 	local itemName = GreyHandling.functions.getItemNameFromChatMessage(chatMessage)
 	if not itemId then
-		if GreyHandlingShowAPIFail then
+		if GreyHandlingShowAPIFail and GreyHandling.DEVELOPMENT_VERSION then
 			print(format("Cannot treat '%s' looted by %s.", itemName, playerName))
 		end
 		return
 	end
 	local _, itemLink, _, _, _, _, _, itemStackCount, _, _, vendorPrice, _, _, bindType = GetItemInfo(itemId)
 	if not itemLink then
-		if GreyHandlingShowAPIFail then
+		if GreyHandlingShowAPIFail and GreyHandling.DEVELOPMENT_VERSION then
 			print(format("Did not manage to retrieve '%s' looted by %s with itemID %s.", itemName, playerName, itemId))
 		end
 		return
