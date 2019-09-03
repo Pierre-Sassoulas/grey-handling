@@ -1,3 +1,0 @@
-local A, GreyHandling = ...
-
-GreyHandling.data.items = {}

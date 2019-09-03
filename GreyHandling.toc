@@ -26,7 +26,8 @@
 constants.lua
 db\initDatabase.lua
 db\playerName.lua
-db\itemStore.lua
+db\itemStorePrivate.lua
+db\itemStorePublic.lua
 functions\getItemIdFromItemLink.lua
 functions\SetBagItemGlow.lua
 functions\DisplayCheapestInChat.lua

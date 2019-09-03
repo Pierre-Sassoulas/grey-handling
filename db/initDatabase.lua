@@ -1,3 +1,8 @@
 local A, GreyHandling = ...
 
-GreyHandling.data = {}
+function GreyHandling.db.reset()
+    GreyHandling.data = {}
+    GreyHandling.data.items = {}
+end
+
+GreyHandling.db.reset()

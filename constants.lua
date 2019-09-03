@@ -4,6 +4,7 @@ local A, GreyHandling = ...
 GreyHandling.frame = CreateFrame("Frame")
 GreyHandling.loot_frame = CreateFrame("Frame")
 GreyHandling.functions = {}
+GreyHandling.db = {}
 GreyHandling.SELL_PRICE_TEXT = format("%s:", SELL_PRICE)
 GreyHandling.IS_CLASSIC = true
 GreyHandling.NAME = "GreyHandling"

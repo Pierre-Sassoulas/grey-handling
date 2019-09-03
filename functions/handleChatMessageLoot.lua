@@ -54,19 +54,7 @@ function GreyHandling.functions.handleChatMessageLoot(chatMessage, playerName, l
 		-- No one want to trade quest item
 		return
 	end
-	if not GreyHandling.data.items[playerName] then
-		GreyHandling.data.items[playerName] = {}
-	end
-	-- print(itemLink)
-	if not GreyHandling.data.items[playerName][itemLink] then
-		GreyHandling.data.items[playerName][itemLink] = {}
-		GreyHandling.data.items[playerName][itemLink]["itemStackCount"] = itemStackCount
-		GreyHandling.data.items[playerName][itemLink]["vendorPrice"] = vendorPrice
-		GreyHandling.data.items[playerName][itemLink]["number"] = 0
-	end
-	-- print("Chat message : ", chatMessage)
 	local number= GreyHandling.functions.numberLootedFromChatMessage(chatMessage)
 	-- print("Number found", number, chatMessage)
-	GreyHandling.data.items[playerName][itemLink]["number"] = GreyHandling.data.items[playerName][itemLink]["number"] + number
-	-- print(format("GreyHandling: (estimation) %s's %s current stack : %s/%s", playerName, itemLink, number, itemStackCount))
+	GreyHandling.db.addItemForPlayer(playerName, itemLink, vendorPrice, itemStackCount, number)
 end

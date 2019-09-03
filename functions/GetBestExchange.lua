@@ -1,6 +1,5 @@
 local A, GreyHandling = ...
 
-
 function GreyHandling.functions.CreateExchange(itemLink, ourCount, theirCount, vendorPrice, itemStackCount)
 	-- When we have no bag space we'll have to throw some
 	local lossCount = itemStackCount - ourCount - theirCount
