@@ -27,7 +27,7 @@ function GreyHandling.functions.handleChatMessageLoot(chatMessage, playerName, l
 		else
 		  version = "WOW retail"
 		end
-		if GreyHandlingShowAPIFail then
+		if GreyHandlingShowAPIFail and GreyHandling.DEVELOPMENT_VERSION then
 			print(format("%s: Something went wrong, this addon is for '%s' please check your version of GreyHandling.", GreyHandling.NAME, version))
 		end
 		return
