@@ -62,10 +62,17 @@ function GreyHandling.functions.ToolTipHook(t)
             end
             for items_id, itemInformation  in pairs(items) do
                 if items_id == link then
-                    GameTooltip:AddLine(
-                        format("%s: %s/%s", playerName, itemInformation.number,
-                            itemInformation.itemStackCount)
-                    )
+                    if itemInformation.confidence == 1 then
+                        GameTooltip:AddLine(
+                            format("(G) %s: %s/%s", playerName, itemInformation.number,
+                                itemInformation.itemStackCount), 0.5, 1, 0.5
+                        )
+                    else
+                        GameTooltip:AddLine(
+                            format("(?) %s: %s/%s", playerName, itemInformation.number,
+                                itemInformation.itemStackCount), 0.5, 0.5, 1
+                        )
+                    end
                 end
             end
 	    end

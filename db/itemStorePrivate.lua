@@ -9,12 +9,13 @@ function GreyHandling.functions.playerHasItem(playerName, itemLink)
 end
 
 function GreyHandling.db.initializeItem(playerName, itemLink, vendorPrice, itemStackCount)
+	-- print(playerName, itemLink, vendorPrice, itemStackCount)
 	if not GreyHandling.data.items[playerName] then
 		GreyHandling.data.items[playerName] = {}
 	end
 	if not GreyHandling.data.items[playerName][itemLink] then
 		GreyHandling.data.items[playerName][itemLink] = {
-            itemStackCount=itemStackCount, vendorPrice = vendorPrice, number=0
+            itemStackCount=itemStackCount, vendorPrice = vendorPrice, number=0, confidence=0
         }
 	end
 end

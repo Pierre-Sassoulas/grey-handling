@@ -38,7 +38,7 @@ function GreyHandling.functions.SomeoneAskForExchange(text, channel, sender, tar
 	for itemid, itemCount in string.gmatch(text, "(%w+)-(%w+)") do
 		local itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount,
 		itemEquipLoc, itemIcon, vendorPrice = GetItemInfo(itemid)
-		GreyHandling.db.setItemForPlayer(sender, itemLink, vendorPrice, itemStackCount, itemCount)
+		GreyHandling.db.setItemForPlayer(sender, itemLink, vendorPrice, itemStackCount, itemCount, 1)
 	end
 	-- if GreyHandlingIsVerbose and target=="PARTY" then
 	print(format("%s: Informations about %s's bag updated", GreyHandling.NAME, sender))
