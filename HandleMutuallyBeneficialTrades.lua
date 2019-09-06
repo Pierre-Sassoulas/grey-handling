@@ -18,7 +18,7 @@ function GreyHandling.functions.HandleMutuallyBeneficialTrades(foundSomething)
 		foundSomething = true
 		local bag, slot = GreyHandling.functions.GetBagAndSlot(fair.itemGiven)
 		if bag and slot then
-			GreyHandling.functions.SetBagItemGlow(bag, slot, "bags-glow-orange")
+			GreyHandling.functions.SetBagItemGlow(bag, slot, "bags-glow-green")
 		end
 		print(GreyHandling.functions.DisplayMutuallyBeneficialTradeInChat(fair))
 		-- SendChatMessage(msg)
