@@ -3,6 +3,7 @@
 local A, GreyHandling = ...
 GreyHandling.frame = CreateFrame("Frame")
 GreyHandling.loot_frame = CreateFrame("Frame")
+GreyHandling.chat_frame = CreateFrame("Frame")
 GreyHandling.functions = {}
 GreyHandling.db = {}
 GreyHandling.SELL_PRICE_TEXT = format("%s:", SELL_PRICE)
@@ -21,8 +22,14 @@ GreyHandling.options.DEFAULT_SHOW_PRICE = true
 GreyHandling.options.DEFAULT_SHOW_API_FAIL = false
 GreyHandling.options.DEFAULT_USE_SCRAP_JUNK_LIST = true
 
---- localization helpers
+local numberOfTries = 0
+while not C_ChatInfo.RegisterAddonMessagePrefix(GreyHandling.NAME) and numberOfTries < 10 do
+  print(format("%s : Failed to create communication channel (%s))", GreyHandling.NAME, numberOfTries))
+  numberOfTries = numberOfTries + 1
+end
+-- C_ChatInfo.RegisterAddonMessagePrefix(GreyHandling.ADDON_CHAT_VERSION)
 
+-- localization helpers
 -- returns the L array with meta suitable for
 -- https://authors.curseforge.com/knowledge-base/world-of-warcraft/531-localization-substitutions
 -- with lua_additive_table same-key-is-true handle-unlocalized=ignore

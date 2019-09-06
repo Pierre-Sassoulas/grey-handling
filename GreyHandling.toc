@@ -36,6 +36,7 @@ functions\GetBestExchange.lua
 functions\GetCheapeastJunk.lua
 functions\SetGameTooltipPrice.lua
 functions\handleChatMessageLoot.lua
+functions\SendAddonMessage.lua
 functions\NumberLootedFromChatMessage.lua
 HandleCheapestJunk.lua
 HandleMutuallyBeneficialTrades.lua

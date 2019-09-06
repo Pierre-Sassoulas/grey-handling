@@ -10,8 +10,9 @@ function GreyHandling.frame:OnEvent(event, key, state)
         if GreyHandling.DEVELOPMENT_VERSION then
             GreyHandling.allTests()
             print("All tests passed successfully.")
-        end
+		end
 		OpenAllBags()
+		GreyHandling.functions.ExchangeMyJunkPlease()
 		local foundSomething = false
 		foundSomething = GreyHandling.functions.HandleCheapestJunk(foundSomething)
 		foundSomething = GreyHandling.functions.HandleMutuallyBeneficialTrades(foundSomething)
@@ -31,9 +32,18 @@ function GreyHandling.loot_frame:OnLoot(event, chat_message, player_name_retail,
 		GreyHandling.functions.handleChatMessageLoot(chat_message, player_name_retail, line_number, player_id, k, l, m, n, o)
 	end
 end
-
 GreyHandling.loot_frame:RegisterEvent("CHAT_MSG_LOOT")
 GreyHandling.loot_frame:SetScript("OnEvent", GreyHandling.loot_frame.OnLoot)
+
+function GreyHandling.chat_frame:OnChat(event, addon,  text, channel, sender, target, zoneChannelID, localID, name, instanceID)
+	if addon == GreyHandling.NAME then
+		GreyHandling.functions.SomeoneAskForExchange(text, channel, sender, target, zoneChannelID, localID, name, instanceID)
+	--elseif addon == GreyHandling.ADDON_CHAT_VERSION then
+		--print(addon, text)
+	end
+end
+GreyHandling.chat_frame:RegisterEvent("CHAT_MSG_ADDON")
+GreyHandling.chat_frame:SetScript("OnEvent", GreyHandling.chat_frame.OnChat)
 
 
 
