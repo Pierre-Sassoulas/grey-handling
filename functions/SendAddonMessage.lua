@@ -57,6 +57,7 @@ function GreyHandling.functions.SomeoneAskForExchange(text, channel, sender, tar
 			GreyHandling.db.setItemForPlayer(sender, itemLink, vendorPrice, itemStackCount, itemCount, 1)
 		end
 	end
+	print(format("%s: %s sent you their current list of exchangeable items.", GreyHandling.NAME, sender))
 	--if GreyHandlingIsVerbose and target=="WHISPER" then
 	--print(
 --		format("%s: %s has %s bag spaces available and can also stack %son top of that.",
