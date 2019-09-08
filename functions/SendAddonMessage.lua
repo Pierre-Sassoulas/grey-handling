@@ -39,6 +39,7 @@ function GreyHandling.functions.SomeoneAskForExchange(text, channel, sender, tar
 		return -- We don't read our own message, except in debug because it helps to dev
 	end
 	-- print(text, "-", channel, "-", sender, "-",  target, "-", zoneChannelID, "-", localID,"-",  name, "-", instanceID)
+	local want = ""
 	for itemid, itemCount in string.gmatch(text, "(%w+)-(%w+)") do
 		if itemid == "b" then
 			GreyHandling.db.setRemainingBagSpaceForPlayer(sender, itemCount)
@@ -51,20 +52,18 @@ function GreyHandling.functions.SomeoneAskForExchange(text, channel, sender, tar
 		else
 			local itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount,
 			itemEquipLoc, itemIcon, vendorPrice = GetItemInfo(itemid)
+			want = format("%s%s*%s, ", want, itemLink, itemStackCount - itemCount%itemStackCount)
 			GreyHandling.db.setItemForPlayer(sender, itemLink, vendorPrice, itemStackCount, itemCount, 1)
 		end
 	end
 	-- if GreyHandlingIsVerbose and target=="PARTY" then
-	print(format("%s: Informations about %s's bag updated", GreyHandling.NAME, sender))
-	-- GreyHandling.functions.ExchangeMyJunkPlease(sender)
---	local fair = GreyHandling.functions.GetBestExchange()
-	--if fair.itemGiven and fair.itemTaken then
-	--	foundSomething = true
-	--	local bag, slot = GreyHandling.functions.GetBagAndSlot(fair.itemGiven)
-	--	if bag and slot then
-	--		GreyHandling.functions.SetBagItemGlow(bag, slot, "bags-glow-green")
-	--	end
-	--	print(GreyHandling.functions.DisplayMutuallyBeneficialTradeInChat(fair))
-	--end
-	-- end
+	print(
+		format("%s: %s has %s bag spaces available and can also stack %s on top of that.",
+			GreyHandling.NAME,
+			sender,
+			GreyHandling.db.getRemainingBagSpaceForPlayer(sender),
+			want
+		)
+
+	)
 end
