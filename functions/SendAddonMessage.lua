@@ -7,7 +7,9 @@ end
 function GreyHandling.functions.ExchangeMyJunkPlease(target)
 	target = target or "PARTY"
 	local message = ""
+	local freeSpace = 0
 	for bagID = 0, NUM_BAG_SLOTS do
+		freeSpace = freeSpace + GetContainerNumFreeSlots(bagID);
 		for bagSlot = 1, GetContainerNumSlots(bagID) do
 			local itemid = GetContainerItemID(bagID, bagSlot)
 			if itemid and IsAddOnLoaded("Scrap") and Scrap:IsJunk(itemid, bagID, bagSlot) then
@@ -19,6 +21,7 @@ function GreyHandling.functions.ExchangeMyJunkPlease(target)
 			end
 		end
 	end
+	message = format("v-%s b-%s %s", GetAddOnMetadata(GreyHandling.NAME, "VERSION"), freeSpace, message)
 	if message ~= "" then
 		if target == "PARTY" then
 			C_ChatInfo.SendAddonMessage(GreyHandling.NAME, message)
@@ -36,9 +39,19 @@ function GreyHandling.functions.SomeoneAskForExchange(text, channel, sender, tar
 	end
 	-- print(text, "-", channel, "-", sender, "-",  target, "-", zoneChannelID, "-", localID,"-",  name, "-", instanceID)
 	for itemid, itemCount in string.gmatch(text, "(%w+)-(%w+)") do
-		local itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount,
-		itemEquipLoc, itemIcon, vendorPrice = GetItemInfo(itemid)
-		GreyHandling.db.setItemForPlayer(sender, itemLink, vendorPrice, itemStackCount, itemCount, 1)
+		if itemid == "b" then
+			GreyHandling.db.setRemainingBagSpaceForPlayer(sender, itemCount)
+			-- print(format("%s has %s bag spaces.", sender, GreyHandling.db.getRemainingBagSpaceForPlayer(sender)))
+		elseif itemid == "v" then
+			local playerVersion = GetAddOnMetadata(GreyHandling.NAME, "VERSION")
+			if itemCount>playerVersion then
+				print(format("%s has %s of %s, it means you could upgrade your own version.", sender, itemCount, GreyHandling.NAME))
+			end
+		else
+			local itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount,
+			itemEquipLoc, itemIcon, vendorPrice = GetItemInfo(itemid)
+			GreyHandling.db.setItemForPlayer(sender, itemLink, vendorPrice, itemStackCount, itemCount, 1)
+		end
 	end
 	-- if GreyHandlingIsVerbose and target=="PARTY" then
 	print(format("%s: Informations about %s's bag updated", GreyHandling.NAME, sender))

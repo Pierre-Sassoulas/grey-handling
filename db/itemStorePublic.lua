@@ -9,6 +9,19 @@ function GreyHandling.db.setItemInfoForPlayer(playerName, itemLink, infoName, va
     GreyHandling.data.items[playerName][itemLink][infoName] = value
 end
 
+function GreyHandling.db.setRemainingBagSpaceForPlayer(playerName, bagSpace)
+    GreyHandling.db.initializePlayer(playerName, bagSpace)
+end
+
+function GreyHandling.db.getRemainingBagSpaceForPlayer(playerName)
+    GreyHandling.db.initializePlayer(playerName)
+    return GreyHandling.data.items[playerName]["bagSpace"]
+end
+
+function GreyHandling.db.removePlayer(playerName)
+    GreyHandling.data.items[playerName] = nil
+end
+
 function GreyHandling.db.setItemForPlayer(playerName, itemLink, vendorPrice, itemStackCount, number, confidence)
     -- print("In GreyHandling.db.addItemForPlayer :", playerName, itemLink, vendorPrice, itemStackCount, number)
     confidence = confidence or 0

@@ -27,7 +27,6 @@ while not C_ChatInfo.RegisterAddonMessagePrefix(GreyHandling.NAME) and numberOfT
   print(format("%s : Failed to create communication channel (%s))", GreyHandling.NAME, numberOfTries))
   numberOfTries = numberOfTries + 1
 end
--- C_ChatInfo.RegisterAddonMessagePrefix(GreyHandling.ADDON_CHAT_VERSION)
 
 -- localization helpers
 -- returns the L array with meta suitable for
