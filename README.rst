@@ -8,7 +8,10 @@ grey-handling
 
 This addon aims to **make decisions about your objects easier when you have to
 throw them or give them away**. It helps you know what are your cheapest objects
-faster and what trade your teammates would likely accept.
+faster and what trade your teammates would likely accept. If you're in a group of person
+that also have GreyHandling and Scrap, it will **permit to stack your item optimally by sharing
+information with your teamamates automatically**. Something can be junk for you and not for
+someone else for example.
 
 What does it do?
 ----------------
@@ -20,12 +23,14 @@ When you launch by hitting **left CTRL while holding SHIFT** :
 - If you have **Scrap** installed, we search in your junk list, if not, only in your grey items.
 - If your bags are full **pick the worst item** (left click to throw or give)
 - If there isn't a worst item **make your two worst items glow in bag**
-- If one ore more **mutually beneficial trades** exist, suggest the fairest one. You need to be grouped with a teammate to see what they're looting.
+- If you saw what your teammate looted items and one ore more **mutually beneficial trades** exist, suggest the fairest one.
+- If someone has GreyHandling in your group : **exchange exact information about your junk items** in order to offer better exchange suggestion.
 
 The two worst items are the cheapest at the moment and the cheapest once fully
 stacked. A mutually beneficial trade is an exchange that permits to free one bag
 space for everyone without throwing anything by keeping one kind of stackable
-grey instead of two.
+grey instead of two. What is junk for someone might not be junk for someone else
+if you use Scrap junk list.
 
 
 Compatibility with other bags addons
@@ -56,7 +61,6 @@ For example, if you have:
 * 5 rocks worth 5*10 coppers = 50 coppers
 * 1 tough jerky worth 1 copper
 
-
 The muddy cape can't stack and is your cheapest grey item. If you activate the
 addon, it pick the cape up and **you just have to left click to get rid of the cape**
 (or right click to cancel the pick up).
@@ -83,3 +87,10 @@ The addon will suggest 10 coppers, but you could give more because you would
 have to throw at least 20 coppers if Alice refuses your offer. The addon does
 not suggest that Alice give you her skin the trade would not be very fair for
 her but you could compensate more.
+
+And if Alice also has GreyHandling, then she will share information with you when activating
+the addon and vice versa:
+
+So your GreyHandling could knows that Alice had 19 tough jerky before you grouped, or that for Alice,
+heavy leather is junk that she sell to NPC but for you it's a valuable crafting material. So it will
+suggest more and better exchanges.
