@@ -32,6 +32,25 @@ function GreyHandling.db.setItemForPlayer(playerName, itemLink, vendorPrice, ite
     GreyHandling.db.setItemInfoForPlayer(playerName, itemLink, "confidence", confidence)
 end
 
+function GreyHandling.db.removePlayerThatLeft(playerNames)
+	for existingPlayerName, items in pairs(GreyHandling.data.items) do
+        local shouldBeRemoved = true
+        for playerName, _ in pairs(playerNames) do
+            playerName = GreyHandling.db.uniformizePlayerName(playerName)
+            if playerName == existingPlayerName then
+                -- print(playerName, "exists and should not be removed.")
+                shouldBeRemoved = false
+            end
+        end
+        if shouldBeRemoved then
+            if GreyHandlingIsVerbose then
+                print(format("%s: Forgetting about %s's bag.", GreyHandling.NAME, existingPlayerName))
+            end
+            GreyHandling.data.items[existingPlayerName] = nil
+        end
+    end
+end
+
 function GreyHandling.db.addItemForPlayer(playerName, itemLink, vendorPrice, itemStackCount, number, confidence)
     confidence = confidence or 0
     if not GreyHandling.db.playerItemInitialized(playerName, itemLink) then

@@ -45,6 +45,16 @@ end
 GreyHandling.chat_frame:RegisterEvent("CHAT_MSG_ADDON")
 GreyHandling.chat_frame:SetScript("OnEvent", GreyHandling.chat_frame.OnChat)
 
+function GreyHandling.member_leave_frame:OnLeave(event, addon,  text, channel, sender, target, zoneChannelID, localID, name, instanceID)
+	local playerNames = {}
+	for raidIndex = 1, GetNumGroupMembers() do
+		local name = GetRaidRosterInfo(raidIndex)
+		playerNames[name] = true
+	end
+	GreyHandling.db.removePlayerThatLeft(playerNames)
+end
+GreyHandling.member_leave_frame:RegisterEvent("GROUP_LEFT")
+GreyHandling.member_leave_frame:SetScript("OnEvent", GreyHandling.member_leave_frame.OnLeave)
 
 
 
