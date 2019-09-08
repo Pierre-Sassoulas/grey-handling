@@ -8,15 +8,17 @@ function GreyHandling.db.uniformizePlayerName(playerName)
 	return playerName
 end
 
-
-function GreyHandling.db.playerItemInitialized(playerName, itemLink)
-	playerName = GreyHandling.db.uniformizePlayerName(playerName)
-    return GreyHandling.data.items[playerName] and GreyHandling.data.items[playerName][itemLink]
+function GreyHandling.db.setItemInfoForPlayer(playerName, itemLink, infoName, value)
+    local playerName = GreyHandling.db.initializePlayer(playerName)
+    GreyHandling.db.initializeItem(playerName, itemLink)
+    GreyHandling.data.items[playerName][itemLink][infoName] = value
 end
 
 function GreyHandling.functions.playerHasItem(playerName, itemLink)
 	playerName = GreyHandling.db.uniformizePlayerName(playerName)
-    return GreyHandling.db.playerItemInitialized(playerName, itemLink) and GreyHandling.db.getItemInfoForPlayer(playerName, itemLink, "number") > 0
+    return GreyHandling.data.items[playerName] and
+            GreyHandling.data.items[playerName][itemLink] and
+            GreyHandling.db.getItemInfoForPlayer(playerName, itemLink, "number") > 0
 end
 
 function GreyHandling.db.initializePlayer(playerName, bagSpace)
@@ -24,16 +26,21 @@ function GreyHandling.db.initializePlayer(playerName, bagSpace)
 	if not GreyHandling.data.items[playerName] then
 		bagSpace = bagSpace or 181 -- 36*5 + 1
 		GreyHandling.data.items[playerName] = {bagSpace=bagSpace}
-	end
+    end
+    return playerName
 end
 
-function GreyHandling.db.initializeItem(playerName, itemLink, vendorPrice, itemStackCount)
+function GreyHandling.db.initializeItem(playerName, itemLink, vendorPrice, itemStackCount, number, confidence)
 	-- print(playerName, itemLink, vendorPrice, itemStackCount)
-	playerName = GreyHandling.db.uniformizePlayerName(playerName)
-	GreyHandling.db.initializePlayer(playerName)
+	local playerName = GreyHandling.db.initializePlayer(playerName)
+    vendorPrice = vendorPrice or 0
+    itemStackCount = itemStackCount or 0
+    number = number or 0
+    confidence = confidence or 0
 	if not GreyHandling.data.items[playerName][itemLink] then
 		GreyHandling.data.items[playerName][itemLink] = {
-            itemStackCount=itemStackCount, vendorPrice = vendorPrice, number=0, confidence=0
+            itemStackCount=itemStackCount, vendorPrice = vendorPrice, number=number, confidence=confidence
         }
-	end
+    end
+    return playerName
 end

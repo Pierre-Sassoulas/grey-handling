@@ -2,11 +2,8 @@ local A, GreyHandling = ...
 
 
 function GreyHandling.db.getItemInfoForPlayer(playerName, itemLink, infoName)
+    playerName = GreyHandling.db.initializeItem(playerName, itemLink)
     return GreyHandling.data.items[playerName][itemLink][infoName]
-end
-
-function GreyHandling.db.setItemInfoForPlayer(playerName, itemLink, infoName, value)
-    GreyHandling.data.items[playerName][itemLink][infoName] = value
 end
 
 function GreyHandling.db.setRemainingBagSpaceForPlayer(playerName, bagSpace)
@@ -14,20 +11,19 @@ function GreyHandling.db.setRemainingBagSpaceForPlayer(playerName, bagSpace)
 end
 
 function GreyHandling.db.getRemainingBagSpaceForPlayer(playerName)
-    GreyHandling.db.initializePlayer(playerName)
+    local playerName = GreyHandling.db.initializePlayer(playerName)
     return GreyHandling.data.items[playerName]["bagSpace"]
 end
 
 function GreyHandling.db.removePlayer(playerName)
+    local playerName = GreyHandling.db.uniformizePlayerName(playerName)
     GreyHandling.data.items[playerName] = nil
 end
 
 function GreyHandling.db.setItemForPlayer(playerName, itemLink, vendorPrice, itemStackCount, number, confidence)
     -- print("In GreyHandling.db.addItemForPlayer :", playerName, itemLink, vendorPrice, itemStackCount, number)
     confidence = confidence or 0
-    if not GreyHandling.db.playerItemInitialized(playerName, itemLink) then
-        GreyHandling.db.initializeItem(playerName, itemLink, vendorPrice, itemStackCount)
-    end
+    GreyHandling.db.initializeItem(playerName, itemLink, vendorPrice, itemStackCount, number, confidence)
     GreyHandling.db.setItemInfoForPlayer(playerName, itemLink, "number", number)
     GreyHandling.db.setItemInfoForPlayer(playerName, itemLink, "confidence", confidence)
 end
@@ -53,9 +49,7 @@ end
 
 function GreyHandling.db.addItemForPlayer(playerName, itemLink, vendorPrice, itemStackCount, number, confidence)
     confidence = confidence or 0
-    if not GreyHandling.db.playerItemInitialized(playerName, itemLink) then
-        GreyHandling.db.initializeItem(playerName, itemLink, vendorPrice, itemStackCount)
-    end
+    GreyHandling.db.initializeItem(playerName, itemLink, vendorPrice, itemStackCount)
     local old_number = GreyHandling.db.getItemInfoForPlayer(playerName, itemLink, "number")
     GreyHandling.db.setItemInfoForPlayer(playerName, itemLink, "number", old_number + number)
     GreyHandling.db.setItemInfoForPlayer(playerName, itemLink, "confidence", confidence)
