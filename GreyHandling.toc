@@ -1,6 +1,6 @@
 ## Interface: 11302
 ## X-Min-Interface: 11302
-## Version: 0.8.1c
+## Version: 0.8.2c
 ## Title: Grey Handling
 
 ## Notes: Helps you get rid of the right grey objects when your bags are full

@@ -11,11 +11,16 @@ function GreyHandling.frame:OnEvent(event, key, state)
             GreyHandling.allTests()
             print("All tests passed successfully.")
 		end
-		OpenAllBags()
+
 		GreyHandling.functions.ExchangeMyJunkPlease()
 		local foundSomething = false
-		foundSomething = GreyHandling.functions.HandleCheapestJunk(foundSomething)
-		foundSomething = GreyHandling.functions.HandleMutuallyBeneficialTrades(foundSomething)
+		OpenAllBags()
+		if GetNumGroupMembers() > 0 then -- is in group
+			foundSomething = GreyHandling.functions.HandleMutuallyBeneficialTrades(foundSomething)
+		end
+		if not foundSomething then
+			foundSomething = GreyHandling.functions.HandleCheapestJunk(foundSomething)
+		end
 		if not foundSomething then
 			CloseAllBags()
 		end
