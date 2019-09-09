@@ -1,6 +1,6 @@
 ## Interface: 11302
 ## X-Min-Interface: 11302
-## Version: 0.8.3c
+## Version: 0.8.4c
 ## Title: Grey Handling
 
 ## Notes: Helps you get rid of the right grey objects when your bags are full
@@ -22,6 +22,8 @@
 ## SavedVariables: GreyHandlingShowPrice
 ## SavedVariables: GreyHandlingShowAPIFail
 ## SavedVariables: GreyHandlingUseScrapJunkList
+## SavedVariables: GreyHandlingSuggestTrade
+## SavedVariables: GreyHandlingShowCheapeastAlways
 
 constants.lua
 db\initDatabase.lua
