@@ -43,4 +43,3 @@ HandleMutuallyBeneficialTrades.lua
 GreyHandlingOptions.lua
 tests\Tests.lua
 GreyHandling.lua
-
