@@ -15,10 +15,10 @@ function GreyHandling.frame:OnEvent(event, key, state)
 		GreyHandling.functions.ExchangeMyJunkPlease()
 		local foundSomething = false
 		OpenAllBags()
-		if GetNumGroupMembers() > 0 then -- is in group
+		if GreyHandlingSuggestTrade and GetNumGroupMembers() > 0 then -- is in group
 			foundSomething = GreyHandling.functions.HandleMutuallyBeneficialTrades(foundSomething)
 		end
-		if not foundSomething then
+		if GreyHandlingShowCheapeastAlways or not foundSomething then
 			foundSomething = GreyHandling.functions.HandleCheapestJunk(foundSomething)
 		end
 		if not foundSomething then
