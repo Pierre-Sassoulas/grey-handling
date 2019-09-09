@@ -22,6 +22,8 @@ GreyHandling.options.DEFAULT_VERBOSE = true
 GreyHandling.options.DEFAULT_SHOW_PRICE = true
 GreyHandling.options.DEFAULT_SHOW_API_FAIL = false
 GreyHandling.options.DEFAULT_USE_SCRAP_JUNK_LIST = true
+GreyHandling.options.DEFAULT_SUGGEST_TRADE = true
+GreyHandling.options.DEFAULT_SHOW_CHEAPEST_ALWAYS = true
 
 local numberOfTries = 0
 while not C_ChatInfo.RegisterAddonMessagePrefix(GreyHandling.NAME) and numberOfTries < 10 do
