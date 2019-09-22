@@ -27,9 +27,15 @@ GreyHandling.options.DEFAULT_SHOW_CHEAPEST_ALWAYS = true
 
 local numberOfTries = 0
 while not C_ChatInfo.RegisterAddonMessagePrefix(GreyHandling.NAME) and numberOfTries < 10 do
-  print(format("%s : Failed to create communication channel (%s))", GreyHandling.NAME, numberOfTries))
+  print(format("Failed to create communication channel (%s))", numberOfTries))
   numberOfTries = numberOfTries + 1
 end
+
+function GreyHandling.Print(str)
+	DEFAULT_CHAT_FRAME:AddMessage("|cff33ff99"..tostring(GreyHandling.NAME).."|r: "..str)
+end
+
+setprinthandler(GreyHandling.Print)
 
 -- localization helpers
 -- returns the L array with meta suitable for

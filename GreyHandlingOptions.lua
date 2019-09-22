@@ -62,7 +62,7 @@ function GreyHandling.options.display()
 	if GreyHandlingShowPrice then
 		price = "I show item's prices."
 	end
-	print(format("%s : %s %s %s And %s", GreyHandling.NAME, scrap, talkative, verbose, price))
+	print(format("%s %s %s And %s", scrap, talkative, verbose, price))
 end
 
 function GreyHandling.options.panel.default()

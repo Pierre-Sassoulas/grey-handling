@@ -26,7 +26,7 @@ function GreyHandling.functions.HandleCheapestJunk(foundSomething)
 			if IsAddOnLoaded("Inventorian") then
 				if GreyHandlingIsVerbose then
 					if GreyHandlingShowAPIFail then
-						print(format("%s: For Inventorian glows in bag feature is not yet supported.", GreyHandling.NAME))
+						print(format("For Inventorian glows in bag feature is not yet supported."))
 					end
 				end
 			else
@@ -35,7 +35,7 @@ function GreyHandling.functions.HandleCheapestJunk(foundSomething)
 			end
 		end
 	else
-		print(format("%s: No junk found in bag.", GreyHandling.NAME))
+		print("No junk found in bag.")
 	end
 	return foundSomething
 end

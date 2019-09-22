@@ -23,7 +23,7 @@ function GreyHandling.functions.HandleMutuallyBeneficialTrades(foundSomething)
 		print(GreyHandling.functions.DisplayMutuallyBeneficialTradeInChat(fair))
 		-- SendChatMessage(msg)
 	else
-		print(format("%s: No mutually beneficial trade found.", GreyHandling.NAME))
+		print("No mutually beneficial trade found.")
 	end
 	return foundSomething
 end

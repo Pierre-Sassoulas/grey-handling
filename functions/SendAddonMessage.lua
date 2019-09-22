@@ -47,8 +47,10 @@ function GreyHandling.functions.SomeoneAskForExchange(text, channel, sender, tar
 		elseif itemid == "v" then
 			local playerVersion = GetAddOnMetadata(GreyHandling.NAME, "VERSION")
 			if itemCount>playerVersion then
-				print(format("%s: %s has %s of %s, it means you could upgrade your own version.", GreyHandling.NAME,
-                    sender, itemCount, GreyHandling.NAME))
+				print(
+					format("%s has %s of %s, it means you could upgrade your own version.", sender, itemCount,
+					GreyHandling.NAME)
+				)
 			end
 		else
 			local itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount,
@@ -57,7 +59,7 @@ function GreyHandling.functions.SomeoneAskForExchange(text, channel, sender, tar
 			GreyHandling.db.setItemForPlayer(sender, itemLink, vendorPrice, itemStackCount, itemCount, 1)
 		end
 	end
-	print(format("%s: %s sent you their current list of exchangeable items.", GreyHandling.NAME, sender))
+	print(format("%s sent you their current list of exchangeable items.", sender))
 	--if GreyHandlingIsVerbose and target=="WHISPER" then
 	--print(
 --		format("%s: %s has %s bag spaces available and can also stack %son top of that.",

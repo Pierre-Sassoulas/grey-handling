@@ -14,7 +14,7 @@ function GreyHandling.functions.DisplayCheapestInChat(text, item)
 				item.itemStackCount
 			)
 		end
-		print(format("%s: %s %s", GreyHandling.NAME, text, details))
-		print(format("%s: Worth %s", GreyHandling.NAME, GetCoinTextureString(item.currentPrice)))
+		print(format("%s %s", text, details))
+		print(format("Worth %s", GetCoinTextureString(item.currentPrice)))
 	end
 end
