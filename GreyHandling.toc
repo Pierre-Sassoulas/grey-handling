@@ -34,7 +34,7 @@ functions\getItemIdFromItemLink.lua
 functions\SetBagItemGlow.lua
 functions\DisplayCheapestInChat.lua
 functions\DisplayMutuallyBeneficialTradeInChat.lua
-functions\GetBestExchange.lua
+functions\GetBestExchanges.lua
 functions\GetCheapeastJunk.lua
 functions\SetGameTooltipPrice.lua
 functions\handleChatMessageLoot.lua

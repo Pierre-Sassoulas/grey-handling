@@ -15,8 +15,9 @@ function GreyHandling.functions.CreateExchange(itemLink, ourCount, theirCount, v
 	}
 end
 
-function GreyHandling.functions.GetBestExchange()
+function GreyHandling.functions.GetBestExchanges()
 	local exchanges = {}
+	local best_exchanges = {}
 	for player_id, items in pairs(GreyHandling.data.items) do
 		for itemLink, itemInformation  in pairs(items) do
 			local ourCount = GetItemCount(itemLink)
@@ -33,8 +34,8 @@ function GreyHandling.functions.GetBestExchange()
 			end
 		end
 	end
-	--local egoist = {itemGiven=nil, itemTaken=nil, ourGain=0, theirGain=0, totalGain=0, fairness=nil, playerId=nil}
-	--local altruist = {itemGiven=nil, itemTaken=nil, ourGain=0, theirGain=0, totalGain=0, fairness=nil, playerId=nil}
+	local egoist = {itemGiven=nil, itemTaken=nil, ourGain=0, theirGain=0, totalGain=0, fairness=nil, playerId=nil }
+	local altruist = {itemGiven=nil, itemTaken=nil, ourGain=0, theirGain=0, totalGain=0, fairness=nil, playerId=nil }
 	local fair = {itemGiven=nil, itemTaken=nil, ourGain=0, theirGain=0, totalGain=0, fairness=nil, playerId=nil}
 	for player_id, item_link_values in pairs(exchanges) do
 		for itemGiven, givenValues in pairs(item_link_values) do
@@ -47,33 +48,25 @@ function GreyHandling.functions.GetBestExchange()
 					local theirGain = given - taken - takenValues.lossCount * takenValues.vendorPrice
 					local totalGain = theirGain + ourGain
 					local fairness = (theirGain - ourGain) * (theirGain - ourGain)
-	--				if ourGain > egoist.ourGain then
-	--					egoist = {itemGiven=itemGiven, itemTaken=itemTaken, ourGain=ourGain, theirGain=theirGain,
-	--						totalGain=totalGain, fairness=fairness, playerId=player_id}
-	--				end
-	--				if theirGain > altruist.theirGain then
-	--					altruist = {itemGiven=itemGiven, itemTaken=itemTaken, ourGain=ourGain, theirGain=theirGain,
-	--						totalGain=totalGain, fairness=fairness, playerId=player_id}
-	--				end
+					if ourGain > egoist.ourGain then
+						egoist = {itemGiven=itemGiven, itemTaken=itemTaken, ourGain=ourGain, theirGain=theirGain,ourCount=givenValues.ourCount,
+								theirCount=takenValues.theirCount, totalGain=totalGain, fairness=fairness, playerId=player_id}
+					end
+					if theirGain > altruist.theirGain then
+						altruist = {itemGiven=itemGiven, itemTaken=itemTaken, ourGain=ourGain, theirGain=theirGain,ourCount=givenValues.ourCount,
+								theirCount=takenValues.theirCount, totalGain=totalGain, fairness=fairness, playerId=player_id}
+					end
 					if fair.fairness==nil or fairness < fair.fairness then
 						fair = {itemGiven=itemGiven, itemTaken=itemTaken, ourGain=ourGain, theirGain=theirGain,ourCount=givenValues.ourCount,
-								theirCount=takenValues.theirCount,
-							totalGain=totalGain, fairness=fairness, playerId=player_id}
+								theirCount=takenValues.theirCount, totalGain=totalGain, fairness=fairness, playerId=player_id}
 					end
-					--print(GreyHandling.functions.DisplayMutuallyBeneficialTradeInChat(
---							{itemGiven=itemGiven, itemTaken=itemTaken, ourGain=ourGain, theirGain=theirGain, ourCount=givenValues.ourCount,
---								theirCount=takenValues.theirCount,
-							--totalGain=totalGain, fairness=fairness, playerId=player_id }
-						--)
-					--)
 				end
 			end
 
 		end
 	end
-	--GreyHandling.functions.DisplayMutuallyBeneficialTradeInChat("Egoist trade:", egoist)
-	--GreyHandling.functions.DisplayMutuallyBeneficialTradeInChat("Altruist trade:", altruist)
-	--GreyHandling.functions.DisplayMutuallyBeneficialTradeInChat("Fairer trade:", fair)
-	--return egoist, altruist, fair
-	return fair
+	table.insert(best_exchanges, egoist)
+	table.insert(best_exchanges, fair)
+	table.insert(best_exchanges, altruist)
+	return best_exchanges
 end

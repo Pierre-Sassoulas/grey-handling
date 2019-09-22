@@ -12,17 +12,21 @@ function GreyHandling.functions.GetBagAndSlot(itemLink)
 end
 
 function GreyHandling.functions.HandleMutuallyBeneficialTrades(foundSomething)
-	--local egoist, altruist, fair = GreyHandling.functions.GetBestExchange()
-	local fair = GreyHandling.functions.GetBestExchange()
-	if fair.itemGiven and fair.itemTaken then
-		foundSomething = true
-		local bag, slot = GreyHandling.functions.GetBagAndSlot(fair.itemGiven)
-		if bag and slot then
-			GreyHandling.functions.SetBagItemGlow(bag, slot, "bags-glow-green")
+	local bestExchanges = GreyHandling.functions.GetBestExchanges()
+	local foundExchange = nil
+	for i, exchange in pairs(bestExchanges) do
+		if exchange.itemGiven and exchange.itemTaken then
+			foundExchange = true
+			foundSomething = true
+			local bag, slot = GreyHandling.functions.GetBagAndSlot(exchange.itemGiven)
+			if bag and slot then
+				GreyHandling.functions.SetBagItemGlow(bag, slot, "bags-glow-green")
+			end
+			print(GreyHandling.functions.DisplayMutuallyBeneficialTradeInChat(exchange))
+			-- SendChatMessage(msg)
 		end
-		print(GreyHandling.functions.DisplayMutuallyBeneficialTradeInChat(fair))
-		-- SendChatMessage(msg)
-	else
+	end
+	if not foundExchange then
 		print("No mutually beneficial trade found.")
 	end
 	return foundSomething
