@@ -3,12 +3,14 @@ local A, GreyHandling = ...
 function GreyHandling.functions.DisplayMutuallyBeneficialTradeInChat(exchange)
 	local msg = ""
 	if exchange.ourGain > 0 then
-		msg = format("%sYou should give them %s", msg, GetCoinTextureString(exchange.ourGain))
+		msg = format("%sGive %s", msg, GetCoinTextureString(exchange.ourGain))
+	elseif exchange.ourGain == 0 then
+		msg = "It's a fair trade"
 	else
-		msg = format("%sYou could ask for %s", msg, GetCoinTextureString(-exchange.ourGain))
+		msg = format("%sAsk for %s", msg, GetCoinTextureString(-exchange.ourGain))
 	end
 	return format(
-		"Exchange your %s*%s for %s's %s*%s : %s", exchange.itemGiven, exchange.ourCount,
-		exchange.playerId, exchange.itemTaken, exchange.theirCount, msg
+		"%s : %s*%s for their %s*%s : %s", exchange.playerId, exchange.itemGiven, exchange.ourCount,
+		exchange.itemTaken, exchange.theirCount, msg
 	)
 end
