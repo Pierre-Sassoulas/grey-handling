@@ -34,15 +34,9 @@ function GreyHandling.functions.ToolTipHook(t)
             if count <= 1 then
                 count = 1
             end
-            if count ~= itemStackCount then
-                if GreyHandling.IS_CLASSIC then
-                    -- We don't have the real value in classic so we create everything on two lines
-                    SetTooltipMoney(t, count*itemSellPrice, nil, format("%s (%s*%s) :", SELL_PRICE, count, GetCoinTextureString(itemSellPrice)))
-                elseif count ~= 1 then
-                    -- Changing the wow tooltip directly is hard because we'd need to recover the real value
-                    -- So three lines it is
-                    SetTooltipMoney(t, itemSellPrice, nil, format("%s (1) :", SELL_PRICE))
-                end
+            SetTooltipMoney(t, itemSellPrice, nil, format("%s (1) :", SELL_PRICE))
+            if count ~= itemStackCount and count ~= 1 and GreyHandling.IS_CLASSIC then
+                SetTooltipMoney(t, count*itemSellPrice, nil, format("%s (%s) :", SELL_PRICE, count))
             end
             SetTooltipMoney(t, itemStackCount * itemSellPrice, nil, format("%s (%s) :", SELL_PRICE, itemStackCount))
         else
