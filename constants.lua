@@ -25,6 +25,9 @@ GreyHandling.options.DEFAULT_SHOW_API_FAIL = false
 GreyHandling.options.DEFAULT_USE_SCRAP_JUNK_LIST = true
 GreyHandling.options.DEFAULT_SUGGEST_TRADE = true
 GreyHandling.options.DEFAULT_SHOW_CHEAPEST_ALWAYS = true
+GreyHandling.redPrint = "ff4d4d"
+GreyHandling.greyPrint = "a0a0a0"
+GreyHandling.bluePrint = "6699ff"
 
 local numberOfTries = 0
 while not C_ChatInfo.RegisterAddonMessagePrefix(GreyHandling.NAME) and numberOfTries < 10 do
@@ -33,8 +36,8 @@ while not C_ChatInfo.RegisterAddonMessagePrefix(GreyHandling.NAME) and numberOfT
 end
 
 function GreyHandling.Print(str)
-    -- c|ff is a wow keyword then a0a0a0 is GREY in hex
-	DEFAULT_CHAT_FRAME:AddMessage("|cffa0a0a0"..tostring(GreyHandling.SHORT_NAME).."|r: "..str)
+    -- c|ff is a wow keyword
+	DEFAULT_CHAT_FRAME:AddMessage("|cff"..GreyHandling.greyPrint..tostring(GreyHandling.SHORT_NAME).."|r: "..str)
 end
 
 setprinthandler(GreyHandling.Print)

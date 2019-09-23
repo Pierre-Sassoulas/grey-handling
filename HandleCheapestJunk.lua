@@ -35,7 +35,7 @@ function GreyHandling.functions.HandleCheapestJunk(foundSomething)
 			end
 		end
 	else
-		print("No junk found in bag.")
+		print("|cff"..GreyHandling.redPrint.."No junk found in bag.".."|r")
 	end
 	return foundSomething
 end

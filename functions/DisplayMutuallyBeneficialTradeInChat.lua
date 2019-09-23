@@ -6,7 +6,7 @@ function GreyHandling.functions.DisplayMutuallyBeneficialTradeInChat(exchange)
 	if exchange.ourGain > 0 then
 		msg = format("%s and %s", msg, GetCoinTextureString(exchange.ourGain))
 	end
-	msg = msg.." for |cFF6699ff"..exchange.playerId.."|r's "..exchange.itemTaken..multiplicator..exchange.theirCount
+	msg = msg.." for |cff"..GreyHandling.bluePrint..exchange.playerId.."|r's "..exchange.itemTaken..multiplicator..exchange.theirCount
 	if exchange.ourGain < 0 then
 		msg = format("%s and %s", msg, GetCoinTextureString(-exchange.ourGain))
 	end

@@ -27,7 +27,7 @@ function GreyHandling.functions.HandleMutuallyBeneficialTrades(foundSomething)
 		end
 	end
 	if not foundExchange then
-		print("No mutually beneficial trade found.")
+		print("|cff"..GreyHandling.redPrint.."No mutually beneficial trade found.".."|r")
 	end
 	return foundSomething
 end
