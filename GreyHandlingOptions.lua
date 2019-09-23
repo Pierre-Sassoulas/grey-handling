@@ -124,7 +124,7 @@ function GreyHandling.options.frame:OnEvent(event, key)
 			change_value_suggest_trade,  GreyHandlingSuggestTrade
 		)
 		local CheckboxShowAPIFail = CreateCheckbox(
-			"Display the cheapest items even if there is a mutually beneficial trade", "",
+			"Display and pick the cheapest items even if there is a mutually beneficial trade", "",
 			change_value_show_cheapeast_always,  GreyHandlingShowCheapestAlways
 		)
 		local CheckboxShowPrice = CreateCheckbox(
