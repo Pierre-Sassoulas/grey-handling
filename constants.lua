@@ -10,6 +10,7 @@ GreyHandling.db = {}
 GreyHandling.SELL_PRICE_TEXT = format("%s:", SELL_PRICE)
 GreyHandling.IS_CLASSIC = true
 GreyHandling.NAME = "GreyHandling"
+GreyHandling.SHORT_NAME = "GH"
 GreyHandling.DISPLAY_NAME = "Grey Handling"
 GreyHandling.MAX_CHAR_IN_CHAT_LOOT_MESSAGE = 255
 GreyHandling.DEVELOPMENT_VERSION = false -- /console scriptErrors 1
@@ -33,7 +34,7 @@ end
 
 function GreyHandling.Print(str)
     -- c|ff is a wow keyword then a0a0a0 is GREY in hex
-	DEFAULT_CHAT_FRAME:AddMessage("|cffa0a0a0"..tostring(GreyHandling.NAME).."|r: "..str)
+	DEFAULT_CHAT_FRAME:AddMessage("|cffa0a0a0"..tostring(GreyHandling.SHORT_NAME).."|r: "..str)
 end
 
 setprinthandler(GreyHandling.Print)
