@@ -11,7 +11,7 @@ throw them or give them away**. It helps you know what are your cheapest objects
 faster and what trade your teammates would likely accept. If you're in a group of person
 that also have GreyHandling and Scrap, it will **permit to stack your item optimally by sharing
 information with your teamamates automatically**. Something can be junk for you and not for
-someone else for example.
+someone else.
 
 What does it do?
 ----------------
