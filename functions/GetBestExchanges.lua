@@ -65,8 +65,8 @@ function GreyHandling.functions.GetBestExchanges()
 
 		end
 	end
-	table.insert(best_exchanges, egoist)
+	--table.insert(best_exchanges, egoist)
 	table.insert(best_exchanges, fair)
-	table.insert(best_exchanges, altruist)
+	--table.insert(best_exchanges, altruist)
 	return best_exchanges
 end
