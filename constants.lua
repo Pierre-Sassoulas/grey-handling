@@ -32,7 +32,8 @@ while not C_ChatInfo.RegisterAddonMessagePrefix(GreyHandling.NAME) and numberOfT
 end
 
 function GreyHandling.Print(str)
-	DEFAULT_CHAT_FRAME:AddMessage("|cff33ff99"..tostring(GreyHandling.NAME).."|r: "..str)
+    -- c|ff is a wow keyword then a0a0a0 is GREY in hex
+	DEFAULT_CHAT_FRAME:AddMessage("|cffa0a0a0"..tostring(GreyHandling.NAME).."|r: "..str)
 end
 
 setprinthandler(GreyHandling.Print)
