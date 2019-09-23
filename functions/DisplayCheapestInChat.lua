@@ -8,13 +8,12 @@ function GreyHandling.functions.DisplayCheapestInChat(text, item)
 		elseif item.potentialPrice == item.currentPrice then
 			details = format("A full stack of %s", GetContainerItemLink(item.bag, item.slot))
 		else
-			details = format("%s*%s (max %s)",
+			details = format("%s %s/%s",
 				GetContainerItemLink(item.bag, item.slot),
 				item.itemCount,
 				item.itemStackCount
 			)
 		end
-		print(format("%s %s", text, details))
-		print(format("Worth %s", GetCoinTextureString(item.currentPrice)))
+		print(format("%s %s (%s)", text, details, GetCoinTextureString(item.currentPrice)))
 	end
 end
