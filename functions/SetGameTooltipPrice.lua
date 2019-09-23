@@ -45,7 +45,9 @@ function GreyHandling.functions.ToolTipHook(t)
                 -- Ie stuff is worth 18 coppers at 60/60, but 6 copper at 45/60
                 -- bagID, bagSlot = from t ?
                 -- local currentDurability, maximumDurability = GetContainerItemDurability(bagID, bagSlot)
-                SetTooltipMoney(t, itemSellPrice, nil, format("%s %s", SELL_PRICE, "(100% durability)"))
+                if GreyHandling.IS_CLASSIC then
+                    SetTooltipMoney(t, itemSellPrice, nil, format("%s %s", SELL_PRICE, "(100% durability)"))
+                end
             else
                 SetTooltipMoney(t, itemSellPrice, nil, format("%s", SELL_PRICE))
             end
