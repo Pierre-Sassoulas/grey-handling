@@ -25,6 +25,11 @@ function GreyHandling.testMutuallyBeneficialExchange()
     GreyHandling.db.addItemForPlayer("TestName-TestServer", "Dent plate émoussée", 14699, 100, 12)
     GreyHandling.db.addItemForPlayer("TestName-TestServer", "Incisive dentelée", 12685, 20, 5)
     GreyHandling.db.addItemForPlayer("TestName-TestServer", "Fourrure miteuse", 2932, 20, 1)
+    GreyHandling.db.addItemForPlayer("OtherName-TestServer", "Cuir épais", 300, 20, 18)
+    GreyHandling.db.addItemForPlayer("TestName-TestServer", "Cuir épais", 300, 20, 1)
+    GreyHandling.db.addItemForPlayer("TestName-TestServer", "Cuir lourd", 150, 20, 15)
+    GreyHandling.db.addItemForPlayer("TestName-TestServer", "Bec acéré", 804, 5, 3)
+    GreyHandling.db.addItemForPlayer("OtherName-TestServer", "Serre de busard", 71, 5, 9)
 end
 
 function GreyHandling.testHandleChatLootMessageFrench()
