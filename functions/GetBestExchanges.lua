@@ -24,7 +24,7 @@ function GreyHandling.functions.GetBestExchanges()
 			local itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount,
 				itemEquipLoc, itemIcon, vendorPrice, itemClassID, itemSubClassID, bindType, expacID, itemSetID,
 				isCraftingReagent = GetItemInfo(itemLink)
-			if ourCount ~= 0 then
+			if ourCount ~= 0 and ourCount%itemInformation.itemStackCount ~= 0 then
 				if exchanges[player_id] == nil then
 					exchanges[player_id] = {}
 				end
