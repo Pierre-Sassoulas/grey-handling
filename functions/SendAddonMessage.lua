@@ -40,9 +40,10 @@ function GreyHandling.functions.SomeoneAskForExchange(text, channel, sender, tar
 	end
 	-- print(text, "-", channel, "-", sender, "-",  target, "-", zoneChannelID, "-", localID,"-",  name, "-", instanceID)
 	local freeStack = ""
+	GreyHandling.data.items[sender] = nil
 	for itemid, itemCount in string.gmatch(text, "(%w+)-(%w+)") do
 		if itemid == "b" then
-			GreyHandling.db.setRemainingBagSpaceForPlayer(sender, itemCount)
+			GreyHandling.db.initializePlayer(sender, itemCount)
 			-- print(format("%s has %s bag spaces.", sender, GreyHandling.db.getRemainingBagSpaceForPlayer(sender)))
 		elseif itemid == "v" then
 			local playerVersion = GetAddOnMetadata(GreyHandling.NAME, "VERSION")
