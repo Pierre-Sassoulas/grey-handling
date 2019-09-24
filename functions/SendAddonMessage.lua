@@ -55,6 +55,11 @@ function GreyHandling.functions.SomeoneAskForExchange(text, channel, sender, tar
 		else
 			local itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount,
 			itemEquipLoc, itemIcon, vendorPrice = GetItemInfo(itemid)
+			if not itemLink then
+				-- We can have problem if the user do not have item in cache.
+				-- (Happens when the teammate had previous object we did not see)
+				break
+			end
 			freeStack = format("%s%s*%s, ", freeStack, itemLink, itemStackCount - itemCount%itemStackCount)
 			GreyHandling.db.setItemForPlayer(sender, itemLink, vendorPrice, itemStackCount, itemCount, 1)
 		end
