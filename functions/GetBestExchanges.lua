@@ -17,7 +17,7 @@ end
 
 function GreyHandling.functions.GetBestExchanges()
 	local exchanges = {}
-	local best_exchanges = {}
+	local bestExchanges = {}
 	for player_id, items in pairs(GreyHandling.data.items) do
 		for itemLink, itemInformation  in pairs(items) do
 			local ourCount = GetItemCount(itemLink)
@@ -34,41 +34,40 @@ function GreyHandling.functions.GetBestExchanges()
 			end
 		end
 	end
-	local egoist = {itemGiven=nil, itemTaken=nil, ourGain=0, theirGain=0, totalGain=0, fairness=nil, playerId=nil }
-	local altruist = {itemGiven=nil, itemTaken=nil, ourGain=0, theirGain=0, totalGain=0, fairness=nil, playerId=nil }
-	local fair = {itemGiven=nil, itemTaken=nil, ourGain=0, theirGain=0, totalGain=0, fairness=nil, playerId=nil}
+	local bestExchangeForCurrentPlayer = nil
 	for player_id, item_link_values in pairs(exchanges) do
+		if not bestExchangeForCurrentPlayer then
+			bestExchangeForCurrentPlayer = {
+				itemGiven=nil, itemTaken=nil, ourGain=nil, theirGain=nil, ourCount=nil, theirCount=nil,
+				greyHandlingGain=nil, fairness=nil, playerId=nil,
+			}
+		end
 		for itemGiven, givenValues in pairs(item_link_values) do
 			for itemTaken, takenValues in pairs(item_link_values) do
 				if itemGiven ~= itemTaken then
-					-- print(itemGiven.item, givenValues.ourCount, GetCoinTextureString(givenValues.vendorPrice), itemTaken.item, takenValues.theirCount, GetCoinTextureString(takenValues.vendorPrice))
+					-- print(itemGiven.item, givenValues.ourCount, GetCoinTextureString(givenValues.vendorPrice),
+					-- itemTaken.item, takenValues.theirCount, GetCoinTextureString(takenValues.vendorPrice))
 					local given =  givenValues.ourCount * givenValues.vendorPrice
 					local taken = takenValues.theirCount * takenValues.vendorPrice
 					local ourGain = taken - given - givenValues.lossCount * givenValues.vendorPrice
 					local theirGain = given - taken - takenValues.lossCount * takenValues.vendorPrice
-					local totalGain = theirGain + ourGain
+					local totalGain = given + taken
+					local potentialGain = givenValues.ourCount * givenValues.vendorPrice
+					local greyHandlingGain = totalGain + potentialGain
 					local fairness = (theirGain - ourGain) * (theirGain - ourGain)
 					local currentExchange =  {
 						itemGiven=itemGiven, itemTaken=itemTaken, ourGain=ourGain, theirGain=theirGain,
-						ourCount=givenValues.ourCount, theirCount=takenValues.theirCount, totalGain=totalGain,
+						ourCount=givenValues.ourCount, theirCount=takenValues.theirCount, greyHandlingGain=greyHandlingGain,
 						fairness=fairness, playerId=player_id
 					}
-					if ourGain > egoist.ourGain then
-						egoist = currentExchange
-					end
-					if theirGain > altruist.theirGain then
-						altruist = currentExchange
-					end
-					if fair.fairness==nil or fairness < fair.fairness then
-						fair = currentExchange
+					if not bestExchangeForCurrentPlayer.greyHandlingGain or greyHandlingGain > bestExchangeForCurrentPlayer.greyHandlingGain then
+						bestExchangeForCurrentPlayer = currentExchange
 					end
 				end
 			end
-
 		end
+		table.insert(bestExchanges, bestExchangeForCurrentPlayer)
+		bestExchangeForCurrentPlayer = nil
 	end
-	--table.insert(best_exchanges, egoist)
-	table.insert(best_exchanges, fair)
-	--table.insert(best_exchanges, altruist)
-	return best_exchanges
+	return bestExchanges
 end
