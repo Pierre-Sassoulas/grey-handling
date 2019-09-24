@@ -29,7 +29,8 @@ function GreyHandling.functions.GetBestExchanges()
 					exchanges[player_id] = {}
 				end
 				exchanges[player_id][itemLink] = GreyHandling.functions.CreateExchange(itemLink, ourCount,
-					itemInformation.number, itemInformation.vendorPrice, itemInformation.itemStackCount, itemInformation.confidence
+					itemInformation.number%itemInformation.itemStackCount, itemInformation.vendorPrice,
+					itemInformation.itemStackCount, itemInformation.confidence
 				)
 			end
 		end
