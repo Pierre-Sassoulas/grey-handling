@@ -29,24 +29,33 @@ function GreyHandling.functions.GetBestExchanges()
 					exchanges[player_id] = {}
 				end
 				exchanges[player_id][itemLink] = GreyHandling.functions.CreateExchange(itemLink, ourCount,
-					itemInformation.number, itemInformation.vendorPrice, itemInformation.itemStackCount
+					itemInformation.number, itemInformation.vendorPrice, itemInformation.itemStackCount, itemInformation.confidence
 				)
 			end
 		end
 	end
 	local bestExchangeForCurrentPlayer = nil
+	local hasGreyHandling = nil
 	for player_id, item_link_values in pairs(exchanges) do
 		if not bestExchangeForCurrentPlayer then
 			bestExchangeForCurrentPlayer = {
 				itemGiven=nil, itemTaken=nil, ourGain=nil, theirGain=nil, ourCount=nil, theirCount=nil,
 				greyHandlingGain=nil, fairness=nil, playerId=nil,
 			}
+			hasGreyHandling = nil
 		end
 		for itemGiven, givenValues in pairs(item_link_values) do
 			for itemTaken, takenValues in pairs(item_link_values) do
 				if itemGiven ~= itemTaken then
 					-- print(itemGiven.item, givenValues.ourCount, GetCoinTextureString(givenValues.vendorPrice),
 					-- itemTaken.item, takenValues.theirCount, GetCoinTextureString(takenValues.vendorPrice))
+					if takenValues.confidence == 1 then
+						hasGreyHandling = True
+					end
+					if hasGreyHandling and takenValues.confidence ~= 1 then
+						-- We don't want to consider non scrap if the user said it's not scrap by GH communication
+						break
+					end
 					local given =  givenValues.ourCount * givenValues.vendorPrice
 					local taken = takenValues.theirCount * takenValues.vendorPrice
 					local ourGain = taken - given - givenValues.lossCount * givenValues.vendorPrice
