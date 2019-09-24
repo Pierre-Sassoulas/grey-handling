@@ -48,17 +48,19 @@ function GreyHandling.functions.GetBestExchanges()
 					local theirGain = given - taken - takenValues.lossCount * takenValues.vendorPrice
 					local totalGain = theirGain + ourGain
 					local fairness = (theirGain - ourGain) * (theirGain - ourGain)
+					local currentExchange =  {
+						itemGiven=itemGiven, itemTaken=itemTaken, ourGain=ourGain, theirGain=theirGain,
+						ourCount=givenValues.ourCount, theirCount=takenValues.theirCount, totalGain=totalGain,
+						fairness=fairness, playerId=player_id
+					}
 					if ourGain > egoist.ourGain then
-						egoist = {itemGiven=itemGiven, itemTaken=itemTaken, ourGain=ourGain, theirGain=theirGain,ourCount=givenValues.ourCount,
-								theirCount=takenValues.theirCount, totalGain=totalGain, fairness=fairness, playerId=player_id}
+						egoist = currentExchange
 					end
 					if theirGain > altruist.theirGain then
-						altruist = {itemGiven=itemGiven, itemTaken=itemTaken, ourGain=ourGain, theirGain=theirGain,ourCount=givenValues.ourCount,
-								theirCount=takenValues.theirCount, totalGain=totalGain, fairness=fairness, playerId=player_id}
+						altruist = currentExchange
 					end
 					if fair.fairness==nil or fairness < fair.fairness then
-						fair = {itemGiven=itemGiven, itemTaken=itemTaken, ourGain=ourGain, theirGain=theirGain,ourCount=givenValues.ourCount,
-								theirCount=takenValues.theirCount, totalGain=totalGain, fairness=fairness, playerId=player_id}
+						fair = currentExchange
 					end
 				end
 			end
