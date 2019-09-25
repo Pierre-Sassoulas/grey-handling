@@ -1,9 +1,12 @@
 local A, GreyHandling = ...
 
 function GreyHandling.functions.CreateExchange(itemLink, ourCount, theirCount, vendorPrice, itemStackCount)
-	-- When we have no bag space we'll have to throw some
-	local lossCount = itemStackCount - ourCount - theirCount
-	if lossCount > 0 then
+	ourCount = ourCount%itemStackCount
+	theirCount = theirCount%itemStackCount
+	-- A perfect trade is a trade without stack overflow (a bag space will be created)
+	local isPerfect = ourCount + theirCount < itemStackCount
+	local lossCount = ourCount + theirCount - itemStackCount
+	if lossCount < 0 then
 		lossCount = 0
 	end
 	return {
@@ -12,6 +15,7 @@ function GreyHandling.functions.CreateExchange(itemLink, ourCount, theirCount, v
 		ourCount = ourCount,
 		theirCount = theirCount,
 		lossCount = lossCount,
+		isPerfect = isPerfect
 	}
 end
 
@@ -28,8 +32,8 @@ function GreyHandling.functions.GetBestExchanges()
 				if exchanges[player_id] == nil then
 					exchanges[player_id] = {}
 				end
-				exchanges[player_id][itemLink] = GreyHandling.functions.CreateExchange(itemLink, ourCount,
-					itemInformation.number%itemInformation.itemStackCount, itemInformation.vendorPrice,
+				exchanges[player_id][itemLink] = GreyHandling.functions.CreateExchange(
+					itemLink, ourCount,	itemInformation.number, itemInformation.vendorPrice,
 					itemInformation.itemStackCount, itemInformation.confidence
 				)
 			end

@@ -43,6 +43,29 @@ function GreyHandling.testHandleChatLootMessageFrench()
     assert (2 == GreyHandling.db.getItemInfoForPlayer("TestName-TestServer", ItemLink, "number"))
 end
 
+function GreyHandling.testCreateExchange()
+    -- Signature : GreyHandling.functions.CreateExchange(itemLink, ourCount, theirCount, vendorPrice, itemStackCount)
+    local exchange = {}
+    local itemLink = "DoesNotMatter"
+    local vendorPrice = 100 -- does'nt matter either
+    local itemStackCount = 20
+    exchange = GreyHandling.functions.CreateExchange(itemLink, 5, 2, vendorPrice, itemStackCount)
+    assert (exchange.isPerfect)
+    assert (exchange.lossCount == 0)
+    exchange = GreyHandling.functions.CreateExchange(itemLink, 15, 7, vendorPrice, itemStackCount)
+    assert (not exchange.isPerfect)
+    assert (exchange.lossCount == 2)
+    exchange = GreyHandling.functions.CreateExchange(itemLink, 165, 222, vendorPrice, itemStackCount)
+    assert (exchange.isPerfect)
+    assert (exchange.lossCount == 0)
+    exchange = GreyHandling.functions.CreateExchange(itemLink, 215, 207, vendorPrice, itemStackCount)
+    assert (not exchange.isPerfect)
+    assert (exchange.lossCount == 2)
+    exchange = GreyHandling.functions.CreateExchange(itemLink, 19, 19, vendorPrice, itemStackCount)
+    assert (not exchange.isPerfect)
+    assert (exchange.lossCount == 18)
+end
+
 function GreyHandling.testHandleChatLootMessageChinese()
     -- Signature : GreyHandling.functions.handleChatMessageLoot(chat_message, player_name, line_number, player_id, k, l, m, n, o)
     local _, mageWater = GetItemInfo("魔法淡水") -- Conjured Fresh Water
@@ -59,6 +82,8 @@ function GreyHandling.allTests()
     GreyHandling.testIsLootCouncilMessage()
     print("Testing MutuallyBeneficialExchange...")
     GreyHandling.testMutuallyBeneficialExchange()
+    print("Testing CreateExchange...")
+    GreyHandling.testCreateExchange()
     --print("Testing HandleChatLootMessage in French...")
     --GreyHandling.testHandleChatLootMessageFrench()
     --print("Testing HandleChatLootMessage in Chinese...")
