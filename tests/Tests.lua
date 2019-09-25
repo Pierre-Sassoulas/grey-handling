@@ -25,9 +25,12 @@ function GreyHandling.testMutuallyBeneficialExchange()
     GreyHandling.db.addItemForPlayer("TestName-TestServer", "Dent plate émoussée", 14699, 100, 12)
     GreyHandling.db.addItemForPlayer("TestName-TestServer", "Incisive dentelée", 12685, 20, 5)
     GreyHandling.db.addItemForPlayer("TestName-TestServer", "Fourrure miteuse", 2932, 20, 1)
-    GreyHandling.db.addItemForPlayer("OtherName-TestServer", "Cuir épais", 300, 20, 18)
-    GreyHandling.db.addItemForPlayer("TestName-TestServer", "Cuir épais", 300, 20, 211)
-    GreyHandling.db.addItemForPlayer("TestName-TestServer", "Cuir lourd", 150, 20, 125)
+    GreyHandling.db.addItemForPlayer("OtherName-TestServer", "Cuir léger", 300, 20, 164)
+    GreyHandling.db.addItemForPlayer("TestName-TestServer", "Cuir moyen", 300, 20, 1224)
+    GreyHandling.db.addItemForPlayer("TestName-TestServer", "Cuir lourd", 150, 20, 119)
+    GreyHandling.db.addItemForPlayer("TestName-TestServer", "Cuir épais", 300, 20, 219)
+    GreyHandling.db.addItemForPlayer("TestName-TestServer", "Cuir lourd", 150, 20, 119)
+    GreyHandling.db.addItemForPlayer("TestName-TestServer", "Peau de raptor", 208, 10, 119)
     GreyHandling.db.addItemForPlayer("TestName-TestServer", "Bec acéré", 804, 5, 3)
     GreyHandling.db.addItemForPlayer("OtherName-TestServer", "Serre de busard", 71, 5, 9)
 end
@@ -66,6 +69,71 @@ function GreyHandling.testCreateExchange()
     assert (exchange.lossCount == 18)
 end
 
+function GreyHandling.testBestExchange()
+    -- Signature : function GreyHandling.functions.getBestExchange(bestExchange, player_id, itemGiven, givenValues, itemTaken, takenValues)
+    -- itemX : itemLink
+    -- values : {
+    --		item = itemLink,
+    --		vendorPrice = vendorPrice,
+    --		ourCount = ourCount,
+    --		theirCount = theirCount,
+    --		lossCount = lossCount,
+    --		isPerfect = isPerfect
+    --	}
+    local player_id = "DoesNotMatter-ServerName"
+    local bestExchange = {greyHandlingGain=nil, isPerfect=false }
+    local itemGiven = "item1"
+    local itemTaken = "item2"
+    local itemGivenValues = {
+        item = itemGiven,
+        vendorPrice = 100,
+        ourCount = 10,
+        theirCount = 10,
+        lossCount = 0,
+        isPerfect = true
+    }
+    local itemTakenValues = {
+        item = itemTaken,
+        vendorPrice = 100,
+        ourCount = 10,
+        theirCount = 10,
+        lossCount = 0,
+        isPerfect = true
+    }
+    assert (not bestExchange.isPerfect)
+    assert (not bestExchange.greyHandlingGain)
+    bestExchange = GreyHandling.functions.getBestExchange(bestExchange, player_id, itemGivenValues, itemTakenValues)
+    -- assert (bestExchange.lossCount == 0)
+    assert (bestExchange.itemGiven == itemGiven)
+    assert (bestExchange.itemTaken == itemTaken)
+    local betterItemGiven = "item3"
+    -- If more value is exchanged the exchange is better
+    local betterItemGivenValues = {
+        item = betterItemGiven,
+        vendorPrice = 1000,
+        ourCount = 10,
+        theirCount = 10,
+        lossCount = 0,
+        isPerfect = true
+    }
+    bestExchange = GreyHandling.functions.getBestExchange(bestExchange, player_id, betterItemGivenValues, itemTakenValues)
+    assert (bestExchange.itemGiven == betterItemGiven)
+    assert (bestExchange.itemTaken == itemTaken)
+    local betterItemTaken = "item4"
+    local betterItemTakenValues = {
+        item = betterItemTaken,
+        vendorPrice = 1000,
+        ourCount = 10,
+        theirCount = 10,
+        lossCount = 0,
+        isPerfect = true
+    }
+    bestExchange = GreyHandling.functions.getBestExchange(bestExchange, player_id, betterItemGivenValues, betterItemTakenValues)
+    assert (bestExchange.itemGiven == betterItemGiven)
+    assert (bestExchange.itemTaken == betterItemTaken)
+end
+
+
 function GreyHandling.testHandleChatLootMessageChinese()
     -- Signature : GreyHandling.functions.handleChatMessageLoot(chat_message, player_name, line_number, player_id, k, l, m, n, o)
     local _, mageWater = GetItemInfo("魔法淡水") -- Conjured Fresh Water
@@ -76,14 +144,16 @@ end
 function GreyHandling.allTests()
     GreyHandling.print(format("WARNING! You're using the development version, the data store is reset for test case"))
     -- GreyHandling.db.reset()
-    print("Testing NumberLootedFromChatMessage...")
+    GreyHandling.print("Testing NumberLootedFromChatMessage...")
     GreyHandling.testNumberLootedFromChatMessage()
-    print("Testing IsLootCouncilMessage...")
+    GreyHandling.print("Testing IsLootCouncilMessage...")
     GreyHandling.testIsLootCouncilMessage()
-    print("Testing MutuallyBeneficialExchange...")
+    GreyHandling.print("Testing MutuallyBeneficialExchange...")
     GreyHandling.testMutuallyBeneficialExchange()
-    print("Testing CreateExchange...")
+    GreyHandling.print("Testing CreateExchange...")
     GreyHandling.testCreateExchange()
+    GreyHandling.print("Testing BestExchange...")
+    GreyHandling.testBestExchange()
     --print("Testing HandleChatLootMessage in French...")
     --GreyHandling.testHandleChatLootMessageFrench()
     --print("Testing HandleChatLootMessage in Chinese...")
