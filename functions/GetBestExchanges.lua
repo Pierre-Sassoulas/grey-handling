@@ -19,6 +19,53 @@ function GreyHandling.functions.CreateExchange(itemLink, ourCount, theirCount, v
 	}
 end
 
+function GreyHandling.functions.isBetterExchange(bestExchange, currentExchange)
+	if not bestExchange.greyHandlingGain then
+		-- Best exchange was not initialized, the current exchange is the only exchange
+		return true
+	end
+	if bestExchange.isPerfectGiven and bestExchange.isPerfectTaken then
+		return currentExchange.isPerfectGiven and currentExchange.isPerfectTaken and greyHandlingGain > bestExchange.greyHandlingGain
+	end
+	if not bestExchange.isPerfectGiven and currentExchange.isPerfectGiven then
+		return true
+	end
+	if not bestExchange.isPerfectTaken and currentExchange.isPerfectTaken then
+		return true
+	end
+	if currentExchange.greyHandlingGain > bestExchange.greyHandlingGain then
+		-- Exchange involve pricier objects
+		return true
+	end
+	return false
+end
+
+function GreyHandling.functions.getBestExchange(bestExchange, player_id, itemGiven, givenValues, itemTaken, takenValues)
+	if itemGiven ~= itemTaken then
+		-- print(itemGiven.item, givenValues.ourCount, GetCoinTextureString(givenValues.vendorPrice),
+		-- itemTaken.item, takenValues.theirCount, GetCoinTextureString(takenValues.vendorPrice))
+		local given =  givenValues.ourCount * givenValues.vendorPrice
+		local taken = takenValues.theirCount * takenValues.vendorPrice
+		local ourGain = taken - given - givenValues.lossCount * givenValues.vendorPrice
+		local theirGain = given - taken - takenValues.lossCount * takenValues.vendorPrice
+		local totalGain = given + taken
+		local potentialGain = givenValues.ourCount * givenValues.vendorPrice
+		local greyHandlingGain = totalGain + potentialGain
+		local currentExchange =  {
+			itemGiven=itemGiven, itemTaken=itemTaken, ourGain=ourGain, theirGain=theirGain,
+			ourCount=givenValues.ourCount, theirCount=takenValues.theirCount, greyHandlingGain=greyHandlingGain,
+			isPerfectGiven = itemGiven.isPerfect, isPerfectTaken = itemTaken.isPerfect,
+			lossCountGiven = itemGiven.lossCount, lossCountTaken = itemTaken.lossCount,
+			playerId=player_id,
+		}
+		if GreyHandling.functions.isBetterExchange(bestExchange, currentExchange) then
+			bestExchange = currentExchange
+		end
+	end
+	return bestExchange
+end
+
+
 function GreyHandling.functions.GetBestExchanges()
 	local exchanges = {}
 	local bestExchanges = {}
@@ -43,41 +90,21 @@ function GreyHandling.functions.GetBestExchanges()
 	local hasGreyHandling = nil
 	for player_id, item_link_values in pairs(exchanges) do
 		if not bestExchangeForCurrentPlayer then
-			bestExchangeForCurrentPlayer = {
-				itemGiven=nil, itemTaken=nil, ourGain=nil, theirGain=nil, ourCount=nil, theirCount=nil,
-				greyHandlingGain=nil, fairness=nil, playerId=nil,
-			}
+			bestExchangeForCurrentPlayer = {greyHandlingGain=nil, isPerfect=false}
 			hasGreyHandling = nil
 		end
 		for itemGiven, givenValues in pairs(item_link_values) do
 			for itemTaken, takenValues in pairs(item_link_values) do
-				if itemGiven ~= itemTaken then
-					-- print(itemGiven.item, givenValues.ourCount, GetCoinTextureString(givenValues.vendorPrice),
-					-- itemTaken.item, takenValues.theirCount, GetCoinTextureString(takenValues.vendorPrice))
-					if takenValues.confidence == 1 then
-						hasGreyHandling = True
-					end
-					if hasGreyHandling and takenValues.confidence ~= 1 then
-						-- We don't want to consider non scrap if the user said it's not scrap by GH communication
-						break
-					end
-					local given =  givenValues.ourCount * givenValues.vendorPrice
-					local taken = takenValues.theirCount * takenValues.vendorPrice
-					local ourGain = taken - given - givenValues.lossCount * givenValues.vendorPrice
-					local theirGain = given - taken - takenValues.lossCount * takenValues.vendorPrice
-					local totalGain = given + taken
-					local potentialGain = givenValues.ourCount * givenValues.vendorPrice
-					local greyHandlingGain = totalGain + potentialGain
-					local fairness = (theirGain - ourGain) * (theirGain - ourGain)
-					local currentExchange =  {
-						itemGiven=itemGiven, itemTaken=itemTaken, ourGain=ourGain, theirGain=theirGain,
-						ourCount=givenValues.ourCount, theirCount=takenValues.theirCount, greyHandlingGain=greyHandlingGain,
-						fairness=fairness, playerId=player_id
-					}
-					if not bestExchangeForCurrentPlayer.greyHandlingGain or greyHandlingGain > bestExchangeForCurrentPlayer.greyHandlingGain then
-						bestExchangeForCurrentPlayer = currentExchange
-					end
+				if takenValues.confidence == 1 then
+					hasGreyHandling = True
 				end
+				if hasGreyHandling and takenValues.confidence ~= 1 then
+					-- We don't want to consider non scrap if the user said it's not scrap by GH communication
+					break
+				end
+				bestExchangeForCurrentPlayer = GreyHandling.functions.getBestExchange(
+					bestExchangeForCurrentPlayer, player_id, itemGiven, givenValues, itemTaken, takenValues
+				)
 			end
 		end
 		table.insert(bestExchanges, bestExchangeForCurrentPlayer)
