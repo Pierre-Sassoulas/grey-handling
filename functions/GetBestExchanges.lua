@@ -9,6 +9,7 @@ function GreyHandling.functions.CreateExchange(itemLink, ourCount, theirCount, v
 	if lossCount < 0 then
 		lossCount = 0
 	end
+	-- print(format("Creating exchange %s %s %s %s %s", itemLink, ourCount, theirCount, itemStackCount, lossCount)
 	return {
 		item = itemLink,
 		vendorPrice = vendorPrice,
@@ -25,7 +26,7 @@ function GreyHandling.functions.isBetterExchange(bestExchange, currentExchange)
 		return true
 	end
 	if bestExchange.isPerfectGiven and bestExchange.isPerfectTaken then
-		return currentExchange.isPerfectGiven and currentExchange.isPerfectTaken and greyHandlingGain > bestExchange.greyHandlingGain
+		return currentExchange.isPerfectGiven and currentExchange.isPerfectTaken and currentExchange.greyHandlingGain > bestExchange.greyHandlingGain
 	end
 	if not bestExchange.isPerfectGiven and currentExchange.isPerfectGiven then
 		return true
@@ -40,26 +41,28 @@ function GreyHandling.functions.isBetterExchange(bestExchange, currentExchange)
 	return false
 end
 
-function GreyHandling.functions.getBestExchange(bestExchange, player_id, itemGiven, givenValues, itemTaken, takenValues)
-	if itemGiven ~= itemTaken then
-		-- print(itemGiven.item, givenValues.ourCount, GetCoinTextureString(givenValues.vendorPrice),
-		-- itemTaken.item, takenValues.theirCount, GetCoinTextureString(takenValues.vendorPrice))
-		local given =  givenValues.ourCount * givenValues.vendorPrice
-		local taken = takenValues.theirCount * takenValues.vendorPrice
-		local ourGain = taken - given - givenValues.lossCount * givenValues.vendorPrice
-		local theirGain = given - taken - takenValues.lossCount * takenValues.vendorPrice
-		local totalGain = given + taken
-		local potentialGain = givenValues.ourCount * givenValues.vendorPrice
+function GreyHandling.functions.getBestExchange(bestExchange, player_id, given, taken)
+	if given.item ~= taken.item then
+		--print(
+		--	given.item, given.ourCount, GetCoinTextureString(given.vendorPrice),
+		--	taken.item, taken.theirCount, GetCoinTextureString(taken.vendorPrice)
+		--)
+		local givenValue =  given.ourCount * given.vendorPrice
+		local takenValue = taken.theirCount * taken.vendorPrice
+		local ourGain = takenValue - givenValue - given.lossCount * given.vendorPrice
+		local theirGain = givenValue - takenValue - taken.lossCount * taken.vendorPrice
+		local totalGain = givenValue + takenValue
+		local potentialGain = given.ourCount * given.vendorPrice
 		local greyHandlingGain = totalGain + potentialGain
 		local currentExchange =  {
-			itemGiven=itemGiven, itemTaken=itemTaken, ourGain=ourGain, theirGain=theirGain,
-			ourCount=givenValues.ourCount, theirCount=takenValues.theirCount, greyHandlingGain=greyHandlingGain,
-			isPerfectGiven = itemGiven.isPerfect, isPerfectTaken = itemTaken.isPerfect,
-			lossCountGiven = itemGiven.lossCount, lossCountTaken = itemTaken.lossCount,
+			itemGiven=given.item, itemTaken=taken.item, ourGain=ourGain, theirGain=theirGain,
+			ourCount=given.ourCount, theirCount=taken.theirCount, greyHandlingGain=greyHandlingGain,
+			isPerfectGiven = given.isPerfect, isPerfectTaken = taken.isPerfect,
+			lossCountGiven = given.lossCount, lossCountTaken = taken.lossCount,
 			playerId=player_id,
 		}
 		if GreyHandling.functions.isBetterExchange(bestExchange, currentExchange) then
-			bestExchange = currentExchange
+			return currentExchange
 		end
 	end
 	return bestExchange
@@ -103,7 +106,7 @@ function GreyHandling.functions.GetBestExchanges()
 					break
 				end
 				bestExchangeForCurrentPlayer = GreyHandling.functions.getBestExchange(
-					bestExchangeForCurrentPlayer, player_id, itemGiven, givenValues, itemTaken, takenValues
+					bestExchangeForCurrentPlayer, player_id, givenValues, takenValues
 				)
 			end
 		end
