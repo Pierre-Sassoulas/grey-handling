@@ -40,8 +40,6 @@ function GreyHandling.Print(str)
 	DEFAULT_CHAT_FRAME:AddMessage("|cff"..GreyHandling.greyPrint..tostring(GreyHandling.SHORT_NAME).."|r: "..str)
 end
 
-setprinthandler(GreyHandling.Print)
-
 -- localization helpers
 -- returns the L array with meta suitable for
 -- https://authors.curseforge.com/knowledge-base/world-of-warcraft/531-localization-substitutions
