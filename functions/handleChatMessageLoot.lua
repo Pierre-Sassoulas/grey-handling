@@ -28,7 +28,7 @@ function GreyHandling.functions.handleChatMessageLoot(chatMessage, playerName, l
 		  version = "WOW retail"
 		end
 		if GreyHandlingShowAPIFail and GreyHandling.DEVELOPMENT_VERSION then
-			print(format("Something went wrong, this addon is for '%s' please check your version of GreyHandling.", version))
+			GreyHandling.print(format("Something went wrong, this addon is for '%s' please check your version of GreyHandling.", version))
 		end
 		return
 	end
@@ -37,14 +37,14 @@ function GreyHandling.functions.handleChatMessageLoot(chatMessage, playerName, l
 	local itemName = GreyHandling.functions.getItemNameFromChatMessage(chatMessage)
 	if not itemId then
 		if GreyHandlingShowAPIFail and GreyHandling.DEVELOPMENT_VERSION then
-			print(format("Cannot treat '%s' looted by %s.", itemName, playerName))
+			GreyHandling.print(format("Cannot treat '%s' looted by %s.", itemName, playerName))
 		end
 		return
 	end
 	local _, itemLink, _, _, _, _, _, itemStackCount, _, _, vendorPrice, _, _, bindType = GetItemInfo(itemId)
 	if not itemLink then
 		if GreyHandlingShowAPIFail and GreyHandling.DEVELOPMENT_VERSION then
-			print(format("Did not manage to retrieve '%s' looted by %s with itemID %s.", itemName, playerName, itemId))
+			GreyHandling.print(format("Did not manage to retrieve '%s' looted by %s with itemID %s.", itemName, playerName, itemId))
 		end
 		return
 	end

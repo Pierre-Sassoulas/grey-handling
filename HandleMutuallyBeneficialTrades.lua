@@ -22,12 +22,12 @@ function GreyHandling.functions.HandleMutuallyBeneficialTrades(foundSomething)
 			if bag and slot then
 				GreyHandling.functions.SetBagItemGlow(bag, slot, "bags-glow-green")
 			end
-			print(GreyHandling.functions.DisplayMutuallyBeneficialTradeInChat(exchange))
+			GreyHandling.print(GreyHandling.functions.DisplayMutuallyBeneficialTradeInChat(exchange))
 			-- SendChatMessage(msg)
 		end
 	end
 	if not foundExchange then
-		print("|cff"..GreyHandling.redPrint.."No mutually beneficial trade found.".."|r")
+		GreyHandling.print("|cff"..GreyHandling.redPrint.."No mutually beneficial trade found.".."|r")
 	end
 	return foundSomething
 end

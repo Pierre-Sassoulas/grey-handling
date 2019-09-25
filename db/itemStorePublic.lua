@@ -40,7 +40,7 @@ function GreyHandling.db.removePlayerThatLeft(playerNames)
         end
         if shouldBeRemoved then
             if GreyHandlingIsVerbose then
-                print(format("Forgetting about %s's bag.", existingPlayerName))
+                GreyHandling.print(format("Forgetting about %s's bag.", existingPlayerName))
             end
             GreyHandling.data.items[existingPlayerName] = nil
         end

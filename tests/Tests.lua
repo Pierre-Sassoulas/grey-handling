@@ -74,7 +74,7 @@ function GreyHandling.testHandleChatLootMessageChinese()
 end
 
 function GreyHandling.allTests()
-    print(format("WARNING! You're using the development version, the data store is reset for test case"))
+    GreyHandling.print(format("WARNING! You're using the development version, the data store is reset for test case"))
     -- GreyHandling.db.reset()
     print("Testing NumberLootedFromChatMessage...")
     GreyHandling.testNumberLootedFromChatMessage()
@@ -88,5 +88,5 @@ function GreyHandling.allTests()
     --GreyHandling.testHandleChatLootMessageFrench()
     --print("Testing HandleChatLootMessage in Chinese...")
     --GreyHandling.testHandleChatLootMessageChinese()
-    print("Test succesfful if there was only messages started by testing!")
+    GreyHandling.print("Test succesfful if there was only messages started by testing!")
 end

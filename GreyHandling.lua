@@ -1,6 +1,6 @@
 local A, GreyHandling = ...
 
-print(format("Launch %s by hitting left CTRL while holding SHIFT. (%s)", GreyHandling.NAME, GreyHandling.OPTION_COMMAND))
+GreyHandling.print(format("Launch %s by hitting left CTRL while holding SHIFT. (%s)", GreyHandling.NAME, GreyHandling.OPTION_COMMAND))
 InterfaceOptions_AddCategory(GreyHandling.options.panel);
 GameTooltip:HookScript("OnTooltipSetItem", GreyHandling.functions.ToolTipHook)
 ItemRefTooltip:HookScript("OnTooltipSetItem", GreyHandling.functions.ToolTipHook)
@@ -9,7 +9,7 @@ function GreyHandling.frame:OnEvent(event, key, state)
 	if key == "LCTRL" and state == 1 and IsShiftKeyDown() then
         if GreyHandling.DEVELOPMENT_VERSION then
             GreyHandling.allTests()
-            print("All tests passed successfully.")
+            GreyHandling.print("All tests passed successfully.")
 		end
 
 		GreyHandling.functions.ExchangeMyJunkPlease()

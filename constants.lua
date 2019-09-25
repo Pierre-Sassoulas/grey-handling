@@ -31,13 +31,13 @@ GreyHandling.bluePrint = "6699ff"
 
 local numberOfTries = 0
 while not C_ChatInfo.RegisterAddonMessagePrefix(GreyHandling.NAME) and numberOfTries < 10 do
-  print(format("Failed to create communication channel (%s))", numberOfTries))
+  GreyHandling.print(format("Failed to create communication channel (%s))", numberOfTries))
   numberOfTries = numberOfTries + 1
 end
 
-function GreyHandling.Print(str)
-    -- c|ff is a wow keyword
-	DEFAULT_CHAT_FRAME:AddMessage("|cff"..GreyHandling.greyPrint..tostring(GreyHandling.SHORT_NAME).."|r: "..str)
+function GreyHandling.print(str)
+    -- |cff is a wow keyword
+	print("|cff"..GreyHandling.greyPrint..tostring(GreyHandling.SHORT_NAME).."|r: "..str)
 end
 
 -- localization helpers
