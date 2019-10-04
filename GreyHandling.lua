@@ -5,26 +5,49 @@ InterfaceOptions_AddCategory(GreyHandling.options.panel);
 GameTooltip:HookScript("OnTooltipSetItem", GreyHandling.functions.ToolTipHook)
 ItemRefTooltip:HookScript("OnTooltipSetItem", GreyHandling.functions.ToolTipHook)
 
-function GreyHandling.frame:OnEvent(event, key, state)
-	if key == "LCTRL" and state == 1 and IsShiftKeyDown() then
-        if GreyHandling.DEVELOPMENT_VERSION then
-            GreyHandling.allTests()
-            GreyHandling.print("All tests passed successfully.")
-		end
 
-		GreyHandling.functions.ExchangeMyJunkPlease()
-		local foundSomething = false
-		OpenAllBags()
-		local isInGroup = GetNumGroupMembers() > 0
-		if GreyHandlingSuggestTrade and (isInGroup or GreyHandling.DEVELOPMENT_VERSION) then
-			foundSomething = GreyHandling.functions.HandleMutuallyBeneficialTrades(foundSomething)
-		end
-		if GreyHandlingShowCheapeastAlways or not foundSomething then
-			foundSomething = GreyHandling.functions.HandleCheapestJunk(foundSomething)
-		end
-		if not foundSomething then
+function GreyHandling.functions.main()
+	if GreyHandling.DEVELOPMENT_VERSION then
+		GreyHandling.allTests()
+		GreyHandling.print("All tests passed successfully.")
+	end
+	GreyHandling.functions.ExchangeMyJunkPlease()
+	local foundSomething = false
+	OpenAllBags()
+	local isInGroup = GetNumGroupMembers() > 0
+	if GreyHandlingSuggestTrade and (isInGroup or GreyHandling.DEVELOPMENT_VERSION) then
+		foundSomething = GreyHandling.functions.HandleMutuallyBeneficialTrades(foundSomething)
+	end
+	if GreyHandlingShowCheapeastAlways or not foundSomething then
+		foundSomething = GreyHandling.functions.HandleCheapestJunk(foundSomething)
+	end
+	if not foundSomething then
+		CloseAllBags()
+	end
+end
+
+function GreyHandling.functions.cheapest()
+	OpenAllBags()
+	if not GreyHandling.functions.HandleCheapestJunk(false) then
+		CloseAllBags()
+	end
+end
+
+function GreyHandling.functions.trade()
+	OpenAllBags()
+	local isInGroup = GetNumGroupMembers() > 0
+	if isInGroup or GreyHandling.DEVELOPMENT_VERSION then
+		if not GreyHandling.functions.HandleMutuallyBeneficialTrades(false) then
 			CloseAllBags()
 		end
+	else
+		GreyHandling.print("|cff"..GreyHandling.redPrint.."Not in a group.".."|r")
+	end
+end
+
+function GreyHandling.frame:OnEvent(event, key, state)
+	if key == "LCTRL" and state == 1 and IsShiftKeyDown() then
+		GreyHandling.functions.main()
 	end
 end
 GreyHandling.frame:RegisterEvent("MODIFIER_STATE_CHANGED")
