@@ -42,7 +42,7 @@ local function change_value_deactivate_default_keybind()
 end
 
 local function change_value_show_cheapeast_always()
-	GreyHandlingShowCheapeastAlways = not GreyHandlingShowCheapeastAlways
+	GreyHandlingShowCheapestAlways = not GreyHandlingShowCheapestAlways
 end
 
 function GreyHandling.options.display()
@@ -72,7 +72,7 @@ function GreyHandling.options.panel.default()
 	GreyHandlingShowAPIFail = GreyHandling.options.DEFAULT_SHOW_API_FAIL
 	GreyHandlingUseScrapJunkList = GreyHandling.options.DEFAULT_USE_SCRAP_JUNK_LIST
 	GreyHandlingDeactivateDefaultKeybind = GreyHandling.options.DEFAULT_DEACTIVATE_DEFAULT_KEYBIND
-	GreyHandlingShowCheapeastAlways = GreyHandling.options.DEFAULT_SHOW_CHEAPEST_ALWAYS
+	GreyHandlingShowCheapestAlways = GreyHandling.options.DEFAULT_SHOW_CHEAPEST_ALWAYS
 end
 
 GreyHandling.options.frame:RegisterEvent("ADDON_LOADED")
@@ -101,8 +101,8 @@ function GreyHandling.options.frame:OnEvent(event, key)
 		if GreyHandlingDeactivateDefaultKeybind == nil then
 			GreyHandlingDeactivateDefaultKeybind = GreyHandling.options.DEFAULT_DEACTIVATE_DEFAULT_KEYBIND
 		end
-		if GreyHandlingShowCheapeastAlways == nil then
-			GreyHandlingShowCheapeastAlways = GreyHandling.options.DEFAULT_SHOW_CHEAPEST_ALWAYS
+		if GreyHandlingShowCheapestAlways == nil then
+			GreyHandlingShowCheapestAlways = GreyHandling.options.DEFAULT_SHOW_CHEAPEST_ALWAYS
 		end
 		local title = GreyHandling.options.panel:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
 		title:SetPoint("TOPLEFT", 16, -16)
@@ -155,7 +155,7 @@ function GreyHandling.options.frame:OnEvent(event, key)
 		GreyHandlingShowAPIFail = GreyHandlingShowAPIFail
 		GreyHandlingUseScrapJunkList = GreyHandlingUseScrapJunkList
 		GreyHandlingDeactivateDefaultKeybind = GreyHandlingDeactivateDefaultKeybind
-		GreyHandlingShowCheapeastAlways = GreyHandlingShowCheapeastAlways
+		GreyHandlingShowCheapestAlways = GreyHandlingShowCheapestAlways
 	end
 end
 

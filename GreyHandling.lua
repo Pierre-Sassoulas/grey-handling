@@ -23,7 +23,7 @@ function GreyHandlingMain()
 	if isInGroup or GreyHandling.DEVELOPMENT_VERSION then
 		foundSomething = GreyHandling.functions.HandleMutuallyBeneficialTrades(foundSomething)
 	end
-	if GreyHandlingShowCheapeastAlways or not foundSomething then
+	if GreyHandlingShowCheapestAlways or not foundSomething then
 		foundSomething = GreyHandling.functions.HandleCheapestJunk(foundSomething)
 	end
 	if not foundSomething then

@@ -23,7 +23,7 @@
 ## SavedVariables: GreyHandlingShowAPIFail
 ## SavedVariables: GreyHandlingUseScrapJunkList
 ## SavedVariables: GreyHandlingDeactivateDefaultKeybind
-## SavedVariables: GreyHandlingShowCheapeastAlways
+## SavedVariables: GreyHandlingShowCheapestAlways
 
 constants.lua
 db\initDatabase.lua
