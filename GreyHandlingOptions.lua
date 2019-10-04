@@ -135,10 +135,14 @@ function GreyHandling.options.frame:OnEvent(event, key)
 			"Automatically offer to trade the grey item in chat (displayed to everyone)", "", change_value_talkative,
 			GreyHandlingIsTalkative
 		)
-		local CheckboxUseScrapJunkList = CreateCheckbox(
-			"Use scrap junk list, if scrap is installed (only grey are analyzed otherwise)", "",
-			change_value_remind_about_scrap,  GreyHandlingUseScrapJunkList
-		)
+		if IsAddOnLoaded("Scrap") then
+			local CheckboxUseScrapJunkList = CreateCheckbox(
+				"Use SCRAP junk list (Scrap consider some grey as valuable, and some white as scrap)", "",
+				change_value_remind_about_scrap,  GreyHandlingUseScrapJunkList
+			)
+		else
+			GreyHandlingUseScrapJunkList = nil
+		end
 		local CheckboxShowAPIFail = CreateCheckbox(
 			"Display API fail (displayed to you only)", "",
 			change_value_show_api_fail,  GreyHandlingShowAPIFail
