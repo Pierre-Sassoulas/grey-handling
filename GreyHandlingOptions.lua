@@ -29,10 +29,6 @@ local function change_value_show_price()
     GreyHandlingShowPrice = not GreyHandlingShowPrice
 end
 
-local function change_value_show_api_fail()
-    GreyHandlingShowAPIFail = not GreyHandlingShowAPIFail
-end
-
 local function change_value_remind_about_scrap()
     GreyHandlingUseScrapJunkList = not GreyHandlingUseScrapJunkList
 end
@@ -69,7 +65,6 @@ function GreyHandling.options.panel.default()
 	GreyHandlingIsTalkative = GreyHandling.options.DEFAULT_TALKATIVE
 	GreyHandlingIsVerbose = GreyHandling.options.DEFAULT_VERBOSE
 	GreyHandlingShowPrice = GreyHandling.options.DEFAULT_SHOW_PRICE
-	GreyHandlingShowAPIFail = GreyHandling.options.DEFAULT_SHOW_API_FAIL
 	GreyHandlingUseScrapJunkList = GreyHandling.options.DEFAULT_USE_SCRAP_JUNK_LIST
 	GreyHandlingDeactivateDefaultKeybind = GreyHandling.options.DEFAULT_DEACTIVATE_DEFAULT_KEYBIND
 	GreyHandlingShowCheapestAlways = GreyHandling.options.DEFAULT_SHOW_CHEAPEST_ALWAYS
@@ -91,9 +86,6 @@ function GreyHandling.options.frame:OnEvent(event, key)
 		end
 		if GreyHandlingShowPrice == nil then
 			GreyHandlingShowPrice = GreyHandling.options.DEFAULT_SHOW_PRICE
-		end
-		if GreyHandlingShowAPIFail == nil then
-			GreyHandlingShowAPIFail = GreyHandling.options.DEFAULT_SHOW_API_FAIL
 		end
 		if GreyHandlingUseScrapJunkList == nil then
 			GreyHandlingUseScrapJunkList = GreyHandling.options.DEFAULT_USE_SCRAP_JUNK_LIST
@@ -143,16 +135,11 @@ function GreyHandling.options.frame:OnEvent(event, key)
 			"Automatically offer to trade the grey item in chat (displayed to everyone)", "", change_value_talkative,
 			GreyHandlingIsTalkative
 		)
-		local CheckboxShowAPIFail = CreateCheckbox(
-			"Display API fail (displayed to you only)", "",
-			change_value_show_api_fail,  GreyHandlingShowAPIFail
-		)
 	end
 	if event == "PLAYER_LOGOUT" then
 		GreyHandlingIsTalkative = GreyHandlingIsTalkative
 		GreyHandlingIsVerbose = GreyHandlingIsVerbose
 		GreyHandlingShowPrice = GreyHandlingShowPrice
-		GreyHandlingShowAPIFail = GreyHandlingShowAPIFail
 		GreyHandlingUseScrapJunkList = GreyHandlingUseScrapJunkList
 		GreyHandlingDeactivateDefaultKeybind = GreyHandlingDeactivateDefaultKeybind
 		GreyHandlingShowCheapestAlways = GreyHandlingShowCheapestAlways

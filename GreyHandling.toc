@@ -20,7 +20,6 @@
 ## SavedVariables: GreyHandlingIsTalkative
 ## SavedVariables: GreyHandlingIsVerbose
 ## SavedVariables: GreyHandlingShowPrice
-## SavedVariables: GreyHandlingShowAPIFail
 ## SavedVariables: GreyHandlingUseScrapJunkList
 ## SavedVariables: GreyHandlingDeactivateDefaultKeybind
 ## SavedVariables: GreyHandlingShowCheapestAlways
