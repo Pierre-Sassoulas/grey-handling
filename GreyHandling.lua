@@ -20,7 +20,7 @@ function GreyHandlingMain()
 	local foundSomething = false
 	OpenAllBags()
 	local isInGroup = GetNumGroupMembers() > 0
-	if GreyHandlingSuggestTrade and (isInGroup or GreyHandling.DEVELOPMENT_VERSION) then
+	if isInGroup or GreyHandling.DEVELOPMENT_VERSION then
 		foundSomething = GreyHandling.functions.HandleMutuallyBeneficialTrades(foundSomething)
 	end
 	if GreyHandlingShowCheapeastAlways or not foundSomething then
@@ -51,7 +51,7 @@ function GreyHandlingSearchForTrade()
 end
 
 function GreyHandling.frame:OnEvent(event, key, state)
-	if key == "LCTRL" and state == 1 and IsShiftKeyDown() then
+	if not GreyHandlingDeactivateDefaultKeybind and key == "LCTRL" and state == 1 and IsShiftKeyDown() then
 		GreyHandlingMain()
 	end
 end

@@ -22,7 +22,7 @@
 ## SavedVariables: GreyHandlingShowPrice
 ## SavedVariables: GreyHandlingShowAPIFail
 ## SavedVariables: GreyHandlingUseScrapJunkList
-## SavedVariables: GreyHandlingSuggestTrade
+## SavedVariables: GreyHandlingDeactivateDefaultKeybind
 ## SavedVariables: GreyHandlingShowCheapeastAlways
 
 constants.lua

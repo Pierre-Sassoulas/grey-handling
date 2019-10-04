@@ -37,8 +37,8 @@ local function change_value_remind_about_scrap()
     GreyHandlingUseScrapJunkList = not GreyHandlingUseScrapJunkList
 end
 
-local function change_value_suggest_trade()
-	GreyHandlingSuggestTrade = not GreyHandlingSuggestTrade
+local function change_value_deactivate_default_keybind()
+	GreyHandlingDeactivateDefaultKeybind = not GreyHandlingDeactivateDefaultKeybind
 end
 
 local function change_value_show_cheapeast_always()
@@ -71,7 +71,7 @@ function GreyHandling.options.panel.default()
 	GreyHandlingShowPrice = GreyHandling.options.DEFAULT_SHOW_PRICE
 	GreyHandlingShowAPIFail = GreyHandling.options.DEFAULT_SHOW_API_FAIL
 	GreyHandlingUseScrapJunkList = GreyHandling.options.DEFAULT_USE_SCRAP_JUNK_LIST
-	GreyHandlingSuggestTrade = GreyHandling.options.DEFAULT_SUGGEST_TRADE
+	GreyHandlingDeactivateDefaultKeybind = GreyHandling.options.DEFAULT_DEACTIVATE_DEFAULT_KEYBIND
 	GreyHandlingShowCheapeastAlways = GreyHandling.options.DEFAULT_SHOW_CHEAPEST_ALWAYS
 end
 
@@ -98,8 +98,8 @@ function GreyHandling.options.frame:OnEvent(event, key)
 		if GreyHandlingUseScrapJunkList == nil then
 			GreyHandlingUseScrapJunkList = GreyHandling.options.DEFAULT_USE_SCRAP_JUNK_LIST
 		end
-		if GreyHandlingSuggestTrade == nil then
-			GreyHandlingSuggestTrade = GreyHandling.options.DEFAULT_SUGGEST_TRADE
+		if GreyHandlingDeactivateDefaultKeybind == nil then
+			GreyHandlingDeactivateDefaultKeybind = GreyHandling.options.DEFAULT_DEACTIVATE_DEFAULT_KEYBIND
 		end
 		if GreyHandlingShowCheapeastAlways == nil then
 			GreyHandlingShowCheapeastAlways = GreyHandling.options.DEFAULT_SHOW_CHEAPEST_ALWAYS
@@ -115,13 +115,21 @@ function GreyHandling.options.frame:OnEvent(event, key)
 		-- Variable for easy positioning
 		lastcheckbox = description
 		-- definition order matter here lastcheckbox is global!
+		local CheckboxSuggestTrade = CreateCheckbox(
+			"Deactivates the default keybind. You'll need to assign one yourself in 'KeyBinding' => 'Addons'", "",
+			change_value_deactivate_default_keybind,  GreyHandlingDeactivateDefaultKeybind
+		)
+		if IsAddOnLoaded("Scrap") then
+			local CheckboxUseScrapJunkList = CreateCheckbox(
+				"Use SCRAP junk list (Scrap consider some grey as valuable, and some white as scrap)", "",
+				change_value_remind_about_scrap,  GreyHandlingUseScrapJunkList
+			)
+		else
+			GreyHandlingUseScrapJunkList = nil
+		end
 		local CheckboxVerbose = CreateCheckbox(
 			"Explain the logic behind the two chepeast items (displayed to you only)", "", change_value_verbose,
 			GreyHandlingIsVerbose
-		)
-		local CheckboxSuggestTrade = CreateCheckbox(
-			"Analyse mutually beneficial exchange (displayed to you only)", "",
-			change_value_suggest_trade,  GreyHandlingSuggestTrade
 		)
 		local CheckboxShowAPIFail = CreateCheckbox(
 			"Display and pick the cheapest items even if there is a mutually beneficial trade", "",
@@ -135,14 +143,6 @@ function GreyHandling.options.frame:OnEvent(event, key)
 			"Automatically offer to trade the grey item in chat (displayed to everyone)", "", change_value_talkative,
 			GreyHandlingIsTalkative
 		)
-		if IsAddOnLoaded("Scrap") then
-			local CheckboxUseScrapJunkList = CreateCheckbox(
-				"Use SCRAP junk list (Scrap consider some grey as valuable, and some white as scrap)", "",
-				change_value_remind_about_scrap,  GreyHandlingUseScrapJunkList
-			)
-		else
-			GreyHandlingUseScrapJunkList = nil
-		end
 		local CheckboxShowAPIFail = CreateCheckbox(
 			"Display API fail (displayed to you only)", "",
 			change_value_show_api_fail,  GreyHandlingShowAPIFail
@@ -154,7 +154,7 @@ function GreyHandling.options.frame:OnEvent(event, key)
 		GreyHandlingShowPrice = GreyHandlingShowPrice
 		GreyHandlingShowAPIFail = GreyHandlingShowAPIFail
 		GreyHandlingUseScrapJunkList = GreyHandlingUseScrapJunkList
-		GreyHandlingSuggestTrade = GreyHandlingSuggestTrade
+		GreyHandlingDeactivateDefaultKeybind = GreyHandlingDeactivateDefaultKeybind
 		GreyHandlingShowCheapeastAlways = GreyHandlingShowCheapeastAlways
 	end
 end
