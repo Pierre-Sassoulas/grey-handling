@@ -111,14 +111,10 @@ function GreyHandling.options.frame:OnEvent(event, key)
 			"Deactivates the default keybind. You'll need to assign one yourself in 'KeyBinding' => 'Addons'", "",
 			change_value_deactivate_default_keybind,  GreyHandlingDeactivateDefaultKeybind
 		)
-		if IsAddOnLoaded("Scrap") then
-			local CheckboxUseScrapJunkList = CreateCheckbox(
-				"Use SCRAP junk list (Scrap consider some grey as valuable, and some white as scrap)", "",
-				change_value_remind_about_scrap,  GreyHandlingUseScrapJunkList
-			)
-		else
-			GreyHandlingUseScrapJunkList = nil
-		end
+		local CheckboxUseScrapJunkList = CreateCheckbox(
+			"Use SCRAP junk list (Scrap consider some grey as valuable, and some white as scrap)", "",
+			change_value_remind_about_scrap,  GreyHandlingUseScrapJunkList
+		)
 		local CheckboxVerbose = CreateCheckbox(
 			"Explain the logic behind the two chepeast items (displayed to you only)", "", change_value_verbose,
 			GreyHandlingIsVerbose

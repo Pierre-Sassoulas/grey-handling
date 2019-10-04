@@ -1,6 +1,6 @@
 local A, GreyHandling = ...
 
-local function bagErrorMessage(addonName)
+local function bagErrorMessage(now, addonName)
 	GreyHandling.print("|cff"..GreyHandling.redPrint.."Picked cheapest item now because glows in bag does'nt work yet for "..addonName..".|r")
 	PickupContainerItem(now.bag, now.slot)
 end
@@ -29,9 +29,9 @@ function GreyHandling.functions.HandleCheapestJunk(foundSomething)
 			GreyHandling.functions.DisplayCheapestInChat("Cheapest now:", now)
 			GreyHandling.functions.DisplayCheapestInChat("Cheapest later:", later)
 			if IsAddOnLoaded("Inventorian") then
-				bagErrorMessage("Inventorian")
+				bagErrorMessage(now, "Inventorian")
 			elseif IsAddOnLoaded("Bagnon") or IsAddOnLoaded("Combuctor") then
-				bagErrorMessage("Bagnon or Combuctor")
+				bagErrorMessage(now, "Bagnon or Combuctor")
 			end
 			GreyHandling.functions.SetBagItemGlow(now.bag, now.slot, "bags-glow-orange")
 			GreyHandling.functions.SetBagItemGlow(later.bag, later.slot, "bags-glow-orange")
