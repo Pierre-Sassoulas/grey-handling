@@ -5,8 +5,13 @@ InterfaceOptions_AddCategory(GreyHandling.options.panel);
 GameTooltip:HookScript("OnTooltipSetItem", GreyHandling.functions.ToolTipHook)
 ItemRefTooltip:HookScript("OnTooltipSetItem", GreyHandling.functions.ToolTipHook)
 
+BINDING_NAME_GH_ALL = "Launch GreyHandling"
+BINDING_NAME_GH_TRADE = "Search for trades only"
+BINDING_NAME_GH_THROW = "Throw cheapest item only"
+BINDING_HEADER_GH = GreyHandling.NAME
 
-function GreyHandling.functions.main()
+
+function GreyHandlingMain()
 	if GreyHandling.DEVELOPMENT_VERSION then
 		GreyHandling.allTests()
 		GreyHandling.print("All tests passed successfully.")
@@ -26,14 +31,14 @@ function GreyHandling.functions.main()
 	end
 end
 
-function GreyHandling.functions.cheapest()
+function GreyHandlingSearchForCheapest()
 	OpenAllBags()
 	if not GreyHandling.functions.HandleCheapestJunk(false) then
 		CloseAllBags()
 	end
 end
 
-function GreyHandling.functions.trade()
+function GreyHandlingSearchForTrade()
 	OpenAllBags()
 	local isInGroup = GetNumGroupMembers() > 0
 	if isInGroup or GreyHandling.DEVELOPMENT_VERSION then
@@ -47,7 +52,7 @@ end
 
 function GreyHandling.frame:OnEvent(event, key, state)
 	if key == "LCTRL" and state == 1 and IsShiftKeyDown() then
-		GreyHandling.functions.main()
+		GreyHandlingMain()
 	end
 end
 GreyHandling.frame:RegisterEvent("MODIFIER_STATE_CHANGED")

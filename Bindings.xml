@@ -1,0 +1,11 @@
+<Bindings>
+	<Binding name="GH_ALL" header="GH" default="SHIFT-ù" category="ADDONS">
+		GreyHandlingMain()
+	</Binding>
+	<Binding name="GH_THROW" default="SHIFT-^" category="ADDONS">
+		GreyHandlingSearchForCheapest(nil)
+	</Binding>
+	<Binding name="GH_TRADE" default="SHIFT-$" category="ADDONS">
+		GreyHandlingSearchForTrade(nil)
+	</Binding>
+</Bindings>
