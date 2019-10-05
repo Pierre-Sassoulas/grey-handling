@@ -45,10 +45,13 @@ if IsAddOnLoaded("Bagnon") or IsAddOnLoaded("Combuctor") then
 		local online = not self.info.cached
 		local bag = online and self:GetBag()
 		local slot = online and self:GetID()
-		local junk = Scrap:IsJunk(id, bag, slot)
+		local junk = nil
+		if IsAddOnLoaded("Scrap") then
+			local junk = Scrap:IsJunk(id, bag, slot)
+		end
 		UpdateBorder(self)
-		self.JunkIcon:SetShown(Scrap_Icons and junk)
-		if Scrap_Glow and junk then
+		self.JunkIcon:SetShown(junk)
+		if junk then
 			self.IconBorder:SetVertexColor(r, g, b)
 			self.IconBorder:Show()
 			self.IconGlow:SetVertexColor(r, g, b, Addon.sets.glowAlpha)
