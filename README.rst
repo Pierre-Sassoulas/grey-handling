@@ -57,6 +57,17 @@ Orange glow does not work with :
 
 If the orange glow does not work, **there is an optional text explanation**.
 
+Changing the key binding
+------------------------
+
+You can disable the default key binding in option (it's more complicated than a keybind, because you need to press
+CTRL while holding shift). You can then define a new one in Keybinding/Addons. This menu is accessible when you
+type "escape" in game.
+
+.. image:: examples/keybinding.jpg
+   :width: 300pt
+
+
 What does it do in detail?
 --------------------------
 
