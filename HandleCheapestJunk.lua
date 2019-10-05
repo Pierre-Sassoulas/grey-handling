@@ -30,8 +30,6 @@ function GreyHandling.functions.HandleCheapestJunk(foundSomething)
 			GreyHandling.functions.DisplayCheapestInChat("Cheapest later:", later)
 			if IsAddOnLoaded("Inventorian") then
 				bagErrorMessage(now, "Inventorian")
-			elseif IsAddOnLoaded("Bagnon") or IsAddOnLoaded("Combuctor") then
-				bagErrorMessage(now, "Bagnon or Combuctor")
 			end
 			GreyHandling.functions.SetBagItemGlow(now.bag, now.slot, "bags-glow-orange")
 			GreyHandling.functions.SetBagItemGlow(later.bag, later.slot, "bags-glow-orange")
