@@ -3,12 +3,12 @@ local A, GreyHandling = ...
 local L = GreyHandling:GetLocalization()
 
 function GreyHandling.functions.ToolTipHook(t)
+    local link = select(2, t:GetItem())
+    if not link then
+        return
+    end
+    local _, itemLink, _, _, _, _, _, itemStackCount, _, _, itemSellPrice, itemClassID = GetItemInfo(link)
     if GreyHandlingShowPrice then
-        local link = select(2, t:GetItem())
-        if not link then
-            return
-        end
-        local _, _, _, _, _, _, _, itemStackCount, _, _, itemSellPrice, itemClassID = GetItemInfo(link)
         -- local itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount,
         -- itemEquipLoc, itemIcon, vendorPrice, itemClassID, itemSubClassID, bindType, expacID, itemSetID, isCraftingReagent = GetItemInfo(link)
         --print(
@@ -71,6 +71,25 @@ function GreyHandling.functions.ToolTipHook(t)
                     end
                 end
             end
-	    end
+        end
+        local now, later = GreyHandling.functions.GetCheapestJunk()
+        -- local texture, itemCount, locked, quality, readable, lootable, itemLink =
+        -- GetContainerItemInfo(now.bag, now.slot);
+        if now.bag and later.bag then
+            local message = ""
+            local _, nowitemCount, _, _, _, _, nowitemLink = GetContainerItemInfo(now.bag, now.slot);
+            local _, lateritemCount, _, _, _, _, lateritemLink = GetContainerItemInfo(later.bag, later.slot);
+            if nowitemLink==itemLink then
+                if nowitemLink==lateritemLink then
+                    message = "Cheapest (now and later)"
+                else
+                    message = "Cheapest (right now)"
+                end
+            end
+            if lateritemLink==itemLink and nowitemLink~=lateritemLink then
+                message = "Cheapest (later)"
+            end
+            GameTooltip:AddLine(message, 1, 0.5, 0.5)
+        end
     end
 end
