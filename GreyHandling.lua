@@ -10,6 +10,23 @@ BINDING_NAME_GH_TRADE = "Search for trades only"
 BINDING_NAME_GH_THROW = "Throw cheapest item only"
 BINDING_HEADER_GH = GreyHandling.NAME
 
+function GreyHandling.isCheapest(bag, slot)
+	local now, later = GreyHandling.functions.GetCheapestJunk()
+	return (bag==now.bag and slot==now.slot) or (later.bag == bag and later.slot == slot)
+end
+
+function GreyHandling.isMutuallyBeneficialTrade(bag, slot)
+	local bestExchanges = GreyHandling.functions.GetBestExchanges()
+	for i, exchange in pairs(bestExchanges) do
+		if exchange.itemGiven and exchange.itemTaken then
+			local exchangeBag, exchangeSlot = GreyHandling.functions.GetBagAndSlot(exchange.itemGiven)
+			if exchangeBag == bag and exchangeSlot == slot then
+				return true
+			end
+		end
+	end
+	return false
+end
 
 function GreyHandlingMain()
 	if GreyHandling.DEVELOPMENT_VERSION then
