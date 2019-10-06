@@ -1,5 +1,29 @@
 local A, GreyHandling = ...
 
+function GreyHandling.isJunk(bagID, bagSlot)
+	local itemid = GetContainerItemID(bagID, bagSlot)
+	return GreyHandling.isJunkByItemId(itemid)
+end
+
+function GreyHandling.isJunkByItemLink(itemLink)
+	local itemid = GreyHandling.functions.getIDNumber(itemLink)
+	return GreyHandling.isJunkByItemId(itemid)
+end
+
+function GreyHandling.isJunkByItemId(itemid)
+	if not itemid then
+		return false
+	end
+	if IsAddOnLoaded("Scrap") and GreyHandlingUseScrapJunkList then
+		return Scrap:IsJunk(itemid, bagID, bagSlot)
+	else
+		local itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount,
+			itemEquipLoc, itemIcon, vendorPrice, itemClassID, itemSubClassID, bindType, expacID, itemSetID,
+			isCraftingReagent = GetItemInfo(itemid)
+		return itemRarity == 0 and vendorPrice > 0
+	end
+end
+
 function GreyHandling.functions.GetCheapestJunk()
 	local now = {}
 	now.currentPrice = nil
@@ -9,23 +33,15 @@ function GreyHandling.functions.GetCheapestJunk()
 		for bagSlot = 1, GetContainerNumSlots(bagID) do
 			if IsAddOnLoaded("ArkInventory") then
 				local loc_id, bag_id = ArkInventory.BlizzardBagIdToInternalId(bagID)
-				local _, item = ArkInventory.API.ItemFrameGet( loc_id, bag_id, bagSlot)
+				local _, item = ArkInventory.API.ItemFrameGet(loc_id, bag_id, bagSlot)
 				ActionButton_HideOverlayGlow(item)
 			end
 			local itemid = GetContainerItemID(bagID, bagSlot)
-
-			local _, itemCount = GetContainerItemInfo(bagID, bagSlot)
 			if itemid then
-				local itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount,
-					itemEquipLoc, itemIcon, vendorPrice, itemClassID, itemSubClassID, bindType, expacID, itemSetID,
-					isCraftingReagent = GetItemInfo(itemid)
-				local isJunk = nil
-				if IsAddOnLoaded("Scrap") and GreyHandlingUseScrapJunkList then
-					isJunk = Scrap:IsJunk(itemid, bagID, bagSlot)
-				else
-					isJunk = (itemRarity == 0 and vendorPrice > 0)
-				end
-				if  isJunk then
+				if GreyHandling.isJunk(bagID, bagSlot) then
+					local itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount,
+						itemEquipLoc, itemIcon, vendorPrice, itemClassID, itemSubClassID, bindType, expacID, itemSetID,
+						isCraftingReagent = GetItemInfo(itemid)
 					local _, itemCount = GetContainerItemInfo(bagID, bagSlot)
                     local currentDurability, maximumDurability = GetContainerItemDurability(bagID, bagSlot)
                     local modifier = 1

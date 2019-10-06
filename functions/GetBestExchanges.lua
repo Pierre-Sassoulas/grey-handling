@@ -75,17 +75,7 @@ function GreyHandling.functions.GetBestExchanges()
 	for player_id, items in pairs(GreyHandling.data.items) do
 		for itemLink, itemInformation  in pairs(items) do
 			local ourCount = GetItemCount(itemLink)
-			local itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount,
-				itemEquipLoc, itemIcon, vendorPrice, itemClassID, itemSubClassID, bindType, expacID, itemSetID,
-				isCraftingReagent = GetItemInfo(itemLink)
-			local isJunk = nil
-			if itemLink and IsAddOnLoaded("Scrap") and GreyHandlingUseScrapJunkList then
-				local itemid = GreyHandling.functions.getIDNumber(itemLink)
-				isJunk = Scrap:IsJunk(itemid)
-			else
-				isJunk = (itemRarity == 0 and vendorPrice > 0)
-			end
-			if isJunk and ourCount ~= 0 and ourCount%itemInformation.itemStackCount ~= 0 then
+			if GreyHandling.isJunkByItemLink(itemLink) and ourCount ~= 0 and ourCount%itemInformation.itemStackCount ~= 0 then
 				if exchanges[player_id] == nil then
 					exchanges[player_id] = {}
 				end
