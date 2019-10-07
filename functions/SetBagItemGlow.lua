@@ -14,6 +14,7 @@ function GreyHandling.functions.AISetBagItemGlow(itemFrame, loc_id, bag_id, slot
 	end
 	if (loc_id == now_loc and now_bag == bag_id and slot_id == now.slot) or
 			(loc_id == later_loc and later_bag == bag_id and slot_id == later.slot) then
+		itemFrame.JunkIcon:SetShown(true)
 		itemFrame.IconBorder:SetVertexColor(1, 0.1, 0.1)
 		itemFrame.IconBorder:SetTexture([[Interface\Artifacts\RelicIconFrame]])
 		itemFrame.IconBorder:Show()
