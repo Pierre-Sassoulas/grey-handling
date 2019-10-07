@@ -6,6 +6,10 @@ function GreyHandling.isJunk(bagID, bagSlot)
 end
 
 function GreyHandling.isJunkByItemLink(itemLink)
+	local _, itemLink = GetItemInfo(itemLink)
+	if not itemLink then
+		return false
+	end
 	local itemid = GreyHandling.functions.getIDNumber(itemLink)
 	return GreyHandling.isJunkByItemId(itemid)
 end

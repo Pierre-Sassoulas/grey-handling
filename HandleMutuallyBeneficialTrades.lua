@@ -20,7 +20,7 @@ function GreyHandling.functions.HandleMutuallyBeneficialTrades(foundSomething)
 			foundSomething = true
 			local bag, slot = GreyHandling.functions.GetBagAndSlot(exchange.itemGiven)
 			if bag and slot then
-				GreyHandling.functions.SetBagItemGlow(bag, slot, "bags-glow-green")
+				GreyHandling.functions.SetBagItemGlow(bag, slot, 0.1, 1, 0.1)
 			end
 			GreyHandling.print(GreyHandling.functions.DisplayMutuallyBeneficialTradeInChat(exchange))
 			-- SendChatMessage(msg)

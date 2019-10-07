@@ -1,7 +1,8 @@
 local A, GreyHandling = ...
 
 
-function GreyHandling.functions.SetBagItemGlow(bagID, slotID, color)
+
+function GreyHandling.functions.SetBagItemGlow(bagID, slotID, r, v, b)
 	local itemFrame
 	if IsAddOnLoaded("OneBag3") then
 		itemFrame = _G["OneBagFrameBag"..bagID.."Item"..slotID]
@@ -20,9 +21,8 @@ function GreyHandling.functions.SetBagItemGlow(bagID, slotID, color)
 		end
 	end
 	if itemFrame then
-		itemFrame.NewItemTexture:SetAtlas(color)
-		itemFrame.NewItemTexture:Show()
-		itemFrame.flashAnim:Play()
-		itemFrame.newitemglowAnim:Play()
+		itemFrame.IconBorder:SetVertexColor(r, v, b)
+		itemFrame.IconBorder:SetTexture([[Interface\Artifacts\RelicIconFrame]])
+		itemFrame.IconBorder:Show()
 	end
 end
