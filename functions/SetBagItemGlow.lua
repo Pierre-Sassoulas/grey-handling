@@ -1,5 +1,28 @@
 local A, GreyHandling = ...
 
+function GreyHandling.functions.AISetBagItemGlow(itemFrame, loc_id, bag_id, slot_id)
+	local now, later = GreyHandling.functions.GetCheapestJunk()
+	if not now and not later then
+		return
+	end
+	local now_loc, now_bag,  later_loc, later_bag
+	if now.bag then
+		now_loc, now_bag = ArkInventory.BlizzardBagIdToInternalId(now.bag)
+	end
+	if later.bag then
+		later_loc, later_bag = ArkInventory.BlizzardBagIdToInternalId(later.bag)
+	end
+	if (loc_id == now_loc and now_bag == bag_id and slot_id == now.slot) or
+			(loc_id == later_loc and later_bag == bag_id and slot_id == later.slot) then
+		itemFrame.IconBorder:SetVertexColor(1, 0.1, 0.1)
+		itemFrame.IconBorder:SetTexture([[Interface\Artifacts\RelicIconFrame]])
+		itemFrame.IconBorder:Show()
+	else
+		itemFrame.IconBorder:SetVertexColor()
+		itemFrame.IconBorder:SetTexture()
+		itemFrame.IconBorder:Show()
+	end
+end
 
 
 function GreyHandling.functions.SetBagItemGlow(bagID, slotID, r, v, b)
@@ -9,9 +32,7 @@ function GreyHandling.functions.SetBagItemGlow(bagID, slotID, r, v, b)
 	elseif IsAddOnLoaded("Inventorian") then
 		return
     elseif IsAddOnLoaded("ArkInventory") or IsAddOnLoaded("ArkInventoryClassic") then
-        local loc_id, bag_id = ArkInventory.BlizzardBagIdToInternalId(bagID)
-        local framename, itemFrame = ArkInventory.API.ItemFrameGet(loc_id, bag_id, slotID)
-        ActionButton_ShowOverlayGlow(itemFrame)
+		return
 	else
 		for i = 1, NUM_CONTAINER_FRAMES, 1 do
 			local frame = _G["ContainerFrame"..i]

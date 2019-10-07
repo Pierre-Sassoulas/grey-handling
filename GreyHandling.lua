@@ -106,3 +106,7 @@ function GreyHandling.member_leave_frame:OnLeave(event, addon,  text, channel, s
 end
 GreyHandling.member_leave_frame:RegisterEvent("GROUP_LEFT")
 GreyHandling.member_leave_frame:SetScript("OnEvent", GreyHandling.member_leave_frame.OnLeave)
+
+if IsAddOnLoaded("ArkInventory") or IsAddOnLoaded("ArkInventoryClassic") then
+	hooksecurefunc(ArkInventory.API, "ItemFrameUpdated", GreyHandling.functions.AISetBagItemGlow)
+end
