@@ -8,4 +8,12 @@ ignore: # Files and directories beginning with a dot (such as .git) are automati
     - art/GreyHandlingTwitchButton.png
     - art/GreyHandlingTwitchRaw.png
     - README.rst
-    - examples/emergency_problematic_looting_situation.jpg
+    - examples/arkinventory.jpg
+    - examples/automatic_pick_up.jpg
+    - examples/bagnon_integration.jpg
+    - examples/item_tooltip_and_glow.jpg
+    - examples/item_tooltip_group.jpg
+    - examples/keybinding.jpg
+    - examples/mutually_beneficial_trade.jpg
+    - examples/mutually_beneficial_trade_small.jpg
+    - examples/red_glow.jpg
