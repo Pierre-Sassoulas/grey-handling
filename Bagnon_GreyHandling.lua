@@ -28,7 +28,7 @@ if IsAddOnLoaded("Bagnon") or IsAddOnLoaded("Combuctor") then
 		local slot = online and self:GetID()
 		local junk = nil
 		if IsAddOnLoaded("Scrap") then
-			local junk = Scrap:IsJunk(id, bag, slot)
+			junk = Scrap:IsJunk(id, bag, slot)
 		end
 		UpdateBorder(self)
 		self.JunkIcon:SetShown(junk)
