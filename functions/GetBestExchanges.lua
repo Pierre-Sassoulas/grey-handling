@@ -9,7 +9,7 @@ function GreyHandling.functions.CreateExchange(itemLink, ourCount, theirCount, v
 	if lossCount < 0 then
 		lossCount = 0
 	end
-	-- print(format("Creating exchange %s %s %s %s %s", itemLink, ourCount, theirCount, itemStackCount, lossCount)
+	-- print(format("Add exchange for %s we give %s, they have %s, it stacks by %s, %s will overflow", itemLink, ourCount, theirCount, itemStackCount, lossCount))
 	return {
 		item = itemLink,
 		vendorPrice = vendorPrice,
@@ -73,6 +73,7 @@ function GreyHandling.functions.GetBestExchanges()
 	local exchanges = {}
 	local bestExchanges = {}
 	for player_id, items in pairs(GreyHandling.data.items) do
+		-- print("PlayerID"..player_id)
 		for itemLink, itemInformation  in pairs(items) do
 			local ourCount = GetItemCount(itemLink)
 			if GreyHandling.isJunkByItemLink(itemLink) and ourCount ~= 0 and ourCount%itemInformation.itemStackCount ~= 0 then

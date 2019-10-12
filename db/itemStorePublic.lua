@@ -52,13 +52,14 @@ function GreyHandling.db.addItemFromStringForPlayer(playerName, itemString, vend
         itemEquipLoc, itemIcon, vendorPrice, itemClassID, itemSubClassID, bindType, expacID, itemSetID,
         isCraftingReagent = GetItemInfo(itemString)
     if not itemLink then
-        print("Cannot add itemString:"..itemString)
+        -- print("Cannot add '"..itemString.."' to DB (not in cache or a real object?)")
         return
     end
     GreyHandling.db.addItemForPlayer(playerName, itemLink, vendorPrice, itemStackCount, number, confidence)
 end
 
 function GreyHandling.db.addItemForPlayer(playerName, itemLink, vendorPrice, itemStackCount, number, confidence)
+    -- print("Adding "..itemLink.."*"..number.." for "..playerName)
     confidence = confidence or 0
     GreyHandling.db.initializeItem(playerName, itemLink, vendorPrice, itemStackCount)
     local old_number = GreyHandling.db.getItemInfoForPlayer(playerName, itemLink, "number")
