@@ -23,6 +23,18 @@ function GreyHandling.functions.AISetBagItemGlow(itemFrame, loc_id, bag_id, slot
 		itemFrame.IconBorder:SetTexture()
 		itemFrame.IconBorder:Show()
 	end
+	local bestExchanges = GreyHandling.functions.GetBestExchanges()
+	for i, exchange in pairs(bestExchanges) do
+		if exchange.itemGiven and exchange.itemTaken then
+			local bag, slot = GreyHandling.functions.GetBagAndSlot(exchange.itemGiven, exchange.ourCount)
+			local ai_loc, ai_bag = ArkInventory.BlizzardBagIdToInternalId(bag)
+			if bag and slot and ai_loc == loc_id and ai_bag == bag_id and slot_id == slot then
+				itemFrame.IconBorder:SetVertexColor(0.1, 1, 0.1)
+				itemFrame.IconBorder:SetTexture([[Interface\Artifacts\RelicIconFrame]])
+				itemFrame.IconBorder:Show()
+			end
+		end
+	end
 end
 
 
