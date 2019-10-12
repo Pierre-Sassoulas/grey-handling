@@ -47,6 +47,17 @@ function GreyHandling.db.removePlayerThatLeft(playerNames)
     end
 end
 
+function GreyHandling.db.addItemFromStringForPlayer(playerName, itemString, vendorPrice, itemStackCount, number, confidence)
+    local itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount,
+        itemEquipLoc, itemIcon, vendorPrice, itemClassID, itemSubClassID, bindType, expacID, itemSetID,
+        isCraftingReagent = GetItemInfo(itemString)
+    if not itemLink then
+        print("Cannot add itemString:"..itemString)
+        return
+    end
+    GreyHandling.db.addItemForPlayer(playerName, itemLink, vendorPrice, itemStackCount, number, confidence)
+end
+
 function GreyHandling.db.addItemForPlayer(playerName, itemLink, vendorPrice, itemStackCount, number, confidence)
     confidence = confidence or 0
     GreyHandling.db.initializeItem(playerName, itemLink, vendorPrice, itemStackCount)
