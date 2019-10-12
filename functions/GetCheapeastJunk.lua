@@ -2,7 +2,10 @@ local A, GreyHandling = ...
 
 function GreyHandling.isJunk(bagID, bagSlot)
 	local itemid = GetContainerItemID(bagID, bagSlot)
-	return GreyHandling.isJunkByItemId(itemid)
+	if itemid and IsAddOnLoaded("Scrap") and GreyHandlingUseScrapJunkList then
+		return Scrap:IsJunk(itemid, bagID, bagSlot)
+	end
+	return GreyHandling.isJunkByItemId(itemid, bagID, bagSlot)
 end
 
 function GreyHandling.isJunkByItemLink(itemLink)
@@ -10,15 +13,18 @@ function GreyHandling.isJunkByItemLink(itemLink)
 	if not itemLink then
 		return false
 	end
+	-- print("Is "..itemLink.." junk ?")
 	local itemid = GreyHandling.functions.getIDNumber(itemLink)
+	-- print("Itemid for "..itemLink.." is ".. itemid)
 	return GreyHandling.isJunkByItemId(itemid)
 end
 
-function GreyHandling.isJunkByItemId(itemid)
+function GreyHandling.isJunkByItemId(itemid, bagID, bagSlot)
 	if not itemid then
 		return false
 	end
 	if IsAddOnLoaded("Scrap") and GreyHandlingUseScrapJunkList then
+		-- print("Using scrap to determine if "..itemid.." is junk.")
 		return Scrap:IsJunk(itemid, bagID, bagSlot)
 	else
 		local itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount,

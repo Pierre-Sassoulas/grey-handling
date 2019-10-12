@@ -75,15 +75,18 @@ function GreyHandling.functions.GetBestExchanges()
 	for player_id, items in pairs(GreyHandling.data.items) do
 		-- print("PlayerID"..player_id)
 		for itemLink, itemInformation  in pairs(items) do
-			local ourCount = GetItemCount(itemLink)
-			if GreyHandling.isJunkByItemLink(itemLink) and ourCount ~= 0 and ourCount%itemInformation.itemStackCount ~= 0 then
-				if exchanges[player_id] == nil then
-					exchanges[player_id] = {}
+			if GreyHandling.isJunkByItemLink(itemLink) then
+				local ourCount = GetItemCount(itemLink)
+				-- print("ItemLink: '"..itemLink.."' Our count : '".. ourCount.."'")
+				if ourCount ~= 0 and ourCount%itemInformation.itemStackCount ~= 0 then
+					if exchanges[player_id] == nil then
+						exchanges[player_id] = {}
+					end
+					exchanges[player_id][itemLink] = GreyHandling.functions.CreateExchange(
+						itemLink, ourCount,	itemInformation.number, itemInformation.vendorPrice,
+						itemInformation.itemStackCount, itemInformation.confidence
+					)
 				end
-				exchanges[player_id][itemLink] = GreyHandling.functions.CreateExchange(
-					itemLink, ourCount,	itemInformation.number, itemInformation.vendorPrice,
-					itemInformation.itemStackCount, itemInformation.confidence
-				)
 			end
 		end
 	end
