@@ -19,7 +19,7 @@ function GreyHandling.isMutuallyBeneficialTrade(bag, slot)
 	local bestExchanges = GreyHandling.functions.GetBestExchanges()
 	for i, exchange in pairs(bestExchanges) do
 		if exchange.itemGiven and exchange.itemTaken then
-			local exchangeBag, exchangeSlot = GreyHandling.functions.GetBagAndSlot(exchange.itemGiven)
+			local exchangeBag, exchangeSlot = GreyHandling.functions.GetBagAndSlot(exchange.itemGiven, exchange.ourCount)
 			if exchangeBag == bag and exchangeSlot == slot then
 				return true
 			end
