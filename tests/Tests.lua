@@ -145,12 +145,15 @@ end
 function GreyHandling.allTests()
     GreyHandling.print(format("WARNING! You're using the development version, the data store is reset for test case"))
     -- GreyHandling.db.reset()
+    GreyHandling.testMutuallyBeneficialExchange()
+    if GreyHandling.DEV_TRADE_ONLY then
+        GreyHandling.print("We populated a fake database of item for your fake group.")
+        return
+    end
     GreyHandling.print("Testing NumberLootedFromChatMessage...")
     GreyHandling.testNumberLootedFromChatMessage()
     GreyHandling.print("Testing IsLootCouncilMessage...")
     GreyHandling.testIsLootCouncilMessage()
-    GreyHandling.print("Testing MutuallyBeneficialExchange...")
-    GreyHandling.testMutuallyBeneficialExchange()
     GreyHandling.print("Testing CreateExchange...")
     GreyHandling.testCreateExchange()
     GreyHandling.print("Testing BestExchange...")

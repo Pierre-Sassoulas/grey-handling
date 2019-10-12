@@ -31,7 +31,6 @@ end
 function GreyHandlingMain()
 	if GreyHandling.DEVELOPMENT_VERSION then
 		GreyHandling.allTests()
-		GreyHandling.print("All tests passed successfully.")
 	end
 	GreyHandling.functions.ExchangeMyJunkPlease()
 	local foundSomething = false

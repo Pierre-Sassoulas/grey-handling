@@ -14,6 +14,7 @@ GreyHandling.SHORT_NAME = "GH"
 GreyHandling.DISPLAY_NAME = "Grey Handling"
 GreyHandling.MAX_CHAR_IN_CHAT_LOOT_MESSAGE = 255
 GreyHandling.DEVELOPMENT_VERSION = false -- /console scriptErrors 1
+GreyHandling.DEV_TRADE_ONLY = true
 GreyHandling.DESCRIPTION = GetAddOnMetadata(GreyHandling.NAME, "NOTES")
 GreyHandling.options = {}
 GreyHandling.options.frame = CreateFrame("FRAME")
