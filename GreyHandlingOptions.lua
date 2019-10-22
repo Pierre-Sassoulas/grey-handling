@@ -6,8 +6,8 @@ GreyHandling.options.panel.name = GreyHandling.DISPLAY_NAME
 local function CreateCheckbox(text, tooltip, script, truth)
     -- Thanks to BattlePetBreedId author (Simca@Malfurion and Hugh@Burning Blade)
     local checkbox = CreateFrame("CheckButton", nil, GreyHandling.options.panel, "UICheckButtonTemplate")
-    checkbox:SetPoint("TOPLEFT", lastcheckbox, "BOTTOMLEFT", 0, 0)
-    checkbox:SetSize(32, 32)
+    checkbox:SetPoint("TOPLEFT", lastcheckbox, "BOTTOMLEFT", 0, -5)
+    checkbox:SetSize(24, 24)
     checkbox.text:SetFontObject("GameFontNormal")
     checkbox.tooltip = tooltip
     checkbox:SetScript("OnClick", script);
@@ -15,6 +15,14 @@ local function CreateCheckbox(text, tooltip, script, truth)
 	checkbox:SetChecked(truth)
     lastcheckbox = checkbox
     return checkbox
+end
+
+local function AddTextTitle(title)
+	local textTitle = GreyHandling.options.panel:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+	textTitle:SetPoint("TOPLEFT", lastcheckbox, "BOTTOMLEFT", 0, -20)
+	textTitle:SetText(title)
+    lastcheckbox = textTitle
+    return textTitle
 end
 
 local function change_value_verbose()
@@ -107,28 +115,38 @@ function GreyHandling.options.frame:OnEvent(event, key)
 		-- Variable for easy positioning
 		lastcheckbox = description
 		-- definition order matter here lastcheckbox is global!
+		AddTextTitle("Keybinding")
 		local CheckboxSuggestTrade = CreateCheckbox(
 			"Deactivates the default keybind. You'll need to assign one yourself in 'KeyBinding' => 'Addons'", "",
 			change_value_deactivate_default_keybind,  GreyHandlingDeactivateDefaultKeybind
-		)
-		local CheckboxUseScrapJunkList = CreateCheckbox(
-			"Use SCRAP junk list (Scrap consider some grey as valuable, and some white as scrap)", "",
-			change_value_remind_about_scrap,  GreyHandlingUseScrapJunkList
-		)
-		local CheckboxVerbose = CreateCheckbox(
-			"Explain the logic behind the two chepeast items (displayed to you only)", "", change_value_verbose,
-			GreyHandlingIsVerbose
 		)
 		local CheckboxShowAPIFail = CreateCheckbox(
 			"Display and pick the cheapest items even if there is a mutually beneficial trade", "",
 			change_value_show_cheapeast_always,  GreyHandlingShowCheapestAlways
 		)
+		AddTextTitle("Item tooltip")
 		local CheckboxShowPrice = CreateCheckbox(
-			"Display vendor sell prices in item tooltips (might be redondant with another addon)", "",
+			"Display vendor sell prices (might be redondant with another addon)", "",
 			change_value_show_price, GreyHandlingShowPrice
 		)
+		AddTextTitle("Determining what is junk for you")
+		local CheckboxUseScrapJunkList = CreateCheckbox(
+			"Use SCRAP junk list (Scrap consider some grey as valuable, and some white as scrap)", "",
+			change_value_remind_about_scrap,  GreyHandlingUseScrapJunkList
+		)
+		--local iconPlacement = CreateFrame("Button", "IconPlacementDropDown", GreyHandling.options.panel, "UIDropDownMenuTemplate")
+	    --iconPlacement:SetPoint("TOPLEFT", lastcheckbox, "BOTTOMLEFT", 0, 0)
+		--lastcheckbox = iconPlacement
+		--UIDropDownMenu_Initialize(IconPlacementDropDown, initIconPlacement)
+		--UIDropDownMenu_SetWidth(IconPlacementDropDown, 110);
+		--UIDropDownMenu_SetButtonWidth(IconPlacementDropDown, 110);
+		AddTextTitle("Text in chat")
+		local CheckboxVerbose = CreateCheckbox(
+			"Explain the logic behind the two chepeast items (displayed to you)", "", change_value_verbose,
+			GreyHandlingIsVerbose
+		)
 		local CheckboxTalkative = CreateCheckbox(
-			"Automatically offer to trade the grey item in chat (displayed to everyone)", "", change_value_talkative,
+			"Automatically offer to trade the grey item (displayed to everyone)", "", change_value_talkative,
 			GreyHandlingIsTalkative
 		)
 	end
