@@ -48,7 +48,8 @@ grey instead of two. What is junk for someone might not be junk for someone else
 Compatibility with other bags addons
 ------------------------------------
 
-- **Scrap** If scrap is installed, we can use your junk list (or not)
+- **Scrap** If Scrap is installed, we can use your junk list (or not) as of november 2019
+- **Peddler** If Peddler is installed, we can use your marked for sell list (or not) as of november 2019
 - **OneBag3** This addon did not need any integration (<3 OneBag3 dev, you're the best)
 - **ArkInventory** Working as of october 2019
 - **Bagnon/Conductor** Working as of october 2019

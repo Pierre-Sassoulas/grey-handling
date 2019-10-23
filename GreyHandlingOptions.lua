@@ -81,9 +81,9 @@ end
 
 local function initWhatIsJunkValue(self, level)
 	local whatIsJunkValues = {
-		"Junk according to Scrap", "Grey Items", "Common Items", "Uncommon Items", "Rare Items", "All Items"
+		"Junk according to Scrap", "Marked for sell by Peddler", "Grey Items", "Common Items", "Uncommon Items",
+        "Rare Items", "All Items"
 	}
-	--, "Marked for sell by Peddler",  }
 	for index, whatIsJunkValue in pairs(whatIsJunkValues) do
 		local whatIsJunkValueOption = UIDropDownMenu_CreateInfo()
 		whatIsJunkValueOption.text = whatIsJunkValue

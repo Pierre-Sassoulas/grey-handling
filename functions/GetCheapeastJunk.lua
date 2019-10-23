@@ -4,6 +4,10 @@ function GreyHandling.useScrap()
 	return IsAddOnLoaded("Scrap") and GreyHandlingWhatIsJunkValue == "Junk according to Scrap"
 end
 
+function GreyHandling.usePeddler()
+	return IsAddOnLoaded("Peddler") and GreyHandlingWhatIsJunkValue == "Marked for sell by Peddler"
+end
+
 function GreyHandling.isJunk(bagID, bagSlot)
 	local itemid = GetContainerItemID(bagID, bagSlot)
 	if itemid and GreyHandling.useScrap() then
@@ -30,6 +34,10 @@ function GreyHandling.isJunkByItemId(itemid, bagID, bagSlot)
 	if GreyHandling.useScrap() then
 		-- print("Using scrap to determine if "..itemid.." is junk.")
 		return Scrap:IsJunk(itemid, bagID, bagSlot)
+	elseif GreyHandling.usePeddler() then
+		-- print("Using Peddler to determine if "..itemid.." is marked for sell.")
+		local uniqueItemID = PeddlerAPI.getUniqueItemID(bagID, bagSlot)
+		return PeddlerAPI.itemIsToBeSold(itemid, uniqueItemID)
 	else
 		local itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount,
 			itemEquipLoc, itemIcon, vendorPrice, itemClassID, itemSubClassID, bindType, expacID, itemSetID,
