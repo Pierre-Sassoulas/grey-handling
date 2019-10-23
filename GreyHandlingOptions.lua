@@ -80,10 +80,18 @@ local function changeWhatIsJunkValue(self)
 end
 
 local function initWhatIsJunkValue(self, level)
-	local whatIsJunkValues = {
-		"Junk according to Scrap", "Marked for sell by Peddler", "Grey Items", "Common Items", "Uncommon Items",
-        "Rare Items", "All Items"
-	}
+	local whatIsJunkValues = {}
+	if IsAddOnLoaded("Scrap") then
+		table.insert(whatIsJunkValues, "Junk according to Scrap")
+	end
+	if IsAddOnLoaded("Peddler") then
+		table.insert(whatIsJunkValues, "Marked for sell by Peddler")
+	end
+	table.insert(whatIsJunkValues, "Grey Items")
+	table.insert(whatIsJunkValues, "Common Items")
+	table.insert(whatIsJunkValues, "Uncommon Items")
+	table.insert(whatIsJunkValues, "Rare Items")
+	table.insert(whatIsJunkValues, "All Items")
 	for index, whatIsJunkValue in pairs(whatIsJunkValues) do
 		local whatIsJunkValueOption = UIDropDownMenu_CreateInfo()
 		whatIsJunkValueOption.text = whatIsJunkValue
