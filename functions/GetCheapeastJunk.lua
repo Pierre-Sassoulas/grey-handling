@@ -1,8 +1,5 @@
 local A, GreyHandling = ...
 
---"Grey Items", "Junk according to Scrap", "Marked to sell for Peddler", "Common Items", "Uncommon Items", "Rare Items",
---"All Items"
-
 function GreyHandling.useScrap()
 	return IsAddOnLoaded("Scrap") and GreyHandlingWhatIsJunkValue == "Junk according to Scrap"
 end
@@ -37,7 +34,24 @@ function GreyHandling.isJunkByItemId(itemid, bagID, bagSlot)
 		local itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount,
 			itemEquipLoc, itemIcon, vendorPrice, itemClassID, itemSubClassID, bindType, expacID, itemSetID,
 			isCraftingReagent = GetItemInfo(itemid)
-		return itemRarity == 0 and vendorPrice > 0
+		if vendorPrice <= 0 then
+			return false
+		end
+		-- Grey Items (it's the default)
+		local minRarity = 0
+		if GreyHandlingWhatIsJunkValue == "Common Items" then
+			minRarity = 1
+		end
+		if GreyHandlingWhatIsJunkValue == "Uncommon Items" then
+			minRarity = 2
+		end
+		if GreyHandlingWhatIsJunkValue == "Rare Items" then
+			minRarity = 3
+		end
+		if GreyHandlingWhatIsJunkValue == "All Items" then
+			minRarity = 100
+		end
+		return itemRarity <= minRarity
 	end
 end
 

@@ -81,10 +81,9 @@ end
 
 local function initWhatIsJunkValue(self, level)
 	local whatIsJunkValues = {
-		"Grey Items", "Junk according to Scrap"
+		"Junk according to Scrap", "Grey Items", "Common Items", "Uncommon Items", "Rare Items", "All Items"
 	}
-	--, "Marked to sell for Peddler", "Common Items", "Uncommon Items", "Rare Items",
-		--"All Items" }
+	--, "Marked for sell by Peddler",  }
 	for index, whatIsJunkValue in pairs(whatIsJunkValues) do
 		local whatIsJunkValueOption = UIDropDownMenu_CreateInfo()
 		whatIsJunkValueOption.text = whatIsJunkValue
@@ -156,7 +155,7 @@ function GreyHandling.options.frame:OnEvent(event, key)
 			GreyHandlingIsVerbose
 		)
 		local CheckboxTalkative = CreateCheckbox(
-			"Automatically offer to trade the grey item (displayed to everyone)", "", change_value_talkative,
+			"Automatically offer to trade the cheapest item (displayed to everyone)", "", change_value_talkative,
 			GreyHandlingIsTalkative
 		)
 		AddTextTitle("Determining what is junk for you")
