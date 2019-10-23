@@ -1,8 +1,15 @@
 local A, GreyHandling = ...
 
+--"Grey Items", "Junk according to Scrap", "Marked to sell for Peddler", "Common Items", "Uncommon Items", "Rare Items",
+--"All Items"
+
+function GreyHandling.useScrap()
+	return IsAddOnLoaded("Scrap") and GreyHandlingWhatIsJunkValue == "Junk according to Scrap"
+end
+
 function GreyHandling.isJunk(bagID, bagSlot)
 	local itemid = GetContainerItemID(bagID, bagSlot)
-	if itemid and IsAddOnLoaded("Scrap") and GreyHandlingUseScrapJunkList then
+	if itemid and GreyHandling.useScrap() then
 		return Scrap:IsJunk(itemid, bagID, bagSlot)
 	end
 	return GreyHandling.isJunkByItemId(itemid, bagID, bagSlot)
@@ -23,7 +30,7 @@ function GreyHandling.isJunkByItemId(itemid, bagID, bagSlot)
 	if not itemid then
 		return false
 	end
-	if IsAddOnLoaded("Scrap") and GreyHandlingUseScrapJunkList then
+	if GreyHandling.useScrap() then
 		-- print("Using scrap to determine if "..itemid.." is junk.")
 		return Scrap:IsJunk(itemid, bagID, bagSlot)
 	else

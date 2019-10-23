@@ -37,10 +37,6 @@ local function change_value_show_price()
     GreyHandlingShowPrice = not GreyHandlingShowPrice
 end
 
-local function change_value_remind_about_scrap()
-    GreyHandlingUseScrapJunkList = not GreyHandlingUseScrapJunkList
-end
-
 local function change_value_deactivate_default_keybind()
 	GreyHandlingDeactivateDefaultKeybind = not GreyHandlingDeactivateDefaultKeybind
 end
@@ -73,9 +69,33 @@ function GreyHandling.options.panel.default()
 	GreyHandlingIsTalkative = GreyHandling.options.DEFAULT_TALKATIVE
 	GreyHandlingIsVerbose = GreyHandling.options.DEFAULT_VERBOSE
 	GreyHandlingShowPrice = GreyHandling.options.DEFAULT_SHOW_PRICE
-	GreyHandlingUseScrapJunkList = GreyHandling.options.DEFAULT_USE_SCRAP_JUNK_LIST
+	GreyHandlingWhatIsJunkValue = GreyHandling.options.DEFAULT_WHAT_IS_JUNK
 	GreyHandlingDeactivateDefaultKeybind = GreyHandling.options.DEFAULT_DEACTIVATE_DEFAULT_KEYBIND
 	GreyHandlingShowCheapestAlways = GreyHandling.options.DEFAULT_SHOW_CHEAPEST_ALWAYS
+end
+
+local function changeWhatIsJunkValue(self)
+	UIDropDownMenu_SetSelectedID(WhatIsJunkValueDropDown, self:GetID())
+	GreyHandlingWhatIsJunkValue = self.value
+end
+
+local function initWhatIsJunkValue(self, level)
+	local whatIsJunkValues = {
+		"Grey Items", "Junk according to Scrap"
+	}
+	--, "Marked to sell for Peddler", "Common Items", "Uncommon Items", "Rare Items",
+		--"All Items" }
+	for index, whatIsJunkValue in pairs(whatIsJunkValues) do
+		local whatIsJunkValueOption = UIDropDownMenu_CreateInfo()
+		whatIsJunkValueOption.text = whatIsJunkValue
+		whatIsJunkValueOption.value = whatIsJunkValue
+		whatIsJunkValueOption.func = changeWhatIsJunkValue
+		UIDropDownMenu_AddButton(whatIsJunkValueOption)
+
+		if whatIsJunkValue == GreyHandlingWhatIsJunkValue then
+			UIDropDownMenu_SetSelectedID(WhatIsJunkValueDropDown, index)
+		end
+	end
 end
 
 GreyHandling.options.frame:RegisterEvent("ADDON_LOADED")
@@ -95,8 +115,8 @@ function GreyHandling.options.frame:OnEvent(event, key)
 		if GreyHandlingShowPrice == nil then
 			GreyHandlingShowPrice = GreyHandling.options.DEFAULT_SHOW_PRICE
 		end
-		if GreyHandlingUseScrapJunkList == nil then
-			GreyHandlingUseScrapJunkList = GreyHandling.options.DEFAULT_USE_SCRAP_JUNK_LIST
+		if GreyHandlingWhatIsJunkValue == nil then
+			GreyHandlingWhatIsJunkValue = GreyHandling.options.DEFAULT_WHAT_IS_JUNK
 		end
 		if GreyHandlingDeactivateDefaultKeybind == nil then
 			GreyHandlingDeactivateDefaultKeybind = GreyHandling.options.DEFAULT_DEACTIVATE_DEFAULT_KEYBIND
@@ -115,31 +135,21 @@ function GreyHandling.options.frame:OnEvent(event, key)
 		-- Variable for easy positioning
 		lastcheckbox = description
 		-- definition order matter here lastcheckbox is global!
-		AddTextTitle("Keybinding")
-		local CheckboxSuggestTrade = CreateCheckbox(
-			"Deactivates the default keybind. You'll need to assign one yourself in 'KeyBinding' => 'Addons'", "",
-			change_value_deactivate_default_keybind,  GreyHandlingDeactivateDefaultKeybind
-		)
+		AddTextTitle("Default behavior")
 		local CheckboxShowAPIFail = CreateCheckbox(
 			"Display and pick the cheapest items even if there is a mutually beneficial trade", "",
 			change_value_show_cheapeast_always,  GreyHandlingShowCheapestAlways
+		)
+		AddTextTitle("Keybinding")
+		local CheckboxSuggestTrade = CreateCheckbox(
+			"Deactivates the default keybind. (You'll need to assign one yourself in 'KeyBinding' => 'Addons')", "",
+			change_value_deactivate_default_keybind,  GreyHandlingDeactivateDefaultKeybind
 		)
 		AddTextTitle("Item tooltip")
 		local CheckboxShowPrice = CreateCheckbox(
 			"Display vendor sell prices (might be redondant with another addon)", "",
 			change_value_show_price, GreyHandlingShowPrice
 		)
-		AddTextTitle("Determining what is junk for you")
-		local CheckboxUseScrapJunkList = CreateCheckbox(
-			"Use SCRAP junk list (Scrap consider some grey as valuable, and some white as scrap)", "",
-			change_value_remind_about_scrap,  GreyHandlingUseScrapJunkList
-		)
-		--local iconPlacement = CreateFrame("Button", "IconPlacementDropDown", GreyHandling.options.panel, "UIDropDownMenuTemplate")
-	    --iconPlacement:SetPoint("TOPLEFT", lastcheckbox, "BOTTOMLEFT", 0, 0)
-		--lastcheckbox = iconPlacement
-		--UIDropDownMenu_Initialize(IconPlacementDropDown, initIconPlacement)
-		--UIDropDownMenu_SetWidth(IconPlacementDropDown, 110);
-		--UIDropDownMenu_SetButtonWidth(IconPlacementDropDown, 110);
 		AddTextTitle("Text in chat")
 		local CheckboxVerbose = CreateCheckbox(
 			"Explain the logic behind the two chepeast items (displayed to you)", "", change_value_verbose,
@@ -149,12 +159,19 @@ function GreyHandling.options.frame:OnEvent(event, key)
 			"Automatically offer to trade the grey item (displayed to everyone)", "", change_value_talkative,
 			GreyHandlingIsTalkative
 		)
+		AddTextTitle("Determining what is junk for you")
+		local whatIsJunkValue = CreateFrame("Button", "WhatIsJunkValueDropDown", GreyHandling.options.panel, "UIDropDownMenuTemplate")
+	    whatIsJunkValue:SetPoint("TOPLEFT", lastcheckbox, "BOTTOMLEFT", 0, -10)
+		lastcheckbox = whatIsJunkValue
+		UIDropDownMenu_Initialize(WhatIsJunkValueDropDown, initWhatIsJunkValue)
+		UIDropDownMenu_SetWidth(WhatIsJunkValueDropDown, 200);
+		UIDropDownMenu_SetButtonWidth(WhatIsJunkValueDropDown, 200);
 	end
 	if event == "PLAYER_LOGOUT" then
 		GreyHandlingIsTalkative = GreyHandlingIsTalkative
 		GreyHandlingIsVerbose = GreyHandlingIsVerbose
 		GreyHandlingShowPrice = GreyHandlingShowPrice
-		GreyHandlingUseScrapJunkList = GreyHandlingUseScrapJunkList
+		GreyHandlingWhatIsJunkValue = GreyHandlingWhatIsJunkValue
 		GreyHandlingDeactivateDefaultKeybind = GreyHandlingDeactivateDefaultKeybind
 		GreyHandlingShowCheapestAlways = GreyHandlingShowCheapestAlways
 	end
