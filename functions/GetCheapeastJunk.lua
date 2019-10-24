@@ -42,7 +42,7 @@ function GreyHandling.isJunkByItemId(itemid, bagID, bagSlot)
 		local itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount,
 			itemEquipLoc, itemIcon, vendorPrice, itemClassID, itemSubClassID, bindType, expacID, itemSetID,
 			isCraftingReagent = GetItemInfo(itemid)
-		if vendorPrice <= 0 then
+		if not vendorPrice or vendorPrice <= 0 then
 			return false
 		end
 		-- Grey Items (it's the default)
