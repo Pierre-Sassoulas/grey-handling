@@ -1,10 +1,18 @@
 local A, GreyHandling = ...
 
-GreyHandling.print(format("Launch %s by hitting left CTRL while holding SHIFT. (%s)", GreyHandling.NAME, GreyHandling.OPTION_COMMAND))
 InterfaceOptions_AddCategory(GreyHandling.options.panel);
 GameTooltip:HookScript("OnTooltipSetItem", GreyHandling.functions.ToolTipHook)
 ItemRefTooltip:HookScript("OnTooltipSetItem", GreyHandling.functions.ToolTipHook)
 
+GreyHandling.print(
+	format("Launch %s with left CTRL while holding SHIFT. (or %s)",
+	GreyHandling.NAME, GreyHandling.CHAT_COMMAND)
+)
+--elseif GreyHandlingDeactivateDefaultKeybind then
+	--GreyHandling.print(format("Loaded %s (%s)", GreyHandling.NAME, GreyHandling.CHAT_COMMAND))
+--end
+
+-- See Bindings.xml
 BINDING_NAME_GH_ALL = "Launch GreyHandling"
 BINDING_NAME_GH_TRADE = "Search for trades only"
 BINDING_NAME_GH_THROW = "Throw cheapest item only"
@@ -94,6 +102,11 @@ function GreyHandling.chat_frame:OnChat(event, addon,  text, channel, sender, ta
 end
 GreyHandling.chat_frame:RegisterEvent("CHAT_MSG_ADDON")
 GreyHandling.chat_frame:SetScript("OnEvent", GreyHandling.chat_frame.OnChat)
+GreyHandling.options.frame:SetScript("OnEvent", GreyHandling.options.frame.OnEvent);
+SLASH_GREYHANDLINGOPTION1 = GreyHandling.CHAT_COMMAND;
+function SlashCmdList.GREYHANDLINGOPTION(msg)
+	GreyHandlingMain()
+end
 
 function GreyHandling.member_leave_frame:OnLeave(event, addon,  text, channel, sender, target, zoneChannelID, localID, name, instanceID)
 	local playerNames = {}

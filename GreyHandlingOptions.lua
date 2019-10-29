@@ -45,25 +45,6 @@ local function change_value_show_cheapeast_always()
 	GreyHandlingShowCheapestAlways = not GreyHandlingShowCheapestAlways
 end
 
-function GreyHandling.options.display()
-	local scrap = "I could use scrap to determine what is junk, if you had it."
-	if IsAddOnLoaded("Scrap") then
-		scrap = "I'm going to use Scrap to determine what is junk. "
-	end
-	local talkative = "I do not talk to your friends."
-	if GreyHandlingIsTalkative then
-		talkative = "I talk to your friends."
-	end
-	local verbose = "I keep to myself around you."
-	if GreyHandlingIsVerbose then
-		verbose = "I talk to you."
-	end
-	local price = "I do not show item's prices."
-	if GreyHandlingShowPrice then
-		price = "I show item's prices."
-	end
-	GreyHandling.print(format("%s %s %s And %s", scrap, talkative, verbose, price))
-end
 
 function GreyHandling.options.panel.default()
 	GreyHandlingIsTalkative = GreyHandling.options.DEFAULT_TALKATIVE
@@ -182,10 +163,4 @@ function GreyHandling.options.frame:OnEvent(event, key)
 		GreyHandlingDeactivateDefaultKeybind = GreyHandlingDeactivateDefaultKeybind
 		GreyHandlingShowCheapestAlways = GreyHandlingShowCheapestAlways
 	end
-end
-
-GreyHandling.options.frame:SetScript("OnEvent", GreyHandling.options.frame.OnEvent);
-SLASH_GREYHANDLINGOPTION1 = GreyHandling.OPTION_COMMAND;
-function SlashCmdList.GREYHANDLINGOPTION(msg)
-	GreyHandling.options.display()
 end
