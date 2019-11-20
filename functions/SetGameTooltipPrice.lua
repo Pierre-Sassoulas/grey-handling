@@ -1,7 +1,5 @@
 local A, GreyHandling = ...
 
-local L = GreyHandling:GetLocalization()
-
 function GreyHandling.functions.ToolTipHook(t)
     local link = select(2, t:GetItem())
     if not link then
@@ -20,7 +18,7 @@ function GreyHandling.functions.ToolTipHook(t)
         --)
         if not itemSellPrice or itemSellPrice <= 0 then
             -- Can be a quest item, mild spices, or hearthstone for example
-            GameTooltip:AddLine("Cannot be sold", "1", "0.5", "0.5")
+            GameTooltip:AddLine(GreyHandling["Cannot be sold"], "1", "0.5", "0.5")
             return
         end
         if itemStackCount > 1 then
@@ -46,7 +44,7 @@ function GreyHandling.functions.ToolTipHook(t)
                 -- bagID, bagSlot = from t ?
                 -- local currentDurability, maximumDurability = GetContainerItemDurability(bagID, bagSlot)
                 if GreyHandling.IS_CLASSIC then
-                    SetTooltipMoney(t, itemSellPrice, nil, format("%s %s", SELL_PRICE, "(100% durability)"))
+                    SetTooltipMoney(t, itemSellPrice, nil, format("%s %s", SELL_PRICE, GreyHandling["(100% durability)"]))
                 end
             else
                 SetTooltipMoney(t, itemSellPrice, nil, format("%s", SELL_PRICE))
@@ -81,13 +79,13 @@ function GreyHandling.functions.ToolTipHook(t)
             local _, lateritemCount, _, _, _, _, lateritemLink = GetContainerItemInfo(later.bag, later.slot);
             if nowitemLink==itemLink then
                 if nowitemLink==lateritemLink then
-                    message = "Cheapest (now and later)"
+                    message = GreyHandling["Cheapest (now and later)"]
                 else
-                    message = "Cheapest (right now)"
+                    message = GreyHandling["Cheapest (right now)"]
                 end
             end
             if lateritemLink==itemLink and nowitemLink~=lateritemLink then
-                message = "Cheapest (later)"
+                message = GreyHandling["Cheapest (later)"]
             end
             GameTooltip:AddLine(message, 1, 0.5, 0.5)
         end

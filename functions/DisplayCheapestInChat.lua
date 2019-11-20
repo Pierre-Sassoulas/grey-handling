@@ -5,7 +5,7 @@ function GreyHandling.functions.GetCheapestMessage(text, item)
 	if item.itemCount == 1 then
 		details = GetContainerItemLink(item.bag, item.slot)
 	elseif item.potentialPrice == item.currentPrice then
-		details = format("A full stack of %s", GetContainerItemLink(item.bag, item.slot))
+		details = format(GreyHandling["A full stack of %s"], GetContainerItemLink(item.bag, item.slot))
 	else
 		details = format("%s %s/%s",
 			GetContainerItemLink(item.bag, item.slot),

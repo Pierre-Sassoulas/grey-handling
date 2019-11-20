@@ -63,16 +63,16 @@ end
 local function initWhatIsJunkValue(self, level)
 	local whatIsJunkValues = {}
 	if IsAddOnLoaded("Scrap") then
-		table.insert(whatIsJunkValues, "Junk according to Scrap")
+		table.insert(whatIsJunkValues, GreyHandling["Junk according to Scrap"])
 	end
 	if IsAddOnLoaded("Peddler") then
-		table.insert(whatIsJunkValues, "Marked for sell by Peddler")
+		table.insert(whatIsJunkValues, GreyHandling["Marked for sell by Peddler"])
 	end
-	table.insert(whatIsJunkValues, "Grey Items")
-	table.insert(whatIsJunkValues, "Common Items")
-	table.insert(whatIsJunkValues, "Uncommon Items")
-	table.insert(whatIsJunkValues, "Rare Items")
-	table.insert(whatIsJunkValues, "All Items")
+	table.insert(whatIsJunkValues, GreyHandling["Grey Items"])
+	table.insert(whatIsJunkValues, GreyHandling["Common Items"])
+	table.insert(whatIsJunkValues, GreyHandling["Uncommon Items"])
+	table.insert(whatIsJunkValues, GreyHandling["Rare Items"])
+	table.insert(whatIsJunkValues, GreyHandling["All Items"])
 	for index, whatIsJunkValue in pairs(whatIsJunkValues) do
 		local whatIsJunkValueOption = UIDropDownMenu_CreateInfo()
 		whatIsJunkValueOption.text = whatIsJunkValue
@@ -123,31 +123,31 @@ function GreyHandling.options.frame:OnEvent(event, key)
 		-- Variable for easy positioning
 		lastcheckbox = description
 		-- definition order matter here lastcheckbox is global!
-		AddTextTitle("Default behavior")
+		AddTextTitle(GreyHandling["Default behavior"])
 		local CheckboxShowAPIFail = CreateCheckbox(
-			"Display and pick the cheapest items even if there is a mutually beneficial trade", "",
+			GreyHandling["Display and pick the cheapest items even if there is a mutually beneficial trade"], "",
 			change_value_show_cheapeast_always,  GreyHandlingShowCheapestAlways
 		)
-		AddTextTitle("Keybinding")
+		AddTextTitle(GreyHandling["Keybinding"])
 		local CheckboxSuggestTrade = CreateCheckbox(
-			"Deactivates the default keybind. (You'll need to assign one yourself in 'KeyBinding' => 'Addons')", "",
+			GreyHandling["Deactivates the default keybind. (You'll need to assign one yourself in 'KeyBinding' => 'Addons')"], "",
 			change_value_deactivate_default_keybind,  GreyHandlingDeactivateDefaultKeybind
 		)
-		AddTextTitle("Item tooltip")
+		AddTextTitle(GreyHandling["Item tooltip"])
 		local CheckboxShowPrice = CreateCheckbox(
-			"Display vendor sell prices (might be redondant with another addon)", "",
+			GreyHandling["Display vendor sell prices (might be redondant with another addon)"], "",
 			change_value_show_price, GreyHandlingShowPrice
 		)
-		AddTextTitle("Text in chat")
+		AddTextTitle(GreyHandling["Text in chat"])
 		local CheckboxVerbose = CreateCheckbox(
-			"Explain the logic behind the two chepeast items (displayed to you)", "", change_value_verbose,
+			GreyHandling["Explain the logic behind the two chepeast items (displayed to you)"], "", change_value_verbose,
 			GreyHandlingIsVerbose
 		)
 		local CheckboxTalkative = CreateCheckbox(
-			"Automatically offer to trade the cheapest item (displayed to everyone)", "", change_value_talkative,
+			GreyHandling["Automatically offer to trade the cheapest item (displayed to everyone)"], "", change_value_talkative,
 			GreyHandlingIsTalkative
 		)
-		AddTextTitle("Determining what is junk for you")
+		AddTextTitle(GreyHandling["Determining what is junk for you"])
 		local whatIsJunkValue = CreateFrame("Button", "WhatIsJunkValueDropDown", GreyHandling.options.panel, "UIDropDownMenuTemplate")
 	    whatIsJunkValue:SetPoint("TOPLEFT", lastcheckbox, "BOTTOMLEFT", 0, -10)
 		lastcheckbox = whatIsJunkValue

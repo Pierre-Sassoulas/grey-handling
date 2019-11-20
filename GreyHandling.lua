@@ -5,7 +5,7 @@ GameTooltip:HookScript("OnTooltipSetItem", GreyHandling.functions.ToolTipHook)
 ItemRefTooltip:HookScript("OnTooltipSetItem", GreyHandling.functions.ToolTipHook)
 
 GreyHandling.print(
-	format("Launch %s with left CTRL while holding SHIFT. (or %s)",
+	format(GreyHandling["Launch %s with left CTRL while holding SHIFT. (or %s)"],
 	GreyHandling.NAME, GreyHandling.CHAT_COMMAND)
 )
 --elseif GreyHandlingDeactivateDefaultKeybind then
@@ -13,10 +13,11 @@ GreyHandling.print(
 --end
 
 -- See Bindings.xml
-BINDING_NAME_GH_ALL = "Launch GreyHandling"
-BINDING_NAME_GH_TRADE = "Search for trades only"
-BINDING_NAME_GH_THROW = "Throw cheapest item only"
+BINDING_NAME_GH_ALL = GreyHandling["Launch GreyHandling"]
+BINDING_NAME_GH_TRADE = GreyHandling["Search for trades only"]
+BINDING_NAME_GH_THROW = GreyHandling["Throw cheapest item only"]
 BINDING_HEADER_GH = GreyHandling.NAME
+
 
 function GreyHandling.isCheapest(bag, slot)
 	local now, later = GreyHandling.functions.GetCheapestJunk()
@@ -70,7 +71,7 @@ function GreyHandlingSearchForTrade()
 			CloseAllBags()
 		end
 	else
-		GreyHandling.print("|cff"..GreyHandling.redPrint.."Not in a group.".."|r")
+		GreyHandling.print("|cff"..GreyHandling.redPrint..GreyHandling["Not in a group."].."|r")
 	end
 end
 

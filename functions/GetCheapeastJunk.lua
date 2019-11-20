@@ -1,11 +1,11 @@
 local A, GreyHandling = ...
 
 function GreyHandling.useScrap()
-	return IsAddOnLoaded("Scrap") and GreyHandlingWhatIsJunkValue == "Junk according to Scrap"
+	return IsAddOnLoaded("Scrap") and GreyHandlingWhatIsJunkValue == GreyHandling["Junk according to Scrap"]
 end
 
 function GreyHandling.usePeddler()
-	return IsAddOnLoaded("Peddler") and GreyHandlingWhatIsJunkValue == "Marked for sell by Peddler"
+	return IsAddOnLoaded("Peddler") and GreyHandlingWhatIsJunkValue == GreyHandling["Marked for sell by Peddler"]
 end
 
 function GreyHandling.isJunk(bagID, bagSlot)
@@ -47,16 +47,16 @@ function GreyHandling.isJunkByItemId(itemid, bagID, bagSlot)
 		end
 		-- Grey Items (it's the default)
 		local minRarity = 0
-		if GreyHandlingWhatIsJunkValue == "Common Items" then
+		if GreyHandlingWhatIsJunkValue == GreyHandling["Common Items"] then
 			minRarity = 1
 		end
-		if GreyHandlingWhatIsJunkValue == "Uncommon Items" then
+		if GreyHandlingWhatIsJunkValue == GreyHandling["Uncommon Items"] then
 			minRarity = 2
 		end
-		if GreyHandlingWhatIsJunkValue == "Rare Items" then
+		if GreyHandlingWhatIsJunkValue == GreyHandling["Rare Items"] then
 			minRarity = 3
 		end
-		if GreyHandlingWhatIsJunkValue == "All Items" then
+		if GreyHandlingWhatIsJunkValue == GreyHandling["All Items"] then
 			minRarity = 100
 		end
 		return itemRarity <= minRarity
