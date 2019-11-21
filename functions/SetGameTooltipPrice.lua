@@ -5,7 +5,7 @@ function GreyHandling.functions.ToolTipHook(t)
     if not link then
         return
     end
-    local _, itemLink, _, _, _, _, _, itemStackCount, _, _, itemSellPrice, itemClassID = GetItemInfo(link)
+    local _, itemLink, _, _, _, _, _, itemStackCount, _, _, itemSellPrice, itemClassID, itemSubClassID = GetItemInfo(link)
     if GreyHandlingShowPrice then
         -- local itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount,
         -- itemEquipLoc, itemIcon, vendorPrice, itemClassID, itemSubClassID, bindType, expacID, itemSetID, isCraftingReagent = GetItemInfo(link)
@@ -38,7 +38,7 @@ function GreyHandling.functions.ToolTipHook(t)
             end
             SetTooltipMoney(t, itemStackCount * itemSellPrice, nil, format("%s (%s) :", SELL_PRICE, itemStackCount))
         else
-            if itemClassID == LE_ITEM_CLASS_WEAPON or itemClassID == LE_ITEM_CLASS_ARMOR then
+            if itemClassID == LE_ITEM_CLASS_WEAPON or itemClassID == LE_ITEM_CLASS_ARMOR and itemSubClassID ~= LE_ITEM_ARMOR_GENERIC then
                 -- TODO Take into account the damage to stuff (price go down not linearly)
                 -- Ie stuff is worth 18 coppers at 60/60, but 6 copper at 45/60
                 -- bagID, bagSlot = from t ?
