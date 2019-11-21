@@ -21,7 +21,7 @@ if GetLocale() == "frFR" then
  GreyHandling["Not in a group."] = "Vous ne faites pas partie d'un groupe"
  GreyHandling["Forgetting about %s's bag."] = "Suppression des connaissances à propos du sac de %s."
  GreyHandling["Cannot be sold"] = "Ne peut être vendu"
- GreyHandling["Launch %s with left CTRL while holding SHIFT. (or %s)"] = "Lancez avec CTRL gauche tout en appuyant sur MAJ. (ou %s)"
+ GreyHandling["Launch %s with left CTRL while holding SHIFT. (or %s)"] = "Lancez %s avec CTRL gauche tout en appuyant sur MAJ. (ou %s)"
  GreyHandling["Cheapest (now and later)"] = "Moins chère (maintenant et plus tard)"
  GreyHandling["Cheapest (right now)"] = "Moins chère (maintenant)"
  GreyHandling["Cheapest (later)"] = "Moins chère (plus tard)"
