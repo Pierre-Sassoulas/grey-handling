@@ -11,11 +11,12 @@ function GreyHandling.functions.ExchangeMyJunkPlease(target)
 	for bagID = 0, NUM_BAG_SLOTS do
 		freeSpace = freeSpace + GetContainerNumFreeSlots(bagID);
 		for bagSlot = 1, GetContainerNumSlots(bagID) do
-			local itemid = GetContainerItemID(bagID, bagSlot)
-			if itemid and IsAddOnLoaded("Scrap") and Scrap:IsJunk(itemid, bagID, bagSlot) then
-				local _, _, _, _, _, _, _, itemStackCount = GetItemInfo(itemid)
+			if GreyHandling.isJunk(bagID, bagSlot) then
+                local itemid = GetContainerItemID(bagID, bagSlot)
+				local _, _, _, _, _, _, _, itemStackCount, _, _, _, _, _, bindType = GetItemInfo(itemid)
+				--  Item binding type: 0 - none; 1 - on pickup; 2 - on equip; 3 - on use; 4 - quest.
 				local _, itemCount = GetContainerItemInfo(bagID, bagSlot)
-				if itemCount%itemStackCount ~=0 then -- We don't want to exchange our full stack
+				if itemCount%itemStackCount ~=0 and (bindType==0 or bindType==3)  then -- We don't want to exchange our full stack
 					-- If someone has a lot of bag space we might.
 					message = format("%s %s-%s", message, itemid, itemCount)
 				end
