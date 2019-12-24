@@ -8,8 +8,9 @@ if IsAddOnLoaded("Bagnon") or IsAddOnLoaded("Combuctor") then
 	if not Addon then
 		Addon = Combuctor
 	end
+	local ItemSlot
     if Addon.ItemSlot then
-        local ItemSlot = Addon.ItemSlot
+        ItemSlot = Addon.ItemSlot
     else
         GreyHandling.print(format("%s cannot work with Bagnon or Combuctor (yet). See Github Issue 33.", GreyHandling.NAME))
         return
