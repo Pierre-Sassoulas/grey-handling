@@ -10,9 +10,14 @@ if IsAddOnLoaded("Bagnon") or IsAddOnLoaded("Combuctor") then
 	end
 	local ItemSlot
     if Addon.ItemSlot then
+        -- Retrocompatibility with old version of Bagnon
         ItemSlot = Addon.ItemSlot
+    elseif Addon.Item then
+        -- Compatibility with new version of Bagnon following change here :
+        -- https://github.com/tullamods/Bagnon/commit/66ef9412fa7d3f6eb9ec91930316ec3818213abd
+        ItemSlot = Addon.Item
     else
-        GreyHandling.print(format("%s cannot work with Bagnon or Combuctor (yet). See Github Issue 33.", GreyHandling.NAME))
+        GreyHandling.print(format("%s cannot work properly with Bagnon or Combuctor. Please open a Github Issue.", GreyHandling.NAME))
         return
     end
 	local UpdateBorder = ItemSlot.UpdateBorder
@@ -71,4 +76,3 @@ if IsAddOnLoaded("Bagnon") or IsAddOnLoaded("Combuctor") then
 	--hooksecurefunc(GreyHandling, 'ToggleJunk', UpdateBags)
 	--Scrap.HasSpotlight = true
 end
-
