@@ -52,7 +52,7 @@ Compatibility with other bags addons
 - **Peddler** If Peddler is installed, we can use your marked for sell list (or not) as of november 2019
 - **OneBag3** This addon did not need any integration (<3 OneBag3 dev, you're the best)
 - **ArkInventory** Working as of october 2019
-- **Bagnon/Conductor** Working as of october 2019
+- **Bagnon/Conductor** Following an update in Bagnon, only Conductor work
 - **VendorPrice** You can disable GreyHandling item tooltip about prices, to not have twice the information.
 
 In bag mark does not work with :
