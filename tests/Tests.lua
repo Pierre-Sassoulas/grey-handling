@@ -162,5 +162,5 @@ function GreyHandling.allTests()
     --GreyHandling.testHandleChatLootMessageFrench()
     --print("Testing HandleChatLootMessage in Chinese...")
     --GreyHandling.testHandleChatLootMessageChinese()
-    GreyHandling.print("Test succesfful if there was only messages started by testing!")
+    GreyHandling.print("Test successful if there was only messages started by testing!")
 end

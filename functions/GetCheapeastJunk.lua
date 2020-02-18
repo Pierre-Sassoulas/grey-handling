@@ -21,9 +21,7 @@ function GreyHandling.isJunkByItemLink(itemLink)
 	if not itemLink then
 		return false
 	end
-	-- print("Is "..itemLink.." junk ?")
 	local itemid = GreyHandling.functions.getIDNumber(itemLink)
-	-- print("Itemid for "..itemLink.." is ".. itemid)
 	return GreyHandling.isJunkByItemId(itemid)
 end
 
@@ -96,7 +94,6 @@ function GreyHandling.functions.GetCheapestJunk()
 						now.itemStackCount = itemStackCount
 						now.vendorPrice = vendorPrice
 						now.bag = bagID
-
 						now.slot = bagSlot
 					end
 					if later.potentialPrice == nil or

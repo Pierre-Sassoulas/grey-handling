@@ -8,9 +8,6 @@ GreyHandling.print(
 	format(GreyHandling["Launch %s with left CTRL while holding SHIFT. (or %s)"],
 	GreyHandling.NAME, GreyHandling.CHAT_COMMAND)
 )
---elseif GreyHandlingDeactivateDefaultKeybind then
-	--GreyHandling.print(format("Loaded %s (%s)", GreyHandling.NAME, GreyHandling.CHAT_COMMAND))
---end
 
 -- See Bindings.xml
 BINDING_NAME_GH_ALL = GreyHandling["Launch GreyHandling"]
@@ -97,8 +94,6 @@ GreyHandling.loot_frame:SetScript("OnEvent", GreyHandling.loot_frame.OnLoot)
 function GreyHandling.chat_frame:OnChat(event, addon,  text, channel, sender, target, zoneChannelID, localID, name, instanceID)
 	if addon == GreyHandling.NAME then
 		GreyHandling.functions.SomeoneAskForExchange(text, channel, sender, target, zoneChannelID, localID, name, instanceID)
-	--elseif addon == GreyHandling.ADDON_CHAT_VERSION then
-		--print(addon, text)
 	end
 end
 GreyHandling.chat_frame:RegisterEvent("CHAT_MSG_ADDON")

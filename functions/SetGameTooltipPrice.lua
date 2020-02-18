@@ -71,8 +71,7 @@ function GreyHandling.functions.ToolTipHook(t)
             end
         end
         local now, later = GreyHandling.functions.GetCheapestJunk()
-        -- local texture, itemCount, locked, quality, readable, lootable, itemLink =
-        -- GetContainerItemInfo(now.bag, now.slot);
+        -- local texture, itemCount, locked, quality, readable, lootable, itemLink = GetContainerItemInfo(now.bag, now.slot);
         if now.bag and later.bag then
             local message = ""
             local _, nowitemCount, _, _, _, _, nowitemLink = GetContainerItemInfo(now.bag, now.slot);
