@@ -18,6 +18,18 @@
 \logo{\includegraphics[width=.03\textwidth]{antidot-logo}}
 
 \setbeamerfont{block title}{size={}}
+\setbeamertemplate{page number in head/foot}{\insertframenumber /\inserttotalframenumber}
+
+\usepackage[absolute,overlay]{textpos}
+
+\setbeamercolor{framesource}{fg=gray}
+\setbeamerfont{framesource}{size=\tiny}
+
+\newcommand{\source}[1]{\begin{textblock*}{5cm}(7.35cm,8.2cm)
+    \begin{beamercolorbox}[ht=0.5cm,right]{framesource}
+        \usebeamerfont{framesource}\usebeamercolor[fg]{framesource} Source: {#1}
+    \end{beamercolorbox}
+\end{textblock*}}
 
 \mode
 <all>
