@@ -52,6 +52,5 @@ HandleCheapestJunk.lua
 HandleMutuallyBeneficialTrades.lua
 GreyHandlingOptions.lua
 Bagnon_GreyHandling.lua
-TSM_GreyHandling.lua
 tests\Tests.lua
 GreyHandling.lua
