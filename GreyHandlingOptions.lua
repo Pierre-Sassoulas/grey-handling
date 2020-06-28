@@ -58,6 +58,8 @@ end
 local function changeWhatIsJunkValue(self)
 	UIDropDownMenu_SetSelectedID(WhatIsJunkValueDropDown, self:GetID())
 	GreyHandlingWhatIsJunkValue = self.value
+    -- Must recalculate cheapest object if this option change
+    GreyHandling.functions.CalculateCheapestJunk()
 end
 
 local function initWhatIsJunkValue(self, level)
@@ -79,7 +81,6 @@ local function initWhatIsJunkValue(self, level)
 		whatIsJunkValueOption.value = whatIsJunkValue
 		whatIsJunkValueOption.func = changeWhatIsJunkValue
 		UIDropDownMenu_AddButton(whatIsJunkValueOption)
-
 		if whatIsJunkValue == GreyHandlingWhatIsJunkValue then
 			UIDropDownMenu_SetSelectedID(WhatIsJunkValueDropDown, index)
 		end

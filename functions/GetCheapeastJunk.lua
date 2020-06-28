@@ -61,7 +61,7 @@ function GreyHandling.isJunkByItemId(itemid, bagID, bagSlot)
 	end
 end
 
-function GreyHandling.functions.GetCheapestJunk()
+function GreyHandling.functions.CalculateCheapestJunk()
 	local now = {}
 	now.currentPrice = nil
 	local later = {}
@@ -106,5 +106,12 @@ function GreyHandling.functions.GetCheapestJunk()
 			end
 		end
 	end
-    return now, later
+	GreyHandling.now = now
+    GreyHandling.later = later
+	print("Calculated cheapest object")
+end
+
+function GreyHandling.functions.GetCheapestJunk()
+	-- print("Just got cheapest without calculation")
+	return GreyHandling.now, GreyHandling.later
 end
