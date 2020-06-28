@@ -17,3 +17,44 @@ ignore: # Files and directories beginning with a dot (such as .git) are automati
     - examples/mutually_beneficial_trade.jpg
     - examples/mutually_beneficial_trade_small.jpg
     - examples/red_glow.jpg
+    - antidot-brown-bag-presentation/icon/ico1.png
+    - antidot-brown-bag-presentation/icon/ico2.jpg
+    - antidot-brown-bag-presentation/.gitignore
+    - antidot-brown-bag-presentation/5daystoprod.png
+    - antidot-brown-bag-presentation/allow_comment.png
+    - antidot-brown-bag-presentation/antidot-logo.png
+    - antidot-brown-bag-presentation/arkinventory_integration.png
+    - antidot-brown-bag-presentation/arkinventory_result.jpg
+    - antidot-brown-bag-presentation/bagnon_video_preview.png
+    - antidot-brown-bag-presentation/beamerthemeAntidot.sty
+    - antidot-brown-bag-presentation/being-the-maintener-of-a-wow-addon.tex
+    - antidot-brown-bag-presentation/better_than_regular_programming.png
+    - antidot-brown-bag-presentation/burst_files.png
+    - antidot-brown-bag-presentation/chinese_discrimination.png
+    - antidot-brown-bag-presentation/classic_retail.png
+    - antidot-brown-bag-presentation/combductor_integration.jpg
+    - antidot-brown-bag-presentation/communication.png
+    - antidot-brown-bag-presentation/debug.png
+    - antidot-brown-bag-presentation/etrace.jpg
+    - antidot-brown-bag-presentation/etrace2.jpg
+    - antidot-brown-bag-presentation/help_from_jaliborc.png
+    - antidot-brown-bag-presentation/hijack_print.png
+    - antidot-brown-bag-presentation/itemtooltip1.jpg
+    - antidot-brown-bag-presentation/keybinds.png
+    - antidot-brown-bag-presentation/l10n.png
+    - antidot-brown-bag-presentation/local_mistake_again.png
+    - antidot-brown-bag-presentation/miniature_basic_example.png
+    - antidot-brown-bag-presentation/options_panel_poc.png
+    - antidot-brown-bag-presentation/options_panel_result.png
+    - antidot-brown-bag-presentation/peddler_integration.png
+    - antidot-brown-bag-presentation/russian.png
+    - antidot-brown-bag-presentation/scrap.png
+    - antidot-brown-bag-presentation/team_exchange.jpg
+    - antidot-brown-bag-presentation/th1r1sv08ht21.png
+    - antidot-brown-bag-presentation/twitch_integration.png
+    - antidot-brown-bag-presentation/twitch_issue_report.png
+    - antidot-brown-bag-presentation/video_preview.png
+    - antidot-brown-bag-presentation/whats_wrong_with_this.png
+    - antidot-brown-bag-presentation/WoW_Box_Art1.jpg
+    - antidot-brown-bag-presentation/wow_summer_hype.png
+    - antidot-brown-bag-presentation/WoWInterface.png
