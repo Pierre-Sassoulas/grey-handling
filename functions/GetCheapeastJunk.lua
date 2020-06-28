@@ -85,6 +85,7 @@ function GreyHandling.functions.CalculateCheapestJunk()
 					if now.currentPrice == nil or now.currentPrice > currentVendorPrice then
 						now.currentPrice = currentVendorPrice
 						now.potentialPrice = potentialVendorPrice
+						now.itemLink = itemLink
 						now.itemCount = itemCount
 						now.itemStackCount = itemStackCount
 						now.vendorPrice = vendorPrice
@@ -96,6 +97,7 @@ function GreyHandling.functions.CalculateCheapestJunk()
 							(later.potentialPrice==potentialVendorPrice and later.currentPrice > currentVendorPrice) then
 						later.currentPrice = currentVendorPrice
 						later.potentialPrice = potentialVendorPrice
+						later.itemLink = itemLink
 						later.itemCount = itemCount
 						later.itemStackCount = itemStackCount
 						later.vendorPrice = vendorPrice
@@ -114,6 +116,24 @@ function GreyHandling.functions.CalculateCheapestJunk()
 		GreyHandling.only_one_item_is_cheapest = false
 	end
 	-- print("Calculated cheapest object")
+end
+
+function GreyHandling.functions.UpdateCheapestJunkPosition()
+	-- print("Updated cheapest object position.")
+	if not GreyHandling.now.itemLink then
+		return
+	end
+	local bag, slot = GreyHandling.functions.GetBagAndSlot(GreyHandling.now.itemLink, GreyHandling.now.itemCount)
+	GreyHandling.now.bag = bag
+	GreyHandling.now.slot = slot
+	if not GreyHandling.only_one_item_is_cheapest then
+		bag, slot = GreyHandling.functions.GetBagAndSlot(
+				GreyHandling.later.itemLink,
+				GreyHandling.later.itemCount
+		)
+	end
+	GreyHandling.later.bag = bag
+	GreyHandling.later.slot = slot
 end
 
 function GreyHandling.functions.GetCheapestJunk()

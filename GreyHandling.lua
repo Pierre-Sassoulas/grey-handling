@@ -107,5 +107,8 @@ end
 local UpdateCheapestFrame = CreateFrame("FRAME", "GreyHandlingUpdateCheapestFrame");
 UpdateCheapestFrame:RegisterEvent("UNIT_INVENTORY_CHANGED");
 UpdateCheapestFrame:RegisterEvent("PLAYER_ENTERING_WORLD");
-UpdateCheapestFrame:RegisterEvent("BAG_UPDATE");
 UpdateCheapestFrame:SetScript("OnEvent", GreyHandling.functions.CalculateCheapestJunk);
+
+local UpdateCheapestPositionFrame = CreateFrame("FRAME", "GreyHandlingUpdateCheapestFrame");
+UpdateCheapestPositionFrame:RegisterEvent("BAG_UPDATE");
+UpdateCheapestPositionFrame:SetScript("OnEvent",  GreyHandling.functions.UpdateCheapestJunkPosition);
