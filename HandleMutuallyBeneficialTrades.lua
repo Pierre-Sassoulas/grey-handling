@@ -11,6 +11,15 @@ function GreyHandling.loot_frame:OnLoot(event, chat_message, player_name_retail,
 	end
 end
 
+function GreyHandling.member_leave_frame:OnLeave(event, addon,  text, channel, sender, target, zoneChannelID, localID, name, instanceID)
+	local playerNames = {}
+	for raidIndex = 1, GetNumGroupMembers() do
+		local name = GetRaidRosterInfo(raidIndex)
+		playerNames[name] = true
+	end
+	GreyHandling.db.removePlayerThatLeft(playerNames)
+end
+
 function GreyHandling.functions.GetBagAndSlot(itemLink, ourCount)
 	for bagID = 0, NUM_BAG_SLOTS do
 		for bagSlot = 1, GetContainerNumSlots(bagID) do
