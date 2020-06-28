@@ -11,7 +11,7 @@ GreyHandling.later = nil
 GreyHandling.functions = {}
 GreyHandling.db = {}
 GreyHandling.SELL_PRICE_TEXT = format("%s:", SELL_PRICE)
-GreyHandling.IS_CLASSIC = true
+GreyHandling.IS_CLASSIC = (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC)
 GreyHandling.NAME = "GreyHandling"
 GreyHandling.SHORT_NAME = "GH"
 GreyHandling.DISPLAY_NAME = "Grey Handling"
