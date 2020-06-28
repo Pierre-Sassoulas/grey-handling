@@ -68,11 +68,6 @@ function GreyHandling.functions.GetCheapestJunk()
 	later.potentialPrice = nil
 	for bagID = 0, NUM_BAG_SLOTS do
 		for bagSlot = 1, GetContainerNumSlots(bagID) do
-			if IsAddOnLoaded("ArkInventory") then
-				local loc_id, bag_id = ArkInventory.BlizzardBagIdToInternalId(bagID)
-				local _, item = ArkInventory.API.ItemFrameGet(loc_id, bag_id, bagSlot)
-				ActionButton_HideOverlayGlow(item)
-			end
 			local itemid = GetContainerItemID(bagID, bagSlot)
 			if itemid then
 				if GreyHandling.isJunk(bagID, bagSlot) then
