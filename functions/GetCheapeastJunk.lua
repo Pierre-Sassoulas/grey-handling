@@ -108,6 +108,11 @@ function GreyHandling.functions.CalculateCheapestJunk()
 	end
 	GreyHandling.now = now
     GreyHandling.later = later
+	if now.bag==later.bag and now.slot==later.slot or now.potentialPrice == later.potentialPrice then
+		GreyHandling.only_one_item_is_cheapest = true
+	else
+		GreyHandling.only_one_item_is_cheapest = false
+	end
 	-- print("Calculated cheapest object")
 end
 

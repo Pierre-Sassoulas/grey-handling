@@ -9,8 +9,7 @@ function GreyHandling.functions.HandleCheapestJunk(foundSomething)
 	local now, later = GreyHandling.functions.GetCheapestJunk()
 	if now.bag and now.slot then
 		foundSomething = true
-		if now.bag==later.bag and now.slot==later.slot or now.potentialPrice == later.potentialPrice then
-			-- Only one item is the cheapest
+		if GreyHandling.only_one_item_is_cheapest then
 			GreyHandling.functions.DisplayCheapestInChat(GreyHandling["Cheapest:"], now)
 			PickupContainerItem(now.bag, now.slot)
 			if GreyHandlingIsTalkative then
