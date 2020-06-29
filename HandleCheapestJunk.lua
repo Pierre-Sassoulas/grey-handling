@@ -13,6 +13,7 @@ function GreyHandling.functions.HandleCheapestJunk(foundSomething)
 		if GreyHandling.only_one_item_is_cheapest then
 			GreyHandling.functions.DisplayCheapestInChat(GreyHandling["Cheapest:"], now)
 			PickupContainerItem(now.bag, now.slot)
+			-- DeleteCursorItem() Dangerous auto-delete
 			if GreyHandlingIsTalkative then
 				local itemLink = GetContainerItemLink(now.bag, now.slot)
 				local whatToGive
