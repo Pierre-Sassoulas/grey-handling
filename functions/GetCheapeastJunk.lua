@@ -118,11 +118,22 @@ function GreyHandling.functions.CalculateCheapestJunk()
 	-- print("Calculated cheapest object")
 end
 
+function GreyHandling.functions.ItemDidNotMove(now_or_later)
+	local _, testedItemCount, _, _, _, _, testedItemLink = GetContainerItemInfo(now_or_later.bag, now_or_later.slot)
+	return now_or_later.itemLink == testedItemLink  and now_or_later.itemCount == testedItemCount
+end
+
 function GreyHandling.functions.UpdateCheapestJunkPosition()
-	-- print("Updated cheapest object position.")
 	if not GreyHandling.now.itemLink then
 		return
 	end
+	-- print("Checked that cheapest object position did not change.")
+	if (GreyHandling.functions.ItemDidNotMove(GreyHandling.now) and
+			(GreyHandling.only_one_item_is_cheapest or GreyHandling.functions.ItemDidNotMove(GreyHandling.later))
+	) then
+		return
+	end
+	-- print("Updated cheapest object position.")
 	local bag, slot = GreyHandling.functions.GetBagAndSlot(GreyHandling.now.itemLink, GreyHandling.now.itemCount)
 	GreyHandling.now.bag = bag
 	GreyHandling.now.slot = slot
