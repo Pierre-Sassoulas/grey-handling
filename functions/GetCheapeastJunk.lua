@@ -108,7 +108,7 @@ function GreyHandling.functions.CalculateCheapestJunk()
 	end
 	GreyHandling.now = now
     GreyHandling.later = later
-	print("Calculated cheapest object")
+	-- print("Calculated cheapest object")
 end
 
 function GreyHandling.functions.GetCheapestJunk()
