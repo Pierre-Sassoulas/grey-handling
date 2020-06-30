@@ -117,6 +117,9 @@ function GreyHandling.functions.CalculateCheapestJunk()
 end
 
 function GreyHandling.functions.ItemDidNotMove(now_or_later)
+	if not now_or_later.bag or not now_or_later.slot then
+		return false
+	end
 	local _, testedItemCount, _, _, _, _, testedItemLink = GetContainerItemInfo(now_or_later.bag, now_or_later.slot)
 	return now_or_later.itemLink == testedItemLink  and now_or_later.itemCount == testedItemCount
 end
