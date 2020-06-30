@@ -69,41 +69,39 @@ function GreyHandling.functions.CalculateCheapestJunk()
 	for bagID = 0, NUM_BAG_SLOTS do
 		for bagSlot = 1, GetContainerNumSlots(bagID) do
 			local itemid = GetContainerItemID(bagID, bagSlot)
-			if itemid then
-				if GreyHandling.isJunk(bagID, bagSlot) then
-					local itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount,
-						itemEquipLoc, itemIcon, vendorPrice, itemClassID, itemSubClassID, bindType, expacID, itemSetID,
-						isCraftingReagent = GetItemInfo(itemid)
-					local _, itemCount = GetContainerItemInfo(bagID, bagSlot)
-                    local currentDurability, maximumDurability = GetContainerItemDurability(bagID, bagSlot)
-                    local modifier = 1
-                    if currentDurability and maximumDurability then
-                        modifier= currentDurability / maximumDurability
-                    end
-					local currentVendorPrice = vendorPrice * itemCount * modifier
-					local potentialVendorPrice = vendorPrice * itemStackCount
-					if now.currentPrice == nil or now.currentPrice > currentVendorPrice then
-						now.currentPrice = currentVendorPrice
-						now.potentialPrice = potentialVendorPrice
-						now.itemLink = itemLink
-						now.itemCount = itemCount
-						now.itemStackCount = itemStackCount
-						now.vendorPrice = vendorPrice
-						now.bag = bagID
-						now.slot = bagSlot
-					end
-					if later.potentialPrice == nil or
-							later.potentialPrice > potentialVendorPrice or
-							(later.potentialPrice==potentialVendorPrice and later.currentPrice > currentVendorPrice) then
-						later.currentPrice = currentVendorPrice
-						later.potentialPrice = potentialVendorPrice
-						later.itemLink = itemLink
-						later.itemCount = itemCount
-						later.itemStackCount = itemStackCount
-						later.vendorPrice = vendorPrice
-						later.bag = bagID
-						later.slot = bagSlot
-					end
+			if itemid and GreyHandling.isJunk(bagID, bagSlot) then
+				local itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount,
+					itemEquipLoc, itemIcon, vendorPrice, itemClassID, itemSubClassID, bindType, expacID, itemSetID,
+					isCraftingReagent = GetItemInfo(itemid)
+				local _, itemCount = GetContainerItemInfo(bagID, bagSlot)
+				local currentDurability, maximumDurability = GetContainerItemDurability(bagID, bagSlot)
+				local modifier = 1
+				if currentDurability and maximumDurability then
+					modifier= currentDurability / maximumDurability
+				end
+				local currentVendorPrice = vendorPrice * itemCount * modifier
+				local potentialVendorPrice = vendorPrice * itemStackCount
+				if now.currentPrice == nil or now.currentPrice > currentVendorPrice then
+					now.currentPrice = currentVendorPrice
+					now.potentialPrice = potentialVendorPrice
+					now.itemLink = itemLink
+					now.itemCount = itemCount
+					now.itemStackCount = itemStackCount
+					now.vendorPrice = vendorPrice
+					now.bag = bagID
+					now.slot = bagSlot
+				end
+				if later.potentialPrice == nil or
+						later.potentialPrice > potentialVendorPrice or
+						(later.potentialPrice==potentialVendorPrice and later.currentPrice > currentVendorPrice) then
+					later.currentPrice = currentVendorPrice
+					later.potentialPrice = potentialVendorPrice
+					later.itemLink = itemLink
+					later.itemCount = itemCount
+					later.itemStackCount = itemStackCount
+					later.vendorPrice = vendorPrice
+					later.bag = bagID
+					later.slot = bagSlot
 				end
 			end
 		end
