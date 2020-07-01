@@ -3,6 +3,7 @@
 \usepackage{listings}
 \usepackage{hyperref}
 \usepackage{tikz}
+\usepackage{xcolor}
 \usetheme{Antidot}
 \begin{document}
 \title{Maintaining a World of Warcraft addon}
@@ -45,7 +46,7 @@
             \begin{block}{What is World of Warcraft (WOW)}
                 \begin{itemize}
                     \item Massively multiplayer online role-playing game (MMORPG)
-                    \item So successful that all competitors were deemed unsuccessful to this day
+                    \item So successful that competitors with hundred of thousands of monthly subscribers were deemed unsuccessful
                     \item 7 expansions updated and delivered continuously since 2004
                 \end{itemize}
             \end{block}
@@ -151,7 +152,7 @@
 
     \begin{block}{Friend and guildies required features}
         \begin{itemize}
-            \item How can a print be "nice" ?
+            \item How can a print be ``nice'' ?
             \item Integrate with ALL their addons for bags
             \item Give visual cue in item tooltip
         \end{itemize}
@@ -246,7 +247,7 @@
 \frame{\frametitle{Development set up}
     \begin{block}{IDE/WOW set up}
         \begin{itemize}
-            \item Put your source directory in "Addons/Interface", rename it so it match your .toc
+            \item Put your source directory in ``Addons/Interface'', rename it so it match your .toc
             \item Create a $/reload$ WOW macro so you can apply changes fast
             \item Find a way to launch unit tests
         \end{itemize}
@@ -316,8 +317,8 @@
 
     \begin{block}{Example : Not doing everything after a keybind...}
         \begin{itemize}
-            \item Update the cheapest object after the "UNIT\_INVENTORY\_CHANGED" event
-            \item Update item tooltip after the "BAG\_UPDATE\_REQUIRED" event
+            \item Update the cheapest object after the ``UNIT\_INVENTORY\_CHANGED'' event
+            \item Update item tooltip after the ``BAG\_UPDATE\_REQUIRED'' event
             \item ...
         \end{itemize}
     \end{block}
@@ -345,13 +346,23 @@
 
 }
 
+\definecolor{greyhandlingGrey}{HTML}{a0a0a0}
+
 \frame{\frametitle{Colors the Blizzard way}
     \begin{block}{Color in print and addon name}
         \begin{itemize}
-            \item |cffHEXCODColored rext|r|
-            \item For example $|cffa0a0a0GH|r|cffffffff:|r$ is "GH" in grey (a0a0a0) then ":" in white (ffffff)
+            \item \textit{|cff\textbf{HEXCOD}\textcolor{blue}{Colored rext}|r|}
+            \item For example for ``\textcolor{greyhandlingGrey}{GH}\textcolor{white}{:}'' ie. ``GH'' in grey (a0a0a0) then ``:'' in white (ffffff) :
+            \item |cff\textbf{a0a0a0}\textcolor{greyhandlingGrey}{GH}|r|cff\textbf{ffffff}\textcolor{white}{:}|r
+            \item Remember, addons are listed alphabetically in the list of addons
         \end{itemize}
     \end{block}
+
+    \begin{center}
+        \includegraphics[width=0.5\textwidth]{blizzard_color.png}
+        \source{Bouzrogue, addon developer}
+    \end{center}
+
 }
 
 \frame{\frametitle{Resources}
@@ -362,7 +373,7 @@
         \begin{itemize}
             \item Open-source addons done by cleverer and more knowledgeable WOW developers than you
             \item wowwiki.fandom.com (events, API, XML, and a lot more)
-            \item Projects that emulate WOW's API (Ellypse's "wow-ui-source" on github.com for example) for auto-completion
+            \item Projects that emulate WOW's API (Ellypse's ``wow-ui-source'' on github.com for example) for auto-completion
         \end{itemize}
     \end{block}
 }
@@ -391,7 +402,7 @@
     \begin{block}{Make your keyboard shortcut official}
         \begin{itemize}
             \item It's not that hard, it's a small XML file
-            \item If your keybind conflict with user's keybinds, and they can't change yours, they go "bye bye"
+            \item If your keybind conflict with user's keybinds, and they can't change yours, they go ``bye bye''
         \end{itemize}
     \end{block}
     \begin{center}
@@ -414,7 +425,7 @@
             \item You need to create a user facing frame, piece by piece
             \item You need to save the options values between session
             \item So, UI from zero AND persistence !
-            \item Considerably harder than hidden "back-end" algorithms calling a print or an API function after an event
+            \item Considerably harder than hidden ``back-end'' algorithms calling a print or an API function after an event
         \end{itemize}
         \begin{center}
             \includegraphics[width=0.8\textwidth]{options_panel_poc.png}
@@ -440,7 +451,7 @@
         \begin{itemize}
             \item You can't set the version of your dependencies
             \item Any release of another addons can break your addon
-            \item A new WOW release by Blizzard will make your addon "deprecated"
+            \item A new WOW release by Blizzard will make your addon ``deprecated''
             \item You're then supposed to upgrade it, every addon developpers does that at the same time... hope for the best.
         \end{itemize}
     \end{block}
@@ -468,9 +479,9 @@
     \begin{block}{Communicating between multiple player using your addon}
         \begin{itemize}
             \item Specify your little messaging convention. Keep it short.
-            \item I used "v-VersionNumber b-FreeBagSpace" + n * "itemId-itemCount"
+            \item I used ``v-VersionNumber b-FreeBagSpace'' + n * ``itemId-itemCount''
             \item Send it via C\_ChatInfo.SendAddonMessage
-            \item Listen to "CHAT\_MSG\_ADDON" fired by your own addon
+            \item Listen to ``CHAT\_MSG\_ADDON'' fired by your own addon
         \end{itemize}
         \begin{center}
             \includegraphics[width=1\textwidth]{communication.png}
@@ -536,7 +547,7 @@
 \frame{\frametitle{Twitch integration}
     \begin{block}{In seven recursive words : Pretty damn convenient}
         \begin{itemize}
-            \item Read the documentation (under "Automatic Packaging")
+            \item Read the documentation (under ``Automatic Packaging'')
             \item It just works
         \end{itemize}
         \begin{center}
@@ -548,7 +559,7 @@
 
 \frame{\frametitle{WoWInterface integration}
 
-    \begin{block}{Another addon "store": WoWInterface}
+    \begin{block}{Another addon ``store'' : WoWInterface}
         \begin{itemize}
             \item There is no integration with external source repository
             \item So I did not use it and had less users than I could have had

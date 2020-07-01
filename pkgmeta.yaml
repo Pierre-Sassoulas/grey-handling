@@ -17,9 +17,6 @@ ignore: # Files and directories beginning with a dot (such as .git) are automati
     - examples/mutually_beneficial_trade.jpg
     - examples/mutually_beneficial_trade_small.jpg
     - examples/red_glow.jpg
-    - antidot-brown-bag-presentation/icon/ico1.png
-    - antidot-brown-bag-presentation/icon/ico2.jpg
-    - antidot-brown-bag-presentation/.gitignore
     - antidot-brown-bag-presentation/5daystoprod.png
     - antidot-brown-bag-presentation/allow_comment.png
     - antidot-brown-bag-presentation/antidot-logo.png
@@ -29,6 +26,7 @@ ignore: # Files and directories beginning with a dot (such as .git) are automati
     - antidot-brown-bag-presentation/beamerthemeAntidot.sty
     - antidot-brown-bag-presentation/being-the-maintener-of-a-wow-addon.tex
     - antidot-brown-bag-presentation/better_than_regular_programming.png
+    - antidot-brown-bag-presentation/blizzard_color.png
     - antidot-brown-bag-presentation/burst_files.png
     - antidot-brown-bag-presentation/chinese_discrimination.png
     - antidot-brown-bag-presentation/classic_retail.png
@@ -39,6 +37,8 @@ ignore: # Files and directories beginning with a dot (such as .git) are automati
     - antidot-brown-bag-presentation/etrace2.jpg
     - antidot-brown-bag-presentation/help_from_jaliborc.png
     - antidot-brown-bag-presentation/hijack_print.png
+    - antidot-brown-bag-presentation/icon/ico1.png
+    - antidot-brown-bag-presentation/icon/ico2.jpg
     - antidot-brown-bag-presentation/itemtooltip1.jpg
     - antidot-brown-bag-presentation/keybinds.png
     - antidot-brown-bag-presentation/l10n.png
