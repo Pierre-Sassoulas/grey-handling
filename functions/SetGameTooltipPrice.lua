@@ -1,11 +1,26 @@
 local A, GreyHandling = ...
 
+function GreyHandling.functions.getPrice(link, itemSellPrice)
+    if IsAddOnLoaded("TradeSkillMaster") and not(GreyHandlingSourceOfItemPrice == GreyHandling["Vendor Price"]) then
+		local tsmSellPrice = TSM_API.GetCustomPriceValue("dbMarket", TSM_API.ToItemString(link))
+        if not(itemSellPrice) or tsmSellPrice and tsmSellPrice > itemSellPrice * GreyHandling.options.AUCTION_HOUSE_CUT then
+            itemSellPrice = tsmSellPrice
+        end
+    end
+    return itemSellPrice
+end
+
+function GreyHandling.functions.GetItemInfo(link)
+    local _, itemLink, _, _, _, _, _, itemStackCount, _, _, itemSellPrice, itemClassID, itemSubClassID = GetItemInfo(link)
+    return itemLink, itemStackCount, GreyHandling.functions.getPrice(link, itemSellPrice), itemClassID, itemSubClassID
+end
+
 function GreyHandling.functions.ToolTipHook(t)
     local link = select(2, t:GetItem())
     if not link then
         return
     end
-    local _, itemLink, _, _, _, _, _, itemStackCount, _, _, itemSellPrice, itemClassID, itemSubClassID = GetItemInfo(link)
+    local itemLink, itemStackCount, itemSellPrice, itemClassID, itemSubClassID = GreyHandling.functions.GetItemInfo(link)
     if GreyHandlingShowPrice then
         -- local itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount,
         -- itemEquipLoc, itemIcon, vendorPrice, itemClassID, itemSubClassID, bindType, expacID, itemSetID, isCraftingReagent = GetItemInfo(link)
@@ -48,6 +63,7 @@ function GreyHandling.functions.ToolTipHook(t)
                 end
             else
                 SetTooltipMoney(t, itemSellPrice, nil, format("%s", SELL_PRICE))
+
             end
         end
         for playerName, items in pairs(GreyHandling.data.items) do

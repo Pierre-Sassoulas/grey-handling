@@ -51,6 +51,7 @@ function GreyHandling.options.panel.default()
 	GreyHandlingIsVerbose = GreyHandling.options.DEFAULT_VERBOSE
 	GreyHandlingShowPrice = GreyHandling.options.DEFAULT_SHOW_PRICE
 	GreyHandlingWhatIsJunkValue = GreyHandling.options.DEFAULT_WHAT_IS_JUNK
+	GreyHandlingSourceOfItemPrice = GreyHandling.options.DEFAULT_SOURCE_OF_ITEM_PRICE
 	GreyHandlingDeactivateDefaultKeybind = GreyHandling.options.DEFAULT_DEACTIVATE_DEFAULT_KEYBIND
 	GreyHandlingShowCheapestAlways = GreyHandling.options.DEFAULT_SHOW_CHEAPEST_ALWAYS
 end
@@ -58,6 +59,13 @@ end
 local function changeWhatIsJunkValue(self)
 	UIDropDownMenu_SetSelectedID(WhatIsJunkValueDropDown, self:GetID())
 	GreyHandlingWhatIsJunkValue = self.value
+    -- Must recalculate cheapest object if this option change
+    GreyHandling.functions.CalculateCheapestJunk()
+end
+
+local function changeSourceOfItemPriceValue(self)
+	UIDropDownMenu_SetSelectedID(SourceOfItemPriceDropDown, self:GetID())
+	GreyHandlingSourceOfItemPrice = self.value
     -- Must recalculate cheapest object if this option change
     GreyHandling.functions.CalculateCheapestJunk()
 end
@@ -87,6 +95,25 @@ local function initWhatIsJunkValue(self, level)
 	end
 end
 
+local function initSourceOfItemPriceValue(self, level)
+	local sourceOfItemPriceValues = {}
+	table.insert(sourceOfItemPriceValues, GreyHandling["Vendor Price"])
+	if IsAddOnLoaded("TradeSkillMaster") then
+		table.insert(sourceOfItemPriceValues, GreyHandling["TSM Market Price, and Vendor Price"])
+		-- table.insert(sourceOfItemPriceValues, GreyHandling["TSM Disenchant Price, TSM Market Price, and Vendor Price"])
+	end
+	for index, sourceOfItemPriceValue in pairs(sourceOfItemPriceValues) do
+		local sourceOfItemPriceValueOption = UIDropDownMenu_CreateInfo()
+		sourceOfItemPriceValueOption.text = sourceOfItemPriceValue
+		sourceOfItemPriceValueOption.value = sourceOfItemPriceValue
+		sourceOfItemPriceValueOption.func = changeSourceOfItemPriceValue
+		UIDropDownMenu_AddButton(sourceOfItemPriceValueOption)
+		if sourceOfItemPriceValue == GreyHandlingSourceOfItemPrice then
+			UIDropDownMenu_SetSelectedID(SourceOfItemPriceDropDown, index)
+		end
+	end
+end
+
 GreyHandling.options.frame:RegisterEvent("ADDON_LOADED")
 GreyHandling.options.frame:RegisterEvent("PLAYER_LOGOUT")
 
@@ -106,6 +133,9 @@ function GreyHandling.options.frame:OnEvent(event, key)
 		end
 		if GreyHandlingWhatIsJunkValue == nil then
 			GreyHandlingWhatIsJunkValue = GreyHandling.options.DEFAULT_WHAT_IS_JUNK
+		end
+		if GreyHandlingSourceOfItemPrice == nil then
+			GreyHandlingSourceOfItemPrice = GreyHandling.options.DEFAULT_SOURCE_OF_ITEM_PRICE
 		end
 		if GreyHandlingDeactivateDefaultKeybind == nil then
 			GreyHandlingDeactivateDefaultKeybind = GreyHandling.options.DEFAULT_DEACTIVATE_DEFAULT_KEYBIND
@@ -155,6 +185,13 @@ function GreyHandling.options.frame:OnEvent(event, key)
 		UIDropDownMenu_Initialize(WhatIsJunkValueDropDown, initWhatIsJunkValue)
 		UIDropDownMenu_SetWidth(WhatIsJunkValueDropDown, 200);
 		UIDropDownMenu_SetButtonWidth(WhatIsJunkValueDropDown, 200);
+		AddTextTitle(GreyHandling["Source of item's prices (Max between all values)"])
+		local sourceOfItemPriceValue = CreateFrame("Button", "SourceOfItemPriceDropDown", GreyHandling.options.panel, "UIDropDownMenuTemplate")
+	    sourceOfItemPriceValue:SetPoint("TOPLEFT", lastcheckbox, "BOTTOMLEFT", 0, -10)
+		lastcheckbox = SourceOfItemPrice
+		UIDropDownMenu_Initialize(SourceOfItemPriceDropDown, initSourceOfItemPriceValue)
+		UIDropDownMenu_SetWidth(SourceOfItemPriceDropDown, 200);
+		UIDropDownMenu_SetButtonWidth(SourceOfItemPriceDropDown, 200);
 	end
 	if event == "PLAYER_LOGOUT" then
 		GreyHandlingIsTalkative = GreyHandlingIsTalkative

@@ -25,12 +25,12 @@ someone else.
 What does it do?
 ----------------
 
-- Displays the **price, maximum stack of items, and number possessed by teammates in tooltip**
+- Displays the **price (TSM's market value or vendor price), maximum stack of items, and number possessed by teammates in tooltip**
 
 When you launch by hitting **left CTRL while holding SHIFT** :
 
 - Search in what you consider as junk (by default grey item)
-- If your bags are full **pick the worst item** (left click to throw or give)
+- If there is a worst item **pick it** (left click to throw or give)
 - If there isn't a worst item **mark your two worst items in bag in red**
 - If you saw what your teammate looted items and one ore more **mutually beneficial trades** exist, suggest the one that stack the most value.
 - If someone also has GreyHandling in your group : **exchange exact information about your junk items** in order to offer better exchange suggestion.
@@ -44,7 +44,6 @@ stacked. A mutually beneficial trade is an exchange that permits to free one bag
 space for everyone without throwing anything by keeping one kind of stackable
 grey instead of two. What is junk for someone might not be junk for someone else.
 
-
 Compatibility with other bags addons
 ------------------------------------
 
@@ -54,9 +53,9 @@ Compatibility with other bags addons
 - **ArkInventory** Working as of october 2019
 - **Bagnon/Conductor** Both working as of January 2020
 - **VendorPrice** You can disable GreyHandling item tooltip about prices, to not have twice the information.
+- **Trade Skill Master** If you have TSM installed, we use max of the market value -5% (Auction house cut) and the vendor price
 
 In bag mark does not work with :
-
 - **Inventorian**
 - All other bag addons that do not use the blizzard default bag interface
 

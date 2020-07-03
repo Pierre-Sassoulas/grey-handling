@@ -23,6 +23,7 @@
 ## SavedVariables: GreyHandlingWhatIsJunkValue
 ## SavedVariables: GreyHandlingDeactivateDefaultKeybind
 ## SavedVariables: GreyHandlingShowCheapestAlways
+## SavedVariables: GreyHandlingSourceOfItemPrice
 
 localization/core.lua
 localization/ar.lua
