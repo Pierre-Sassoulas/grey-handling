@@ -2,7 +2,11 @@ local A, GreyHandling = ...
 
 function GreyHandling.functions.getPrice(link, itemSellPrice)
     if not(link) then
-        return itemSellPrice
+        if itemSellPrice then
+            return itemSellPrice
+        else
+            return 0
+        end
     end
     if IsAddOnLoaded("TradeSkillMaster") and not(GreyHandlingSourceOfItemPrice == GreyHandling["Vendor Price"]) then
 		local tsmSellPrice = TSM_API.GetCustomPriceValue("dbMarket", TSM_API.ToItemString(link))
