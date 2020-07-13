@@ -74,6 +74,9 @@ function GreyHandling.functions.CalculateCheapestJunk()
 				   itemEquipLoc, itemIcon, vendorPrice, itemClassID, itemSubClassID, bindType, expacID, itemSetID,
 				   isCraftingReagent = GetItemInfo(itemid)
 				vendorPrice = GreyHandling.functions.getPrice(itemLink, vendorPrice)
+				if not(itemStackCount) then
+					itemStackCount = 0
+				end
 				local _, itemCount = GetContainerItemInfo(bagID, bagSlot)
 				local currentDurability, maximumDurability = GetContainerItemDurability(bagID, bagSlot)
 				local modifier = 1
