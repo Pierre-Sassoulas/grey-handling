@@ -38,7 +38,7 @@ function GreyHandling.functions.ToolTipHook(t)
         --    "- VendorPrice", vendorPrice, "- ItemClassID", itemClassID, "- ItemSubClassId", itemSubClassID,
         --    "- bindType", bindType, "- expacID",  expacID,"- ItemSetID",  itemSetID, "- isCraftingReagent", isCraftingReagent
         --)
-        if not itemSellPrice or itemSellPrice <= 0 then
+        if not itemSellPrice or itemSellPrice <= 0 or not itemStackCount then
             -- Can be a quest item, mild spices, or hearthstone for example
             GameTooltip:AddLine(GreyHandling["Cannot be sold"], "1", "0.5", "0.5")
             return

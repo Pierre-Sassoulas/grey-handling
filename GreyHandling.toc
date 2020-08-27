@@ -1,6 +1,6 @@
 ## Interface: 11305
 ## X-Min-Interface: 11302
-## Version: 1.13.2_1.8.7
+## Version: 1.13.2_1.8.8
 ## Title:|cffa0a0a0GH|r|cffffffff:|r Grey Handling
 ## OptionalDeps: Bagnon, Combuctor, ArkInventory, Peddler, Scrap, TradeSkillMaster
 
