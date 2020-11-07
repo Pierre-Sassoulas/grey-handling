@@ -1,20 +1,28 @@
 local A, GreyHandling = ...
 
+function GreyHandling.functions.returnPrice(itemSellPrice)
+    if itemSellPrice then
+        return itemSellPrice
+    else
+        return 0
+    end
+end
+
 function GreyHandling.functions.getPrice(link, itemSellPrice)
-    if not(link) then
-        if itemSellPrice then
-            return itemSellPrice
-        else
-            return 0
-        end
+    if not link then
+        return GreyHandling.functions.returnPrice(itemSellPrice)
     end
     if IsAddOnLoaded("TradeSkillMaster") and not(GreyHandlingSourceOfItemPrice == GreyHandling["Vendor Price"]) then
-		local tsmSellPrice = TSM_API.GetCustomPriceValue("dbMarket", TSM_API.ToItemString(link))
+        local itemString = TSM_API.ToItemString(link)
+        if not itemString then
+            return GreyHandling.functions.returnPrice(itemSellPrice)
+        end
+		local tsmSellPrice = TSM_API.GetCustomPriceValue("dbMarket", itemString)
         if not(itemSellPrice) or tsmSellPrice and tsmSellPrice > itemSellPrice * GreyHandling.options.AUCTION_HOUSE_CUT then
             itemSellPrice = tsmSellPrice
         end
     end
-    return itemSellPrice
+    return GreyHandling.functions.returnPrice(itemSellPrice)
 end
 
 function GreyHandling.functions.GetItemInfo(link)

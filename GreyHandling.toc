@@ -1,8 +1,10 @@
 ## Interface: 11305
 ## X-Min-Interface: 11302
-## Version: 1.13.5_1.8.8
+## Version: 1.13.5_1.8.9
 ## Title:|cffa0a0a0GH|r|cffffffff:|r Grey Handling
 ## OptionalDeps: Bagnon, Combuctor, ArkInventory, Peddler, Scrap, TradeSkillMaster
+## Author: pierre-sassoulas
+## X-Curse-Project-ID: 336164
 
 ## Notes: Helps you get rid of the right grey objects when your bags are full
 ## Notes-deDE: Hilft Ihnen, die richtigen grauen Gegenstände loszuwerden, wenn Ihre Taschen voll sind
@@ -14,9 +16,7 @@
 ## Notes-ptBR: Ajuda você a se livrar dos objetos cinzentos certos quando suas malas estão cheias
 ## Notes-itIT:  Ti aiuta a sbarazzarti degli oggetti grigi giusti quando le tue borse sono piene
 
-## Author: pierre-sassoulas
 
-## X-Curse-Project-ID: 336164
 
 ## SavedVariables: GreyHandlingIsTalkative
 ## SavedVariables: GreyHandlingIsVerbose
