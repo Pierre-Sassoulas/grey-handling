@@ -18,7 +18,7 @@ What does it do?
 
 - Displays the **price (TSM's market value or vendor price), maximum stack of items, and number possessed by teammates in tooltip**
 
-.. image:: antidot-brown-bag-presentation/combductor_integration.jpg
+.. image:: brown-bag-presentation/combductor_integration.jpg
    :width: 600pt
 
 When you launch by hitting **left CTRL while holding SHIFT** :
@@ -30,7 +30,7 @@ When you launch by hitting **left CTRL while holding SHIFT** :
 The two worst items are the cheapest at the moment and the cheapest once fully
 stacked.
 
-.. image:: antidot-brown-bag-presentation/arkinventory_result.jpg
+.. image:: brown-bag-presentation/arkinventory_result.jpg
    :width: 600pt
 
 - If you saw what your teammate looted items and one ore more **mutually beneficial trades** exist, suggest the one that stack the most value.
@@ -39,7 +39,7 @@ A mutually beneficial trade is an exchange that permits to free one bag
 space for everyone without throwing anything by keeping one kind of stackable
 grey instead of two. What is junk for someone might not be junk for someone else.
 
-.. image:: antidot-brown-bag-presentation/team_exchange.jpg
+.. image:: brown-bag-presentation/team_exchange.jpg
    :width: 600pt
 
 - If someone also has GreyHandling in your group : **exchange exact information about your junk items** in order to offer better exchange suggestion.
