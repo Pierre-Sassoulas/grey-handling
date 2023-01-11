@@ -1,0 +1,35 @@
+\mode<presentation>
+
+\definecolor{elumBlack}{RGB}{0,0,0}
+\definecolor{elumYellow}{RGB}{234,171,33}
+
+\useinnertheme[shadow=true]{rounded}
+\useoutertheme{shadow}
+\usecolortheme{orchid}
+\usecolortheme{whale}
+
+\setbeamercolor{palette primary}{bg=elumBlack,fg=elumYellow}
+\setbeamercolor{palette secondary}{bg=elumBlack,fg=elumYellow}
+\setbeamercolor{palette tertiary}{bg=elumBlack,fg=white}
+\setbeamercolor{palette quaternary}{bg=black,fg=white}
+\setbeamercolor{structure}{fg=elumBlack}
+\setbeamercolor{section in toc}{fg=elumBlack}
+
+\logo{\includegraphics[width=.027\textwidth]{elum-logo}}
+
+\setbeamerfont{block title}{size={}}
+\setbeamertemplate{page number in head/foot}{\insertframenumber /\inserttotalframenumber}
+
+\usepackage[absolute,overlay]{textpos}
+
+\setbeamercolor{framesource}{fg=gray}
+\setbeamerfont{framesource}{size=\tiny}
+
+\newcommand{\source}[1]{\begin{textblock*}{5cm}(7.35cm,8.3cm)
+    \begin{beamercolorbox}[ht=0.5cm,right]{framesource}
+        \usebeamerfont{framesource}\usebeamercolor[fg]{framesource} Source: {#1}
+    \end{beamercolorbox}
+\end{textblock*}}
+
+\mode
+<all>
