@@ -1,6 +1,9 @@
-## Interface: 90001
-## X-Min-Interface: 80250
-## Version: 9.0.1_1.8.9
+## Interface: 100100
+## X-Min-Interface: 100100
+## X-Min-Interface-Classic: 11403
+## X-Min-Interface-BCC: 20504
+## X-Min-Interface-Wrath: 30401
+## Version: 10.1.0_1.9.0
 ## Title:|cffa0a0a0GH|r|cffffffff:|r Grey Handling
 ## OptionalDeps: Bagnon, Combuctor, ArkInventory, Peddler, Scrap, TradeSkillMaster
 ## Author: pierre-sassoulas
@@ -15,8 +18,6 @@
 ## Notes-esES: Te ayuda a deshacerte de los objetos grises correctos cuando tus maletas están llenas
 ## Notes-ptBR: Ajuda você a se livrar dos objetos cinzentos certos quando suas malas estão cheias
 ## Notes-itIT:  Ti aiuta a sbarazzarti degli oggetti grigi giusti quando le tue borse sono piene
-
-
 
 ## SavedVariables: GreyHandlingIsTalkative
 ## SavedVariables: GreyHandlingIsVerbose
