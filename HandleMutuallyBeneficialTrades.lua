@@ -22,8 +22,8 @@ end
 
 function GreyHandling.functions.GetBagAndSlot(itemLink, ourCount)
 	for bagID = 0, NUM_BAG_SLOTS do
-		for bagSlot = 1, GetContainerNumSlots(bagID) do
-			local _, testedItemCount, _, _, _, _, testedItemLink = GetContainerItemInfo(bagID, bagSlot)
+		for bagSlot = 1, C_Container.GetContainerNumSlots(bagID) do
+			local _, testedItemCount, _, _, _, _, testedItemLink = C_Container.GetContainerItemInfo(bagID, bagSlot)
 			if testedItemLink == itemLink and ourCount == testedItemCount then
 				-- print(itemLink, testedItemLink, ourCount, testedItemCount)
 				return bagID, bagSlot

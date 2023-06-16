@@ -9,7 +9,7 @@ function GreyHandling.usePeddler()
 end
 
 function GreyHandling.isJunk(bagID, bagSlot)
-	local itemid = GetContainerItemID(bagID, bagSlot)
+	local itemid = C_Container.GetContainerItemID(bagID, bagSlot)
 	if itemid and GreyHandling.useScrap() then
 		return Scrap:IsJunk(itemid, bagID, bagSlot)
 	end
@@ -67,8 +67,8 @@ function GreyHandling.functions.CalculateCheapestJunk()
 	local later = {}
 	later.potentialPrice = nil
 	for bagID = 0, NUM_BAG_SLOTS do
-		for bagSlot = 1, GetContainerNumSlots(bagID) do
-			local itemid = GetContainerItemID(bagID, bagSlot)
+		for bagSlot = 1, C_Container.GetContainerNumSlots(bagID) do
+			local itemid = C_Container.GetContainerItemID(bagID, bagSlot)
 			if itemid and GreyHandling.isJunk(bagID, bagSlot) then
 				local itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount,
 				   itemEquipLoc, itemIcon, vendorPrice, itemClassID, itemSubClassID, bindType, expacID, itemSetID,
@@ -77,8 +77,8 @@ function GreyHandling.functions.CalculateCheapestJunk()
 				if not(itemStackCount) then
 					itemStackCount = 0
 				end
-				local _, itemCount = GetContainerItemInfo(bagID, bagSlot)
-				local currentDurability, maximumDurability = GetContainerItemDurability(bagID, bagSlot)
+				local itemCount = C_Container.GetContainerItemInfo(bagID, bagSlot).stackCount
+				local currentDurability, maximumDurability = C_Container.GetContainerItemDurability(bagID, bagSlot)
 				local modifier = 1
 				if currentDurability and maximumDurability then
 					modifier= currentDurability / maximumDurability
@@ -124,7 +124,7 @@ function GreyHandling.functions.ItemDidNotMove(now_or_later)
 	if not now_or_later.bag or not now_or_later.slot then
 		return false
 	end
-	local _, testedItemCount, _, _, _, _, testedItemLink = GetContainerItemInfo(now_or_later.bag, now_or_later.slot)
+	local _, testedItemCount, _, _, _, _, testedItemLink = C_Container.GetContainerItemInfo(now_or_later.bag, now_or_later.slot)
 	return now_or_later.itemLink == testedItemLink  and now_or_later.itemCount == testedItemCount
 end
 
