@@ -19,7 +19,7 @@ function GreyHandling.functions.AISetBagItemGlow(itemFrame, loc_id, bag_id, slot
 		itemFrame.IconBorder:SetTexture([[Interface\Artifacts\RelicIconFrame]])
 		itemFrame.IconBorder:Show()
 	else
-		itemFrame.IconBorder:SetVertexColor()
+		itemFrame.IconBorder:SetVertexColor(1, 1, 1, 1 )
 		itemFrame.IconBorder:SetTexture()
 		itemFrame.IconBorder:Show()
 	end
