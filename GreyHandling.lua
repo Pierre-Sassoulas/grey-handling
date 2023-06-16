@@ -1,8 +1,7 @@
 local A, GreyHandling = ...
 
 InterfaceOptions_AddCategory(GreyHandling.options.panel);
-GameTooltip:HookScript("OnTooltipSetItem", GreyHandling.functions.ToolTipHook)
-ItemRefTooltip:HookScript("OnTooltipSetItem", GreyHandling.functions.ToolTipHook)
+TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item, GreyHandling.functions.ToolTipHook)
 
 GreyHandling.print(
 	format(GreyHandling["Launch %s with left CTRL while holding SHIFT. (or %s)"],
