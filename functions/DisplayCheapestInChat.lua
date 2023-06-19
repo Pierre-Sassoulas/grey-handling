@@ -3,7 +3,7 @@ local A, GreyHandling = ...
 function GreyHandling.functions.GetCheapestMessage(text, item)
 	local details = ""
 	if item.itemCount == 1 then
-		details = C_Container.GetContainerItemLink(item.bag, item.slot)
+		details = GetContainerItemLink(item.bag, item.slot)
 	elseif item.potentialPrice == item.currentPrice then
 		details = format(GreyHandling["A full stack of %s"], GetContainerItemLink(item.bag, item.slot))
 	else

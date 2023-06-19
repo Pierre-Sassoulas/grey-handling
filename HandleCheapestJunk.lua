@@ -2,7 +2,7 @@ local A, GreyHandling = ...
 
 local function bagErrorMessage(now, addonName)
 	GreyHandling.print("|cff"..GreyHandling.redPrint..GreyHandling["Picked cheapest item now because glows in bag does'nt work yet for "]..addonName..".|r")
-	C_Container.PickupContainerItem(now.bag, now.slot)
+	PickupContainerItem(now.bag, now.slot)
 end
 
 function GreyHandling.functions.HandleCheapestJunk(foundSomething)
@@ -12,10 +12,10 @@ function GreyHandling.functions.HandleCheapestJunk(foundSomething)
 		foundSomething = true
 		if GreyHandling.only_one_item_is_cheapest then
 			GreyHandling.functions.DisplayCheapestInChat(GreyHandling["Cheapest:"], now)
-			C_Container.PickupContainerItem(now.bag, now.slot)
+			PickupContainerItem(now.bag, now.slot)
 			-- DeleteCursorItem() Dangerous auto-delete
 			if GreyHandlingIsTalkative then
-				local itemLink = C_Container.GetContainerItemLink(now.bag, now.slot)
+				local itemLink = GetContainerItemLink(now.bag, now.slot)
 				local whatToGive
 				if now.itemCount == 1 then
 					whatToGive = format("%s", itemLink)

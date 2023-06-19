@@ -37,6 +37,7 @@ localization/pt.lua
 localization/ru.lua
 localization/zh.lua
 constants.lua
+CompatRetailClassic.lua
 db\initDatabase.lua
 db\playerName.lua
 db\itemStorePrivate.lua

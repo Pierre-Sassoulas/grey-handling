@@ -103,10 +103,11 @@ function GreyHandling.functions.ToolTipHook(t)
         end
         local now, later = GreyHandling.functions.GetCheapestJunk()
         -- local texture, itemCount, locked, quality, readable, lootable, itemLink = GetContainerItemInfo(now.bag, now.slot);
+        -- in retail it's now a table
         if now.bag and later.bag then
             local message = ""
-            local _, nowitemCount, _, _, _, _, nowitemLink = GetContainerItemInfo(now.bag, now.slot);
-            local _, lateritemCount, _, _, _, _, lateritemLink = GetContainerItemInfo(later.bag, later.slot);
+            local nowitemCount, nowitemLink = GetItemCountAndLink(now.bag, now.slot);
+            local lateritemCount, lateritemLink = GetItemCountAndLink(later.bag, later.slot);
             if nowitemLink==itemLink then
                 if nowitemLink==lateritemLink then
                     message = GreyHandling["Cheapest (now and later)"]

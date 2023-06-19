@@ -52,7 +52,7 @@ function GreyHandling.functions.SetBagItemGlow(bagID, slotID, r, v, b)
 		for i = 1, NUM_CONTAINER_FRAMES, 1 do
 			local frame = _G["ContainerFrame"..i]
 			if frame:GetID() == bagID and frame:IsShown() then
-				itemFrame = _G["ContainerFrame"..i.."Item"..(C_Container.GetContainerNumSlots(bagID) + 1 - slotID)]
+				itemFrame = _G["ContainerFrame"..i.."Item"..(GetContainerNumSlots(bagID) + 1 - slotID)]
 			end
 		end
 	end
