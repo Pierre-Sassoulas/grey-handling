@@ -20,10 +20,12 @@ ignore: # Files and directories beginning with a dot (such as .git) are automati
     - brown-bag-presentation/5daystoprod.png
     - brown-bag-presentation/allow_comment.png
     - brown-bag-presentation/antidot-logo.png
+    - brown-bag-presentation/elum-logo.png
     - brown-bag-presentation/arkinventory_integration.png
     - brown-bag-presentation/arkinventory_result.jpg
     - brown-bag-presentation/bagnon_video_preview.png
     - brown-bag-presentation/beamerthemeAntidot.sty
+    - brown-bag-presentation/beamerthemeElum.sty
     - brown-bag-presentation/being-the-maintener-of-a-wow-addon.tex
     - brown-bag-presentation/better_than_regular_programming.png
     - brown-bag-presentation/blizzard_color.png
