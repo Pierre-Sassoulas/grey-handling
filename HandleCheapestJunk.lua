@@ -22,7 +22,8 @@ function GreyHandling.functions.HandleCheapestJunk(foundSomething)
 				else
 					whatToGive = format("%s*%s", itemLink, now.itemCount)
 				end
-				SendChatMessage(format(GreyHandling["I can give you %s if you have enough bag places."], whatToGive))
+				-- Need to be called in a secure context, this is complicated
+				--SendChatMessage(format(GreyHandling["I can give you %s if you have enough bag places."], whatToGive))
 			end
 			GreyHandling.functions.SetBagItemGlow(now.bag, now.slot, 1, 0.1, 0.1)
 			CloseAllBags()
