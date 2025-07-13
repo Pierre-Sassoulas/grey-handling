@@ -51,7 +51,7 @@ function GreyHandling.testCreateExchange()
     -- Signature : GreyHandling.functions.CreateExchange(itemLink, ourCount, theirCount, vendorPrice, itemStackCount)
     local exchange = {}
     local itemLink = "DoesNotMatter"
-    local vendorPrice = 100 -- does'nt matter either
+    local vendorPrice = 100 -- doesn't matter either
     local itemStackCount = 20
     exchange = GreyHandling.functions.CreateExchange(itemLink, 5, 2, vendorPrice, itemStackCount)
     assert (exchange.isPerfect)

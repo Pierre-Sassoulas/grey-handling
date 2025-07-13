@@ -29,7 +29,7 @@ if GetLocale() == "frFR" then
  GreyHandling["Cheapest later:"] = "Moins chère plus tard:"
  GreyHandling["Cheapest:"] = "Moins chère:"
  GreyHandling["No mutually beneficial trade found."] = "Aucun échange mutuellement bénéfique n'a été trouvé."
- GreyHandling["Picked cheapest item now because glows in bag does'nt work yet for "] = "Objet le moins cher séléctionné car la lueur dans le sac ne marche pas encore pour "
+ GreyHandling["Picked cheapest item now because glows in bag doesn't work yet for "] = "Objet le moins cher séléctionné car la lueur dans le sac ne marche pas encore pour "
  GreyHandling["I can give you %s if you have enough bag places."] = "Je peux donner %s, si quelqu'un a de la place dans ses sacs."
  GreyHandling["No junk found in bag."] = "Rien à jeter dans les sacs."
  GreyHandling["%s has %s of %s, it means you could upgrade your own version."] = "%s a %s de %s, cela veut dire que vous pourriez mettre à jour votre propre version."

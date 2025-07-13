@@ -1,7 +1,7 @@
 local A, GreyHandling = ...
 
 local function bagErrorMessage(now, addonName)
-	GreyHandling.print("|cff"..GreyHandling.redPrint..GreyHandling["Picked cheapest item now because glows in bag does'nt work yet for "]..addonName..".|r")
+	GreyHandling.print("|cff"..GreyHandling.redPrint..GreyHandling["Picked cheapest item now because glows in bag doesn't work yet for "]..addonName..".|r")
 	PickupContainerItem(now.bag, now.slot)
 end
 
