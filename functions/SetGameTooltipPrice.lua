@@ -52,23 +52,35 @@ function GreyHandling.functions.ToolTipHook(t)
             return
         end
         if itemStackCount > 1 then
-            local c = GetMouseFocus()
-            if not c then
-                return -- error("nil GetMouseFocus()")
+            local count = 1
+
+            -- Only try to get count from mouse focus if available (Retail)
+            if GetMouseFocus then
+                local c = GetMouseFocus()
+                if c then
+                    local bn = c:GetName() and (c:GetName() .. "Count")
+                    count = c.count
+                        or (c.Count and c.Count:GetText())
+                        or (c.Quantity and c.Quantity:GetText())
+                        or (bn and _G[bn] and _G[bn]:GetText())
+                        or 1
+                    count = tonumber(count) or 1
+                    if count <= 1 then
+                        count = 1
+                    end
+                end
             end
-            local bn = c:GetName() and (c:GetName() .. "Count")
-            local count = c.count or (c.Count and c.Count:GetText()) or (c.Quantity and c.Quantity:GetText()) or (bn and _G[bn] and _G[bn]:GetText())
-            count = tonumber(count) or 1
-            if count <= 1 then
-                count = 1
-            end
+
             SetTooltipMoney(t, itemSellPrice, nil, format("%s (1) :", SELL_PRICE))
+
             if count ~= itemStackCount and count ~= 1 and GreyHandling.IS_CLASSIC then
-                SetTooltipMoney(t, count*itemSellPrice, nil, format("%s (%s) :", SELL_PRICE, count))
+                SetTooltipMoney(t, count * itemSellPrice, nil, format("%s (%s) :", SELL_PRICE, count))
             end
+
             SetTooltipMoney(t, itemStackCount * itemSellPrice, nil, format("%s (%s) :", SELL_PRICE, itemStackCount))
         else
-            if itemClassID == LE_ITEM_CLASS_WEAPON or itemClassID == LE_ITEM_CLASS_ARMOR and itemSubClassID ~= LE_ITEM_ARMOR_GENERIC then
+            if (itemClassID == LE_ITEM_CLASS_WEAPON) or
+               (itemClassID == LE_ITEM_CLASS_ARMOR and itemSubClassID ~= LE_ITEM_ARMOR_GENERIC) then
                 -- TODO Take into account the damage to stuff (price go down not linearly)
                 -- Ie stuff is worth 18 coppers at 60/60, but 6 copper at 45/60
                 -- bagID, bagSlot = from t ?
@@ -78,7 +90,6 @@ function GreyHandling.functions.ToolTipHook(t)
                 end
             else
                 SetTooltipMoney(t, itemSellPrice, nil, format("%s", SELL_PRICE))
-
             end
         end
         for playerName, items in pairs(GreyHandling.data.items) do
