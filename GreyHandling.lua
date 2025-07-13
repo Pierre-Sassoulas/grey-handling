@@ -1,7 +1,8 @@
 local A, GreyHandling = ...
 
-InterfaceOptions_AddCategory(GreyHandling.options.panel);
--- TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item, GreyHandling.functions.ToolTipHook)
+local category = Settings.RegisterCanvasLayoutCategory(GreyHandling.options.panel, "GreyHandling");
+Settings.RegisterAddOnCategory(category);
+
 
 GreyHandling.print(
 	format(GreyHandling["Launch %s with left CTRL while holding SHIFT. (or %s)"],
