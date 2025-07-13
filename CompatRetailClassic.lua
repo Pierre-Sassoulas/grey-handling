@@ -5,18 +5,14 @@ GetContainerItemDurability = GetContainerItemDurability or C_Container.GetContai
 -- local GetContainerItemInfo = GetContainerItemInfo or C_Container.GetContainerItemInfo
 
 function GetItemCount(bagID, bagSlot)
-	if C_Container then
-		return GetContainerItemInfo(bagID, bagSlot).stackCount
-	end
-	local _, itemCount = GetContainerItemInfo(bagID, bagSlot)
-	return itemCount
+    local itemInfo = C_Container.GetContainerItemInfo(bagID, bagSlot)
+    return itemInfo and itemInfo.stackCount or 0
 end
 
 function GetItemCountAndLink(bagID, bagSlot)
-	if C_Container then
-		local itemTable = GetContainerItemInfo(bagID, bagSlot)
-		return itemTable.stackCount, itemTable.itemLink
-	end
-	local _, testedItemCount, _, _, _, _, testedItemLink = GetContainerItemInfo(bagID, bagSlot)
-	return testedItemCount, testedItemLink
+    local itemInfo = C_Container.GetContainerItemInfo(bagID, bagSlot)
+    if itemInfo then
+        return itemInfo.stackCount, itemInfo.hyperlink
+    end
+    return 0, nil
 end
