@@ -1,10 +1,17 @@
 local A, GreyHandling = ...
 
+
+
 function GreyHandling.sendVersionToParty()
-	C_ChatInfo.SendAddonMessage(GreyHandling.NAME, GetAddOnMetadata(GreyHandling.NAME, "VERSION"))
+	if IsInGroup() or IsInRaid() then
+		C_ChatInfo.SendAddonMessage(GreyHandling.NAME, GetAddOnMetadata(GreyHandling.NAME, "VERSION"))
+	end
 end
 
 function GreyHandling.functions.ExchangeMyJunkPlease(target)
+	if not (IsInGroup() or IsInRaid()) then
+		return
+	end
 	target = target or "PARTY"
 	local message = ""
 	local freeSpace = 0
