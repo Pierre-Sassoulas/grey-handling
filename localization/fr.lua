@@ -44,4 +44,5 @@ if GetLocale() == "frFR" then
  GreyHandling["Source of item's prices (Max between all values)"] = "Source de prix des objets (Max de toutes les valeurs)"
  GreyHandling["Vendor Price"] = "Prix des vendeurs"
  GreyHandling["TSM Market Price, and Vendor Price"] = "Prix du marché de TSM, et prix des vendeurs"
+ GreyHandling["Auctionator Market Price, and Vendor Price"] = "Prix du marché d'Auctionator, et prix des vendeurs"
 end

@@ -54,9 +54,10 @@ Compatibility with other addons
 - **Peddler** If Peddler is installed, we can use your marked for sell list (or not) as of July 2020 (*)
 - **OneBag3** This addon did not need any integration (<3 OneBag3 dev, you're the best)
 - **ArkInventory** Working as of july 2020
-- **Bagnon/Conductor** Both working as of July 2020
+- **Bagnon/Conductor** Both working as of July 2025
 - **VendorPrice** You can disable GreyHandling item tooltip about prices, to not have twice the information.
-- **Trade Skill Master** If you have TSM installed, we use max of the market value -5% (Auction house cut) and the vendor price
+- **Trade Skill Master** If you have TSM installed, we can use max of the market value -5% (Auction house cut) and the vendor price as of july 2025
+- **Auctionator** If you have Auctionator installed, we can use max of the market value -5% (Auction house cut) and the vendor price as of july 2025
 
 In bag mark do not work with bag addons that do not use the blizzard default bag interface. If
 the bag mark does not work, **there is an optional text explanation**.
