@@ -56,8 +56,7 @@ Compatibility with other addons
 - **ArkInventory** Working as of july 2020
 - **Bagnon/Conductor** Both working as of July 2025
 - **VendorPrice** You can disable GreyHandling item tooltip about prices, to not have twice the information.
-- **Trade Skill Master** If you have TSM installed, we can use max of the market value -5% (Auction house cut) and the vendor price as of july 2025
-- **Auctionator** If you have Auctionator installed, we can use max of the market value -5% (Auction house cut) and the vendor price as of july 2025
+- **Trade Skill Master / Auctionator** If you have TSM or Auctionator installed, we can use max of the market value -5% (Auction house cut) and the vendor price as of july 2025
 
 In bag mark do not work with bag addons that do not use the blizzard default bag interface. If
 the bag mark does not work, **there is an optional text explanation**.
