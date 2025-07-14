@@ -102,6 +102,9 @@ local function initSourceOfItemPriceValue(self, level)
 		table.insert(sourceOfItemPriceValues, GreyHandling["TSM Market Price, and Vendor Price"])
 		-- table.insert(sourceOfItemPriceValues, GreyHandling["TSM Disenchant Price, TSM Market Price, and Vendor Price"])
 	end
+	if IsAddOnLoaded("Auctionator") then
+		table.insert(sourceOfItemPriceValues, GreyHandling["Auctionator Market Price, and Vendor Price"])
+	end
 	for index, sourceOfItemPriceValue in pairs(sourceOfItemPriceValues) do
 		local sourceOfItemPriceValueOption = UIDropDownMenu_CreateInfo()
 		sourceOfItemPriceValueOption.text = sourceOfItemPriceValue
