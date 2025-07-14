@@ -12,22 +12,31 @@ function GreyHandling.functions.getPrice(link, itemSellPrice)
     if not link then
         return GreyHandling.functions.returnPrice(itemSellPrice)
     end
+    local auctionHouseSalePrice = 0
     if IsAddOnLoaded("TradeSkillMaster") and GreyHandlingSourceOfItemPrice == GreyHandling["TSM Market Price, and Vendor Price"] then
         local itemString = TSM_API.ToItemString(link)
         if itemString then
             local tsmSellPrice = TSM_API.GetCustomPriceValue("dbMarket", itemString)
-            if tsmSellPrice and (not itemSellPrice or tsmSellPrice > itemSellPrice * GreyHandling.options.AUCTION_HOUSE_CUT) then
-                itemSellPrice = tsmSellPrice
+            if tsmSellPrice then
+                auctionHouseSalePrice = tsmSellPrice
             end
         end
     end
     if IsAddOnLoaded("Auctionator") and GreyHandlingSourceOfItemPrice == GreyHandling["Auctionator Market Price, and Vendor Price"] then
         local aucPrice = Auctionator.API.v1.GetAuctionPriceByItemLink("GreyHandling", link)
-        if aucPrice and (not itemSellPrice or aucPrice > itemSellPrice) then
-            itemSellPrice = aucPrice
+        if aucPrice then
+            auctionHouseSalePrice = aucPrice
         end
     end
-    return GreyHandling.functions.returnPrice(itemSellPrice)
+    if not itemSellPrice then
+        return auctionHouseSalePrice
+    end
+    if itemSellPrice * GreyHandling.options.AUCTION_HOUSE_CUT > auctionHouseSalePrice then
+        return GreyHandling.functions.returnPrice(itemSellPrice)
+    else
+        return GreyHandling.functions.returnPrice(auctionHouseSalePrice)
+    end
+
 end
 
 
