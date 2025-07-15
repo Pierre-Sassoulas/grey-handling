@@ -76,7 +76,7 @@ function GreyHandling.functions.GetBestExchanges()
 		-- print("PlayerID"..player_id)
 		for itemLink, itemInformation  in pairs(items) do
 			if GreyHandling.isJunkByItemLink(itemLink) then
-				local ourCount = GetItemCount(itemLink)
+				local ourCount = C_Item.GetItemCount(itemLink)
 				-- print("ItemLink: '"..itemLink.."' Our count : '".. ourCount.."'")
 				if ourCount ~= 0 and ourCount%itemInformation.itemStackCount ~= 0 then
 					if exchanges[player_id] == nil then
