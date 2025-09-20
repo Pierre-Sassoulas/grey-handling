@@ -21,8 +21,3 @@ end
 -- ChatFrame_AddMessageEventFilter("CHAT_MSG_LOOT", GreyHandling.loot_frame.OnLoot) -- This happen before the wow message
 GreyHandling.loot_frame:RegisterEvent("CHAT_MSG_LOOT")
 GreyHandling.loot_frame:SetScript("OnEvent", GreyHandling.loot_frame.OnLoot)
-
-
-
-
-

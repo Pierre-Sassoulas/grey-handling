@@ -28,4 +28,3 @@ functions\handleChatMessageLoot.lua
 functions\NumberLootedFromChatMessage.lua
 GreyHandlingOptions.lua
 GreyHandling.lua
-
