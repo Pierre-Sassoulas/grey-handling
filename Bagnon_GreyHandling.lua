@@ -65,4 +65,3 @@ if IsAddOnLoaded("Bagnon") or IsAddOnLoaded("Combuctor") then
 	--hooksecurefunc(GreyHandling, 'ToggleJunk', UpdateBags)
 	--Scrap.HasSpotlight = true
 end
-
