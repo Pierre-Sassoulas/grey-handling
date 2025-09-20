@@ -32,6 +32,8 @@ function GreyHandling.testMutuallyBeneficialExchange()
     GreyHandling.db.addItemFromStringForPlayer("OtherName-TestServer", "Morue Rochécaille crue", 150, 20, 119)
     GreyHandling.db.addItemFromStringForPlayer("TestName-TestServer", "Cuir robuste", 500, 20, 259)
     GreyHandling.db.addItemFromStringForPlayer("TestName-TestServer", "Peau de raptor", 208, 10, 119)
+    GreyHandling.db.addItemFromStringForPlayer("TestName-TestServer", "Dorépine", 500, 20, 259)
+    GreyHandling.db.addItemFromStringForPlayer("TestName-TestServer", "Fleur de feu", 500, 20, 259)
     GreyHandling.db.addItemFromStringForPlayer("TestName-TestServer", "Bec acéré", 804, 5, 3)
     GreyHandling.db.addItemFromStringForPlayer("OtherName-TestServer", "Serre de busard", 71, 5, 9)
 end
