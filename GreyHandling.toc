@@ -1,9 +1,9 @@
-## Interface: 11507
-## X-Min-Interface: 11507
-## X-Min-Interface-Classic: 11507
+## Interface: 11508
+## X-Min-Interface: 11508
+## X-Min-Interface-Classic: 11508
 ## X-Min-Interface-BCC: 20504
 ## X-Min-Interface-Wrath: 30401
-## Version: 1.15.07_1.10.2
+## Version: 1.15.08_1.11.0
 ## Title:|cffa0a0a0GH|r|cffffffff:|r Grey Handling
 ## OptionalDeps: Bagnon, Combuctor, ArkInventory, Peddler, Scrap, TradeSkillMaster
 ## Author: pierre-sassoulas
