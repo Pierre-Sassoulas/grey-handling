@@ -60,14 +60,14 @@ local function changeWhatIsJunkValue(self)
 	UIDropDownMenu_SetSelectedID(WhatIsJunkValueDropDown, self:GetID())
 	GreyHandlingWhatIsJunkValue = self.value
     -- Must recalculate cheapest object if this option change
-    GreyHandling.functions.CalculateCheapestJunk()
+    GreyHandling.functions.CalculateCheapestJunk(true)
 end
 
 local function changeSourceOfItemPriceValue(self)
 	UIDropDownMenu_SetSelectedID(SourceOfItemPriceDropDown, self:GetID())
 	GreyHandlingSourceOfItemPrice = self.value
     -- Must recalculate cheapest object if this option change
-    GreyHandling.functions.CalculateCheapestJunk()
+    GreyHandling.functions.CalculateCheapestJunk(true)
 end
 
 local function initWhatIsJunkValue(self, level)

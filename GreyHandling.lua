@@ -77,7 +77,7 @@ function GreyHandling.frame:OnEvent(event, key, state)
 	if state == 0 then
 		-- Isn't it convenient to just calculate for every keybind released instead of thinking hard about events in
 		-- other addons and complicated hooks ?
-		GreyHandling.functions.CalculateCheapestJunk()
+		GreyHandling.functions.CalculateCheapestJunk(false)
 	end
 	if not GreyHandlingDeactivateDefaultKeybind and key == "LCTRL" and state == 1 and IsShiftKeyDown() then
 		GreyHandlingMain()
