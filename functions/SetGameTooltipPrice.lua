@@ -45,8 +45,27 @@ function GreyHandling.functions.GetItemInfo(link)
     return itemLink, itemStackCount, GreyHandling.functions.getPrice(link, itemSellPrice), itemClassID, itemSubClassID
 end
 
-function GreyHandling.functions.ToolTipHook(t)
-    local link = select(2, t:GetItem())
+function GreyHandling.functions.GetTooltipItemLink(tooltip)
+    if not tooltip then return nil end
+    -- Retail
+    if TooltipUtil and TooltipUtil.GetDisplayedItem then
+        local link = TooltipUtil.GetDisplayedItem(tooltip)
+        if link then
+            return link
+        end
+    end
+    -- Classic
+    if tooltip.GetItem then
+        local _, link = tooltip:GetItem()
+        return link
+    end
+    return nil
+end
+
+
+function GreyHandling.functions.ToolTipHook(tooltip)
+    local t = tooltip or self or GameTooltip
+    local link = GreyHandling.functions.GetTooltipItemLink(t)
     if not link then
         return
     end
