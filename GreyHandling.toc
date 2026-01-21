@@ -6,6 +6,7 @@
 ## Version: 1.15.08_1.11.2
 ## Title:|cffa0a0a0GH|r|cffffffff:|r Grey Handling
 ## OptionalDeps: Bagnon, Combuctor, ArkInventory, Peddler, Scrap, TradeSkillMaster
+## IconTexture: Interface\AddOns\GreyHandling\art\GreyHandlingIcon
 ## Author: pierre-sassoulas
 ## X-Curse-Project-ID: 336164
 
