@@ -113,10 +113,6 @@ end
 GreyHandling.member_leave_frame:RegisterEvent("GROUP_LEFT")
 GreyHandling.member_leave_frame:SetScript("OnEvent", GreyHandling.member_leave_frame.OnLeave)
 
-if IsAddOnLoaded("ArkInventory") or IsAddOnLoaded("ArkInventoryClassic") then
-	hooksecurefunc(ArkInventory.API, "ItemFrameUpdated", GreyHandling.functions.AISetBagItemGlow)
-end
-
 local UpdateCheapestFrame = CreateFrame("FRAME", "GreyHandlingUpdateCheapestFrame");
 UpdateCheapestFrame:RegisterEvent("UNIT_INVENTORY_CHANGED");
 UpdateCheapestFrame:RegisterEvent("PLAYER_ENTERING_WORLD");

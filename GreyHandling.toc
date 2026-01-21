@@ -57,6 +57,7 @@ functions\NumberLootedFromChatMessage.lua
 HandleCheapestJunk.lua
 HandleMutuallyBeneficialTrades.lua
 GreyHandlingOptions.lua
+ArkInventory_GreyHandling.lua
 Bagnon_GreyHandling.lua
 tests\Tests.lua
 GreyHandling.lua
