@@ -3,7 +3,7 @@
 ## X-Min-Interface-Classic: 11508
 ## X-Min-Interface-BCC: 20504
 ## X-Min-Interface-Wrath: 30401
-## Version: 1.15.08_1.11.2
+## Version: 12.0.1_1.12.1
 ## Category: Bags & Inventory
 
 ## Title: |cffa0a0a0GH|r|cffffffff:|r Grey Handling

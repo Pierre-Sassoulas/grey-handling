@@ -5,6 +5,9 @@ function GreyHandling.functions.AISetBagItemGlow(itemFrame, loc_id, bag_id, slot
 	if not now and not later then
 		return
 	end
+	if not ArkInventory or not ArkInventory.BlizzardBagIdToInternalId then
+		return -- ArkInventory API not available, skip
+	end
 	local now_loc, now_bag,  later_loc, later_bag
 	if now.bag then
 		now_loc, now_bag = ArkInventory.BlizzardBagIdToInternalId(now.bag)
