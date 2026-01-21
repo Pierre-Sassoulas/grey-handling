@@ -4,7 +4,8 @@
 ## X-Min-Interface-BCC: 20504
 ## X-Min-Interface-Wrath: 30401
 ## Version: 1.15.08_1.11.2
-## Title:|cffa0a0a0GH|r|cffffffff:|r Grey Handling
+
+## Title: |TInterface\AddOns\GreyHandling\art\GreyHandlingIcon:16:16|t |cffa0a0a0GH|r|cffffffff:|r Grey Handling
 ## OptionalDeps: Bagnon, Combuctor, ArkInventory, Peddler, Scrap, TradeSkillMaster
 ## IconTexture: Interface\AddOns\GreyHandling\art\GreyHandlingIcon
 ## Author: pierre-sassoulas
