@@ -5,13 +5,14 @@ function GreyHandling.functions.AISetBagItemGlow(itemFrame, loc_id, bag_id, slot
 	if not now and not later then
 		return
 	end
-	local now_loc, now_bag,  later_loc, later_bag
+	local now_loc, now_bag, later_loc, later_bag
 	if now.bag then
 		now_loc, now_bag = ArkInventory.BlizzardBagIdToInternalId(now.bag)
 	end
 	if later.bag then
 		later_loc, later_bag = ArkInventory.BlizzardBagIdToInternalId(later.bag)
 	end
+
 	if (loc_id == now_loc and now_bag == bag_id and slot_id == now.slot) or
 			(loc_id == later_loc and later_bag == bag_id and slot_id == later.slot) then
 		itemFrame.JunkIcon:SetShown(true)
@@ -19,7 +20,7 @@ function GreyHandling.functions.AISetBagItemGlow(itemFrame, loc_id, bag_id, slot
 		itemFrame.IconBorder:SetTexture([[Interface\Artifacts\RelicIconFrame]])
 		itemFrame.IconBorder:Show()
 	else
-		itemFrame.IconBorder:SetVertexColor(1, 1, 1, 1 )
+		itemFrame.IconBorder:SetVertexColor(1, 1, 1, 1)
 		itemFrame.IconBorder:SetTexture()
 		itemFrame.IconBorder:Show()
 	end
