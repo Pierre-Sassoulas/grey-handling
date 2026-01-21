@@ -12,7 +12,14 @@ end
 
 function GreyHandling.functions.handleChatMessageLoot(chatMessage, playerName, lineNumber, playerId, k, l, m, n, o)
 	-- print("Handling", chatMessage, "-",  playerName, "-",  lineNumber, "-",  playerId, "-",  GreyHandling.data.playerName)
-	if GreyHandling.data.playerName == playerName then
+
+	-- Convert playerName to comparable format (handles retail's secret values)
+	local comparablePlayerName = playerName
+	if Ambiguate then
+		comparablePlayerName = Ambiguate(playerName, "none")
+	end
+
+	if GreyHandling.data.playerName == comparablePlayerName then
 		-- print("This is the player, we don't need to add", chatMessage, " to our data store.")
 		return -- We can get the player items reliably with GetItemCount()
 	end
@@ -32,6 +39,9 @@ function GreyHandling.functions.handleChatMessageLoot(chatMessage, playerName, l
 		end
 		return
 	end
+	-- Use the ambiguated name for the rest of the function
+	playerName = comparablePlayerName
+
 	-- chatMessage contain an item link, and work like one as of patch 8.2.0
 	local itemId = GreyHandling.functions.getIDNumber(chatMessage)
 	local itemName = GreyHandling.functions.getItemNameFromChatMessage(chatMessage)
