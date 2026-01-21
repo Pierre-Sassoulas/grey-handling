@@ -8,7 +8,14 @@ GreyHandling.print(
 	format(GreyHandling["Launch %s with left CTRL while holding SHIFT. (or %s)"],
 	GreyHandling.NAME, GreyHandling.CHAT_COMMAND)
 )
-GameTooltip:HookScript("OnTooltipSetItem", GreyHandling.functions.ToolTipHook)
+-- Tooltip hook compatibility
+if TooltipDataProcessor then
+	-- Retail: Use TooltipDataProcessor
+	TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item, GreyHandling.functions.ToolTipHook)
+else
+	-- Classic: Use the old hook method
+	GameTooltip:HookScript("OnTooltipSetItem", GreyHandling.functions.ToolTipHook)
+end
 
 -- See Bindings.xml
 BINDING_NAME_GH_ALL = GreyHandling["Launch GreyHandling"]
