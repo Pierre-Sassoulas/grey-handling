@@ -62,7 +62,7 @@ function GreyHandling.isJunkByItemId(itemid, bagID, bagSlot)
 end
 
 
-function GreyHandling.functions.CalculateCheapestJunk()
+local function CalculateCheapestJunkInternal()
 	local now = {}
 	now.currentPrice = nil
 	local later = {}
@@ -118,7 +118,19 @@ function GreyHandling.functions.CalculateCheapestJunk()
 	else
 		GreyHandling.only_one_item_is_cheapest = false
 	end
-	-- print("Calculated cheapest object")
+
+	-- Start throttle timer after calculation
+	GreyHandling.calculationThrottled = true
+	C_Timer.After(1.0, function()
+		GreyHandling.calculationThrottled = false
+	end)
+end
+
+function GreyHandling.functions.CalculateCheapestJunk(forceCalculation)
+	if forceCalculation or not GreyHandling.calculationThrottled then
+		CalculateCheapestJunkInternal()
+		-- print("Calculated cheapest item")
+	end
 end
 
 function GreyHandling.functions.ItemDidNotMove(now_or_later)

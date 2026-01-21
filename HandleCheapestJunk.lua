@@ -6,7 +6,7 @@ local function bagErrorMessage(now, addonName)
 end
 
 function GreyHandling.functions.HandleCheapestJunk(foundSomething)
-	GreyHandling.functions.CalculateCheapestJunk() -- Required as long as changing the scrap junk list does not trigger a calculation
+	GreyHandling.functions.CalculateCheapestJunk(true) -- Required as long as changing the scrap junk list does not trigger a calculation
 	local now, later = GreyHandling.functions.GetCheapestJunk()
 	if now.bag and now.slot then
 		foundSomething = true

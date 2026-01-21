@@ -31,6 +31,7 @@ GreyHandling.options.DEFAULT_DEACTIVATE_DEFAULT_KEYBIND = false
 GreyHandling.options.DEFAULT_SHOW_CHEAPEST_ALWAYS = true
 GreyHandling.options.DEFAULT_SOURCE_OF_ITEM_PRICE = GreyHandling["TSM Market Price, and Vendor Price"]
 GreyHandling.options.AUCTION_HOUSE_CUT = 1.05 -- Could be higher, because if it's close to vendor price it's probably also hard to sell.
+GreyHandling.calculationThrottled = false
 GreyHandling.redPrint = "ff4d4d"
 GreyHandling.greyPrint = "a0a0a0"
 GreyHandling.bluePrint = "6699ff"
