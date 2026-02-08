@@ -64,14 +64,18 @@ if IsAddOnLoaded("Bagnon") or IsAddOnLoaded("Combuctor") then
 		return originalRemovePlayer(...)
 	end
 
-	Addon.Rules:New('greyhandling', 'Grey Handling', 'Interface\\Addons\\GreyHandling\\Art\\GreyHandlingIcon', function(player, bag, slot, bagInfo, itemInfo)
-		if itemInfo.id and bag and slot then
-			if GreyHandling.isCheapest(bag, slot) then
-				return true
+	if Addon.Rules and Addon.Rules.New then
+		Addon.Rules:New('greyhandling', 'Grey Handling', 'Interface\\Addons\\GreyHandling\\Art\\GreyHandlingIcon', function(player, bag, slot, bagInfo, itemInfo)
+			if itemInfo.id and bag and slot then
+				if GreyHandling.isCheapest(bag, slot) then
+					return true
+				end
+				return GreyHandling.isMutuallyBeneficialTrade(bag, slot)
 			end
-			return GreyHandling.isMutuallyBeneficialTrade(bag, slot)
-		end
-	end)
+		end)
+	else
+		GreyHandling.print(format("%s: Bagnon Rules API not available. Item filtering disabled.", GreyHandling.NAME))
+	end
 
 	function ItemSlot:UpdateBorder()
 		local id = self.info.id
