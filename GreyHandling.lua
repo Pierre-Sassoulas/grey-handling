@@ -121,3 +121,9 @@ UpdateCheapestFrame:SetScript("OnEvent", GreyHandling.functions.CalculateCheapes
 local UpdateCheapestPositionFrame = CreateFrame("FRAME", "GreyHandlingUpdateCheapestFrame");
 UpdateCheapestPositionFrame:RegisterEvent("BAG_UPDATE");
 UpdateCheapestPositionFrame:SetScript("OnEvent",  GreyHandling.functions.UpdateCheapestJunkPosition);
+
+GreyHandling.trade_frame = CreateFrame("Frame")
+GreyHandling.trade_frame:RegisterEvent("TRADE_SHOW")
+GreyHandling.trade_frame:RegisterEvent("TRADE_CLOSED")
+GreyHandling.trade_frame:RegisterEvent("TRADE_REQUEST_CANCEL")
+GreyHandling.trade_frame:SetScript("OnEvent", GreyHandling.trade_frame.OnEvent)
