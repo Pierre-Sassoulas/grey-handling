@@ -10,6 +10,7 @@ local function UpdateDatabaseAfterTrade()
 
     local playerName = GreyHandling.data.playerName
 
+    GreyHandling.db.initializePlayer(playerName)
     GreyHandling.db.initializePlayer(tradePartnerName)
 
     local hasChanges = false
