@@ -102,9 +102,12 @@ end
 
 function GreyHandling.trade_frame:OnEvent(event, ...)
     if event == "TRADE_SHOW" then
-        tradePartnerName = UnitName("NPC")
-        if tradePartnerName then
-            tradePartnerName = GreyHandling.db.uniformizePlayerName(tradePartnerName)
+        local name, realm = UnitName("NPC")
+        if name then
+            if realm and realm ~= "" then
+                name = format("%s-%s", name, realm)
+            end
+            tradePartnerName = GreyHandling.db.uniformizePlayerName(name)
             tradeCompleted = false
             if GreyHandlingIsVerbose then
                 GreyHandling.print(format("Trading with %s", tradePartnerName))
