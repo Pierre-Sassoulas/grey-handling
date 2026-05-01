@@ -100,7 +100,7 @@ function GreyHandling.functions.GetBestExchanges()
 		for itemGiven, givenValues in pairs(item_link_values) do
 			for itemTaken, takenValues in pairs(item_link_values) do
 				if takenValues.confidence == 1 then
-					hasGreyHandling = True
+					hasGreyHandling = true
 				end
 				if hasGreyHandling and takenValues.confidence ~= 1 then
 					-- We don't want to consider non scrap if the user said it's not scrap by GH communication
