@@ -125,5 +125,5 @@ UpdateCheapestPositionFrame:SetScript("OnEvent",  GreyHandling.functions.UpdateC
 GreyHandling.trade_frame = CreateFrame("Frame")
 GreyHandling.trade_frame:RegisterEvent("TRADE_SHOW")
 GreyHandling.trade_frame:RegisterEvent("TRADE_CLOSED")
-GreyHandling.trade_frame:RegisterEvent("TRADE_REQUEST_CANCEL")
+GreyHandling.trade_frame:RegisterEvent("UI_INFO_MESSAGE")
 GreyHandling.trade_frame:SetScript("OnEvent", GreyHandling.trade_frame.OnEvent)

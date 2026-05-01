@@ -1,10 +1,10 @@
 local A, GreyHandling = ...
 
 local tradePartnerName = nil
-local tradeCancelled = false
+local tradeCompleted = false
 
 local function UpdateDatabaseAfterTrade()
-    if not tradePartnerName or tradeCancelled then
+    if not tradePartnerName or not tradeCompleted then
         return
     end
 
@@ -105,23 +105,26 @@ function GreyHandling.trade_frame:OnEvent(event, ...)
         tradePartnerName = UnitName("NPC")
         if tradePartnerName then
             tradePartnerName = GreyHandling.db.uniformizePlayerName(tradePartnerName)
-            tradeCancelled = false
+            tradeCompleted = false
             if GreyHandlingIsVerbose then
                 GreyHandling.print(format("Trading with %s", tradePartnerName))
             end
         end
 
-    elseif event == "TRADE_REQUEST_CANCEL" then
-        tradeCancelled = true
+    elseif event == "UI_INFO_MESSAGE" then
+        local _, message = ...
+        if message == ERR_TRADE_COMPLETE then
+            tradeCompleted = true
+        end
 
     elseif event == "TRADE_CLOSED" then
-        if not tradeCancelled and tradePartnerName then
+        if tradeCompleted and tradePartnerName then
             -- Small delay to ensure bags are updated
             C_Timer.After(0.2, UpdateDatabaseAfterTrade)
         end
         C_Timer.After(0.5, function()
             tradePartnerName = nil
-            tradeCancelled = false
+            tradeCompleted = false
         end)
     end
 end
