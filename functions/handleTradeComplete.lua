@@ -58,30 +58,36 @@ local function UpdateDatabaseAfterTrade()
         end
     end
 
+    local newItemLinks = {}
     for bagID = 0, NUM_BAG_SLOTS do
         for bagSlot = 1, GetContainerNumSlots(bagID) do
             if GreyHandling.isJunk(bagID, bagSlot) then
                 local itemLink = C_Container.GetContainerItemLink(bagID, bagSlot)
-                if itemLink and (not GreyHandling.data.items[playerName][itemLink] or GreyHandling.data.items[playerName][itemLink].number == 0) then
-                    -- New item we didn't have before
-                    local count = GetItemCount(bagID, bagSlot)
-                    if count > 0 then
-                        hasChanges = true
-                        local _, _, _, _, _, _, _, itemStackCount, _, _, vendorPrice = GetItemInfo(itemLink)
-                        GreyHandling.db.initializeItem(playerName, itemLink, vendorPrice, itemStackCount, count, 0)
-
-                        -- Update partner's count (if they had it)
-                        if GreyHandling.data.items[tradePartnerName] and GreyHandling.data.items[tradePartnerName][itemLink] then
-                            local partnerCount = GreyHandling.db.getItemInfoForPlayer(tradePartnerName, itemLink, "number")
-                            GreyHandling.db.setItemInfoForPlayer(tradePartnerName, itemLink, "number", math.max(0, partnerCount - count))
-                        end
-
-                        if GreyHandlingIsVerbose then
-                            GreyHandling.print(format("|cff%sReceived new:|r %sx%d from %s",
-                                GreyHandling.bluePrint, itemLink, count, tradePartnerName))
-                        end
-                    end
+                if itemLink and not newItemLinks[itemLink] and
+                        (not GreyHandling.data.items[playerName][itemLink] or
+                         GreyHandling.data.items[playerName][itemLink].number == 0) then
+                    newItemLinks[itemLink] = true
                 end
+            end
+        end
+    end
+    for itemLink in pairs(newItemLinks) do
+        local count = C_Item.GetItemCount(itemLink)
+        if count > 0 then
+            hasChanges = true
+            local _, _, _, _, _, _, _, itemStackCount, _, _, vendorPrice = GetItemInfo(itemLink)
+            GreyHandling.db.initializeItem(playerName, itemLink, vendorPrice, itemStackCount, count, 0)
+            GreyHandling.db.setItemInfoForPlayer(playerName, itemLink, "number", count)
+
+            -- Update partner's count (if they had it)
+            if GreyHandling.data.items[tradePartnerName] and GreyHandling.data.items[tradePartnerName][itemLink] then
+                local partnerCount = GreyHandling.db.getItemInfoForPlayer(tradePartnerName, itemLink, "number")
+                GreyHandling.db.setItemInfoForPlayer(tradePartnerName, itemLink, "number", math.max(0, partnerCount - count))
+            end
+
+            if GreyHandlingIsVerbose then
+                GreyHandling.print(format("|cff%sReceived new:|r %sx%d from %s",
+                    GreyHandling.bluePrint, itemLink, count, tradePartnerName))
             end
         end
     end
