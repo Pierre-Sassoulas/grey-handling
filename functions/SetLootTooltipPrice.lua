@@ -11,6 +11,29 @@ local function GetTotalFreeBagSlots()
     return free
 end
 
+local function GetStackableSpaceForItem(itemLink)
+    local _, _, _, _, _, _, _, itemStackCount = GetItemInfo(itemLink)
+    if not itemStackCount or itemStackCount <= 1 then
+        return 0
+    end
+    local lootItemID = GreyHandling.functions.getIDNumber(itemLink)
+    if not lootItemID then
+        return 0
+    end
+    local space = 0
+    for bagID = 0, NUM_BAG_SLOTS do
+        for bagSlot = 1, GetContainerNumSlots(bagID) do
+            if GetContainerItemID(bagID, bagSlot) == lootItemID then
+                local stackCount = GetItemCount(bagID, bagSlot)
+                if stackCount > 0 and stackCount < itemStackCount then
+                    space = space + (itemStackCount - stackCount)
+                end
+            end
+        end
+    end
+    return space
+end
+
 function GreyHandling.functions.LootTooltipHook(tooltip, slot)
     if not GreyHandlingShowPrice or not slot then
         return
@@ -20,6 +43,15 @@ function GreyHandling.functions.LootTooltipHook(tooltip, slot)
         return
     end
     if GetTotalFreeBagSlots() > 0 then
+        return
+    end
+    local stackableSpace = GetStackableSpaceForItem(link)
+    if stackableSpace > 0 then
+        tooltip:AddLine(
+            format(GreyHandling["Take it: you can stack %s more."], stackableSpace),
+            0.5, 1, 0.5
+        )
+        tooltip:Show()
         return
     end
     local now = GreyHandling.now
