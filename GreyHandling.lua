@@ -17,6 +17,12 @@ else
 	GameTooltip:HookScript("OnTooltipSetItem", GreyHandling.functions.ToolTipHook)
 end
 
+if GameTooltip.SetLootItem then
+	hooksecurefunc(GameTooltip, "SetLootItem", function(self, slot)
+		GreyHandling.functions.LootTooltipHook(self, slot)
+	end)
+end
+
 -- See Bindings.xml
 BINDING_NAME_GH_ALL = GreyHandling["Launch GreyHandling"]
 BINDING_NAME_GH_TRADE = GreyHandling["Search for trades only"]

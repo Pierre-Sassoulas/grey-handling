@@ -45,4 +45,8 @@ if GetLocale() == "frFR" then
  GreyHandling["Vendor Price"] = "Prix du vendeur"
  GreyHandling["TSM Market Price, and Vendor Price"] = "Prix du marché TSM et prix du vendeur"
  GreyHandling["Auctionator Market Price, and Vendor Price"] = "Prix du marché Auctionator et prix du vendeur"
+ GreyHandling["Bag full and no junk to drop."] = "Sacs pleins et rien à jeter."
+ GreyHandling["Leave on corpse (loot has no value)."] = "Laisser sur le cadavre (objet sans valeur)."
+ GreyHandling["Take it: worth %s more than your cheapest junk."] = "À prendre : vaut %s de plus que votre objet le moins cher."
+ GreyHandling["Leave on corpse: cheapest junk is worth %s more."] = "Laisser sur le cadavre : votre objet le moins cher vaut %s de plus."
 end
