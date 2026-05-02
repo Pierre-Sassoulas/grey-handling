@@ -49,4 +49,5 @@ if GetLocale() == "frFR" then
  GreyHandling["Leave on corpse (loot has no value)."] = "Laisser sur le cadavre (objet sans valeur)."
  GreyHandling["Take it: worth %s more than your cheapest junk."] = "À prendre : vaut %s de plus que votre objet le moins cher."
  GreyHandling["Leave on corpse: cheapest junk is worth %s more."] = "Laisser sur le cadavre : votre objet le moins cher vaut %s de plus."
+ GreyHandling["Take it: you can stack %s more."] = "À prendre : vous pouvez en stacker encore %s."
 end

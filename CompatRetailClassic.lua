@@ -1,4 +1,5 @@
 GetContainerNumSlots = GetContainerNumSlots or C_Container.GetContainerNumSlots
+GetContainerNumFreeSlots = GetContainerNumFreeSlots or C_Container.GetContainerNumFreeSlots
 GetContainerItemID = GetContainerItemID or C_Container.GetContainerItemID
 GetContainerItemDurability = GetContainerItemDurability or C_Container.GetContainerItemDurability
 -- Need this to still be nil in GetItemCount
