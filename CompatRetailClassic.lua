@@ -8,6 +8,7 @@ GetItemQualityColor = GetItemQualityColor or function(quality)
     local c = ITEM_QUALITY_COLORS[quality]
     return c.r, c.g, c.b, c.hex
 end
+GetMouseFocus = GetMouseFocus or function() return GetMouseFoci and GetMouseFoci() end
 LE_ITEM_CLASS_WEAPON  = LE_ITEM_CLASS_WEAPON  or (Enum.ItemClass and Enum.ItemClass.Weapon) or 2
 LE_ITEM_CLASS_ARMOR   = LE_ITEM_CLASS_ARMOR   or (Enum.ItemClass and Enum.ItemClass.Armor)  or 4
 LE_ITEM_ARMOR_GENERIC = LE_ITEM_ARMOR_GENERIC or (Enum.ItemArmorSubclass and Enum.ItemArmorSubclass.Generic) or 0
