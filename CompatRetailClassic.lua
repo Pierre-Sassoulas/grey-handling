@@ -8,7 +8,10 @@ GetItemQualityColor = GetItemQualityColor or function(quality)
     local c = ITEM_QUALITY_COLORS[quality]
     return c.r, c.g, c.b, c.hex
 end
-if not GreyHandling.IS_CLASSIC then
+LE_ITEM_CLASS_WEAPON  = LE_ITEM_CLASS_WEAPON  or (Enum.ItemClass and Enum.ItemClass.Weapon) or 2
+LE_ITEM_CLASS_ARMOR   = LE_ITEM_CLASS_ARMOR   or (Enum.ItemClass and Enum.ItemClass.Armor)  or 4
+LE_ITEM_ARMOR_GENERIC = LE_ITEM_ARMOR_GENERIC or (Enum.ItemArmorSubclass and Enum.ItemArmorSubclass.Generic) or 0
+if WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC then
     -- In retail 12.x, MoneyFrame reads protected frame sizes and crashes when
     -- called from addon-tainted code. Replace with a plain AddLine.
     SetTooltipMoney = function(tooltip, amount, _, prefix)
