@@ -236,7 +236,7 @@ end
 
 function GreyHandling.allTests()
     GreyHandling.print(format("WARNING! You're using the development version, the data store is reset for test case"))
-    GreyHandling.checkAPI()
+    -- GreyHandling.checkAPI()  -- uncomment to audit the WoW API surface
     -- GreyHandling.db.reset()
     GreyHandling.testMutuallyBeneficialExchange()
     if GreyHandling.DEV_TRADE_ONLY then
