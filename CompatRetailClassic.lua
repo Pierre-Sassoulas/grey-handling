@@ -3,6 +3,11 @@ GetContainerNumFreeSlots = GetContainerNumFreeSlots or C_Container.GetContainerN
 GetContainerItemID = GetContainerItemID or C_Container.GetContainerItemID
 GetContainerItemDurability = GetContainerItemDurability or C_Container.GetContainerItemDurability
 GetItemInfo = GetItemInfo or C_Item.GetItemInfo
+GetCoinTextureString = GetCoinTextureString or C_CurrencyInfo.GetCoinTextureString
+GetItemQualityColor = GetItemQualityColor or function(quality)
+    local c = ITEM_QUALITY_COLORS[quality]
+    return c.r, c.g, c.b, c.hex
+end
 -- Need this to still be nil in GetItemCount
 -- local GetContainerItemInfo = GetContainerItemInfo or C_Container.GetContainerItemInfo
 
