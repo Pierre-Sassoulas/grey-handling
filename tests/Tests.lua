@@ -1,5 +1,95 @@
 local A, GreyHandling = ...
 
+function GreyHandling.checkAPI()
+    local n_ok, n_missing = 0, 0
+    local function check(label, value)
+        if value ~= nil then
+            n_ok = n_ok + 1
+        else
+            n_missing = n_missing + 1
+            GreyHandling.print("|cffff4d4d[MISSING]|r " .. label)
+        end
+    end
+    local function checkGroup(label, func)
+        if func == nil then
+            n_missing = n_missing + 1
+            GreyHandling.print("|cffff4d4d[GROUP-MISSING]|r " .. label)
+        else
+            n_ok = n_ok + 1
+            GreyHandling.print("|cffffff00[GROUP]|r " .. label .. " = " .. tostring(func()))
+        end
+    end
+
+    GreyHandling.print("=== API Check ===")
+
+    -- Aliased globals (removed from global namespace in retail)
+    check("GetItemInfo",               GetItemInfo)
+    check("GetCoinTextureString",       GetCoinTextureString)
+    check("GetItemQualityColor",        GetItemQualityColor)
+    check("GetContainerNumSlots",       GetContainerNumSlots)
+    check("GetContainerNumFreeSlots",   GetContainerNumFreeSlots)
+    check("GetContainerItemID",         GetContainerItemID)
+    check("GetContainerItemDurability", GetContainerItemDurability)
+    check("GetAddOnMetadata",           GetAddOnMetadata)
+    check("IsAddOnLoaded",              IsAddOnLoaded)
+
+    -- C_ APIs backing the aliases
+    check("C_Item.GetItemInfo",                C_Item and C_Item.GetItemInfo)
+    check("C_CurrencyInfo.GetCoinTextureString", C_CurrencyInfo and C_CurrencyInfo.GetCoinTextureString)
+    check("C_AddOns.GetAddOnMetadata",         C_AddOns and C_AddOns.GetAddOnMetadata)
+    check("C_AddOns.IsAddOnLoaded",            C_AddOns and C_AddOns.IsAddOnLoaded)
+
+    -- C_Container (used both via alias and directly)
+    check("C_Container.GetContainerNumSlots",       C_Container and C_Container.GetContainerNumSlots)
+    check("C_Container.GetContainerNumFreeSlots",   C_Container and C_Container.GetContainerNumFreeSlots)
+    check("C_Container.GetContainerItemID",         C_Container and C_Container.GetContainerItemID)
+    check("C_Container.GetContainerItemDurability", C_Container and C_Container.GetContainerItemDurability)
+    check("C_Container.GetContainerItemInfo",       C_Container and C_Container.GetContainerItemInfo)
+    check("C_Container.GetContainerItemLink",       C_Container and C_Container.GetContainerItemLink)
+
+    -- Chat / timer
+    check("C_ChatInfo.RegisterAddonMessagePrefix", C_ChatInfo and C_ChatInfo.RegisterAddonMessagePrefix)
+    check("C_ChatInfo.SendAddonMessage",           C_ChatInfo and C_ChatInfo.SendAddonMessage)
+    check("C_Timer.After",                         C_Timer and C_Timer.After)
+
+    -- Tooltip
+    check("TooltipDataProcessor",                       TooltipDataProcessor)
+    check("TooltipDataProcessor.AddTooltipPostCall",    TooltipDataProcessor and TooltipDataProcessor.AddTooltipPostCall)
+    check("TooltipUtil.GetDisplayedItem",               TooltipUtil and TooltipUtil.GetDisplayedItem)
+    check("SetTooltipMoney",                            SetTooltipMoney)
+    check("GameTooltip.SetLootItem",                    GameTooltip and GameTooltip.SetLootItem)
+
+    -- Loot & UI
+    check("GetLootSlotLink",                        GetLootSlotLink)
+    check("GetLootSlotInfo",                        GetLootSlotInfo)
+    check("OpenAllBags",                            OpenAllBags)
+    check("CloseAllBags",                           CloseAllBags)
+    check("GetMouseFocus",                          GetMouseFocus)
+    check("Settings.RegisterCanvasLayoutCategory",  Settings and Settings.RegisterCanvasLayoutCategory)
+    check("Settings.RegisterAddOnCategory",         Settings and Settings.RegisterAddOnCategory)
+
+    -- Constants / tables
+    check("NUM_BAG_SLOTS",         NUM_BAG_SLOTS)
+    check("SELL_PRICE",            SELL_PRICE)
+    check("ITEM_QUALITY_COLORS[0]", ITEM_QUALITY_COLORS and ITEM_QUALITY_COLORS[0])
+    check("LE_ITEM_CLASS_WEAPON",  LE_ITEM_CLASS_WEAPON)
+    check("LE_ITEM_CLASS_ARMOR",   LE_ITEM_CLASS_ARMOR)
+    check("LE_ITEM_ARMOR_GENERIC", LE_ITEM_ARMOR_GENERIC)
+
+    -- Group APIs: check existence and show solo return value
+    checkGroup("GetNumGroupMembers()", GetNumGroupMembers)
+    checkGroup("IsInGroup()",          IsInGroup)
+    checkGroup("IsInRaid()",           IsInRaid)
+    check("GetRaidRosterInfo",         GetRaidRosterInfo)
+
+    local total = n_ok + n_missing
+    if n_missing == 0 then
+        GreyHandling.print(format("|cff00ff00API check: %d/%d OK|r", n_ok, total))
+    else
+        GreyHandling.print(format("|cffff4d4dAPI check: %d/%d OK, %d MISSING (see above)|r", n_ok, total, n_missing))
+    end
+end
+
 function GreyHandling.testNumberLootedFromChatMessage()
     assert(14 == GreyHandling.functions.numberLootedFromChatMessage("你制造了：[魔法淡水]x14"), "Can't parse conjuring bread in chinese")
     assert (20 == GreyHandling.functions.numberLootedFromChatMessage("Vous créez：[Petit pain de manne invoqué] x20"), "Can't parse conjuring bread in french")
@@ -146,6 +236,7 @@ end
 
 function GreyHandling.allTests()
     GreyHandling.print(format("WARNING! You're using the development version, the data store is reset for test case"))
+    GreyHandling.checkAPI()
     -- GreyHandling.db.reset()
     GreyHandling.testMutuallyBeneficialExchange()
     if GreyHandling.DEV_TRADE_ONLY then
