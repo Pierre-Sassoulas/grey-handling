@@ -2,6 +2,7 @@ GetContainerNumSlots = GetContainerNumSlots or C_Container.GetContainerNumSlots
 GetContainerNumFreeSlots = GetContainerNumFreeSlots or C_Container.GetContainerNumFreeSlots
 GetContainerItemID = GetContainerItemID or C_Container.GetContainerItemID
 GetContainerItemDurability = GetContainerItemDurability or C_Container.GetContainerItemDurability
+GetItemInfo = GetItemInfo or C_Item.GetItemInfo
 -- Need this to still be nil in GetItemCount
 -- local GetContainerItemInfo = GetContainerItemInfo or C_Container.GetContainerItemInfo
 
