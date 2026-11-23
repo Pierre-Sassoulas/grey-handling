@@ -22,7 +22,7 @@ function GreyHandling.functions.ExchangeMyJunkPlease(target)
                 local itemid = C_Container.GetContainerItemID(bagID, bagSlot)
 				local _, _, _, _, _, _, _, itemStackCount, _, _, _, _, _, bindType = GetItemInfo(itemid)
 				--  Item binding type: 0 - none; 1 - on pickup; 2 - on equip; 3 - on use; 4 - quest.
-				local itemCount = GetItemCount(bagID, bagSlot)
+				local itemCount = GreyHandling.GetContainerStackCount(bagID, bagSlot)
 				if itemCount%itemStackCount ~=0 and (bindType==0 or bindType==3)  then
 					-- We don't want to exchange our full stack
 					-- If someone has a lot of bag space we might.

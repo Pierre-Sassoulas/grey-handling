@@ -78,7 +78,7 @@ local function CalculateCheapestJunkInternal()
 				if not(itemStackCount) then
 					itemStackCount = 0
 				end
-				local itemCount = GetItemCount(bagID, bagSlot)
+				local itemCount = GreyHandling.GetContainerStackCount(bagID, bagSlot)
 				local currentDurability, maximumDurability = GetContainerItemDurability(bagID, bagSlot)
 				local modifier = 1
 				if currentDurability and maximumDurability then
@@ -137,7 +137,7 @@ function GreyHandling.functions.ItemDidNotMove(now_or_later)
 	if not now_or_later.bag or not now_or_later.slot then
 		return false
 	end
-	local testedItemCount, testedItemLink = GetItemCountAndLink(now_or_later.bag, now_or_later.slot)
+	local testedItemCount, testedItemLink = GreyHandling.GetContainerStackCountAndLink(now_or_later.bag, now_or_later.slot)
 	return now_or_later.itemLink == testedItemLink  and now_or_later.itemCount == testedItemCount
 end
 
