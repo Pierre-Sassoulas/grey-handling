@@ -1,6 +1,6 @@
 ## Interface: 16001
 ## X-Min-Interface: 16001
-## Version: 1.60.1_1.13.0
+## Version: 1.60.1_1.13.1
 ## Category: Bags & Inventory
 
 ## Title: |cffa0a0a0GH|r|cffffffff:|r Grey Handling
