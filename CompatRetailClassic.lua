@@ -21,15 +21,16 @@ if WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC then
         tooltip:AddLine(format("%s %s", prefix or "", GetCoinTextureString(amount)), 1, 1, 1)
     end
 end
--- Need this to still be nil in GetItemCount
--- local GetContainerItemInfo = GetContainerItemInfo or C_Container.GetContainerItemInfo
+-- Bag slot helpers live in the addon namespace: a global GetItemCount would
+-- shadow Blizzard's GetItemCount(itemID, includeBank) used by other addons.
+local _, GreyHandling = ...
 
-function GetItemCount(bagID, bagSlot)
+function GreyHandling.GetContainerStackCount(bagID, bagSlot)
     local itemInfo = C_Container.GetContainerItemInfo(bagID, bagSlot)
     return itemInfo and itemInfo.stackCount or 0
 end
 
-function GetItemCountAndLink(bagID, bagSlot)
+function GreyHandling.GetContainerStackCountAndLink(bagID, bagSlot)
     local itemInfo = C_Container.GetContainerItemInfo(bagID, bagSlot)
     if itemInfo then
         return itemInfo.stackCount, itemInfo.hyperlink

@@ -147,8 +147,8 @@ function GreyHandling.functions.ToolTipHook(tooltip)
         -- in retail it's now a table
         if now.bag and later.bag then
             local message = ""
-            local nowitemCount, nowitemLink = GetItemCountAndLink(now.bag, now.slot);
-            local lateritemCount, lateritemLink = GetItemCountAndLink(later.bag, later.slot);
+            local nowitemCount, nowitemLink = GreyHandling.GetContainerStackCountAndLink(now.bag, now.slot);
+            local lateritemCount, lateritemLink = GreyHandling.GetContainerStackCountAndLink(later.bag, later.slot);
             if nowitemLink==itemLink then
                 if nowitemLink==lateritemLink then
                     message = GreyHandling["Cheapest (now and later)"]

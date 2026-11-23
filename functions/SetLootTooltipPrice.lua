@@ -24,7 +24,7 @@ local function GetStackableSpaceForItem(itemLink)
     for bagID = 0, NUM_BAG_SLOTS do
         for bagSlot = 1, GetContainerNumSlots(bagID) do
             if GetContainerItemID(bagID, bagSlot) == lootItemID then
-                local stackCount = GetItemCount(bagID, bagSlot)
+                local stackCount = GreyHandling.GetContainerStackCount(bagID, bagSlot)
                 if stackCount > 0 and stackCount < itemStackCount then
                     space = space + (itemStackCount - stackCount)
                 end
